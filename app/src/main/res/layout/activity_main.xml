@@ -50,7 +50,7 @@
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.915" />
+        app:layout_constraintVertical_bias="0.924" />
 
     <TextView
         android:id="@+id/textView3"
@@ -92,7 +92,7 @@
         app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin"
-        app:layout_constraintVertical_bias="0.203" />
+        app:layout_constraintVertical_bias="0.28" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
