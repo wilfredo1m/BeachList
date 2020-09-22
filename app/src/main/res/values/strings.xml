@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">BeachList</string>
+    <string name="password">password</string>
+    <string name="email_field">Enter Email:</string>
+    <string name="login_instructions">Use Campus Email Address to Log In</string>
+    <string name="pictureTextField">Beachlist</string>
+    <string name="login_button">Login</string>
+    <string name="create_account_button">Create Account</string>
+    <string name="content_description_login_image">logo</string>
+
 </resources>

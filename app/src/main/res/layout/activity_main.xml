@@ -7,13 +7,61 @@
     android:background="#FFFDFD"
     tools:context=".MainActivity">
 
+    <!--autofillhitns needed for API 26 + -->
+    <!--hint is needed for backwards compatibility-->
+    <TextView
+        android:id="@+id/tvBeachlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pictureTextField"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/etEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivBeachListLogo"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="@string/pictureTextField" />
+
+    <TextView
+        android:id="@+id/tv_Instructions"
+        android:layout_width="279dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/login_instructions"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/etEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBeachlist"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/ivBeachListLogo"
+        android:layout_width="148dp"
+        android:layout_height="167dp"
+        android:layout_marginTop="4dp"
+        android:contentDescription="@string/content_description_login_image"
+        app:layout_constraintBottom_toTopOf="@+id/etEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/final_beachlist_logo" />
+
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="282dp"
         android:layout_height="40dp"
+        android:autofillHints="@string/email_field"
         android:background="#80040404"
         android:ems="10"
-        android:hint="Enter Email:"
+        android:hint="@string/email_field"
         android:inputType="textEmailAddress"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,24 +69,27 @@
         app:layout_constraintHorizontal_bias="0.395"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499"
-        tools:text="Enter Email:" />
+        tools:text="@string/email_field" />
+
+    <!--autofillhitns needed for API 26 + -->
+    <!--hint is needed for backwards compatibility-->
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="282dp"
         android:layout_height="40dp"
+        android:autofillHints="@string/password"
         android:background="#79040404"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.395"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.588"
+        app:layout_constraintTop_toBottomOf="@+id/etEmail"
+        app:layout_constraintVertical_bias="0.077"
         tools:text="password" />
 
     <Button
@@ -46,7 +97,7 @@
         android:layout_width="282dp"
         android:layout_height="53dp"
         android:background="#13558D"
-        android:text="Login"
+        android:text="@string/login_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.395"
@@ -60,57 +111,12 @@
         android:layout_width="146dp"
         android:layout_height="30dp"
         android:background="#13558D"
-        android:text="Create Account"
+        android:text="@string/create_account_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.449"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin"
         app:layout_constraintVertical_bias="0.172" />
-
-    <TextView
-        android:id="@+id/tvBeachlist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Beachlist"
-        android:textColor="#000000"
-        android:translationZ="90dp"
-        app:layout_constraintBottom_toTopOf="@+id/etEmail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.0"
-        tools:text="Beachlist" />
-
-    <TextView
-        android:id="@+id/tv_Instructions"
-        android:layout_width="279dp"
-        android:layout_height="23dp"
-        android:layout_marginBottom="16dp"
-        android:text="Use Campus Email Address to Log In"
-        android:textAllCaps="true"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/etEmail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.409"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBeachlist"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="148dp"
-        android:layout_height="167dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/etEmail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/final_beachlist_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
