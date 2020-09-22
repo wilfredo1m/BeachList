@@ -68,36 +68,26 @@
         app:layout_constraintTop_toBottomOf="@+id/btnLogin"
         app:layout_constraintVertical_bias="0.172" />
 
-    <ImageView
-        android:id="@+id/ivBeachListLogo"
-        android:layout_width="275dp"
-        android:layout_height="196dp"
-        app:layout_constraintBottom_toTopOf="@+id/etEmail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/beachlistlogo" />
-
     <TextView
         android:id="@+id/tvBeachlist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Beachlist"
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/tv_Instructions"
+        android:translationZ="90dp"
+        app:layout_constraintBottom_toTopOf="@+id/etEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.816"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.0"
         tools:text="Beachlist" />
 
     <TextView
         android:id="@+id/tv_Instructions"
         android:layout_width="279dp"
         android:layout_height="23dp"
+        android:layout_marginBottom="16dp"
         android:text="Use Campus Email Address to Log In"
         android:textAllCaps="true"
         android:textColor="#000000"
@@ -105,9 +95,22 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/etEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintHorizontal_bias="0.409"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivBeachListLogo"
-        app:layout_constraintVertical_bias="0.707" />
+        app:layout_constraintTop_toBottomOf="@+id/tvBeachlist"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="148dp"
+        android:layout_height="167dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/etEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/final_beachlist_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
