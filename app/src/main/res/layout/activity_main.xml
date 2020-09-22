@@ -50,7 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.924"
-        tools:text="THIS IS A TEST" />
+        tools:text="Email Address:" />
 
     <TextView
         android:id="@+id/textView3"
@@ -78,14 +78,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
         app:layout_constraintVertical_bias="0.095"
-        tools:text="Click here For Porn" />
+        tools:text="Login" />
 
     <Button
         android:id="@+id/btnCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#1D30AE"
-        android:text="Create OnlyFans Account"
+        android:text="Create Account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
