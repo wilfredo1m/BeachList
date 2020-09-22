@@ -110,7 +110,7 @@
         android:id="@+id/btnCreateAccount"
         android:layout_width="146dp"
         android:layout_height="30dp"
-        android:background="#13558D"
+        android:background="@drawable/rounded_corners"
         android:text="@string/create_account_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
