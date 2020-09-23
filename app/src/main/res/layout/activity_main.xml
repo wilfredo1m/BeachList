@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gray_background"
+    android:background="#FFFDFD"
     tools:context=".MainActivity">
 
-    <!--autofillhitns needed for API 26 + -->
+    <!--autofillhints needed for API 26 + -->
     <!--hint is needed for backwards compatibility-->
     <TextView
         android:id="@+id/tvBeachlist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/pictureTextField"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/etEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -30,12 +30,12 @@
         android:layout_marginBottom="16dp"
         android:text="@string/login_instructions"
         android:textAllCaps="true"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/etEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvBeachlist"
         app:layout_constraintVertical_bias="1.0" />
@@ -54,6 +54,9 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/final_beachlist_logo" />
 
+    <!--autofillhitns needed for API 26 + -->
+    <!--hint is needed for backwards compatibility-->
+
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="282dp"
@@ -63,16 +66,14 @@
         android:ems="10"
         android:hint="@string/email_field"
         android:inputType="textEmailAddress"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.395"
+        app:layout_constraintHorizontal_bias="0.519"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499"
         tools:text="@string/email_field" />
-
-    <!--autofillhitns needed for API 26 + -->
-    <!--hint is needed for backwards compatibility-->
 
     <EditText
         android:id="@+id/etPassword"
@@ -83,14 +84,14 @@
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.395"
+        app:layout_constraintHorizontal_bias="0.519"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etEmail"
         app:layout_constraintVertical_bias="0.077"
-        tools:text="password" />
+        tools:text="Password" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -100,10 +101,10 @@
         android:text="@string/login_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.395"
+        app:layout_constraintHorizontal_bias="0.519"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword"
-        app:layout_constraintVertical_bias="0.168"
+        app:layout_constraintVertical_bias="0.179"
         tools:text="Login" />
 
     <Button
@@ -114,9 +115,9 @@
         android:text="@string/create_account_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.464"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin"
-        app:layout_constraintVertical_bias="0.172" />
+        app:layout_constraintVertical_bias="0.184" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
