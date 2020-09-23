@@ -5,12 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-// this is neeeded in order to run the program. if no main activity is set then nothing will run
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.Scanner;
+
+// this is needed in order to run the program. if no main activity is set then nothing will run
 public class MainActivity extends AppCompatActivity {
     private Button createAccountButton, homeScreenButton;
+    private EditText email, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +42,26 @@ public class MainActivity extends AppCompatActivity {
         homeScreenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openHomeScreen();
+                email = (EditText) findViewById(R.id.etEmail);
+                password = (EditText) findViewById(R.id.etPassword);
+
+                // Check if email or password field left blank
+                if((email.getText().toString().isEmpty()) || (password.getText().toString().isEmpty())){
+                    displayEmptyFieldError();
+                }
+                else{
+                    openHomeScreen();
+                }
             }
         });
 
+
     }
+    // Displays when either Email or Password field are left blank
+    public void displayEmptyFieldError(){
+        Toast.makeText(MainActivity.this, "Enter Email and Password",Toast.LENGTH_LONG).show();
+    }
+
     // Opens Create Account Screen
     public void openCreateAccountScreen(){
         Intent openScreen = new Intent(this, CreateAccount.class);
