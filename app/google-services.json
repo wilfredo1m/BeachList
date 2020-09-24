@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:516467978288:android:d136fc4594578cc11cfdf5",
+        "mobilesdk_app_id": "1:516467978288:android:5a59802cabbb3ca21cfdf5",
         "android_client_info": {
-          "package_name": "com.company.beachlist"
+          "package_name": "com.example.beachlist"
         }
       },
       "oauth_client": [
