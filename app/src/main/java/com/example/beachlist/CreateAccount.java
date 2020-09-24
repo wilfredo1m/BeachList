@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class CreateAccount extends AppCompatActivity {
     private Button createAccountButton, cancelButton;
+    private EditText fName, lName, email, password, gradDate, phoneNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,17 +19,42 @@ public class CreateAccount extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
 
         // Create Account Button
-        createAccountButton = (Button) findViewById(R.id.btnCreateAccount);
+        createAccountButton = (Button) findViewById(R.id.btnCreateAccount2);
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openLoginScreen();
+                // Gets input entered in each field
+                fName = (EditText) findViewById(R.id.etFirstName);
+                lName = (EditText) findViewById(R.id.etLastName);
+                email = (EditText) findViewById(R.id.etEmail2);
+                password = (EditText) findViewById(R.id.etPassword2);
+                gradDate = (EditText) findViewById(R.id.etGradDate);
+                phoneNum = (EditText) findViewById(R.id.etPhone);
+
+                // Check if any field left blank
+                if(fName.getText().toString().isEmpty()
+                        || lName.getText().toString().isEmpty()
+                        || fName.getText().toString().isEmpty()
+                        || password.getText().toString().isEmpty()
+                        || gradDate.getText().toString().isEmpty()
+                        || phoneNum.getText().toString().isEmpty()){
+                    displayEmptyFieldError();
+                }
+
+                // Check if email is valid
+                // else if(){
+                //
+                //}
+
+                else {
+                    openLoginScreen();
+                }
             }
         });
 
         // Cancel Button
-        createAccountButton = (Button) findViewById(R.id.btnCancel);
-        createAccountButton.setOnClickListener(new View.OnClickListener() {
+        cancelButton = (Button) findViewById(R.id.btnCancel);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openLoginScreen();
@@ -38,5 +66,10 @@ public class CreateAccount extends AppCompatActivity {
     public void openLoginScreen(){
         Intent openScreen = new Intent(this, MainActivity.class);
         startActivity(openScreen);
+    }
+
+    // Displays when any field is left blank
+    public void displayEmptyFieldError(){
+        Toast.makeText(CreateAccount.this, "Fill in all information",Toast.LENGTH_SHORT).show();
     }
 }
