@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Home Screen Button
+        // Home Screen Button (Needs to add the check for valid login)
         homeScreenButton = (Button) findViewById(R.id.btnLogin);
         homeScreenButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
                 if((email.getText().toString().isEmpty()) || (password.getText().toString().isEmpty())){
                     displayEmptyFieldError();
                 }
+
+                // Check if email and password are valid
+                // else if(){
+                //
+                //}
+
                 else{
                     openHomeScreen();
                 }
@@ -59,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     }
     // Displays when either Email or Password field are left blank
     public void displayEmptyFieldError(){
-        Toast.makeText(MainActivity.this, "Enter Email and Password",Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this, "Enter Email and Password",Toast.LENGTH_SHORT).show();
     }
 
     // Opens Create Account Screen
@@ -68,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(openScreen);
     }
 
-    // Opens Home Screen (Needs to add the check for valid login)
+    // Opens Home Screen
     public void openHomeScreen(){
         Intent openScreen = new Intent(this, HomeScreen.class);
         startActivity(openScreen);
