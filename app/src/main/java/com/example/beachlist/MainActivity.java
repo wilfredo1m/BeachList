@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    // Displays when either Email or Password field are left blank
+    // Displays when Email and/or Password field are left blank
     public void displayEmptyFieldError(){
         Toast.makeText(MainActivity.this, "Enter Email and Password",Toast.LENGTH_SHORT).show();
     }
