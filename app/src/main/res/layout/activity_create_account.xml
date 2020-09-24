@@ -11,30 +11,29 @@
         android:id="@+id/btnCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="68dp"
-        android:layout_marginRight="68dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginRight="76dp"
         android:text="Cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnCreateAccount2"
-        app:layout_constraintHorizontal_bias="0.777"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnCreateAccount2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/btnCreateAccount"
+        app:layout_constraintEnd_toStartOf="@+id/btnCreateAccount"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/btnCreateAccount2"
+        android:id="@+id/btnCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="112dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
         android:text="@string/create_account_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.667" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="401dp"
+        android:layout_width="match_parent"
         android:layout_height="61dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
@@ -50,21 +49,22 @@
 
     <EditText
         android:id="@+id/editTextPhone"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:background="#A8000000"
         android:ems="10"
+        android:hint="(xxx)xxx-xxxx"
         android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="@+id/tvPhoneNumber"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvPhoneNumber"
-        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="320dp" />
 
     <EditText
         android:id="@+id/editTextDate"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:background="#A8000000"
         android:ems="10"
         android:hint="mm/dd/yyyy"
         android:inputType="date"
@@ -75,48 +75,22 @@
 
     <TextView
         android:id="@+id/tvExpectedGraduation"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
+        android:background="#A8000000"
         android:text="Expected Graduation Date"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword"
-        tools:layout_editor_absoluteX="28dp" />
-
-    <TextView
-        android:id="@+id/tvPhoneNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="PhoneNumber"
-        android:textIsSelectable="false"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextDate"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextDate"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:scaleType="center"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.918"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.019"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
     <EditText
         android:id="@+id/etEmail"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:background="#A8000000"
         android:ems="10"
         android:hint="@string/email_field"
@@ -126,7 +100,7 @@
 
     <EditText
         android:id="@+id/etFirstName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="32dp"
@@ -139,10 +113,10 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName8"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:background="#A8000000"
         android:ems="10"
         android:hint="last name"
@@ -154,10 +128,10 @@
 
     <EditText
         android:id="@+id/etPassword"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:background="#A8000000"
         android:ems="10"
         android:hint="@string/password"
