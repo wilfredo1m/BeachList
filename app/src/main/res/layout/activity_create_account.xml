@@ -9,9 +9,10 @@
 
     <Button
         android:id="@+id/btnCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="116dp"
+        android:layout_height="44dp"
         android:layout_marginTop="104dp"
+        android:background="@drawable/abstract_blue_button"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnCreateAccount2"
@@ -22,11 +23,12 @@
 
     <Button
         android:id="@+id/btnCreateAccount2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="111dp"
+        android:layout_height="43dp"
         android:layout_marginTop="104dp"
         android:layout_marginEnd="64dp"
         android:layout_marginRight="64dp"
+        android:background="@drawable/abstract_blue_button"
         android:text="@string/create_account_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +39,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="61dp"
-        android:background="?attr/colorPrimary"
+        android:background="@drawable/gray_background"
         android:minHeight="?attr/actionBarSize"
         android:scaleType="fitXY"
         android:theme="?attr/actionBarTheme"
@@ -69,6 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:background="#8B000000"
         android:ems="10"
         android:hint="xxx-xxx-xxxx"
         android:inputType="phone"
@@ -82,6 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:background="#8B000000"
         android:ems="10"
         android:hint="mm/dd/yyyy"
         android:inputType="date"
@@ -96,6 +100,7 @@
         android:layout_width="209dp"
         android:layout_height="24dp"
         android:layout_marginTop="20dp"
+        android:background="#8B000000"
         android:text="PhoneNumber"
         android:textIsSelectable="false"
         android:textSize="18sp"
@@ -109,6 +114,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:background="#8B000000"
         android:text="Expected Graduation Date"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/etPassword2"
@@ -167,9 +173,11 @@
         android:layout_marginTop="36dp"
         android:background="@drawable/user"
         android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.941"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintHorizontal_bias="0.673"
+        app:layout_constraintStart_toEndOf="@+id/etLastName"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
