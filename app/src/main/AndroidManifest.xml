@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.beachlist">
 
+    <supports-screens>
+
+
+
+
+    </supports-screens>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
