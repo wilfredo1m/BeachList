@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "516467978288",
+    "firebase_url": "https://beachlist-26c5b.firebaseio.com",
+    "project_id": "beachlist-26c5b",
+    "storage_bucket": "beachlist-26c5b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516467978288:android:5a59802cabbb3ca21cfdf5",
+        "android_client_info": {
+          "package_name": "com.example.beachlist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "516467978288-go9eu7lpdg4av07gmgn864cmtbn33it4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgQKNnz-HNNbm_5vjw0GwUwvQX1l4MxOw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "516467978288-go9eu7lpdg4av07gmgn864cmtbn33it4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
