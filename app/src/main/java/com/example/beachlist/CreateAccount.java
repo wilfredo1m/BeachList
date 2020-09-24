@@ -35,6 +35,7 @@ public class CreateAccount extends AppCompatActivity {
                 if(fName.getText().toString().isEmpty()
                         || lName.getText().toString().isEmpty()
                         || fName.getText().toString().isEmpty()
+                        || email.getText().toString().isEmpty()
                         || password.getText().toString().isEmpty()
                         || gradDate.getText().toString().isEmpty()
                         || phoneNum.getText().toString().isEmpty()){
