@@ -23,7 +23,7 @@ public class CreateAccount extends AppCompatActivity {
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Gets input entered in each field
+                // Input entered in each field
                 fName = (EditText) findViewById(R.id.etFirstName);
                 lName = (EditText) findViewById(R.id.etLastName);
                 email = (EditText) findViewById(R.id.etEmail2);
