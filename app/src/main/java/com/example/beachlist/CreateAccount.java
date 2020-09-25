@@ -2,33 +2,43 @@ package com.example.beachlist;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.renderscript.ScriptGroup;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public class CreateAccount extends AppCompatActivity {
-    private Button createAccountButton, cancelButton;
+    private Button createAccountButton, cancelButton, profilePicButton;
     private EditText fName, lName, email, password, gradDate, phoneNum;
-    private ImageButton profilePic;
+    private ImageView profilePicture;
     public static final int IMAGE_REQUEST = 33;
+    public static final int PROCESSED_OK = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
-        // Set Profile Picture
-        profilePic = (ImageButton) findViewById(R.id.btnProfilePic);
-        profilePic.setOnClickListener(new View.OnClickListener() {
+        profilePicture = (ImageView) findViewById(R.id.ivProfileImage);
+
+        // Set Profile Picture Button
+        profilePicButton = (Button) findViewById(R.id.button2);
+        profilePicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Access the phones camera roll to let user pick their profile picture
@@ -95,7 +105,38 @@ public class CreateAccount extends AppCompatActivity {
         // Set data and type (* means all image types)
         openCameraRoll.setDataAndType(data,"image/*");
 
+        // start the activity (accessing camera roll)
         startActivityForResult(openCameraRoll, IMAGE_REQUEST);
+    }
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(resultCode == PROCESSED_OK){
+            // Accessed camera roll successfully
+            if(requestCode == IMAGE_REQUEST){
+                // Camera roll sent back a picture
+
+                // Address of image in phone
+                Uri imageUri = data.getData();
+
+                // Stream to read image data
+                InputStream input;
+
+                try {
+                    input = getContentResolver().openInputStream(imageUri);
+
+                    // Get Bitmap from InputStream
+                    Bitmap image = BitmapFactory.decodeStream(input);
+
+                    // Displays image in the application
+                    profilePicture.setImageBitmap(image);
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "Unable to load image", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 
     // Opens Login Screen
