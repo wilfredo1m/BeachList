@@ -40,7 +40,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="61dp"
-        android:background="@drawable/header_wallpaper"
+        android:background="@drawable/gray_background"
         android:minHeight="?attr/actionBarSize"
         android:scaleType="fitXY"
         android:theme="?attr/actionBarTheme"
@@ -176,12 +176,13 @@
 
     <ImageView
         android:id="@+id/ivProfileImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="382dp"
+        android:scaleType="fitXY"
         android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"
         app:layout_constraintEnd_toEndOf="parent"
@@ -194,7 +195,7 @@
     <Button
         android:id="@+id/button2"
         android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_height="99dp"
         android:background="?attr/selectableItemBackground"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/ivProfileImage"
@@ -208,10 +209,10 @@
         android:id="@+id/imageView8"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvPhoneNumber"
-        app:layout_constraintEnd_toStartOf="@+id/tvPhoneNumber"
+        app:layout_constraintBottom_toBottomOf="@+id/etPhone"
+        app:layout_constraintEnd_toStartOf="@+id/etPhone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvPhoneNumber"
+        app:layout_constraintTop_toTopOf="@+id/etPhone"
         app:srcCompat="@drawable/phone_number_icon" />
 
     <ImageView
@@ -226,12 +227,14 @@
 
     <ImageView
         android:id="@+id/imageView11"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvExpectedGraduation"
-        app:layout_constraintEnd_toStartOf="@+id/tvExpectedGraduation"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/etGradDate"
+        app:layout_constraintEnd_toStartOf="@+id/etGradDate"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvExpectedGraduation"
+        app:layout_constraintTop_toTopOf="@+id/etGradDate"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/date_icon" />
 
     <ImageView
