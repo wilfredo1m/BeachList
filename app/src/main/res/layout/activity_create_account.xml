@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gray_background"
+    android:clickable="false"
     tools:context=".CreateAccount">
 
     <Button

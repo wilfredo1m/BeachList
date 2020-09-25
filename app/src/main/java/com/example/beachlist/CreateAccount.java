@@ -3,7 +3,9 @@ package com.example.beachlist;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -11,11 +13,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import java.io.File;
+
 public class CreateAccount extends AppCompatActivity {
     private Button createAccountButton, cancelButton;
     private EditText fName, lName, email, password, gradDate, phoneNum;
     private ImageButton profilePic;
-    public static final int GET_FROM_GALLERY = 3;
+    public static final int IMAGE_REQUEST = 33;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +32,7 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Access the phones camera roll to let user pick their profile picture
-                startActivityForResult(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+                openCameraRoll();
             }
         });
 
@@ -75,6 +79,23 @@ public class CreateAccount extends AppCompatActivity {
                 openLoginScreen();
             }
         });
+    }
+
+    // Opens Camera Roll
+    public void openCameraRoll(){
+        Intent openCameraRoll = new Intent(Intent.ACTION_PICK);
+
+        // Location of where to find the pictures
+        File pictureDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        String pictureDirectoryPath = pictureDirectory.getPath();
+
+        // URI of the path to pictures
+        Uri data = Uri.parse(pictureDirectoryPath);
+
+        // Set data and type (* means all image types)
+        openCameraRoll.setDataAndType(data,"image/*");
+
+        startActivityForResult(openCameraRoll, IMAGE_REQUEST);
     }
 
     // Opens Login Screen
