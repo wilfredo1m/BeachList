@@ -7,6 +7,19 @@
     <string name="pictureTextField">Beachlist</string>
     <string name="login_button">Login</string>
     <string name="create_account_button">Create Account</string>
+    <string name="create_account_header">Create Account</string>
     <string name="content_description_login_image">logo</string>
+    <string name = "cancelBtn">cancel</string>
+    <string name="last_name">Last Name :</string>
+    <string name="first_name">first Name :</string>
+    <string name="email_address">Email Address :</string>
+    <string name="phone_number">Phone Number :</string>
+    <string name="expected_grad_date_lbl">Expected Graduation Date</string>
+    <string name="expected_grad_date">MM/DD/YYYY</string>
+    <string name="phone_lbl">Phone Number</string>
+    <string name="phone_num">xxx-xxx-xxxx</string>
+    <string name="pic_description">Image of user profile</string>
+
+
 
 </resources>
