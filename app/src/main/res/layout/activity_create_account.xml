@@ -13,16 +13,16 @@
         android:layout_height="44dp"
         android:layout_marginTop="104dp"
         android:background="@drawable/abstract_blue_button"
-        android:text="Cancel"
+        android:text="@string/cancelBtn"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnCreateAccount2"
+        app:layout_constraintEnd_toStartOf="@+id/btnCreateAccount"
         app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPhone"
         app:layout_constraintVertical_bias="0.324" />
 
     <Button
-        android:id="@+id/btnCreateAccount2"
+        android:id="@+id/btnCreateAccount"
         android:layout_width="111dp"
         android:layout_height="43dp"
         android:layout_marginTop="104dp"
@@ -49,7 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:title="Create Account" />
+        app:title="@string/create_account_header" />
 
     <EditText
         android:id="@+id/etFirstName"
@@ -61,24 +61,71 @@
         android:layout_marginTop="36dp"
         android:background="#AE000000"
         android:ems="10"
-        android:hint="first name"
+        android:hint="@string/first_name"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <EditText
-        android:id="@+id/etPhone"
+        android:id="@+id/etLastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="#8A000000"
+        android:ems="10"
+        android:hint="@string/last_name"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/etFirstName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/etFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/etFirstName" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="#8A000000"
+        android:ems="10"
+        android:hint="@string/email_field"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/etLastName"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/etLastName"
+        app:layout_constraintTop_toBottomOf="@+id/etLastName"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="#8A000000"
+        android:ems="10"
+        android:hint="@string/password"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/etEmail"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/etEmail"
+        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+
+    <TextView
+        android:id="@+id/tvExpectedGraduation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="#8B000000"
-        android:ems="10"
-        android:hint="xxx-xxx-xxxx"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="@+id/tvPhoneNumber"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvPhoneNumber"
-        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber" />
+        android:text="@string/expected_grad_date_lbl"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/etPassword"
+        app:layout_constraintStart_toStartOf="@+id/etPassword"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
     <EditText
         android:id="@+id/etGradDate"
@@ -87,7 +134,8 @@
         android:layout_marginTop="20dp"
         android:background="#8B000000"
         android:ems="10"
-        android:hint="mm/dd/yyyy"
+        android:hint="@string/expected_grad_date"
+        android:importantForAutofill="no"
         android:inputType="date"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/tvExpectedGraduation"
@@ -101,7 +149,7 @@
         android:layout_height="24dp"
         android:layout_marginTop="20dp"
         android:background="#8B000000"
-        android:text="PhoneNumber"
+        android:text="@string/phone_lbl"
         android:textIsSelectable="false"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/etGradDate"
@@ -109,62 +157,20 @@
         app:layout_constraintStart_toStartOf="@+id/etGradDate"
         app:layout_constraintTop_toBottomOf="@+id/etGradDate" />
 
-    <TextView
-        android:id="@+id/tvExpectedGraduation"
+    <EditText
+        android:id="@+id/etPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="#8B000000"
-        android:text="Expected Graduation Date"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/etPassword2"
-        app:layout_constraintStart_toStartOf="@+id/etPassword2"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword2" />
-
-    <EditText
-        android:id="@+id/etPassword2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:background="#8A000000"
         android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/etEmail2"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/etEmail2"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail2" />
-
-    <EditText
-        android:id="@+id/etEmail2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:background="#8A000000"
-        android:ems="10"
-        android:hint="@string/email_field"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/etLastName"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/etLastName"
-        app:layout_constraintTop_toBottomOf="@+id/etLastName" />
-
-    <EditText
-        android:id="@+id/etLastName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:background="#8A000000"
-        android:ems="10"
-        android:hint="last name"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/etFirstName"
+        android:hint="@string/phone_num"
+        android:importantForAutofill="no"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="@+id/tvPhoneNumber"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/etFirstName"
-        app:layout_constraintTop_toBottomOf="@+id/etFirstName" />
+        app:layout_constraintStart_toStartOf="@+id/tvPhoneNumber"
+        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber" />
 
     <ImageButton
         android:id="@+id/btnProfilePic"
@@ -172,12 +178,33 @@
         android:layout_height="124dp"
         android:layout_marginTop="36dp"
         android:background="@drawable/user"
+        android:contentDescription="@string/content_description_login_image"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount2"
+        app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.673"
         app:layout_constraintStart_toEndOf="@+id/etLastName"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/ivProfileImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/user"
+        tools:layout_editor_absoluteY="254dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="100dp"
+        android:layout_height="99dp"
+        android:text="Button"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="259dp"
+        tools:layout_editor_absoluteY="255dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

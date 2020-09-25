@@ -33,15 +33,15 @@ public class CreateAccount extends AppCompatActivity {
         });
 
         // Create Account Button
-        createAccountButton = (Button) findViewById(R.id.btnCreateAccount2);
+        createAccountButton = (Button) findViewById(R.id.btnCreateAccount);
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Gets input entered in each field
                 fName = (EditText) findViewById(R.id.etFirstName);
                 lName = (EditText) findViewById(R.id.etLastName);
-                email = (EditText) findViewById(R.id.etEmail2);
-                password = (EditText) findViewById(R.id.etPassword2);
+                email = (EditText) findViewById(R.id.etEmail);
+                password = (EditText) findViewById(R.id.etPassword);
                 gradDate = (EditText) findViewById(R.id.etGradDate);
                 phoneNum = (EditText) findViewById(R.id.etPhone);
 
