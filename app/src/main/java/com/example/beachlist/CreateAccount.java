@@ -18,7 +18,7 @@ import java.io.File;
 public class CreateAccount extends AppCompatActivity {
     private Button createAccountButton, cancelButton;
     private EditText fName, lName, email, password, gradDate, phoneNum;
-    private ImageButton profilePic;
+    private Button profilePic;
     public static final int IMAGE_REQUEST = 33;
 
     @Override
@@ -27,7 +27,7 @@ public class CreateAccount extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
 
         // Set Profile Picture
-        profilePic = (ImageButton) findViewById(R.id.btnProfilePic);
+        profilePic = (Button)  findViewById(R.id.button2);
         profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
