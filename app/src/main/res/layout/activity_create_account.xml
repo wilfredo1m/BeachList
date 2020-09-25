@@ -118,8 +118,8 @@
 
     <TextView
         android:id="@+id/tvExpectedGraduation"
-        android:layout_width="204dp"
-        android:layout_height="wrap_content"
+        android:layout_width="192dp"
+        android:layout_height="45dp"
         android:layout_marginTop="28dp"
         android:background="#8B000000"
         android:text="@string/expected_grad_date_lbl"
@@ -141,7 +141,7 @@
         android:inputType="date"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/tvExpectedGraduation"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/tvExpectedGraduation"
         app:layout_constraintTop_toBottomOf="@+id/tvExpectedGraduation" />
 
@@ -195,10 +195,11 @@
         android:id="@+id/button2"
         android:layout_width="100dp"
         android:layout_height="99dp"
-        android:text="Button"
-        android:visibility="invisible"
+        android:background="@android:drawable/screen_background_light_transparent"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/ivProfileImage"
         app:layout_constraintEnd_toEndOf="@+id/ivProfileImage"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/ivProfileImage"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.972" />
@@ -229,8 +230,10 @@
         android:layout_height="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/etGradDate"
         app:layout_constraintEnd_toStartOf="@+id/etGradDate"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/etGradDate"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/date_icon" />
 
     <ImageView
@@ -264,5 +267,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/etLastName"
         app:srcCompat="@drawable/person_icon" />
+
+    <ImageView
+        android:id="@+id/imageView17"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/etPassword"
+        app:layout_constraintEnd_toStartOf="@+id/etPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/etPassword"
+        app:layout_constraintVertical_bias="0.334"
+        app:srcCompat="@drawable/password_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
