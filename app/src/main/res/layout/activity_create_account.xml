@@ -54,11 +54,11 @@
 
     <EditText
         android:id="@+id/etFirstName"
-        android:layout_width="wrap_content"
+        android:layout_width="192dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
         android:layout_marginTop="36dp"
         android:background="#AE000000"
         android:ems="10"
@@ -70,7 +70,7 @@
 
     <EditText
         android:id="@+id/etLastName"
-        android:layout_width="wrap_content"
+        android:layout_width="192dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
@@ -86,23 +86,23 @@
 
     <EditText
         android:id="@+id/etEmail"
-        android:layout_width="wrap_content"
+        android:layout_width="192dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:background="#8A000000"
         android:ems="10"
         android:hint="@string/email_field"
+        android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="@+id/etLastName"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/etLastName"
-        app:layout_constraintTop_toBottomOf="@+id/etLastName"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/etLastName" />
 
     <EditText
         android:id="@+id/etPassword"
-        android:layout_width="wrap_content"
+        android:layout_width="192dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
@@ -118,19 +118,20 @@
 
     <TextView
         android:id="@+id/tvExpectedGraduation"
-        android:layout_width="wrap_content"
+        android:layout_width="204dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="28dp"
         android:background="#8B000000"
         android:text="@string/expected_grad_date_lbl"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/etPassword"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/etPassword"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
     <EditText
         android:id="@+id/etGradDate"
-        android:layout_width="wrap_content"
+        android:layout_width="192dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="#8B000000"
@@ -146,7 +147,7 @@
 
     <TextView
         android:id="@+id/tvPhoneNumber"
-        android:layout_width="209dp"
+        android:layout_width="192dp"
         android:layout_height="24dp"
         android:layout_marginTop="20dp"
         android:background="#8B000000"
@@ -160,44 +161,35 @@
 
     <EditText
         android:id="@+id/etPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_width="192dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="16dp"
         android:background="#8B000000"
         android:ems="10"
         android:hint="@string/phone_num"
         android:importantForAutofill="no"
         android:inputType="phone"
         app:layout_constraintEnd_toEndOf="@+id/tvPhoneNumber"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/tvPhoneNumber"
         app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber" />
-
-    <ImageButton
-        android:id="@+id/btnProfilePic"
-        android:layout_width="137dp"
-        android:layout_height="124dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/user"
-        android:contentDescription="@string/content_description_login_image"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.673"
-        app:layout_constraintStart_toEndOf="@+id/etLastName"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/ivProfileImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="382dp"
         android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/user"
-        tools:layout_editor_absoluteY="254dp" />
+        app:layout_constraintHorizontal_bias="0.761"
+        app:layout_constraintStart_toEndOf="@+id/etLastName"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/user" />
 
     <Button
         android:id="@+id/button2"
@@ -205,7 +197,72 @@
         android:layout_height="99dp"
         android:text="Button"
         android:visibility="invisible"
-        tools:layout_editor_absoluteX="259dp"
-        tools:layout_editor_absoluteY="255dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/ivProfileImage"
+        app:layout_constraintEnd_toEndOf="@+id/ivProfileImage"
+        app:layout_constraintStart_toStartOf="@+id/ivProfileImage"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.972" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/etPhone"
+        app:layout_constraintEnd_toStartOf="@+id/etPhone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/etPhone"
+        app:srcCompat="@drawable/phone_number_icon" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/etEmail"
+        app:layout_constraintEnd_toStartOf="@+id/etEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/etEmail"
+        app:srcCompat="@drawable/email_icon" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/etGradDate"
+        app:layout_constraintEnd_toStartOf="@+id/etGradDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/etGradDate"
+        app:srcCompat="@drawable/date_icon" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/etFirstName"
+        app:layout_constraintEnd_toStartOf="@+id/etFirstName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/etFirstName"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/person_icon" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/etFirstName"
+        app:layout_constraintEnd_toStartOf="@+id/etFirstName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/etFirstName"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/person_icon" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/etLastName"
+        app:layout_constraintEnd_toStartOf="@+id/etLastName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/etLastName"
+        app:srcCompat="@drawable/person_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
