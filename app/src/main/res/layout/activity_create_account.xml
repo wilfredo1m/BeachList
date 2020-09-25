@@ -123,6 +123,7 @@
         android:layout_marginTop="28dp"
         android:background="#8B000000"
         android:text="@string/expected_grad_date_lbl"
+        android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/etPassword"
         app:layout_constraintHorizontal_bias="1.0"
@@ -152,6 +153,7 @@
         android:layout_marginTop="20dp"
         android:background="#8B000000"
         android:text="@string/phone_lbl"
+        android:textColor="#FFFFFF"
         android:textIsSelectable="false"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/etGradDate"
@@ -209,10 +211,10 @@
         android:id="@+id/imageView8"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/etPhone"
-        app:layout_constraintEnd_toStartOf="@+id/etPhone"
+        app:layout_constraintBottom_toBottomOf="@+id/tvPhoneNumber"
+        app:layout_constraintEnd_toStartOf="@+id/tvPhoneNumber"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etPhone"
+        app:layout_constraintTop_toTopOf="@+id/tvPhoneNumber"
         app:srcCompat="@drawable/phone_number_icon" />
 
     <ImageView
@@ -227,14 +229,12 @@
 
     <ImageView
         android:id="@+id/imageView11"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/etGradDate"
-        app:layout_constraintEnd_toStartOf="@+id/etGradDate"
-        app:layout_constraintHorizontal_bias="0.555"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvExpectedGraduation"
+        app:layout_constraintEnd_toStartOf="@+id/tvExpectedGraduation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etGradDate"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toTopOf="@+id/tvExpectedGraduation"
         app:srcCompat="@drawable/date_icon" />
 
     <ImageView
