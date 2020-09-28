@@ -40,7 +40,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="61dp"
-        android:background="@drawable/gray_background"
+        android:background="@drawable/black_header_background"
         android:minHeight="?attr/actionBarSize"
         android:scaleType="fitXY"
         android:theme="?attr/actionBarTheme"
@@ -184,8 +184,9 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="382dp"
+        android:clickable="false"
+        android:contentDescription="@string/content_description_login_image"
         android:scaleType="fitXY"
-        android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.761"
@@ -249,7 +250,7 @@
         app:srcCompat="@drawable/person_icon" />
 
     <ImageView
-        android:id="@+id/imageView13"
+        android:id="@+id/ivFirst_Name_Icon"
         android:layout_width="25dp"
         android:layout_height="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/etFirstName"
@@ -260,7 +261,7 @@
         app:srcCompat="@drawable/person_icon" />
 
     <ImageView
-        android:id="@+id/imageView16"
+        android:id="@+id/iv_Last_Name_Icon"
         android:layout_width="25dp"
         android:layout_height="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/etLastName"
