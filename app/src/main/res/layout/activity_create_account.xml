@@ -57,8 +57,8 @@
         android:layout_width="192dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="52dp"
-        android:layout_marginLeft="52dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
         android:layout_marginTop="36dp"
         android:background="#AE000000"
         android:ems="10"
@@ -196,7 +196,7 @@
         app:srcCompat="@drawable/user" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_Profile_image"
         android:layout_width="100dp"
         android:layout_height="99dp"
         android:background="?attr/selectableItemBackground"
@@ -209,9 +209,10 @@
         app:layout_constraintVertical_bias="0.972" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/iv_Phone_num_icon"
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:contentDescription="@string/phone_num_icon_description"
         app:layout_constraintBottom_toBottomOf="@+id/tvPhoneNumber"
         app:layout_constraintEnd_toStartOf="@+id/tvPhoneNumber"
         app:layout_constraintStart_toStartOf="parent"
@@ -219,9 +220,10 @@
         app:srcCompat="@drawable/phone_number_icon" />
 
     <ImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/iv_email_icon"
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:contentDescription="@string/email_icon_description"
         app:layout_constraintBottom_toBottomOf="@+id/etEmail"
         app:layout_constraintEnd_toStartOf="@+id/etEmail"
         app:layout_constraintStart_toStartOf="parent"
@@ -229,9 +231,10 @@
         app:srcCompat="@drawable/email_icon" />
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/iv_expect_grad_date_icon"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:contentDescription="@string/expected_grad_icon_description"
         app:layout_constraintBottom_toBottomOf="@+id/tvExpectedGraduation"
         app:layout_constraintEnd_toStartOf="@+id/tvExpectedGraduation"
         app:layout_constraintStart_toStartOf="parent"
@@ -239,20 +242,10 @@
         app:srcCompat="@drawable/date_icon" />
 
     <ImageView
-        android:id="@+id/imageView12"
+        android:id="@+id/iv_First_Name_Icon"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/etFirstName"
-        app:layout_constraintEnd_toStartOf="@+id/etFirstName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etFirstName"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/person_icon" />
-
-    <ImageView
-        android:id="@+id/ivFirst_Name_Icon"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:contentDescription="@string/first_name_icon_desc"
         app:layout_constraintBottom_toBottomOf="@+id/etFirstName"
         app:layout_constraintEnd_toStartOf="@+id/etFirstName"
         app:layout_constraintStart_toStartOf="parent"
@@ -264,6 +257,7 @@
         android:id="@+id/iv_Last_Name_Icon"
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:contentDescription="@string/last_name_icon_desc"
         app:layout_constraintBottom_toBottomOf="@+id/etLastName"
         app:layout_constraintEnd_toStartOf="@+id/etLastName"
         app:layout_constraintStart_toStartOf="parent"
@@ -271,10 +265,11 @@
         app:srcCompat="@drawable/person_icon" />
 
     <ImageView
-        android:id="@+id/imageView17"
+        android:id="@+id/iv_password_icon"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:background="#FFFFFF"
+        android:contentDescription="@string/password_icon_description"
         app:layout_constraintBottom_toBottomOf="@+id/etPassword"
         app:layout_constraintEnd_toStartOf="@+id/etPassword"
         app:layout_constraintStart_toStartOf="parent"

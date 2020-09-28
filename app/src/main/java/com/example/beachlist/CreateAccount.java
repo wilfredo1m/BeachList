@@ -9,12 +9,9 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
-import android.renderscript.ScriptGroup;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -37,7 +34,7 @@ public class CreateAccount extends AppCompatActivity {
         profilePicture = (ImageView) findViewById(R.id.ivProfileImage);
 
         // Set Profile Picture Button
-        profilePicButton = (Button) findViewById(R.id.button2);
+        profilePicButton = (Button) findViewById(R.id.btn_Profile_image);
         profilePicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

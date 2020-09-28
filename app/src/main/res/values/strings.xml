@@ -19,7 +19,10 @@
     <string name="phone_lbl">Phone Number</string>
     <string name="phone_num">xxx-xxx-xxxx</string>
     <string name="pic_description">Image of user profile</string>
-
-
-
+    <string name="first_name_icon_desc">First name icon</string>
+    <string name="last_name_icon_desc">Last name icon</string>
+    <string name="password_icon_description">password icon</string>
+    <string name="email_icon_description">email icon</string>
+    <string name="phone_num_icon_description">phone icon</string>
+    <string name="expected_grad_icon_description">expected grad icon</string>
 </resources>
