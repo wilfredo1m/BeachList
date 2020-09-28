@@ -41,12 +41,13 @@ public class CreateAccount extends AppCompatActivity {
                         || phoneNum.getText().toString().isEmpty()){
                     displayEmptyFieldError();
                 }
-
-                // Check if email is valid
-                // else if(){
-                //
-                //}
-
+                else if (email.getText().toString().length() <= 18) {
+                    // Provided email cant be shorter than 19 characters since "@student.csulb.edu" is fixed at 18 characters
+                    displayMalformedEmailError();
+                }
+                else if (!email.getText().toString().substring(email.getText().toString().length() - 18).equals("@student.csulb.edu")) {
+                    displayMalformedEmailError();
+                }
                 else {
                     openLoginScreen();
                 }
@@ -72,5 +73,10 @@ public class CreateAccount extends AppCompatActivity {
     // Displays when any field is left blank
     public void displayEmptyFieldError(){
         Toast.makeText(CreateAccount.this, "Fill in all information",Toast.LENGTH_SHORT).show();
+    }
+
+    // Displays when an incorrect email is provided
+    public void displayMalformedEmailError(){
+        Toast.makeText(CreateAccount.this, "Must provide an email ending in @student.csulb.edu",Toast.LENGTH_SHORT).show();
     }
 }
