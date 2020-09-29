@@ -25,6 +25,9 @@
     <string name="email_icon_description">email icon</string>
     <string name="phone_num_icon_description">phone icon</string>
     <string name="expected_grad_icon_description">expected grad icon</string>
-    <string name="header_page_message">display_message</string>
+    <string name="header_page_message">Display Message</string>
+    <string name="account_settings_header"> Account Settings</string>
+    <string name="messages_header"> Messages</string>
+
 
 </resources>
