@@ -184,10 +184,10 @@
         app:cardCornerRadius="100dp"
         app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.728"
-        app:layout_constraintStart_toEndOf="@+id/etFirstName"
+        app:layout_constraintStart_toEndOf="@+id/etLastName"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.058">
+
         <ImageView
             android:id="@+id/ivProfileImage"
             android:layout_width="100dp"
