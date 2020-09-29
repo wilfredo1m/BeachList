@@ -21,7 +21,7 @@ import java.io.InputStream;
 
 public class CreateAccount extends AppCompatActivity {
     private Button createAccountButton, cancelButton, profilePicButton;
-    private EditText fName, lName, email, password, gradDate, phoneNum;
+    private EditText fName, lName, idNumber, email, password, gradDate, phoneNum;
     private ImageView profilePicture;
     public static final int IMAGE_REQUEST = 33;
     public static final int PROCESSED_OK = -1;
@@ -51,6 +51,7 @@ public class CreateAccount extends AppCompatActivity {
                 // Gets input entered in each field
                 fName = (EditText) findViewById(R.id.etFirstName);
                 lName = (EditText) findViewById(R.id.etLastName);
+                idNumber = (EditText) findViewById(R.id.etIDNumber);
                 email = (EditText) findViewById(R.id.etEmail);
                 password = (EditText) findViewById(R.id.etPassword);
                 gradDate = (EditText) findViewById(R.id.etGradDate);
@@ -60,6 +61,7 @@ public class CreateAccount extends AppCompatActivity {
                 if(fName.getText().toString().isEmpty()
                         || lName.getText().toString().isEmpty()
                         || fName.getText().toString().isEmpty()
+                        || idNumber.getText().toString().isEmpty()
                         || email.getText().toString().isEmpty()
                         || password.getText().toString().isEmpty()
                         || gradDate.getText().toString().isEmpty()

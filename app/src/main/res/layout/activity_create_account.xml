@@ -125,10 +125,10 @@
         android:text="@string/expected_grad_date_lbl"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/etIDNumber"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintStart_toStartOf="@+id/etIDNumber"
+        app:layout_constraintTop_toBottomOf="@+id/etIDNumber" />
 
     <EditText
         android:id="@+id/etGradDate"
@@ -276,7 +276,7 @@
         app:srcCompat="@drawable/password_icon" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/etIDNumber"
         android:layout_width="192dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -294,10 +294,10 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:contentDescription="@string/id_icon_description"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/etIDNumber"
+        app:layout_constraintEnd_toStartOf="@+id/etIDNumber"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintTop_toTopOf="@+id/etIDNumber"
         app:srcCompat="@drawable/id_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
