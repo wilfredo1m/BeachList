@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar5"
+        android:id="@+id/bottomToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#000000"
@@ -18,51 +18,51 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnHome"
         android:layout_width="80dp"
         android:layout_height="44dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:background="@drawable/home_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar5"
-        app:layout_constraintEnd_toStartOf="@+id/button7"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomToolbar"
+        app:layout_constraintEnd_toStartOf="@+id/btnCreatePost"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar5"
+        app:layout_constraintTop_toTopOf="@+id/bottomToolbar"
         app:layout_constraintVertical_bias="0.666" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/btnCreatePost"
         android:layout_width="80dp"
         android:layout_height="44dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="4dp"
         android:background="@drawable/plus_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar5"
-        app:layout_constraintEnd_toStartOf="@+id/button8" />
+        app:layout_constraintBottom_toBottomOf="@+id/bottomToolbar"
+        app:layout_constraintEnd_toStartOf="@+id/btnMessages" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/btnMessages"
         android:layout_width="80dp"
         android:layout_height="45dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:background="@drawable/message_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar5"
-        app:layout_constraintEnd_toStartOf="@+id/button9"
-        app:layout_constraintTop_toTopOf="@+id/toolbar5"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomToolbar"
+        app:layout_constraintEnd_toStartOf="@+id/btnAccountSettings"
+        app:layout_constraintTop_toTopOf="@+id/bottomToolbar"
         app:layout_constraintVertical_bias="0.642" />
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/btnAccountSettings"
         android:layout_width="80dp"
         android:layout_height="47dp"
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
         android:background="@drawable/person_male"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar5"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar5"
-        app:layout_constraintTop_toTopOf="@+id/toolbar5"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomToolbar"
+        app:layout_constraintEnd_toEndOf="@+id/bottomToolbar"
+        app:layout_constraintTop_toTopOf="@+id/bottomToolbar"
         app:layout_constraintVertical_bias="0.727" />
 </androidx.constraintlayout.widget.ConstraintLayout>
