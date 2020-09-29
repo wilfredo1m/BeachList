@@ -95,10 +95,10 @@
         android:hint="@string/email_field"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/etLastName"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/etLastName"
-        app:layout_constraintTop_toBottomOf="@+id/etLastName" />
+        app:layout_constraintEnd_toEndOf="@+id/etPhone"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/etPhone"
+        app:layout_constraintTop_toBottomOf="@+id/etPhone" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -120,15 +120,13 @@
         android:id="@+id/tvExpectedGraduation"
         android:layout_width="192dp"
         android:layout_height="45dp"
-        android:layout_marginTop="28dp"
         android:background="#8B000000"
         android:text="@string/expected_grad_date_lbl"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/etPassword"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/etPassword"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
+        tools:layout_editor_absoluteY="226dp" />
 
     <EditText
         android:id="@+id/etGradDate"
@@ -274,5 +272,28 @@
         app:layout_constraintTop_toTopOf="@+id/etPassword"
         app:layout_constraintVertical_bias="0.334"
         app:srcCompat="@drawable/password_icon" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="192dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#8A000000"
+        android:ems="10"
+        android:hint="@string/id_num"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/etLastName"
+        app:layout_constraintStart_toStartOf="@+id/etLastName"
+        app:layout_constraintTop_toBottomOf="@+id/etLastName" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName"
+        app:srcCompat="@drawable/id_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

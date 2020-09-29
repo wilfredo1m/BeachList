@@ -12,6 +12,7 @@
     <string name = "cancelBtn">cancel</string>
     <string name="last_name">Last Name :</string>
     <string name="first_name">first Name :</string>
+    <string name="id_num">ID Number :</string>
     <string name="email_address">Email Address :</string>
     <string name="phone_number">Phone Number :</string>
     <string name="expected_grad_date_lbl">Expected Graduation Date</string>
