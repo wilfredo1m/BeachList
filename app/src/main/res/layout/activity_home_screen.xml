@@ -35,7 +35,7 @@
         android:id="@+id/imageView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         tools:srcCompat="@tools:sample/avatars" />
@@ -51,7 +51,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.96"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
@@ -73,7 +73,7 @@
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="52dp"
         android:layout_marginRight="52dp"
         app:layout_constraintEnd_toStartOf="@+id/imageView5"
