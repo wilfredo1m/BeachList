@@ -13,36 +13,31 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button10"
-        android:layout_width="59dp"
-        android:layout_height="57dp"
-        android:background="@drawable/categories_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar6"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar6"
-        app:layout_constraintTop_toTopOf="@+id/toolbar6" />
-
     <SearchView
-        android:layout_width="67dp"
-        android:layout_height="53dp"
+        android:id="@+id/searchView"
+        android:layout_width="351dp"
+        android:layout_height="56dp"
         android:background="#70000000"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar6"
+        app:layout_constraintEnd_toStartOf="@+id/button10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0">
+
+    </SearchView>
 
     <com.google.android.material.tabs.TabLayout
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
         android:background="#DD070C61"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar6"
+        app:layout_constraintTop_toBottomOf="@+id/searchView"
         app:tabIndicatorColor="#0A65EC">
 
         <com.google.android.material.tabs.TabItem
@@ -60,4 +55,15 @@
             android:layout_height="wrap_content"
             android:text="Service" />
     </com.google.android.material.tabs.TabLayout>
+
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="46dp"
+        android:layout_height="45dp"
+        android:background="@drawable/categories_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar6"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar6"
+        app:layout_constraintHorizontal_bias="0.997"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar6" />
 </androidx.constraintlayout.widget.ConstraintLayout>
