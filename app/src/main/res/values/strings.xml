@@ -20,6 +20,7 @@
     <string name="phone_lbl">Phone Number</string>
     <string name="phone_num">xxx-xxx-xxxx</string>
     <string name="pic_description">Image of user profile</string>
+    <string name="id_icon_description">ID Icon Image</string>
     <string name="first_name_icon_desc">First name icon</string>
     <string name="last_name_icon_desc">Last name icon</string>
     <string name="password_icon_description">password icon</string>
