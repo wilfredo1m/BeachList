@@ -68,6 +68,9 @@ public class CreateAccount extends AppCompatActivity {
 
                 // Valid login
                 else {
+                    // CHECK IF LOGIN IS IN DATABASE HERE???
+
+
                     openLoginScreen();
                 }
             }
