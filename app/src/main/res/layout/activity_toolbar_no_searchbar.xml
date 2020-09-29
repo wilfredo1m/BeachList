@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar4"
+        android:id="@+id/tb_message_toolbar"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:background="#000000"
@@ -19,14 +19,14 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_display_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/header_page_message"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
+        app:layout_constraintBottom_toBottomOf="@+id/tb_message_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4" />
+        app:layout_constraintTop_toTopOf="@+id/tb_message_toolbar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

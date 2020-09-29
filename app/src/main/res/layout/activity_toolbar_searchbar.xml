@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar6"
+        android:id="@+id/tb_searchbar_toolbar"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:background="#000000"
@@ -22,7 +22,7 @@
         android:layout_width="351dp"
         android:layout_height="56dp"
         android:background="#70000000"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar6"
+        app:layout_constraintBottom_toBottomOf="@+id/tb_searchbar_toolbar"
         app:layout_constraintEnd_toStartOf="@+id/btn_categories"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -65,9 +65,9 @@
         android:layout_width="46dp"
         android:layout_height="45dp"
         android:background="@drawable/categories_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar6"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar6"
+        app:layout_constraintBottom_toBottomOf="@+id/tb_searchbar_toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/tb_searchbar_toolbar"
         app:layout_constraintHorizontal_bias="0.997"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar6" />
+        app:layout_constraintTop_toTopOf="@+id/tb_searchbar_toolbar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

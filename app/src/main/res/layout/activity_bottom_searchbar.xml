@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/bottomToolbar"
+        android:id="@+id/tb_bottom_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#000000"
@@ -24,11 +24,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:background="@drawable/home_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomToolbar"
+        app:layout_constraintBottom_toBottomOf="@+id/tb_bottom_toolbar"
         app:layout_constraintEnd_toStartOf="@+id/btnCreatePost"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bottomToolbar"
+        app:layout_constraintTop_toTopOf="@+id/tb_bottom_toolbar"
         app:layout_constraintVertical_bias="0.666" />
 
     <Button
@@ -39,7 +39,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="4dp"
         android:background="@drawable/plus_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomToolbar"
+        app:layout_constraintBottom_toBottomOf="@+id/tb_bottom_toolbar"
         app:layout_constraintEnd_toStartOf="@+id/btnMessages" />
 
     <Button
@@ -49,9 +49,9 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:background="@drawable/message_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomToolbar"
+        app:layout_constraintBottom_toBottomOf="@+id/tb_bottom_toolbar"
         app:layout_constraintEnd_toStartOf="@+id/btnAccountSettings"
-        app:layout_constraintTop_toTopOf="@+id/bottomToolbar"
+        app:layout_constraintTop_toTopOf="@+id/tb_bottom_toolbar"
         app:layout_constraintVertical_bias="0.642" />
 
     <Button
@@ -61,8 +61,8 @@
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
         android:background="@drawable/person_male"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomToolbar"
-        app:layout_constraintEnd_toEndOf="@+id/bottomToolbar"
-        app:layout_constraintTop_toTopOf="@+id/bottomToolbar"
+        app:layout_constraintBottom_toBottomOf="@+id/tb_bottom_toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/tb_bottom_toolbar"
+        app:layout_constraintTop_toTopOf="@+id/tb_bottom_toolbar"
         app:layout_constraintVertical_bias="0.727" />
 </androidx.constraintlayout.widget.ConstraintLayout>
