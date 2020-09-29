@@ -176,37 +176,35 @@
         app:layout_constraintStart_toStartOf="@+id/tvPhoneNumber"
         app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber" />
 
-    <ImageView
-        android:id="@+id/ivProfileImage"
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="382dp"
-        android:clickable="false"
-        android:contentDescription="@string/content_description_login_image"
-        android:scaleType="fitXY"
+        app:cardCornerRadius="100dp"
         app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.761"
-        app:layout_constraintStart_toEndOf="@+id/etLastName"
+        app:layout_constraintHorizontal_bias="0.728"
+        app:layout_constraintStart_toEndOf="@+id/etFirstName"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/user" />
+        app:layout_constraintVertical_bias="0.058">
+        <ImageView
+            android:id="@+id/ivProfileImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/content_description_login_image"
+            android:scaleType="center"
+            app:srcCompat="@drawable/user" />
 
-    <Button
-        android:id="@+id/btn_Profile_image"
-        android:layout_width="100dp"
-        android:layout_height="99dp"
-        android:background="?attr/selectableItemBackground"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/ivProfileImage"
-        app:layout_constraintEnd_toEndOf="@+id/ivProfileImage"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/ivProfileImage"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.972" />
+        <Button
+            android:id="@+id/btn_Profile_image"
+            android:layout_width="100dp"
+            android:layout_height="99dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="?attr/selectableItemBackground"
+            android:visibility="visible" />
+    </androidx.cardview.widget.CardView>
 
     <ImageView
         android:id="@+id/iv_Phone_num_icon"
