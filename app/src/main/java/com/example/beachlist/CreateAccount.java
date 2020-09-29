@@ -49,32 +49,24 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Gets input entered in each field
-                fName = (EditText) findViewById(R.id.etFirstName);
-                lName = (EditText) findViewById(R.id.etLastName);
-                idNumber = (EditText) findViewById(R.id.etIDNumber);
-                email = (EditText) findViewById(R.id.etEmail);
-                password = (EditText) findViewById(R.id.etPassword);
-                gradDate = (EditText) findViewById(R.id.etGradDate);
-                phoneNum = (EditText) findViewById(R.id.etPhone);
+                getUserInputs();
 
                 // Check if any field left blank
-                if(fName.getText().toString().isEmpty()
-                        || lName.getText().toString().isEmpty()
-                        || fName.getText().toString().isEmpty()
-                        || idNumber.getText().toString().isEmpty()
-                        || email.getText().toString().isEmpty()
-                        || password.getText().toString().isEmpty()
-                        || gradDate.getText().toString().isEmpty()
-                        || phoneNum.getText().toString().isEmpty()){
+                if(anyEmptyFields()){
                     displayEmptyFieldError();
                 }
+
+                // Provided email cant be shorter than 19 characters since "@student.csulb.edu" is fixed at 18 characters
                 else if (email.getText().toString().length() <= 18) {
-                    // Provided email cant be shorter than 19 characters since "@student.csulb.edu" is fixed at 18 characters
                     displayMalformedEmailError();
                 }
+
+                // Checks if the email provided is a student csulb email
                 else if (!email.getText().toString().substring(email.getText().toString().length() - 18).equals("@student.csulb.edu")) {
                     displayMalformedEmailError();
                 }
+
+                // Valid login
                 else {
                     openLoginScreen();
                 }
@@ -153,5 +145,31 @@ public class CreateAccount extends AppCompatActivity {
     // Displays when an incorrect email is provided
     public void displayMalformedEmailError(){
         Toast.makeText(CreateAccount.this, "Must provide an email ending in @student.csulb.edu",Toast.LENGTH_SHORT).show();
+    }
+
+    // Get the information entered by the user
+    public void getUserInputs(){
+        fName = (EditText) findViewById(R.id.etFirstName);
+        lName = (EditText) findViewById(R.id.etLastName);
+        idNumber = (EditText) findViewById(R.id.etIDNumber);
+        email = (EditText) findViewById(R.id.etEmail);
+        password = (EditText) findViewById(R.id.etPassword);
+        gradDate = (EditText) findViewById(R.id.etGradDate);
+        phoneNum = (EditText) findViewById(R.id.etPhone);
+    }
+
+    // Checks if any text field is left empty
+    public boolean anyEmptyFields(){
+        if(fName.getText().toString().isEmpty()
+                || lName.getText().toString().isEmpty()
+                || fName.getText().toString().isEmpty()
+                || idNumber.getText().toString().isEmpty()
+                || email.getText().toString().isEmpty()
+                || password.getText().toString().isEmpty()
+                || gradDate.getText().toString().isEmpty()
+                || phoneNum.getText().toString().isEmpty()){
+            return true;
+        }
+        return false;
     }
 }
