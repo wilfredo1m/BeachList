@@ -1,19 +1,27 @@
 package com.example.beachlist;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,8 +29,10 @@ import java.io.InputStream;
 
 public class CreateAccount extends AppCompatActivity {
     private Button createAccountButton, cancelButton, profilePicButton;
-    private EditText fName, lName, idNumber, email, password, gradDate, phoneNum;
+    private EditText fNameEt, lNameEt, idNumberEt, emailEt, passwordEt, gradDateEt, phoneNumEt;
     private ImageView profilePicture;
+    private ProgressDialog progressDialog;
+    private FirebaseAuth mAuth;
     public static final int IMAGE_REQUEST = 33;
     public static final int PROCESSED_OK = -1;
 
@@ -30,6 +40,8 @@ public class CreateAccount extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+
+        mAuth = FirebaseAuth.getInstance();
 
         profilePicture = (ImageView) findViewById(R.id.ivProfileImage);
 
@@ -43,36 +55,17 @@ public class CreateAccount extends AppCompatActivity {
             }
         });
 
+        // Get input fields
+        getUserInputs();
+        progressDialog = new ProgressDialog(this);
+
         // Create Account Button
         createAccountButton = (Button) findViewById(R.id.btnCreateAccount);
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Gets input entered in each field
-                getUserInputs();
-
-                // Check if any field left blank
-                if(anyEmptyFields()){
-                    displayEmptyFieldError();
-                }
-
-                // Provided email cant be shorter than 19 characters since "@student.csulb.edu" is fixed at 18 characters
-                else if (email.getText().toString().length() <= 18) {
-                    displayMalformedEmailError();
-                }
-
-                // Checks if the email provided is a student csulb email
-                else if (!email.getText().toString().substring(email.getText().toString().length() - 18).equals("@student.csulb.edu")) {
-                    displayMalformedEmailError();
-                }
-
-                // Valid login
-                else {
-                    // CHECK IF LOGIN IS IN DATABASE HERE???
-
-
-                    openLoginScreen();
-                }
+                // Register the User
+                Register();
             }
         });
 
@@ -134,10 +127,53 @@ public class CreateAccount extends AppCompatActivity {
         }
     }
 
+    public void Register(){
+        // Check if any field left blank
+        if(anyEmptyFields()){
+            displayEmptyFieldError();
+            return;
+        }
+
+        String fname = fNameEt.getText().toString();
+        String lname = lNameEt.getText().toString();
+        String idNumber = idNumberEt.getText().toString();
+        String email = emailEt.getText().toString();
+        String password = passwordEt.getText().toString();
+        String gradDate = gradDateEt.getText().toString();
+        String phoneNum = phoneNumEt.getText().toString();
+        // Provided email cant be shorter than 19 characters since "@student.csulb.edu" is fixed at 18 characters
+        if (email.length() <= 18) {
+            displayMalformedEmailError();
+            return;
+        }
+        // Checks if the email provided is a student csulb email
+        else if (!isValidSchoolEmail(email)) {
+            displayMalformedEmailError();
+            return;
+        }
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
+        progressDialog.setCanceledOnTouchOutside(false);
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()) {
+                    Toast.makeText(CreateAccount.this, "Successfully registered", Toast.LENGTH_LONG).show();
+                    openLoginScreen();
+                }
+                else{
+                    Toast.makeText(CreateAccount.this, "Sign up failed!",Toast.LENGTH_LONG).show();
+                }
+                progressDialog.dismiss();
+            }
+        });
+    }
+
     // Opens Login Screen
     public void openLoginScreen(){
         Intent openScreen = new Intent(this, MainActivity.class);
         startActivity(openScreen);
+        finish();
     }
 
     // Displays when any field is left blank
@@ -152,27 +188,31 @@ public class CreateAccount extends AppCompatActivity {
 
     // Get the information entered by the user
     public void getUserInputs(){
-        fName = (EditText) findViewById(R.id.etFirstName);
-        lName = (EditText) findViewById(R.id.etLastName);
-        idNumber = (EditText) findViewById(R.id.etIDNumber);
-        email = (EditText) findViewById(R.id.etEmail);
-        password = (EditText) findViewById(R.id.etPassword);
-        gradDate = (EditText) findViewById(R.id.etGradDate);
-        phoneNum = (EditText) findViewById(R.id.etPhone);
+        fNameEt = (EditText) findViewById(R.id.etFirstName);
+        lNameEt = (EditText) findViewById(R.id.etLastName);
+        idNumberEt = (EditText) findViewById(R.id.etIDNumber);
+        emailEt = (EditText) findViewById(R.id.etEmail);
+        passwordEt = (EditText) findViewById(R.id.etPassword);
+        gradDateEt = (EditText) findViewById(R.id.etGradDate);
+        phoneNumEt = (EditText) findViewById(R.id.etPhone);
     }
 
     // Checks if any text field is left empty
     public boolean anyEmptyFields(){
-        if(fName.getText().toString().isEmpty()
-                || lName.getText().toString().isEmpty()
-                || fName.getText().toString().isEmpty()
-                || idNumber.getText().toString().isEmpty()
-                || email.getText().toString().isEmpty()
-                || password.getText().toString().isEmpty()
-                || gradDate.getText().toString().isEmpty()
-                || phoneNum.getText().toString().isEmpty()){
+        if(fNameEt.getText().toString().isEmpty()
+                || lNameEt.getText().toString().isEmpty()
+                || fNameEt.getText().toString().isEmpty()
+                || idNumberEt.getText().toString().isEmpty()
+                || emailEt.getText().toString().isEmpty()
+                || passwordEt.getText().toString().isEmpty()
+                || gradDateEt.getText().toString().isEmpty()
+                || phoneNumEt.getText().toString().isEmpty()){
             return true;
         }
         return false;
+    }
+
+    public boolean isValidSchoolEmail(String email) {
+        return email.substring(email.length() - 18).equals("@student.csulb.edu");
     }
 }
