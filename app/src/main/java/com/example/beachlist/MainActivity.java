@@ -70,22 +70,23 @@ public class MainActivity extends AppCompatActivity {
         if((email.isEmpty()) || (password.isEmpty())){
             displayEmptyFieldError();
         }
-        progressDialog.setMessage("Please wait...");
-        progressDialog.show();
-        progressDialog.setCanceledOnTouchOutside(false);
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()) {
-                    Toast.makeText(MainActivity.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
-                    openHomeScreen();
+        else {
+            progressDialog.setMessage("Please wait...");
+            progressDialog.show();
+            progressDialog.setCanceledOnTouchOutside(false);
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(MainActivity.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
+                        openHomeScreen();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Log in failed!", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
                 }
-                else{
-                    Toast.makeText(MainActivity.this, "Log in failed!",Toast.LENGTH_LONG).show();
-                }
-                progressDialog.dismiss();
-            }
-        });
+            });
+        }
     }
 
     // Displays when Email and/or Password field are left blank
