@@ -78,8 +78,13 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(MainActivity.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
-                        openHomeScreen();
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        if (user.isEmailVerified() == false) {
+                            Toast.makeText(MainActivity.this, "Email not verified", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(MainActivity.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
+                            openHomeScreen();
+                        }
                     } else {
                         Toast.makeText(MainActivity.this, "Log in failed!", Toast.LENGTH_LONG).show();
                     }

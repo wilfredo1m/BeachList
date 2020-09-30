@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -159,6 +161,9 @@ public class CreateAccount extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     Toast.makeText(CreateAccount.this, "Successfully registered", Toast.LENGTH_LONG).show();
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    sendValidationEmail(user);
+                    FirebaseAuth.getInstance().signOut();
                     openLoginScreen();
                 }
                 else{
@@ -214,5 +219,24 @@ public class CreateAccount extends AppCompatActivity {
 
     public boolean isValidSchoolEmail(String email) {
         return email.substring(email.length() - 18).equals("@student.csulb.edu");
+    }
+
+    public void sendValidationEmail(final FirebaseUser user) {
+        user.sendEmailVerification()
+                .addOnCompleteListener(this, new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+
+                        if (task.isSuccessful()) {
+                            Toast.makeText(CreateAccount.this,
+                                    "Verification email sent to " + user.getEmail(),
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(CreateAccount.this,
+                                    "Failed to send verification email.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }
