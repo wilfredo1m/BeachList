@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Opens Home Screen
     public void openHomeScreen(){
-        Intent openScreen = new Intent(this, HomeScreen.class);
+        Intent openScreen = new Intent(this, HomeFragment.class);
         startActivity(openScreen);
     }
 }
