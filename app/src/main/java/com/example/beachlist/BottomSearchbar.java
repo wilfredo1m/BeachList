@@ -13,7 +13,7 @@ public class BottomSearchbar extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bottom_searchbar);
+        setContentView(R.layout.activity_searchbar);
 
         // Home Screen Button
         homeButton = (Button) findViewById(R.id.btnHome);
