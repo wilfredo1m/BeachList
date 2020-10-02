@@ -47,19 +47,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mAuth = FirebaseAuth.getInstance();
-
         emailEt = findViewById(R.id.etEmail);
         passwordEt = findViewById(R.id.etPassword);
         progressDialog = new ProgressDialog(this);
         // Home Screen Button (Needs to add the check for valid login)
+
+
         homeScreenButton = (Button) findViewById(R.id.btnLogin);
-        homeScreenButton.setOnClickListener(new View.OnClickListener() {
+
+       homeScreenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Login User
                 Login();
             }
         });
+
     }
 
     public void Login() {
@@ -83,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Email not verified", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(MainActivity.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
-                            openHomeScreen();
+                            //to add this back later once page is fixed
+                            //openHomeScreen();
                         }
                     } else {
                         Toast.makeText(MainActivity.this, "Log in failed!", Toast.LENGTH_LONG).show();
