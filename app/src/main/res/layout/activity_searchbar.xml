@@ -45,4 +45,13 @@
         app:layout_constraintEnd_toEndOf="@+id/toolbar2"
         app:layout_constraintStart_toEndOf="@+id/searchView"
         app:layout_constraintTop_toTopOf="@+id/toolbar2" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="218dp"
+        tools:layout_editor_absoluteY="314dp">
+
+    </com.google.android.material.chip.ChipGroup>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
