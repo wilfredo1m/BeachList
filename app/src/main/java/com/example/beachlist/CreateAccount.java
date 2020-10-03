@@ -24,10 +24,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Objects;
 
 public class CreateAccount extends AppCompatActivity {
     private Button createAccountButton, cancelButton, profilePicButton;
@@ -35,6 +39,8 @@ public class CreateAccount extends AppCompatActivity {
     private ImageView profilePicture;
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
     public static final int IMAGE_REQUEST = 33;
     public static final int PROCESSED_OK = -1;
 
@@ -43,7 +49,11 @@ public class CreateAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
+        //instance of authentication
         mAuth = FirebaseAuth.getInstance();
+
+        //instance of the database
+        database = FirebaseDatabase.getInstance();
 
         profilePicture = (ImageView) findViewById(R.id.ivProfileImage);
 
@@ -136,13 +146,13 @@ public class CreateAccount extends AppCompatActivity {
             return;
         }
 
-        String fname = fNameEt.getText().toString();
-        String lname = lNameEt.getText().toString();
-        String idNumber = idNumberEt.getText().toString();
-        String email = emailEt.getText().toString();
+        final String fname = fNameEt.getText().toString();
+        final String lname = lNameEt.getText().toString();
+        final String idNumber = idNumberEt.getText().toString();
+        final String email = emailEt.getText().toString();
         String password = passwordEt.getText().toString();
-        String gradDate = gradDateEt.getText().toString();
-        String phoneNum = phoneNumEt.getText().toString();
+        final String gradDate = gradDateEt.getText().toString();
+        final String phoneNum = phoneNumEt.getText().toString();
         // Provided email cant be shorter than 19 characters since "@student.csulb.edu" is fixed at 18 characters
         if (email.length() <= 18) {
             displayMalformedEmailError();
@@ -161,10 +171,31 @@ public class CreateAccount extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     Toast.makeText(CreateAccount.this, "Successfully registered", Toast.LENGTH_LONG).show();
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    sendValidationEmail(user);
-                    FirebaseAuth.getInstance().signOut();
-                    openLoginScreen();
+                    final FirebaseUser user = mAuth.getCurrentUser();
+                    String userId = user.getUid();
+                    databaseReference = database.getReference("User").child(userId);
+                    HashMap<String, String> hashMap = new HashMap<>();
+                    hashMap.put("userid", userId);
+                    hashMap.put("firstname", fname);
+                    hashMap.put("lastname", lname);
+                    hashMap.put("idnumber", idNumber);
+                    hashMap.put("email", email);
+                    hashMap.put("graddate", gradDate);
+                    hashMap.put("phonenumber", phoneNum);
+                    hashMap.put("imageURL", "default");
+                    databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()) {
+                                sendValidationEmail(user);
+                                FirebaseAuth.getInstance().signOut();
+                                openLoginScreen();
+                            }
+                            else {
+                                Toast.makeText(CreateAccount.this, "Data storage failed!", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
                 }
                 else{
                     Toast.makeText(CreateAccount.this, "Sign up failed!",Toast.LENGTH_LONG).show();
@@ -203,15 +234,15 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     // Checks if any text field is left empty
-    public boolean anyEmptyFields(){
-        if(fNameEt.getText().toString().isEmpty()
+    public boolean anyEmptyFields() {
+        if (fNameEt.getText().toString().isEmpty()
                 || lNameEt.getText().toString().isEmpty()
                 || fNameEt.getText().toString().isEmpty()
                 || idNumberEt.getText().toString().isEmpty()
                 || emailEt.getText().toString().isEmpty()
                 || passwordEt.getText().toString().isEmpty()
                 || gradDateEt.getText().toString().isEmpty()
-                || phoneNumEt.getText().toString().isEmpty()){
+                || phoneNumEt.getText().toString().isEmpty()) {
             return true;
         }
         return false;
