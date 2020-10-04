@@ -30,9 +30,14 @@
         android:id="@+id/searchView"
         android:layout_width="339dp"
         android:layout_height="56dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/toolbar2"
-        app:layout_constraintTop_toTopOf="@+id/toolbar2" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar2"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button"
