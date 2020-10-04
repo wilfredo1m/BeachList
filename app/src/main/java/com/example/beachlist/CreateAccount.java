@@ -36,6 +36,7 @@ import java.util.Objects;
 public class CreateAccount extends AppCompatActivity {
     private Button createAccountButton, cancelButton, profilePicButton;
     private EditText fNameEt, lNameEt, idNumberEt, emailEt, passwordEt, gradDateEt, phoneNumEt;
+    private Bitmap profileImage;
     private ImageView profilePicture;
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
@@ -126,10 +127,10 @@ public class CreateAccount extends AppCompatActivity {
                     input = getContentResolver().openInputStream(imageUri);
 
                     // Get Bitmap from InputStream
-                    Bitmap image = BitmapFactory.decodeStream(input);
+                    profileImage = BitmapFactory.decodeStream(input);
 
                     // Displays image in the application
-                    profilePicture.setImageBitmap(image);
+                    profilePicture.setImageBitmap(profileImage);
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -146,13 +147,20 @@ public class CreateAccount extends AppCompatActivity {
             return;
         }
 
+        // Check if user selected an image
+//        if (profileImage == null) {
+//            displayEmptyImageError();
+//        }
+
         final String fname = fNameEt.getText().toString();
         final String lname = lNameEt.getText().toString();
         final String idNumber = idNumberEt.getText().toString();
         final String email = emailEt.getText().toString();
-        String password = passwordEt.getText().toString();
         final String gradDate = gradDateEt.getText().toString();
         final String phoneNum = phoneNumEt.getText().toString();
+
+        String password = passwordEt.getText().toString();
+
         // Provided email cant be shorter than 19 characters since "@student.csulb.edu" is fixed at 18 characters
         if (email.length() <= 18) {
             displayMalformedEmailError();
@@ -163,6 +171,7 @@ public class CreateAccount extends AppCompatActivity {
             displayMalformedEmailError();
             return;
         }
+        //Login progress dialog
         progressDialog.setMessage("Please wait...");
         progressDialog.show();
         progressDialog.setCanceledOnTouchOutside(false);
@@ -171,19 +180,17 @@ public class CreateAccount extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     Toast.makeText(CreateAccount.this, "Successfully registered", Toast.LENGTH_LONG).show();
+
+                    //Set firebase user to current user instance
                     final FirebaseUser user = mAuth.getCurrentUser();
+                    //Get special user ID
                     String userId = user.getUid();
-                    databaseReference = database.getReference("User").child(userId);
-                    HashMap<String, String> hashMap = new HashMap<>();
-                    hashMap.put("userid", userId);
-                    hashMap.put("firstname", fname);
-                    hashMap.put("lastname", lname);
-                    hashMap.put("idnumber", idNumber);
-                    hashMap.put("email", email);
-                    hashMap.put("graddate", gradDate);
-                    hashMap.put("phonenumber", phoneNum);
-                    hashMap.put("imageURL", "default");
-                    databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    //Initialize database within User reference with a child using user ID
+                    databaseReference = database.getReference("users").child(userId);
+                    //Create User reference with data
+                    UserData currentUser = new UserData(userId, fname, lname, idNumber, email, gradDate, phoneNum, profileImage);
+                    //Write data to database
+                    databaseReference.setValue(currentUser).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()) {
@@ -220,6 +227,10 @@ public class CreateAccount extends AppCompatActivity {
     // Displays when an incorrect email is provided
     public void displayMalformedEmailError(){
         Toast.makeText(CreateAccount.this, "Must provide an email ending in @student.csulb.edu",Toast.LENGTH_SHORT).show();
+    }
+
+    public void displayEmptyImageError() {
+        Toast.makeText(CreateAccount.this, "Please pick a picture for your account!", Toast.LENGTH_LONG).show();
     }
 
     // Get the information entered by the user
