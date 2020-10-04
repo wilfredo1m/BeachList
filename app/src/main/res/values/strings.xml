@@ -9,7 +9,7 @@
     <string name="create_account_button">Create Account</string>
     <string name="create_account_header">Create Account</string>
     <string name="content_description_login_image">logo</string>
-    <string name = "cancelBtn">cancel</string>
+    <string name="cancelBtn">cancel</string>
     <string name="last_name">Last Name :</string>
     <string name="first_name">first Name :</string>
     <string name="id_num">ID Number :</string>
@@ -30,6 +30,8 @@
     <string name="header_page_message">Display Message</string>
     <string name="account_settings_header"> Account Settings</string>
     <string name="messages_header"> Messages</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
