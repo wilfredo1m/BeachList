@@ -11,8 +11,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,11 +28,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Objects;
 
 public class CreateAccount extends AppCompatActivity {
-    private Button createAccountButton, cancelButton, profilePicButton;
     private EditText fNameEt, lNameEt, idNumberEt, emailEt, passwordEt, gradDateEt, phoneNumEt;
     private Bitmap profileImage;
     private ImageView profilePicture;
@@ -56,10 +51,10 @@ public class CreateAccount extends AppCompatActivity {
         //instance of the database
         database = FirebaseDatabase.getInstance();
 
-        profilePicture = (ImageView) findViewById(R.id.ivProfileImage);
+        profilePicture = findViewById(R.id.ivProfileImage);
 
         // Set Profile Picture Button
-        profilePicButton = (Button) findViewById(R.id.btn_Profile_image);
+        Button profilePicButton = findViewById(R.id.btn_Profile_image);
         profilePicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +68,7 @@ public class CreateAccount extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
 
         // Create Account Button
-        createAccountButton = (Button) findViewById(R.id.btnCreateAccount);
+        Button createAccountButton = findViewById(R.id.btnCreateAccount);
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +78,7 @@ public class CreateAccount extends AppCompatActivity {
         });
 
         // Cancel Button
-        cancelButton = (Button) findViewById(R.id.btnCancel);
+        Button cancelButton = findViewById(R.id.btnCancel);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -235,28 +230,25 @@ public class CreateAccount extends AppCompatActivity {
 
     // Get the information entered by the user
     public void getUserInputs(){
-        fNameEt = (EditText) findViewById(R.id.etFirstName);
-        lNameEt = (EditText) findViewById(R.id.etLastName);
-        idNumberEt = (EditText) findViewById(R.id.etIDNumber);
-        emailEt = (EditText) findViewById(R.id.etEmail);
-        passwordEt = (EditText) findViewById(R.id.etPassword);
-        gradDateEt = (EditText) findViewById(R.id.etGradDate);
-        phoneNumEt = (EditText) findViewById(R.id.etPhone);
+        fNameEt = findViewById(R.id.etFirstName);
+        lNameEt = findViewById(R.id.etLastName);
+        idNumberEt = findViewById(R.id.etIDNumber);
+        emailEt = findViewById(R.id.etEmail);
+        passwordEt = findViewById(R.id.etPassword);
+        gradDateEt = findViewById(R.id.etGradDate);
+        phoneNumEt = findViewById(R.id.etPhone);
     }
 
     // Checks if any text field is left empty
     public boolean anyEmptyFields() {
-        if (fNameEt.getText().toString().isEmpty()
+        return fNameEt.getText().toString().isEmpty()
                 || lNameEt.getText().toString().isEmpty()
                 || fNameEt.getText().toString().isEmpty()
                 || idNumberEt.getText().toString().isEmpty()
                 || emailEt.getText().toString().isEmpty()
                 || passwordEt.getText().toString().isEmpty()
                 || gradDateEt.getText().toString().isEmpty()
-                || phoneNumEt.getText().toString().isEmpty()) {
-            return true;
-        }
-        return false;
+                || phoneNumEt.getText().toString().isEmpty();
     }
 
     public boolean isValidSchoolEmail(String email) {
