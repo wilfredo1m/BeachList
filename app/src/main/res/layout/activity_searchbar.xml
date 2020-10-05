@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView2"
+        android:id="@+id/bottom_nav_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:itemTextColor="#FFFFFF"
@@ -17,12 +17,12 @@
 
 
     <fragment
-        android:id="@+id/fixing_this_fragment"
+        android:id="@+id/menu_bar_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="414dp"
         android:layout_height="717dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView2"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_nav_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

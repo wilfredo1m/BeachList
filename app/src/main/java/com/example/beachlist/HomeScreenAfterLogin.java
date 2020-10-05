@@ -21,8 +21,8 @@ public class HomeScreenAfterLogin extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searchbar);
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView2);
-        NavController navController = Navigation.findNavController(this,  R.id.fixing_this_fragment);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_view);
+        NavController navController = Navigation.findNavController(this,  R.id.menu_bar_fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
     }
 }
