@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/fragment1"
-        android:name="com.example.beachlist.fragment1"
+        android:name="com.example.beachlist.HomeFragment"
         android:label="fragment_fragment1"
-        tools:layout="@layout/fragment_fragment1" />
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/fragment2"
-        android:name="com.example.beachlist.fragment2"
+        android:name="com.example.beachlist.MessageFragment"
         android:label="fragment_fragment2"
-        tools:layout="@layout/fragment_fragment2" />
+        tools:layout="@layout/fragment_messages" />
     <fragment
         android:id="@+id/fragment4"
-        android:name="com.example.beachlist.fragment4"
+        android:name="com.example.beachlist.AccountSettingsFragment"
         android:label="fragment_fragment4"
-        tools:layout="@layout/fragment_fragment4" />
+        tools:layout="@layout/fragment_account_settings" />
     <fragment
         android:id="@+id/fragment3"
-        android:name="com.example.beachlist.fragment3"
+        android:name="com.example.beachlist.CreatePostFragment"
         android:label="fragment_fragment3"
-        tools:layout="@layout/fragment_fragment3" />
+        tools:layout="@layout/fragment_create_post" />
 </navigation>
