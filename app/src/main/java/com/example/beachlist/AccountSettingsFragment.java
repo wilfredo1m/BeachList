@@ -37,10 +37,6 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        openFriendsListScreen();
-    }
-
-    public void openFriendsListScreen(){
         Intent openScreen = new Intent(getActivity(),FriendsList.class);
         startActivity(openScreen);
     }
