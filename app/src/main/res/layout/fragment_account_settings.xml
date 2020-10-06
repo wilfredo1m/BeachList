@@ -53,7 +53,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
-
+<!-- scroll view cann only have 1 child -->
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
@@ -62,14 +62,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent">
-
+        <!-- ill have to see how to add a bunch of things to this scroll view in linear setup -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
-
     </ScrollView>
-
+    <!-- Tabs that will change to different views in the same page -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
@@ -78,18 +77,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent">
-
+        <!-- curent listings will ba accesed from this tab -->
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="current listings" />
-
+        <!-- sold listings will ba accesed from this tab -->
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="sold listings" />
-
-
     </com.google.android.material.tabs.TabLayout>
 
     <Button
@@ -116,6 +113,7 @@
 
     <RatingBar
         android:id="@+id/ratingBar"
+        android:isIndicator="true"
         android:layout_width="244dp"
         android:layout_height="43dp"
         android:layout_marginTop="8dp"
