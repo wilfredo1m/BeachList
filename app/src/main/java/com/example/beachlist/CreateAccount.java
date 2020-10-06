@@ -5,25 +5,35 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.renderscript.ScriptIntrinsicYuvToRGB;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageMetadata;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,12 +41,12 @@ import java.io.InputStream;
 
 public class CreateAccount extends AppCompatActivity {
     private EditText fNameEt, lNameEt, idNumberEt, emailEt, passwordEt, gradDateEt, phoneNumEt;
-    private Bitmap profileImage;
     private ImageView profilePicture;
-    private ProgressDialog progressDialog;
+    private Uri filePath;
     private FirebaseAuth mAuth;
+    private FirebaseUser user;
     private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
+    private StorageReference storageReference;
     public static final int IMAGE_REQUEST = 33;
     public static final int PROCESSED_OK = -1;
 
@@ -47,7 +57,6 @@ public class CreateAccount extends AppCompatActivity {
 
         //instance of authentication
         mAuth = FirebaseAuth.getInstance();
-
         //instance of the database
         database = FirebaseDatabase.getInstance();
 
@@ -65,7 +74,6 @@ public class CreateAccount extends AppCompatActivity {
 
         // Get input fields
         getUserInputs();
-        progressDialog = new ProgressDialog(this);
 
         // Create Account Button
         Button createAccountButton = findViewById(R.id.btnCreateAccount);
@@ -113,16 +121,16 @@ public class CreateAccount extends AppCompatActivity {
                 // Camera roll sent back a picture
 
                 // Address of image in phone
-                Uri imageUri = data.getData();
+                filePath = data.getData();
 
                 // Stream to read image data
                 InputStream input;
 
                 try {
-                    input = getContentResolver().openInputStream(imageUri);
+                    input = getContentResolver().openInputStream(filePath);
 
                     // Get Bitmap from InputStream
-                    profileImage = BitmapFactory.decodeStream(input);
+                    Bitmap profileImage = BitmapFactory.decodeStream(input);
 
                     // Displays image in the application
                     profilePicture.setImageBitmap(profileImage);
@@ -142,19 +150,8 @@ public class CreateAccount extends AppCompatActivity {
             return;
         }
 
-        // Check if user selected an image
-//        if (profileImage == null) {
-//            displayEmptyImageError();
-//        }
-
-        final String fname = fNameEt.getText().toString();
-        final String lname = lNameEt.getText().toString();
-        final String idNumber = idNumberEt.getText().toString();
+        final String password = passwordEt.getText().toString();
         final String email = emailEt.getText().toString();
-        final String gradDate = gradDateEt.getText().toString();
-        final String phoneNum = phoneNumEt.getText().toString();
-
-        String password = passwordEt.getText().toString();
 
         // Provided email cant be shorter than 19 characters since "@student.csulb.edu" is fixed at 18 characters
         if (email.length() <= 18) {
@@ -166,7 +163,9 @@ public class CreateAccount extends AppCompatActivity {
             displayMalformedEmailError();
             return;
         }
+
         //Login progress dialog
+        final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
         progressDialog.show();
         progressDialog.setCanceledOnTouchOutside(false);
@@ -174,37 +173,70 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
-                    Toast.makeText(CreateAccount.this, "Successfully registered", Toast.LENGTH_LONG).show();
-
                     //Set firebase user to current user instance
-                    final FirebaseUser user = mAuth.getCurrentUser();
-                    //Get special user ID
-                    String userId = user.getUid();
-                    //Initialize database within User reference with a child using user ID
-                    databaseReference = database.getReference("users").child(userId);
-                    //Create User reference with data
-                    UserData currentUser = new UserData(userId, fname, lname, idNumber, email, gradDate, phoneNum, profileImage);
-                    //Write data to database
-                    databaseReference.setValue(currentUser).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()) {
-                                sendValidationEmail(user);
-                                FirebaseAuth.getInstance().signOut();
-                                openLoginScreen();
-                            }
-                            else {
-                                Toast.makeText(CreateAccount.this, "Data storage failed!", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
+                    user = mAuth.getCurrentUser();
+                    saveUserData();
+                    Toast.makeText(CreateAccount.this, "Successfully registered", Toast.LENGTH_LONG).show();
+                    sendValidationEmail(user);
+                    FirebaseAuth.getInstance().signOut();
+                    openLoginScreen();
                 }
                 else{
                     Toast.makeText(CreateAccount.this, "Sign up failed!",Toast.LENGTH_LONG).show();
                 }
-                progressDialog.dismiss();
+
             }
         });
+    }
+
+    public void saveUserData() {
+        final UserData currentUser = new UserData();
+
+        currentUser.setFirstName(fNameEt.getText().toString());
+        currentUser.setLastName(lNameEt.getText().toString());
+        currentUser.setIdNumber(idNumberEt.getText().toString());
+        currentUser.setEmail(emailEt.getText().toString());
+        currentUser.setGradDate(gradDateEt.getText().toString());
+        currentUser.setPhoneNum(phoneNumEt.getText().toString());
+        //Set authenticated user ID
+        final String userId = user.getUid();
+        currentUser.setUserId(userId);
+        //Blank to be updated later
+        currentUser.setImageUrl(" ");
+
+        //Initialize database within User reference with a child using user ID
+        final DatabaseReference userReference = database.getReference("users").child(userId);
+        //Write data to database
+        userReference.setValue(currentUser);
+
+        if(filePath != null) {
+            storageReference = FirebaseStorage.getInstance().getReference();
+            final StorageReference imageRef = storageReference.child("images/" + filePath.getLastPathSegment());
+            UploadTask uploadTask = imageRef.putFile(filePath);
+
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
+
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    StorageMetadata snapshotMetadata = taskSnapshot.getMetadata();
+                    Task<Uri> downloadUrl = imageRef.getDownloadUrl();
+                    downloadUrl.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String imageReference = uri.toString();
+                            userReference.child(userId).child("imageUrl").setValue(imageReference);
+                            currentUser.setImageUrl(imageReference);
+                        }
+                    });
+                }
+            });
+        }
     }
 
     // Opens Login Screen
@@ -272,5 +304,11 @@ public class CreateAccount extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 }

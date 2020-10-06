@@ -4,20 +4,20 @@ import android.graphics.Bitmap;
 
 public class UserData {
 
-    String userId, fname, lname, idNumber, email, gradDate, phoneNum;
-    Bitmap profileImage;
+    String firstName, lastName, idNumber, email, gradDate, phoneNum;
+    String userId, imageUrl;
 
     public UserData() { }
 
-    public UserData(String userId, String fname, String lname, String idNumber, String email, String gradDate, String phoneNum, Bitmap profileImage) {
+    public UserData(String fname, String lname, String idNumber, String email, String gradDate, String phoneNum, String userId, String url) {
         this.userId = userId;
-        this.fname = fname;
-        this.lname = lname;
+        this.firstName = fname;
+        this.lastName = lname;
         this.idNumber = idNumber;
         this.email = email;
         this.gradDate = gradDate;
         this.phoneNum = phoneNum;
-        this.profileImage = profileImage;
+        this.imageUrl = url;
     }
 
     public String getUserId() {
@@ -28,20 +28,20 @@ public class UserData {
         this.userId = userId;
     }
 
-    public String getFname() {
-        return fname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFname(String fname) {
-        this.fname = fname;
+    public void setFirstName(String fname) {
+        this.firstName = fname;
     }
 
-    public String getLname() {
-        return lname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLname(String lname) {
-        this.lname = lname;
+    public void setLastName(String lname) {
+        this.lastName = lname;
     }
 
     public String getIdNumber() {
@@ -76,11 +76,11 @@ public class UserData {
         this.phoneNum = phoneNum;
     }
 
-    public Bitmap getProfileImage() {
-        return profileImage;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setProfileImage(Bitmap profileImage) {
-        this.profileImage = profileImage;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
