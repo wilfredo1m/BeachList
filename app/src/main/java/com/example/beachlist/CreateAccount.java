@@ -172,7 +172,14 @@ public class CreateAccount extends AppCompatActivity {
                 if(task.isSuccessful()) {
                     //Set firebase user to current user instance
                     user = mAuth.getCurrentUser();
-                    createUserAccount();
+                    createUserAccount(
+                            fNameEt.getText().toString(),
+                            lNameEt.getText().toString(),
+                            idNumberEt.getText().toString(),
+                            emailEt.getText().toString(),
+                            gradDateEt.getText().toString(),
+                            phoneNumEt.getText().toString()
+                            );
                     Toast.makeText(CreateAccount.this, "Successfully registered", Toast.LENGTH_LONG).show();
                     sendValidationEmail(user);
                 } else {
@@ -182,15 +189,16 @@ public class CreateAccount extends AppCompatActivity {
         });
     }
 
-    public void createUserAccount() {
+    public void createUserAccount(String fname, String lname, String idnumber, String email, String graddate, String phonenum) {
         final UserData currentUser = new UserData();
 
-        currentUser.setFirstName(fNameEt.getText().toString());
-        currentUser.setLastName(lNameEt.getText().toString());
-        currentUser.setIdNumber(idNumberEt.getText().toString());
-        currentUser.setEmail(emailEt.getText().toString());
-        currentUser.setGradDate(gradDateEt.getText().toString());
-        currentUser.setPhoneNum(phoneNumEt.getText().toString());
+        currentUser.setFirstName(fname);
+        currentUser.setLastName(lname);
+        currentUser.setIdNumber(idnumber);
+        currentUser.setEmail(email);
+        currentUser.setGradDate(graddate);
+        currentUser.setPhoneNum(phonenum);
+
         //Set authenticated user ID
         final String userId = user.getUid();
         currentUser.setUserId(userId);
