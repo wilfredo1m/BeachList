@@ -93,7 +93,7 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     // Opens Camera Roll
-    public void openCameraRoll(){
+    public void openCameraRoll() {
         Intent openCameraRoll = new Intent(Intent.ACTION_PICK);
 
         // Location of where to find the pictures
@@ -111,10 +111,10 @@ public class CreateAccount extends AppCompatActivity {
     }
     @SuppressLint("MissingSuperCall")
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(resultCode == PROCESSED_OK){
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == PROCESSED_OK) {
             // Accessed camera roll successfully
-            if(requestCode == IMAGE_REQUEST){
+            if(requestCode == IMAGE_REQUEST) {
                 // Camera roll sent back a picture
 
                 // Address of image in phone
@@ -142,7 +142,7 @@ public class CreateAccount extends AppCompatActivity {
 
     public void firebaseUserRegister() {
         // Check if any field left blank
-        if(anyEmptyFields()){
+        if(anyEmptyFields()) {
             displayEmptyFieldError();
             return;
         }
@@ -175,8 +175,7 @@ public class CreateAccount extends AppCompatActivity {
                     createUserAccount();
                     Toast.makeText(CreateAccount.this, "Successfully registered", Toast.LENGTH_LONG).show();
                     sendValidationEmail(user);
-                }
-                else {
+                } else {
                     Toast.makeText(CreateAccount.this, "Sign up failed!",Toast.LENGTH_LONG).show();
                 }
             }
@@ -238,19 +237,19 @@ public class CreateAccount extends AppCompatActivity {
     //Store user image
 
     // Opens Login Screen
-    public void openLoginScreen(){
+    public void openLoginScreen() {
         Intent openScreen = new Intent(this, MainActivity.class);
         startActivity(openScreen);
         finish();
     }
 
     // Displays when any field is left blank
-    public void displayEmptyFieldError(){
+    public void displayEmptyFieldError() {
         Toast.makeText(CreateAccount.this, "Fill in all information",Toast.LENGTH_SHORT).show();
     }
 
     // Displays when an incorrect email is provided
-    public void displayMalformedEmailError(){
+    public void displayMalformedEmailError() {
         Toast.makeText(CreateAccount.this, "Must provide an email ending in @student.csulb.edu",Toast.LENGTH_SHORT).show();
     }
 
@@ -259,7 +258,7 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     // Get the information entered by the user
-    public void getUserInputs(){
+    public void getUserInputs() {
         fNameEt = findViewById(R.id.etFirstName);
         lNameEt = findViewById(R.id.etLastName);
         idNumberEt = findViewById(R.id.etIDNumber);
