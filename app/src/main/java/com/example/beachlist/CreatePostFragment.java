@@ -1,18 +1,26 @@
 package com.example.beachlist;
 
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link CreatePostFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
 public class CreatePostFragment extends Fragment {
-    @Nullable
+    public CreatePostFragment() {
+        // Required empty public constructor
+    }
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_create_post, container, false);
     }
 }

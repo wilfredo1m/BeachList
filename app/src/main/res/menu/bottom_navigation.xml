@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_home"
+        android:id="@+id/fragment_home"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="Home"/>
     <item
-        android:id="@+id/nav_message"
+        android:id="@+id/fragment_messages"
         android:icon="@drawable/ic_baseline_message_24"
         android:title="Message"/>
     <item
-        android:id="@+id/nav_create_post"
+        android:id="@+id/fragment_create_post"
         android:icon="@drawable/ic_baseline_add_a_photo_24"
         android:title="Create Post"/>
     <item
-        android:id="@+id/nav_account_settings"
+        android:id="@+id/fragment_account_settings"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="Account Settings"/>
 

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(MainActivity.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
                             //to add this back later once page is fixed
-                            //openHomeScreen();
+                            openHomeScreen();
                         }
                     } else {
                         Toast.makeText(MainActivity.this, "Log in failed!", Toast.LENGTH_LONG).show();
@@ -107,11 +108,14 @@ public class MainActivity extends AppCompatActivity {
     public void openCreateAccountScreen(){
         Intent openScreen = new Intent(this, CreateAccount.class);
         startActivity(openScreen);
+
+       // Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
+        //startActivity(openScreen);
     }
 
     // Opens Home Screen
     public void openHomeScreen(){
-        Intent openScreen = new Intent(this, HomeFragment.class);
+        Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         startActivity(openScreen);
     }
 }

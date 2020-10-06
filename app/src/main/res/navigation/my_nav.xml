@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/fragment_home">
+
+    <fragment
+        android:id="@+id/fragment_home"
+        android:name="com.example.beachlist.HomeFragment"
+        android:label="fragment_fragment1"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/fragment_messages"
+        android:name="com.example.beachlist.MessageFragment"
+        android:label="fragment_fragment2"
+        tools:layout="@layout/fragment_messages" />
+    <fragment
+        android:id="@+id/fragment_account_settings"
+        android:name="com.example.beachlist.AccountSettingsFragment"
+        android:label="fragment_fragment4"
+        tools:layout="@layout/fragment_account_settings" />
+    <fragment
+        android:id="@+id/fragment_create_post"
+        android:name="com.example.beachlist.CreatePostFragment"
+        android:label="fragment_fragment3"
+        tools:layout="@layout/fragment_create_post" />
+</navigation>
