@@ -35,6 +35,9 @@
     <!-- Friends List Text -->
     <string name="friend_list_tab">Friend List</string>
     <string name="pending_friend_list_tab">Pending Requests</string>
+    <string name="pending_friend_list_header">Pending Requests</string>
+    <string name="friend_list_header">Friend List</string>
+
 
     <!-- Messages text -->
     <string name="messages_header"> Messages</string>
@@ -48,8 +51,15 @@
 
     <!-- Not sure if needed -->
     <string name="header_page_message">Display Message</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
-
-
+    <!-- spinner stuff -->
+    <string-array name="categories">
+        <item>book</item>
+        <item>electronic</item>
+        <item>furniture</item>
+        <item>game</item>
+    </string-array>
 </resources>
