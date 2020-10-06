@@ -12,7 +12,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.renderscript.ScriptIntrinsicYuvToRGB;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -30,8 +29,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -81,7 +78,7 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Register the User
-                Register();
+                firebaseUserRegister();
             }
         });
 
@@ -143,7 +140,7 @@ public class CreateAccount extends AppCompatActivity {
         }
     }
 
-    public void Register(){
+    public void firebaseUserRegister() {
         // Check if any field left blank
         if(anyEmptyFields()){
             displayEmptyFieldError();
@@ -175,21 +172,18 @@ public class CreateAccount extends AppCompatActivity {
                 if(task.isSuccessful()) {
                     //Set firebase user to current user instance
                     user = mAuth.getCurrentUser();
-                    saveUserData();
+                    createUserAccount();
                     Toast.makeText(CreateAccount.this, "Successfully registered", Toast.LENGTH_LONG).show();
                     sendValidationEmail(user);
-                    FirebaseAuth.getInstance().signOut();
-                    openLoginScreen();
                 }
-                else{
+                else {
                     Toast.makeText(CreateAccount.this, "Sign up failed!",Toast.LENGTH_LONG).show();
                 }
-
             }
         });
     }
 
-    public void saveUserData() {
+    public void createUserAccount() {
         final UserData currentUser = new UserData();
 
         currentUser.setFirstName(fNameEt.getText().toString());
@@ -217,27 +211,31 @@ public class CreateAccount extends AppCompatActivity {
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-
+                    FirebaseAuth.getInstance().signOut();
+                    openLoginScreen();
                 }
             });
 
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    StorageMetadata snapshotMetadata = taskSnapshot.getMetadata();
                     Task<Uri> downloadUrl = imageRef.getDownloadUrl();
                     downloadUrl.addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
                             String imageReference = uri.toString();
-                            userReference.child(userId).child("imageUrl").setValue(imageReference);
+                            userReference.child("imageUrl").setValue(imageReference);
                             currentUser.setImageUrl(imageReference);
+                            FirebaseAuth.getInstance().signOut();
+                            openLoginScreen();
                         }
                     });
                 }
             });
         }
     }
+
+    //Store user image
 
     // Opens Login Screen
     public void openLoginScreen(){
