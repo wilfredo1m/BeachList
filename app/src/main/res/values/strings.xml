@@ -32,11 +32,24 @@
     <!-- Account Settings Text -->
     <string name="account_settings_header"> Account Settings</string>
     <string name="friend_list_button_name">Friend List</string>
+    <string name="edit_settings_button_name">Edit Settings</string>
+    <string name="tl_current_listings">Current Listings</string>
+    <string name="tl_sold_listings">Sold Listings</string>
+    <string name="user_image_description">User Image</string>
+
+
     <!-- Friends List Text -->
     <string name="friend_list_tab">Friend List</string>
     <string name="pending_friend_list_tab">Pending Requests</string>
     <string name="pending_friend_list_header">Pending Requests</string>
     <string name="friend_list_header">Friend List</string>
+    <string name="friend_image_description">friend Image</string>
+    <!-- Pending Friends List Text -->
+    <string name="pending_friend_image_description">potential friend Image</string>
+    <!-- Pending Friends List Text -->
+    <string name="selected_friend_image_description">selected friend Image</string>
+    <string name="selected_friend_header">Selected Friend</string>
+
 
 
     <!-- Messages text -->

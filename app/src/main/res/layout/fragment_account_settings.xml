@@ -8,15 +8,16 @@
     tools:context=".AccountSettingsFragment" >
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iv_user_image"
         android:layout_width="135dp"
         android:layout_height="115dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="@drawable/ic_baseline_person_24"
+        android:contentDescription="@string/user_image_description"
         app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
-        app:layout_constraintEnd_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toStartOf="@+id/tv_last_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_first_name"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.Toolbar
@@ -29,6 +30,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_edit_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/edit_settings_button_name"
+        app:layout_constraintEnd_toEndOf="@+id/ratingBar"
+        app:layout_constraintStart_toStartOf="@+id/iv_user_image"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+    <Button
+        android:id="@+id/btn_friend_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/friend_list_button_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_edit_settings" />
 
     <TextView
         android:id="@+id/tv_account_setting_label"
@@ -45,16 +65,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/btn_friend_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/friend_list_button_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
-<!-- scroll view cann only have 1 child -->
+    <!-- scroll view cann only have 1 child -->
     <!-- Tabs that will change to different views in the same page -->
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
@@ -65,34 +78,26 @@
         app:layout_constraintStart_toStartOf="parent">
         <!-- curent listings will ba accesed from this tab -->
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/tl_current_listings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="current listings" />
+            android:text="@string/tl_current_listings" />
         <!-- sold listings will ba accesed from this tab -->
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/tl_past_listings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="sold listings" />
+            android:text="@string/tl_sold_listings" />
     </com.google.android.material.tabs.TabLayout>
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="edit settings"
-        app:layout_constraintEnd_toEndOf="@+id/ratingBar"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
-
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_first_name"
         android:layout_width="230dp"
         android:layout_height="26dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="First Name"
+        android:text="@string/first_name"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/account_setting_toolbar" />
@@ -103,22 +108,22 @@
         android:layout_width="244dp"
         android:layout_height="43dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/tv_last_name"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintStart_toStartOf="@+id/tv_last_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_last_name" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_last_name"
         android:layout_width="229dp"
         android:layout_height="34dp"
         android:layout_marginTop="12dp"
-        android:text="Last Name"
+        android:text="@string/last_name"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="@+id/tv_first_name"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="@+id/tv_first_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_first_name" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
