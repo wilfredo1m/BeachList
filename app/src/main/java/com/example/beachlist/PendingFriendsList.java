@@ -2,13 +2,11 @@ package com.example.beachlist;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -18,7 +16,7 @@ import java.util.List;
 public class PendingFriendsList extends AppCompatActivity {
     RecyclerView recyclerView;
     List<FriendsData> list = new ArrayList<>();
-    RecyclerViewAdapter adapter;
+    PendingFriendsRecyclerAdapter adapter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +35,7 @@ public class PendingFriendsList extends AppCompatActivity {
             FriendsData pendingFriend = new FriendsData(profilePics[i],firstNames[i],lastNames[i]);
             list.add(pendingFriend);
         }
-        adapter = new RecyclerViewAdapter(this,list);
+        adapter = new PendingFriendsRecyclerAdapter(this,list);
         recyclerView.setAdapter(adapter);
 
         //***********************************************Tab Setup********************************************

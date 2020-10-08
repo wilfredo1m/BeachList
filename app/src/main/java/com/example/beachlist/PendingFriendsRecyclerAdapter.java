@@ -12,24 +12,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
+public class PendingFriendsRecyclerAdapter extends RecyclerView.Adapter<PendingFriendsRecyclerAdapter.MyViewHolder> {
     Context context;
     List<FriendsData> list;
 
-    public RecyclerViewAdapter(Context context, List<FriendsData> list) {
+    public PendingFriendsRecyclerAdapter(Context context, List<FriendsData> list) {
         this.context = context;
         this.list = list;
     }
 
     @NonNull
     @Override
-    public RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_friend_list_row,parent,false);
+    public PendingFriendsRecyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_pending_friend_row,parent,false);
         return new MyViewHolder(view);
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PendingFriendsRecyclerAdapter.MyViewHolder holder, int position) {
         holder.profilePic.setImageResource(list.get(position).getImageProfile());
         holder.firstName.setText(list.get(position).getFirstName());
         holder.lastName.setText(list.get(position).getLastName());

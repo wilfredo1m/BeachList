@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -17,7 +16,7 @@ import java.util.List;
 public class FriendsList extends AppCompatActivity {
     RecyclerView recyclerView;
     List<FriendsData> list = new ArrayList<>();
-    RecyclerViewAdapter adapter;
+    FriendsRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,7 +36,7 @@ public class FriendsList extends AppCompatActivity {
             FriendsData friend = new FriendsData(profilePics[i],firstNames[i],lastNames[i]);
             list.add(friend);
         }
-        adapter = new RecyclerViewAdapter(this,list);
+        adapter = new FriendsRecyclerAdapter(this,list);
         recyclerView.setAdapter(adapter);
 
         //***********************************************Tab Setup********************************************
