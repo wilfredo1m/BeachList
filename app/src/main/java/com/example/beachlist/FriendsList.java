@@ -2,7 +2,6 @@ package com.example.beachlist;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TableLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,8 +16,8 @@ public class FriendsList extends AppCompatActivity {
         setContentView(R.layout.activity_friendlist);
 
         TabLayout tabs = findViewById(R.id.friends_list_both_tabs);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        tabs.setupWithViewPager(viewPager);
+        ViewPager viewPage = (ViewPager) findViewById(R.id.pager);
+        tabs.setupWithViewPager(viewPage);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

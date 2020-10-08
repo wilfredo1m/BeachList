@@ -2,6 +2,7 @@ package com.example.beachlist;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,9 +16,11 @@ public class PendingFriendsList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pending_friend);
 
-        TabLayout tabs = findViewById(R.id.friends_list_both_tabs);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        tabs.setupWithViewPager(viewPager);
+        final TabLayout tabs = findViewById(R.id.friends_list_both_tabs);
+        final ViewPager viewPage = (ViewPager) findViewById(R.id.pager);
+        tabs.setupWithViewPager(viewPage);
+        tabs.setScrollPosition(1,0f,true);
+        //viewPage.setCurrentItem(1);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -31,6 +34,7 @@ public class PendingFriendsList extends AppCompatActivity {
             }
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                openFriends();
             }
         });
     }
