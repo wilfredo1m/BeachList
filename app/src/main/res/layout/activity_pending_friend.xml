@@ -38,18 +38,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar3" />
 
-    <ImageView
-        android:id="@+id/iv_pending_friend_image"
-        android:layout_width="120dp"
-        android:layout_height="111dp"
-        android:layout_marginTop="148dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/ic_baseline_person_24"
-        android:contentDescription="@string/pending_friend_image_description"
-        app:layout_constraintEnd_toStartOf="@+id/tv_last_name"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/btn_back_button"
         android:layout_width="wrap_content"
@@ -62,47 +50,11 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar3"
         app:layout_constraintVertical_bias="1.0" />
 
-    <Button
-        android:id="@+id/btn_accept_btn"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:background="@drawable/ic_baseline_check_24"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_pending_friend_image"
-        app:layout_constraintStart_toEndOf="@+id/iv_pending_friend_image" />
-
-    <Button
-        android:id="@+id/btn_reject_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/ic_baseline_clear_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_accept_btn"
-        app:layout_constraintTop_toTopOf="@+id/btn_accept_btn" />
-
-    <TextView
-        android:id="@+id/tv_first_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/first_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/iv_pending_friend_image"
-        tools:text="first name" />
-
-    <TextView
-        android:id="@+id/tv_last_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/last_name"
-        app:layout_constraintEnd_toEndOf="@+id/tv_first_name"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_first_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_first_name" />
+        app:layout_constraintTop_toBottomOf="@+id/include" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
