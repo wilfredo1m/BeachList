@@ -51,7 +51,6 @@
     <string name="selected_friend_header">Selected Friend</string>
 
 
-
     <!-- Messages text -->
     <string name="messages_header"> Messages</string>
     <!-- Home screen Text -->
@@ -75,4 +74,36 @@
         <item>furniture</item>
         <item>game</item>
     </string-array>
+
+    <!-- test first names  -->
+    <string-array name="first_names">
+        <item>viet</item>
+        <item>wilfredo</item>
+        <item>randy</item>
+        <item>bernie</item>
+        <item>rupert</item>
+        <item>Stewie</item>
+        <item>peter</item>
+        <item>meg</item>
+        <item>lois</item>
+        <item>chris</item>
+    </string-array>
+
+
+    <!-- test last names  -->
+    <string-array name="last_names">
+        <item>Griffin</item>
+        <item>Griffin</item>
+        <item>Griffin</item>
+        <item>Griffin</item>
+        <item>Griffin</item>
+        <item>Griffin</item>
+        <item>Griffin</item>
+        <item>Griffin</item>
+        <item>Griffin</item>
+        <item>Griffin</item>
+    </string-array>
+
+
+
 </resources>

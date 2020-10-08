@@ -33,7 +33,7 @@
         android:text="@string/pending_friend_list_header"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/friends_tab_layout"
+        app:layout_constraintBottom_toTopOf="@+id/include"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar3" />
@@ -42,20 +42,20 @@
         android:id="@+id/iv_pending_friend_image"
         android:layout_width="120dp"
         android:layout_height="111dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginTop="148dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:background="@drawable/ic_baseline_person_24"
         android:contentDescription="@string/pending_friend_image_description"
         app:layout_constraintEnd_toStartOf="@+id/tv_last_name"
-        app:layout_constraintTop_toBottomOf="@+id/friends_tab_layout" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_outline_arrow_back_ios_24"
-        app:layout_constraintBottom_toTopOf="@+id/friends_tab_layout"
+        app:layout_constraintBottom_toTopOf="@+id/include"
         app:layout_constraintEnd_toStartOf="@+id/tv_pending_request_header"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,6 +89,7 @@
         android:layout_height="wrap_content"
         android:text="@string/first_name"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/iv_pending_friend_image"
         tools:text="first name" />
@@ -97,9 +98,10 @@
         android:id="@+id/tv_last_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="8dp"
         android:text="@string/last_name"
         app:layout_constraintEnd_toEndOf="@+id/tv_first_name"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tv_first_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_first_name" />
 
