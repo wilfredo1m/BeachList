@@ -17,8 +17,8 @@ public class PendingFriendsList extends AppCompatActivity {
         setContentView(R.layout.activity_pending_friend);
 
         final TabLayout tabs = findViewById(R.id.friends_list_both_tabs);
-        final ViewPager viewPage = (ViewPager) findViewById(R.id.pager);
-        tabs.setupWithViewPager(viewPage);
+       // final ViewPager viewPage = (ViewPager) findViewById(R.id.pager);
+      //  tabs.setupWithViewPager(viewPage);
         tabs.setScrollPosition(1,0f,true);
         //viewPage.setCurrentItem(1);
 

@@ -42,8 +42,8 @@ public class FriendsList extends AppCompatActivity {
 
         //***********************************************Tab Setup********************************************
         TabLayout tabs = findViewById(R.id.friends_list_both_tabs);
-        ViewPager viewPage = (ViewPager) findViewById(R.id.pager);
-        tabs.setupWithViewPager(viewPage);
+        //ViewPager viewPage = (ViewPager) findViewById(R.id.pager);
+        //tabs.setupWithViewPager(viewPage);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
