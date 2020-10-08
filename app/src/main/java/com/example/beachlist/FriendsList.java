@@ -25,7 +25,7 @@ public class FriendsList extends AppCompatActivity {
         setContentView(R.layout.activity_friendlist);
 
         //******************************************Display Friends List***************************************
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.friends_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         String firstNames[] = getResources().getStringArray(R.array.first_names);
@@ -42,8 +42,6 @@ public class FriendsList extends AppCompatActivity {
 
         //***********************************************Tab Setup********************************************
         TabLayout tabs = findViewById(R.id.friends_list_both_tabs);
-        //ViewPager viewPage = (ViewPager) findViewById(R.id.pager);
-        //tabs.setupWithViewPager(viewPage);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
