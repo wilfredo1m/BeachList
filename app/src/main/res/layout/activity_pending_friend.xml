@@ -6,26 +6,14 @@
     android:layout_height="match_parent"
     android:background="#790F88">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/friends_tab_layout"
+    <include
+        android:id="@+id/include"
+        layout="@layout/friend_list_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3">
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/friend_list_tab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/friend_list_tab" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/pending_friend_list_tab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/pending_friend_list_tab" />
-    </com.google.android.material.tabs.TabLayout>
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar3"
