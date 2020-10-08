@@ -50,42 +50,14 @@
         app:layout_constraintTop_toTopOf="@+id/friend_list_toolbar"
         app:layout_constraintVertical_bias="1.0" />
 
-    <ImageView
-        android:id="@+id/iv_friend_image"
-        android:layout_width="138dp"
-        android:layout_height="121dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginLeft="52dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/ic_baseline_person_24"
-        android:contentDescription="@string/friend_image_description"
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/tv_first_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:text="@string/first_name"
-        app:layout_constraintStart_toEndOf="@+id/iv_friend_image"
-        app:layout_constraintTop_toTopOf="@+id/iv_friend_image" />
-
-    <TextView
-        android:id="@+id/tv_last_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="@string/last_name"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_friend_image"
-        app:layout_constraintEnd_toEndOf="@+id/tv_first_name"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_first_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_first_name"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
