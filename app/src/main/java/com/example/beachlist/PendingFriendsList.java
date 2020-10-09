@@ -2,6 +2,8 @@ package com.example.beachlist;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,10 +41,10 @@ public class PendingFriendsList extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         //***********************************************Tab Setup********************************************
+        tabFunctionality();
+        /*
         final TabLayout tabs = findViewById(R.id.friends_list_both_tabs);
-
         tabs.setScrollPosition(1,0f,true);
-
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -56,8 +58,38 @@ public class PendingFriendsList extends AppCompatActivity {
                 openFriends();
             }
         });
+        */
+        // Cancel Button
+        //Button accountPictureButton = findViewById(R.id.btn_account_picture_button);
+        //accountPictureButton.setOnClickListener(new View.OnClickListener() {
+        //   @Override
+        //    public void onClick(View view) {
+        //        ();
+        //    }
+        //});
+
     }
 
+
+    public void tabFunctionality(){
+        final TabLayout tabs = findViewById(R.id.friends_list_both_tabs);
+        tabs.setScrollPosition(1,0f,true);
+        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                openFriends();
+            }
+        });
+
+
+    }
     public void openFriends(){
         Intent openScreen = new Intent(this, FriendsList.class);
         startActivity(openScreen);

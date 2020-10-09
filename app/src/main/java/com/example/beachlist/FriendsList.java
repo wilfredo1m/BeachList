@@ -39,6 +39,48 @@ public class FriendsList extends AppCompatActivity {
         adapter = new FriendsRecyclerAdapter(this,list);
         recyclerView.setAdapter(adapter);
 
+
+        //***********************************************Tab Setup********************************************
+        tabMenuFunctionality();
+        /*
+        TabLayout tabs = findViewById(R.id.friends_list_both_tabs);
+
+        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if(tab.getPosition() == 1)
+                    openPendingFriends();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+*/
+        // Cancel Button
+        //Button accountPictureButton = findViewById(R.id.btn_account_select_btn);
+        //accountPictureButton.setOnClickListener(new View.OnClickListener() {
+        //   @Override
+        //    public void onClick(View view) {
+        //        ();
+        //    }
+        //});
+
+
+
+
+    }
+
+    public void openPendingFriends(){
+        Intent openScreen = new Intent(this, PendingFriendsList.class);
+        startActivity(openScreen);
+    }
+
+
+    public void tabMenuFunctionality(){
         //***********************************************Tab Setup********************************************
         TabLayout tabs = findViewById(R.id.friends_list_both_tabs);
 
@@ -56,10 +98,10 @@ public class FriendsList extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+
+
+
     }
 
-    public void openPendingFriends(){
-        Intent openScreen = new Intent(this, PendingFriendsList.class);
-        startActivity(openScreen);
-    }
+
 }
