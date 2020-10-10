@@ -33,7 +33,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/iv_selected_pending_user_image"
+        android:id="@+id/iv_selected_pending_friend_image"
         android:layout_width="168dp"
         android:layout_height="169dp"
         android:layout_marginStart="16dp"
@@ -51,13 +51,13 @@
         android:layout_height="40dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/ic_baseline_report_24"
-        app:layout_constraintEnd_toEndOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="@+id/tv_pending_last_name"
         app:layout_constraintHorizontal_bias="0.463"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintStart_toStartOf="@+id/tv_pending_last_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pending_last_name" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_pending_first_name"
         android:layout_width="153dp"
         android:layout_height="24dp"
         android:layout_marginTop="36dp"
@@ -68,15 +68,15 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar4" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/tv_pending_last_name"
         android:layout_width="156dp"
         android:layout_height="21dp"
         android:layout_marginTop="24dp"
         android:text="@string/last_name"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintStart_toStartOf="@+id/tv_pending_first_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pending_first_name" />
 
     <RatingBar
         android:id="@+id/ratingBar3"
