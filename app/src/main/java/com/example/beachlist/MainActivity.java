@@ -108,9 +108,6 @@ public class MainActivity extends AppCompatActivity {
     public void openCreateAccountScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         startActivity(openScreen);
-
-       // Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
-        //startActivity(openScreen);
     }
 
     // Opens Home Screen

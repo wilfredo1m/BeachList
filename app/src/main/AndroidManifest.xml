@@ -15,6 +15,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".HomeScreenAfterLogin"></activity>
         <activity android:name=".CreateAccount" />
+        <activity android:name=".SelectedFriend"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

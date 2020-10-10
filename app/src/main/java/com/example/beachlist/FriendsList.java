@@ -15,7 +15,7 @@ import java.util.List;
 
 public class FriendsList extends AppCompatActivity {
     RecyclerView recyclerView;
-    List<FriendsData> list = new ArrayList<>();
+    public static List<FriendsData> list = new ArrayList<>();
     FriendsRecyclerAdapter adapter;
 
     @Override

@@ -20,12 +20,10 @@ public class SelectedFriend extends AppCompatActivity {
         firstName = findViewById(R.id.tv_first_name);
         lastName = findViewById(R.id.tv_last_name);
 
-        int image = getIntent().getIntExtra("Profile Picture",1);
-        String fName = getIntent().getStringExtra("First Name");
-        String lName = getIntent().getStringExtra("Last Name");
+        int position = getIntent().getIntExtra("position",1);
 
-        profilePic.setImageResource(image);
-        firstName.setText(fName);
-        lastName.setText(lName);
+        profilePic.setImageResource(FriendsList.list.get(position).getImageProfile());
+        firstName.setText(FriendsList.list.get(position).getFirstName());
+        lastName.setText(FriendsList.list.get(position).getLastName());
     }
 }
