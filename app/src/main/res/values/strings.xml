@@ -61,10 +61,10 @@
     <string name="create_post_header"> Create Post</string>
     <!-- future text -->
 
-
     <!-- Selected user -->
     <string name="selected_user_header"> Selected User</string>
-
+    <!-- Selected pending user -->
+    <string name="selected_pending_user_header"> Selected Pending User</string>
 
 
     <!-- Not sure if needed -->
