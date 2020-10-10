@@ -61,6 +61,12 @@
     <string name="create_post_header"> Create Post</string>
     <!-- future text -->
 
+
+    <!-- Selected user -->
+    <string name="selected_user_header"> Selected User</string>
+
+
+
     <!-- Not sure if needed -->
     <string name="header_page_message">Display Message</string>
     <!-- TODO: Remove or change this placeholder text -->
