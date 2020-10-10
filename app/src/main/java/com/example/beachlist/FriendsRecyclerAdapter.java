@@ -1,6 +1,7 @@
 package com.example.beachlist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,10 +30,21 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FriendsRecyclerAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FriendsRecyclerAdapter.MyViewHolder holder, final int position) {
         holder.profilePic.setImageResource(list.get(position).getImageProfile());
         holder.firstName.setText(list.get(position).getFirstName());
         holder.lastName.setText(list.get(position).getLastName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, SelectedFriend.class);
+                intent.putExtra("Profile Picture",list.get(position).getImageProfile());
+                intent.putExtra("First Name",list.get(position).getFirstName());
+                intent.putExtra("Last Name",list.get(position).getLastName());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
