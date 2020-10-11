@@ -32,10 +32,12 @@ public class HomeScreenAfterLogin extends AppCompatActivity {
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         callingActivity = checkCallingActivity();
-        //callingActivity is assigned the index based on which screen we want to go back to (0-3)
         if(callingActivity == 3){
             bottomNavigationView.setSelectedItemId(R.id.fragment_account_settings);
         }
+//        if(checkCallingActivity() == FriendsList.class.getSimpleName()){
+//            bottomNavigationView.getMenu().getItem(2).setChecked(true);
+//        }
 
     }
     public int checkCallingActivity() {
