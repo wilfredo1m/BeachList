@@ -1,6 +1,9 @@
 package com.example.beachlist;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,5 +28,18 @@ public class SelectedFriend extends AppCompatActivity {
         profilePic.setImageResource(FriendsList.list.get(position).getImageProfile());
         firstName.setText(FriendsList.list.get(position).getFirstName());
         lastName.setText(FriendsList.list.get(position).getLastName());
+
+        Button backButton = findViewById(R.id.selected_friend_back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openFriendListScreen();
+            }
+        });
+    }
+
+    public void openFriendListScreen(){
+        Intent openScreen = new Intent(this, FriendsList.class);
+        startActivity(openScreen);
     }
 }

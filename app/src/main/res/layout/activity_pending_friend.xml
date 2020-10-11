@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#790F88">
+    android:background="#790F88"
+    android:id="@+id/pending_friend_list_container">
 
     <include
         android:id="@+id/include"
@@ -39,7 +40,7 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar3" />
 
     <Button
-        android:id="@+id/btn_back_button"
+        android:id="@+id/pending_btn_back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_outline_arrow_back_ios_24"

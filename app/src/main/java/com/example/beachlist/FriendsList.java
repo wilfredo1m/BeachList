@@ -2,6 +2,8 @@ package com.example.beachlist;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +42,14 @@ public class FriendsList extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
+        Button backButton = findViewById(R.id.friends_btn_back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AccountSettingsFragment fragment = new AccountSettingsFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.friend_list_container, fragment).commit();
+            }
+        });
         //***********************************************Tab Setup********************************************
         tabMenuFunctionality();
         /*

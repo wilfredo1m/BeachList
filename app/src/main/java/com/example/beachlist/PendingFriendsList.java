@@ -40,6 +40,14 @@ public class PendingFriendsList extends AppCompatActivity {
         adapter = new PendingFriendsRecyclerAdapter(this,list);
         recyclerView.setAdapter(adapter);
 
+        Button backButton = findViewById(R.id.pending_btn_back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AccountSettingsFragment fragment = new AccountSettingsFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.pending_friend_list_container, fragment).commit();
+            }
+        });
         //***********************************************Tab Setup********************************************
         tabFunctionality();
         /*
