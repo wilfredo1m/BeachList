@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#23E6B0">
+    android:background="@drawable/gray_background">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar4"
+        android:id="@+id/tb_primary_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#000000"
@@ -18,14 +18,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_selected_user_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/selected_pending_user_header"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
+        app:layout_constraintBottom_toBottomOf="@+id/tb_primary_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,55 +36,55 @@
         android:id="@+id/iv_selected_pending_friend_image"
         android:layout_width="168dp"
         android:layout_height="169dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/ic_baseline_person_24"
-        app:layout_constraintBottom_toTopOf="@+id/ratingBar3"
         app:layout_constraintEnd_toStartOf="@+id/textView2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar4" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_primary_toolbar" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="61dp"
+        android:id="@+id/btn_report_user"
+        android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/ic_baseline_report_24"
-        app:layout_constraintEnd_toEndOf="@+id/tv_pending_last_name"
-        app:layout_constraintHorizontal_bias="0.463"
-        app:layout_constraintStart_toStartOf="@+id/tv_pending_last_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_pending_last_name" />
+        app:layout_constraintStart_toEndOf="@+id/btn_reject_user"
+        app:layout_constraintTop_toBottomOf="@+id/tv_report_lbl" />
 
     <Button
         android:id="@+id/pending_friend_back_button"
-        android:layout_width="63dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:background="@drawable/ic_outline_arrow_back_ios_24"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar2"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="@+id/tb_primary_toolbar" />
 
     <TextView
         android:id="@+id/tv_pending_first_name"
         android:layout_width="153dp"
         android:layout_height="24dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
+        android:fontFamily="casual"
         android:text="@string/first_name"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar4" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_primary_toolbar" />
 
     <TextView
         android:id="@+id/tv_pending_last_name"
         android:layout_width="156dp"
         android:layout_height="21dp"
         android:layout_marginTop="24dp"
+        android:fontFamily="casual"
         android:text="@string/last_name"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tv_pending_first_name"
@@ -94,20 +94,105 @@
         android:id="@+id/ratingBar3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_reject_user"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.378" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_selected_pending_friend_image" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar3" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar4" />
+
+    <Button
+        android:id="@+id/btn_accept_user"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ic_baseline_check_24"
+        app:layout_constraintStart_toStartOf="@+id/tv_accept_user_lbl"
+        app:layout_constraintTop_toBottomOf="@+id/tv_accept_user_lbl" />
+
+    <Button
+        android:id="@+id/btn_reject_user"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ic_baseline_clear_24"
+        app:layout_constraintStart_toEndOf="@+id/btn_accept_user"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reject_user_lbl" />
+
+    <TextView
+        android:id="@+id/tv_accept_user_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/accept_user_label"
+        app:layout_constraintEnd_toStartOf="@+id/tv_reject_user_lbl"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pending_last_name" />
+
+    <TextView
+        android:id="@+id/tv_reject_user_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/deny_user_label"
+        app:layout_constraintEnd_toEndOf="@+id/tv_pending_last_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pending_last_name" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tb_primary_toolbar"
+        app:layout_constraintVertical_bias="0.452" />
+
+    <TextView
+        android:id="@+id/tv_listing_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text="@string/selected_user_Listing_header"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar4"
+        app:layout_constraintVertical_bias="0.521" />
+
+    <TextView
+        android:id="@+id/tv_report_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:text="@string/report_user_lbl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/tv_reject_user_lbl"
+        app:layout_constraintTop_toTopOf="@+id/tv_reject_user_lbl" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

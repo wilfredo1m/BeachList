@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:clickable="false">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -16,40 +16,18 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="122dp"
-            android:background="#FFFFFF">
+            android:background="#000000">
 
-            <Button
-                android:id="@+id/btn_accept_friend_request"
-                android:layout_width="59dp"
-                android:layout_height="27dp"
-                android:layout_marginStart="160dp"
-                android:layout_marginLeft="160dp"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/ic_baseline_check_24"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/friend_last_name" />
-
-            <Button
-                android:id="@+id/btn_reject_friend_request"
-                android:layout_width="53dp"
-                android:layout_height="34dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:background="@drawable/ic_baseline_clear_24"
-                app:layout_constraintBottom_toBottomOf="@+id/btn_accept_friend_request"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.2"
-                app:layout_constraintStart_toEndOf="@+id/btn_accept_friend_request"
-                app:layout_constraintTop_toTopOf="@+id/btn_accept_friend_request"
-                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/friend_first_name"
                 android:layout_width="175dp"
                 android:layout_height="23dp"
                 android:layout_marginTop="12dp"
+                android:fontFamily="casual"
                 android:text="@string/first_name"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.412"
                 app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
@@ -60,8 +38,10 @@
                 android:layout_width="173dp"
                 android:layout_height="23dp"
                 android:layout_marginTop="12dp"
+                android:fontFamily="casual"
                 android:text="@string/last_name"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/friend_first_name"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/friend_first_name"
@@ -73,20 +53,10 @@
                 android:layout_height="96dp"
                 android:layout_marginStart="4dp"
                 android:layout_marginLeft="4dp"
+                android:background="@drawable/ic_baseline_person_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/person_icon" />
-
-            <Button
-                android:id="@+id/btn_account_picture_button"
-                android:layout_width="103dp"
-                android:layout_height="96dp"
-                app:layout_constraintBottom_toBottomOf="@+id/ivProfileImage"
-                app:layout_constraintEnd_toEndOf="@+id/ivProfileImage"
-                app:layout_constraintStart_toStartOf="@+id/ivProfileImage"
-                android:background="?attr/selectableItemBackground"
-                app:layout_constraintTop_toTopOf="@+id/ivProfileImage" />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

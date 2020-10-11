@@ -51,15 +51,15 @@
 
     <Button
         android:id="@+id/friends_btn_back_button"
-        android:layout_width="45dp"
-        android:layout_height="46dp"
+        android:layout_width="67dp"
+        android:layout_height="37dp"
         android:background="@drawable/ic_outline_arrow_back_ios_24"
         app:layout_constraintBottom_toTopOf="@+id/include"
         app:layout_constraintEnd_toStartOf="@+id/tv_header"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/friend_list_toolbar"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.631" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
