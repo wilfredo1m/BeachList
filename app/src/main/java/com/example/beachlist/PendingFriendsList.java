@@ -40,7 +40,7 @@ public class PendingFriendsList extends AppCompatActivity {
         adapter = new PendingFriendsRecyclerAdapter(this,list);
         recyclerView.setAdapter(adapter);
 
-        //****************************************Back Button*************************************************
+        //****************************************Back Button and Accept/Reject Buttons*************************************************
         Button backButton = findViewById(R.id.pending_btn_back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +91,8 @@ public class PendingFriendsList extends AppCompatActivity {
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                list.clear();
+                openPendingFriends();
             }
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
@@ -98,6 +100,7 @@ public class PendingFriendsList extends AppCompatActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                list.clear();
                 openFriends();
             }
         });
@@ -105,6 +108,11 @@ public class PendingFriendsList extends AppCompatActivity {
 
     public void openFriends(){
         Intent openScreen = new Intent(this, FriendsList.class);
+        startActivity(openScreen);
+    }
+
+    public void openPendingFriends(){
+        Intent openScreen = new Intent(this, PendingFriendsList.class);
         startActivity(openScreen);
     }
 }

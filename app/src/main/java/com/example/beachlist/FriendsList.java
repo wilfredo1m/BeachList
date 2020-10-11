@@ -34,6 +34,7 @@ public class FriendsList extends AppCompatActivity {
                                 R.drawable.pikachu, R.drawable.squirtle, R.drawable.sudowoodo, R.drawable.totodile, R.drawable.treeko};
         String lastNames[] = getResources().getStringArray(R.array.last_names);
 
+        //list.clear();
         for(int i = 0; i < firstNames.length; i++){
             FriendsData friend = new FriendsData(profilePics[i],firstNames[i],lastNames[i]);
             list.add(friend);
@@ -91,6 +92,11 @@ public class FriendsList extends AppCompatActivity {
         startActivity(openScreen);
     }
 
+    public void openFriends(){
+        Intent openScreen = new Intent(this, FriendsList.class);
+        startActivity(openScreen);
+    }
+
     public void tabMenuFunctionality(){
         //***********************************************Tab Setup********************************************
         TabLayout tabs = findViewById(R.id.friends_list_both_tabs);
@@ -98,8 +104,10 @@ public class FriendsList extends AppCompatActivity {
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if(tab.getPosition() == 1)
+                if(tab.getPosition() == 1) {
+                    list.clear();
                     openPendingFriends();
+                }
             }
 
             @Override
@@ -107,6 +115,8 @@ public class FriendsList extends AppCompatActivity {
             }
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                list.clear();
+                openFriends();
             }
         });
     }
