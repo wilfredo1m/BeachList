@@ -41,15 +41,15 @@ public class FriendsList extends AppCompatActivity {
         adapter = new FriendsRecyclerAdapter(this,list);
         recyclerView.setAdapter(adapter);
 
-
+        //****************************************Back Button*************************************************
         Button backButton = findViewById(R.id.friends_btn_back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AccountSettingsFragment fragment = new AccountSettingsFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.friend_list_container, fragment).commit();
+                openAccountSettingsScreen();
             }
         });
+
         //***********************************************Tab Setup********************************************
         tabMenuFunctionality();
         /*
@@ -78,17 +78,18 @@ public class FriendsList extends AppCompatActivity {
         //        ();
         //    }
         //});
+    }
 
-
-
-
+    public void openAccountSettingsScreen(){
+        Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
+        openScreen.putExtra("screen",3);
+        startActivity(openScreen);
     }
 
     public void openPendingFriends(){
         Intent openScreen = new Intent(this, PendingFriendsList.class);
         startActivity(openScreen);
     }
-
 
     public void tabMenuFunctionality(){
         //***********************************************Tab Setup********************************************
@@ -108,10 +109,5 @@ public class FriendsList extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
-
-
-
     }
-
-
 }

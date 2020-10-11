@@ -16,7 +16,7 @@ import android.widget.Button;
  * create an instance of this fragment.
  */
 public class AccountSettingsFragment extends Fragment implements View.OnClickListener{
-    private Button friendsListButton;
+    private Button friendsListButton, backButton;
 
     public AccountSettingsFragment() {
         // Required empty public constructor

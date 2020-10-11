@@ -40,14 +40,15 @@ public class PendingFriendsList extends AppCompatActivity {
         adapter = new PendingFriendsRecyclerAdapter(this,list);
         recyclerView.setAdapter(adapter);
 
+        //****************************************Back Button*************************************************
         Button backButton = findViewById(R.id.pending_btn_back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AccountSettingsFragment fragment = new AccountSettingsFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.pending_friend_list_container, fragment).commit();
+                openAccountSettingsScreen();
             }
         });
+
         //***********************************************Tab Setup********************************************
         tabFunctionality();
         /*
@@ -78,6 +79,11 @@ public class PendingFriendsList extends AppCompatActivity {
 
     }
 
+    public void openAccountSettingsScreen(){
+        Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
+        openScreen.putExtra("screen",3);
+        startActivity(openScreen);
+    }
 
     public void tabFunctionality(){
         final TabLayout tabs = findViewById(R.id.friends_list_both_tabs);
@@ -95,9 +101,8 @@ public class PendingFriendsList extends AppCompatActivity {
                 openFriends();
             }
         });
-
-
     }
+
     public void openFriends(){
         Intent openScreen = new Intent(this, FriendsList.class);
         startActivity(openScreen);
