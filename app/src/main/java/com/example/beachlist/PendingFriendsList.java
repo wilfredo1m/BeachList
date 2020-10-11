@@ -32,7 +32,7 @@ public class PendingFriendsList extends AppCompatActivity {
         int profilePics[] = {R.drawable.bulbasaur, R.drawable.charmander, R.drawable.froakie, R.drawable.golem, R.drawable.jigglypuff,
                 R.drawable.pikachu, R.drawable.squirtle, R.drawable.sudowoodo, R.drawable.totodile, R.drawable.treeko};
         String lastNames[] = getResources().getStringArray(R.array.last_names);
-
+        list.clear();
         for(int i = 0; i < firstNames.length; i++){
             FriendsData pendingFriend = new FriendsData(profilePics[i],firstNames[i],lastNames[i]);
             list.add(pendingFriend);
@@ -91,7 +91,7 @@ public class PendingFriendsList extends AppCompatActivity {
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                list.clear();
+               // list.clear();
                 openPendingFriends();
             }
             @Override
@@ -100,7 +100,7 @@ public class PendingFriendsList extends AppCompatActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                list.clear();
+              //  list.clear();
                 openFriends();
             }
         });
@@ -115,4 +115,5 @@ public class PendingFriendsList extends AppCompatActivity {
         Intent openScreen = new Intent(this, PendingFriendsList.class);
         startActivity(openScreen);
     }
+
 }
