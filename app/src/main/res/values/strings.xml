@@ -46,10 +46,11 @@
     <string name="friend_image_description">friend Image</string>
     <!-- Pending Friends List Text -->
     <string name="pending_friend_image_description">potential friend Image</string>
-    <!-- Pending Friends List Text -->
+    <string name="report_user_lbl">Report</string>
+    <!-- selected  Friends List Text -->
     <string name="selected_friend_image_description">selected friend Image</string>
     <string name="selected_friend_header">Selected Friend</string>
-
+    <string name="remove_friend_label">Remove Friend</string>
 
     <!-- Messages text -->
     <string name="messages_header"> Messages</string>
@@ -63,9 +64,15 @@
 
     <!-- Selected user -->
     <string name="selected_user_header"> Selected User</string>
-    <!-- Selected pending user -->
-    <string name="selected_pending_user_header"> Selected Pending User</string>
+    <string name="selected_user_Listing_header"> Listings</string>
+    <string name="report_user_label"> Report User</string>
+    <string name="add_user_label">Add User</string>
 
+    <!-- Selected pending user -->
+
+    <string name="selected_pending_user_header"> Selected Pending User</string>
+    <string name="accept_user_label"> Accept</string>
+    <string name="deny_user_label">Deny</string>
 
     <!-- Not sure if needed -->
     <string name="header_page_message">Display Message</string>

@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pending_friend_list_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#790F88"
-    android:id="@+id/pending_friend_list_container">
+    android:clickable="false">
 
     <include
         android:id="@+id/include"
@@ -41,15 +42,15 @@
 
     <Button
         android:id="@+id/pending_btn_back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="67dp"
+        android:layout_height="37dp"
         android:background="@drawable/ic_outline_arrow_back_ios_24"
         app:layout_constraintBottom_toTopOf="@+id/include"
         app:layout_constraintEnd_toStartOf="@+id/tv_pending_request_header"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar3"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.631" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pending_friends_recycler"
