@@ -15,7 +15,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FriendsList extends AppCompatActivity {
+public class FriendsListTab extends AppCompatActivity {
     RecyclerView recyclerView;
     public static List<FriendsData> list = new ArrayList<>();
     FriendsRecyclerAdapter adapter;
@@ -29,16 +29,22 @@ public class FriendsList extends AppCompatActivity {
         recyclerView = findViewById(R.id.friends_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        // This is temporary, added these to test the list would display
         String firstNames[] = getResources().getStringArray(R.array.first_names);
         int profilePics[] = {R.drawable.bulbasaur, R.drawable.charmander, R.drawable.froakie, R.drawable.golem, R.drawable.jigglypuff,
                                 R.drawable.pikachu, R.drawable.squirtle, R.drawable.sudowoodo, R.drawable.totodile, R.drawable.treeko};
         String lastNames[] = getResources().getStringArray(R.array.last_names);
 
+        // clears list each time to make sure no duplicates are added
         list.clear();
+
+        // adds the friends to be the list that will be displayed
         for(int i = 0; i < firstNames.length; i++){
             FriendsData friend = new FriendsData(profilePics[i],firstNames[i],lastNames[i]);
             list.add(friend);
         }
+
+        // Links recycler view adapter
         adapter = new FriendsRecyclerAdapter(this,list);
         recyclerView.setAdapter(adapter);
 
@@ -81,22 +87,26 @@ public class FriendsList extends AppCompatActivity {
         //});
     }
 
+    // takes us back to Account Settings screen
     public void openAccountSettingsScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         openScreen.putExtra("screen",3);
         startActivity(openScreen);
     }
 
+    // Opens pending friends list tab
     public void openPendingFriends(){
-        Intent openScreen = new Intent(this, PendingFriendsList.class);
+        Intent openScreen = new Intent(this, PendingFriendsListTab.class);
         startActivity(openScreen);
     }
 
+    // Opens friends list tab
     public void openFriends(){
-        Intent openScreen = new Intent(this, FriendsList.class);
+        Intent openScreen = new Intent(this, FriendsListTab.class);
         startActivity(openScreen);
     }
 
+    // Sets what to do when each tab is selected / reselected from the friends list tab
     public void tabMenuFunctionality(){
         //***********************************************Tab Setup********************************************
         TabLayout tabs = findViewById(R.id.friends_list_both_tabs);
@@ -104,8 +114,8 @@ public class FriendsList extends AppCompatActivity {
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                // if pending friends tab is selected
                 if(tab.getPosition() == 1) {
-                    //list.clear();
                     openPendingFriends();
                 }
             }
@@ -115,7 +125,6 @@ public class FriendsList extends AppCompatActivity {
             }
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-               // list.clear();
                 openFriends();
             }
         });

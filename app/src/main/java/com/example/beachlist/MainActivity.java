@@ -51,12 +51,10 @@ public class MainActivity extends AppCompatActivity {
         emailEt = findViewById(R.id.etEmail);
         passwordEt = findViewById(R.id.etPassword);
         progressDialog = new ProgressDialog(this);
-        // Home Screen Button (Needs to add the check for valid login)
 
-
+        // Login button
         homeScreenButton = (Button) findViewById(R.id.btnLogin);
-
-       homeScreenButton.setOnClickListener(new View.OnClickListener() {
+        homeScreenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Login User

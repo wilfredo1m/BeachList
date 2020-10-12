@@ -24,8 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FriendsList"></activity>
-        <activity android:name=".PendingFriendsList"></activity>
+        <activity android:name=".FriendsListTab"></activity>
+        <activity android:name=".PendingFriendsListTab"></activity>
     </application>
 
 </manifest>

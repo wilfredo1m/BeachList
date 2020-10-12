@@ -23,12 +23,15 @@ public class SelectedPendingFriend extends AppCompatActivity {
         firstName = findViewById(R.id.tv_pending_first_name);
         lastName = findViewById(R.id.tv_pending_last_name);
 
+        // gets the pic and name of the user to display
         int position = getIntent().getIntExtra("position",1);
 
-        profilePic.setImageResource(FriendsList.list.get(position).getImageProfile());
-        firstName.setText(FriendsList.list.get(position).getFirstName());
-        lastName.setText(FriendsList.list.get(position).getLastName());
+        // Sets the persons info in the correct fields to be displayed
+        profilePic.setImageResource(FriendsListTab.list.get(position).getImageProfile());
+        firstName.setText(FriendsListTab.list.get(position).getFirstName());
+        lastName.setText(FriendsListTab.list.get(position).getLastName());
 
+        // Go back to pending friends list
         Button backButton = findViewById(R.id.pending_friend_back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +40,7 @@ public class SelectedPendingFriend extends AppCompatActivity {
             }
         });
 
+        // Accept and Reject Request buttons
         Button acceptRequest = findViewById(R.id.btn_accept_user);
         acceptRequest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,12 +61,12 @@ public class SelectedPendingFriend extends AppCompatActivity {
     }
 
     public void openPendingFriendListScreen(){
-        Intent openScreen = new Intent(this, PendingFriendsList.class);
+        Intent openScreen = new Intent(this, PendingFriendsListTab.class);
         startActivity(openScreen);
     }
 
     public void openFriendsListScreen(){
-        Intent openScreen = new Intent(this, FriendsList.class);
+        Intent openScreen = new Intent(this, FriendsListTab.class);
         startActivity(openScreen);
     }
 }

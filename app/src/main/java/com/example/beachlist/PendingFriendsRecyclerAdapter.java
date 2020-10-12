@@ -36,6 +36,7 @@ public class PendingFriendsRecyclerAdapter extends RecyclerView.Adapter<PendingF
         holder.firstName.setText(list.get(position).getFirstName());
         holder.lastName.setText(list.get(position).getLastName());
 
+        // when a pending friend is clicked, the position is taken to get that person info
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

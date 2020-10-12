@@ -28,6 +28,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         // Inflate the layout for this fragment
         View accountSettingsScreen = inflater.inflate(R.layout.fragment_account_settings, container, false);
 
+        // Takes us to friends list screen when we click the button
         friendsListButton = (Button) accountSettingsScreen.findViewById(R.id.btn_friend_list);
         friendsListButton.setOnClickListener(this);
 
@@ -38,7 +39,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        Intent openScreen = new Intent(getActivity(),FriendsList.class);
+        Intent openScreen = new Intent(getActivity(), FriendsListTab.class);
         startActivity(openScreen);
     }
 }

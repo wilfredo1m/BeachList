@@ -263,6 +263,7 @@ public class CreateAccount extends AppCompatActivity {
         Toast.makeText(CreateAccount.this, "Must provide an email ending in @student.csulb.edu",Toast.LENGTH_SHORT).show();
     }
 
+    // Displays when a profile picture has not been added
     public void displayEmptyImageError() {
         Toast.makeText(CreateAccount.this, "Please pick a picture for your account!", Toast.LENGTH_LONG).show();
     }
@@ -290,10 +291,12 @@ public class CreateAccount extends AppCompatActivity {
                 || phoneNumEt.getText().toString().isEmpty();
     }
 
+    // Checks if email entered is a csulb one
     public boolean isValidSchoolEmail(String email) {
         return email.substring(email.length() - 18).equals("@student.csulb.edu");
     }
 
+    // Sends validation email to user after they create an account
     public void sendValidationEmail(final FirebaseUser user) {
         user.sendEmailVerification()
                 .addOnCompleteListener(this, new OnCompleteListener() {

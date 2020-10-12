@@ -31,15 +31,29 @@ public class HomeScreenAfterLogin extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this,  R.id.menu_bar_fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
+        // callingActivity will tell us which screen we just switched from
+        // and what screen from the bottom nav should be displayed
         callingActivity = checkCallingActivity();
+        // display Messages Screen
+//        if(callingActivity == 1){
+//            bottomNavigationView.setSelectedItemId(R.id.fragment_messages);
+//        }
+        // display create post screen
+//        else if(callingActivity == 2){
+//            bottomNavigationView.setSelectedItemId(R.id.fragment_create_post);
+//        }
+        //display account settings screen
         if(callingActivity == 3){
             bottomNavigationView.setSelectedItemId(R.id.fragment_account_settings);
         }
-//        if(checkCallingActivity() == FriendsList.class.getSimpleName()){
-//            bottomNavigationView.getMenu().getItem(2).setChecked(true);
-//        }
+
 
     }
+
+    // Will get the screen that has sent us back to the base 4 screens
+    // 1 is messages
+    // 2 is create post
+    // 3 is account settings
     public int checkCallingActivity() {
         callingActivity = getIntent().getIntExtra("screen",7);
         return callingActivity;
