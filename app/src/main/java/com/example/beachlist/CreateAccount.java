@@ -207,7 +207,7 @@ public class CreateAccount extends AppCompatActivity {
         currentUser.setImageUrl(" ");
 
         //Initialize database within User reference with a child using user ID
-        final DatabaseReference userReference = database.getReference("users").child(userId);
+        final DatabaseReference userReference = database.getReference("users").child(userId).child("data");
         //Write data to database
         userReference.setValue(currentUser);
         //If user has selected an image

@@ -2,11 +2,12 @@ package com.example.beachlist;
 
 import android.graphics.Bitmap;
 
+import java.util.HashMap;
+
 public class UserData {
 
     String firstName, lastName, idNumber, email, gradDate, phoneNum;
     String userId, imageUrl;
-    String[] friends, pending, sent = {};
 
     public UserData() { }
 
@@ -84,4 +85,5 @@ public class UserData {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
 }
