@@ -15,11 +15,12 @@
         android:layout_marginTop="104dp"
         android:background="@drawable/abstract_blue_button"
         android:text="@string/cancelBtn"
+        android:nextFocusForward="@id/etFirstName"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnCreateAccount"
+        app:layout_constraintEnd_toStartOf="@id/btnCreateAccount"
         app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPhone"
+        app:layout_constraintTop_toBottomOf="@id/etPhone"
         app:layout_constraintVertical_bias="0.324" />
 
     <Button
@@ -31,9 +32,10 @@
         android:layout_marginRight="64dp"
         android:background="@drawable/abstract_blue_button"
         android:text="@string/create_account_button"
+        android:nextFocusForward="@id/btnCancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPhone"
+        app:layout_constraintTop_toBottomOf="@id/etPhone"
         app:layout_constraintVertical_bias="0.324" />
 
     <androidx.appcompat.widget.Toolbar
@@ -65,8 +67,9 @@
         android:hint="@string/first_name"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:nextFocusForward="@id/etLastName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <EditText
         android:id="@+id/etLastName"
@@ -79,10 +82,11 @@
         android:hint="@string/last_name"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:nextFocusForward="@+id/etIDNumber"
         app:layout_constraintEnd_toEndOf="@+id/etFirstName"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/etFirstName"
-        app:layout_constraintTop_toBottomOf="@+id/etFirstName" />
+        app:layout_constraintStart_toStartOf="@id/etFirstName"
+        app:layout_constraintTop_toBottomOf="@id/etFirstName" />
 
     <EditText
         android:id="@+id/etEmail"
@@ -95,10 +99,11 @@
         android:hint="@string/email_field"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/etPhone"
+        android:nextFocusForward="@id/etPassword"
+        app:layout_constraintEnd_toEndOf="@id/etPhone"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/etPhone"
-        app:layout_constraintTop_toBottomOf="@+id/etPhone" />
+        app:layout_constraintStart_toStartOf="@id/etPhone"
+        app:layout_constraintTop_toBottomOf="@id/etPhone" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -111,10 +116,11 @@
         android:hint="@string/password"
         android:importantForAutofill="no"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/etEmail"
+        android:nextFocusForward="@+id/btnCreateAccount"
+        app:layout_constraintEnd_toEndOf="@id/etEmail"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/etEmail"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+        app:layout_constraintStart_toStartOf="@id/etEmail"
+        app:layout_constraintTop_toBottomOf="@id/etEmail" />
 
     <TextView
         android:id="@+id/tvExpectedGraduation"
@@ -125,10 +131,10 @@
         android:text="@string/expected_grad_date_lbl"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/etIDNumber"
+        app:layout_constraintEnd_toEndOf="@id/etIDNumber"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/etIDNumber"
-        app:layout_constraintTop_toBottomOf="@+id/etIDNumber" />
+        app:layout_constraintStart_toStartOf="@id/etIDNumber"
+        app:layout_constraintTop_toBottomOf="@id/etIDNumber" />
 
     <EditText
         android:id="@+id/etGradDate"
@@ -141,10 +147,11 @@
         android:importantForAutofill="no"
         android:inputType="date"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/tvExpectedGraduation"
+        android:nextFocusForward="@id/etPhone"
+        app:layout_constraintEnd_toEndOf="@id/tvExpectedGraduation"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/tvExpectedGraduation"
-        app:layout_constraintTop_toBottomOf="@+id/tvExpectedGraduation" />
+        app:layout_constraintStart_toStartOf="@id/tvExpectedGraduation"
+        app:layout_constraintTop_toBottomOf="@id/tvExpectedGraduation" />
 
     <TextView
         android:id="@+id/tvPhoneNumber"
@@ -156,10 +163,10 @@
         android:textColor="#FFFFFF"
         android:textIsSelectable="false"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/etGradDate"
+        app:layout_constraintEnd_toEndOf="@id/etGradDate"
         app:layout_constraintHorizontal_bias="0.053"
-        app:layout_constraintStart_toStartOf="@+id/etGradDate"
-        app:layout_constraintTop_toBottomOf="@+id/etGradDate" />
+        app:layout_constraintStart_toStartOf="@id/etGradDate"
+        app:layout_constraintTop_toBottomOf="@id/etGradDate" />
 
     <EditText
         android:id="@+id/etPhone"
@@ -171,10 +178,11 @@
         android:hint="@string/phone_num"
         android:importantForAutofill="no"
         android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="@+id/tvPhoneNumber"
+        android:nextFocusForward="@+id/etEmail"
+        app:layout_constraintEnd_toEndOf="@id/tvPhoneNumber"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/tvPhoneNumber"
-        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber" />
+        app:layout_constraintStart_toStartOf="@id/tvPhoneNumber"
+        app:layout_constraintTop_toBottomOf="@id/tvPhoneNumber" />
 
 
     <androidx.cardview.widget.CardView
@@ -182,10 +190,10 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:cardCornerRadius="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"
+        app:layout_constraintBottom_toTopOf="@id/btnCreateAccount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etLastName"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toEndOf="@id/etLastName"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintVertical_bias="0.058">
 
         <ImageView
@@ -211,10 +219,10 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:contentDescription="@string/phone_num_icon_description"
-        app:layout_constraintBottom_toBottomOf="@+id/tvPhoneNumber"
-        app:layout_constraintEnd_toStartOf="@+id/tvPhoneNumber"
+        app:layout_constraintBottom_toBottomOf="@id/tvPhoneNumber"
+        app:layout_constraintEnd_toStartOf="@id/tvPhoneNumber"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvPhoneNumber"
+        app:layout_constraintTop_toTopOf="@id/tvPhoneNumber"
         app:srcCompat="@drawable/phone_number_icon" />
 
     <ImageView
@@ -222,10 +230,10 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:contentDescription="@string/email_icon_description"
-        app:layout_constraintBottom_toBottomOf="@+id/etEmail"
-        app:layout_constraintEnd_toStartOf="@+id/etEmail"
+        app:layout_constraintBottom_toBottomOf="@id/etEmail"
+        app:layout_constraintEnd_toStartOf="@id/etEmail"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etEmail"
+        app:layout_constraintTop_toTopOf="@id/etEmail"
         app:srcCompat="@drawable/email_icon" />
 
     <ImageView
@@ -233,10 +241,10 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:contentDescription="@string/expected_grad_icon_description"
-        app:layout_constraintBottom_toBottomOf="@+id/tvExpectedGraduation"
-        app:layout_constraintEnd_toStartOf="@+id/tvExpectedGraduation"
+        app:layout_constraintBottom_toBottomOf="@id/tvExpectedGraduation"
+        app:layout_constraintEnd_toStartOf="@id/tvExpectedGraduation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvExpectedGraduation"
+        app:layout_constraintTop_toTopOf="@id/tvExpectedGraduation"
         app:srcCompat="@drawable/date_icon" />
 
     <ImageView
@@ -244,10 +252,10 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:contentDescription="@string/first_name_icon_desc"
-        app:layout_constraintBottom_toBottomOf="@+id/etFirstName"
-        app:layout_constraintEnd_toStartOf="@+id/etFirstName"
+        app:layout_constraintBottom_toBottomOf="@id/etFirstName"
+        app:layout_constraintEnd_toStartOf="@id/etFirstName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etFirstName"
+        app:layout_constraintTop_toTopOf="@id/etFirstName"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/person_icon" />
 
@@ -256,10 +264,10 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:contentDescription="@string/last_name_icon_desc"
-        app:layout_constraintBottom_toBottomOf="@+id/etLastName"
-        app:layout_constraintEnd_toStartOf="@+id/etLastName"
+        app:layout_constraintBottom_toBottomOf="@id/etLastName"
+        app:layout_constraintEnd_toStartOf="@id/etLastName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etLastName"
+        app:layout_constraintTop_toTopOf="@id/etLastName"
         app:srcCompat="@drawable/person_icon" />
 
     <ImageView
@@ -268,10 +276,10 @@
         android:layout_height="25dp"
         android:background="#FFFFFF"
         android:contentDescription="@string/password_icon_description"
-        app:layout_constraintBottom_toBottomOf="@+id/etPassword"
-        app:layout_constraintEnd_toStartOf="@+id/etPassword"
+        app:layout_constraintBottom_toBottomOf="@id/etPassword"
+        app:layout_constraintEnd_toStartOf="@id/etPassword"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etPassword"
+        app:layout_constraintTop_toTopOf="@id/etPassword"
         app:layout_constraintVertical_bias="0.334"
         app:srcCompat="@drawable/password_icon" />
 
@@ -284,6 +292,7 @@
         android:ems="10"
         android:hint="@string/id_num"
         android:inputType="textPersonName"
+        android:nextFocusForward="@+id/etGradDate"
         app:layout_constraintEnd_toEndOf="@+id/etLastName"
         app:layout_constraintStart_toStartOf="@+id/etLastName"
         app:layout_constraintTop_toBottomOf="@+id/etLastName"

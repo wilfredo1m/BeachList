@@ -5,15 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,6 +36,8 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class CreateAccount extends AppCompatActivity {
+    private static final String TAG = "CustomAuthActivity";
+
     private EditText fNameEt, lNameEt, idNumberEt, emailEt, passwordEt, gradDateEt, phoneNumEt;
     private ImageView profilePicture;
     private Uri filePath;
@@ -170,6 +171,7 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
+                    Log.d(TAG, "signInWithCustomToken:success");
                     //Set firebase user to current user instance
                     user = mAuth.getCurrentUser();
                     createUserAccount(
@@ -183,6 +185,7 @@ public class CreateAccount extends AppCompatActivity {
                     Toast.makeText(CreateAccount.this, "Successfully registered", Toast.LENGTH_LONG).show();
                     sendValidationEmail(user);
                 } else {
+                    Log.w(TAG, "signInWithCustomToken:failure", task.getException());
                     Toast.makeText(CreateAccount.this, "Sign up failed!",Toast.LENGTH_LONG).show();
                 }
                 progressDialog.dismiss();
