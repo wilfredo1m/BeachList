@@ -6,6 +6,7 @@ public class UserData {
 
     String firstName, lastName, idNumber, email, gradDate, phoneNum;
     String userId, imageUrl;
+    String[] friends, pending, sent = {};
 
     public UserData() { }
 
