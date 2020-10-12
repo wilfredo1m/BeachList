@@ -33,13 +33,36 @@ public class SelectedPendingFriend extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openFriendListScreen();
+                openPendingFriendListScreen();
+            }
+        });
+
+        Button acceptRequest = findViewById(R.id.btn_accept_user);
+        acceptRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Temporarily sending to friends list to make sure it works
+                openFriendsListScreen();
+            }
+        });
+
+        Button rejectRequest = findViewById(R.id.btn_reject_user);
+        rejectRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Temporarily sending to friends list to make sure it works
+                openFriendsListScreen();
             }
         });
     }
 
-    public void openFriendListScreen(){
+    public void openPendingFriendListScreen(){
         Intent openScreen = new Intent(this, PendingFriendsList.class);
+        startActivity(openScreen);
+    }
+
+    public void openFriendsListScreen(){
+        Intent openScreen = new Intent(this, FriendsList.class);
         startActivity(openScreen);
     }
 }
