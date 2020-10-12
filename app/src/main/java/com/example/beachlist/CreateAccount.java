@@ -185,6 +185,7 @@ public class CreateAccount extends AppCompatActivity {
                 } else {
                     Toast.makeText(CreateAccount.this, "Sign up failed!",Toast.LENGTH_LONG).show();
                 }
+                progressDialog.dismiss();
             }
         });
     }
@@ -209,8 +210,9 @@ public class CreateAccount extends AppCompatActivity {
         final DatabaseReference userReference = database.getReference("users").child(userId);
         //Write data to database
         userReference.setValue(currentUser);
-
+        //If user has selected an image
         if(filePath != null) {
+            //Store user image
             storageReference = FirebaseStorage.getInstance().getReference();
             final StorageReference imageRef = storageReference.child("images/" + filePath.getLastPathSegment());
             UploadTask uploadTask = imageRef.putFile(filePath);
@@ -242,7 +244,7 @@ public class CreateAccount extends AppCompatActivity {
         }
     }
 
-    //Store user image
+
 
     // Opens Login Screen
     public void openLoginScreen() {
@@ -309,11 +311,5 @@ public class CreateAccount extends AppCompatActivity {
                         }
                     }
                 });
-    }
-
-    public String getFileExtension(Uri uri) {
-        ContentResolver cR = getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 }
