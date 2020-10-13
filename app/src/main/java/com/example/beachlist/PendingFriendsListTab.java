@@ -28,15 +28,22 @@ public class PendingFriendsListTab extends AppCompatActivity {
         recyclerView = findViewById(R.id.pending_friends_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        // This is temporary, added these to test the list would display
         String firstNames[] = getResources().getStringArray(R.array.first_names);
         int profilePics[] = {R.drawable.bulbasaur, R.drawable.charmander, R.drawable.froakie, R.drawable.golem, R.drawable.jigglypuff,
                 R.drawable.pikachu, R.drawable.squirtle, R.drawable.sudowoodo, R.drawable.totodile, R.drawable.treeko};
         String lastNames[] = getResources().getStringArray(R.array.last_names);
+
+        // clears list each time to make sure no duplicates are added
         list.clear();
+
+        // adds the pending friends to be the list that will be displayed
         for(int i = 0; i < firstNames.length; i++){
             FriendsData pendingFriend = new FriendsData(profilePics[i],firstNames[i],lastNames[i]);
             list.add(pendingFriend);
         }
+
+        // Links recycler view adapter
         adapter = new PendingFriendsRecyclerAdapter(this,list);
         recyclerView.setAdapter(adapter);
 

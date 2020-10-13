@@ -17,6 +17,7 @@
         <activity android:name=".CreateAccount" />
         <activity android:name=".SelectedFriend"/>
         <activity android:name=".SelectedPendingFriend"/>
+        <activity android:name=".SelectedUser"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

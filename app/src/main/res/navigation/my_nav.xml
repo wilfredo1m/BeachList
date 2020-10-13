@@ -9,14 +9,7 @@
         android:id="@+id/fragment_home"
         android:name="com.example.beachlist.HomeFragment"
         android:label="fragment_fragment1"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_fragment_home_to_fragment_user"
-            app:destination="@id/fragment_user" />
-        <action
-            android:id="@+id/action_fragment_home_to_fragment_service"
-            app:destination="@id/fragment_service" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/fragment_messages"
         android:name="com.example.beachlist.MessageFragment"
@@ -34,31 +27,18 @@
         tools:layout="@layout/fragment_create_post" />
     <fragment
         android:id="@+id/fragment_user"
-        android:name="com.example.beachlist.UserHomeSearch"
+        android:name="com.example.beachlist.UserHomeSearchTab"
         android:label="fragment_user_select_from_home"
         tools:layout="@layout/fragment_user_select_from_home" >
         <action
             android:id="@+id/action_fragment_user_to_fragment_service"
             app:destination="@id/fragment_service" />
-        <action
-            android:id="@+id/action_fragment_user_to_fragment_home"
-            app:destination="@id/fragment_home" />
-        <action
-            android:id="@+id/action_fragment_user_to_fragment_service2"
-            app:destination="@id/fragment_service" />
     </fragment>
     <fragment
         android:id="@+id/fragment_service"
-        android:name="com.example.beachlist.ServiceHomeSearch"
+        android:name="com.example.beachlist.ServiceHomeSearchTab"
         android:label="fragment_service_select_from_home"
-        tools:layout="@layout/fragment_service_select_from_home" >
-        <action
-            android:id="@+id/action_fragment_service_to_fragment_user"
-            app:destination="@id/fragment_user" />
-        <action
-            android:id="@+id/action_fragment_service_to_fragment_home"
-            app:destination="@id/fragment_home" />
-    </fragment>
+        tools:layout="@layout/fragment_service_select_from_home" />
     <fragment
         android:id="@+id/menu_fragment"
         android:name="com.example.beachlist.menu_fragment"
