@@ -5,15 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,6 +36,8 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class CreateAccount extends AppCompatActivity {
+    private static final String TAG = "CustomAuthActivity";
+
     private EditText fNameEt, lNameEt, idNumberEt, emailEt, passwordEt, gradDateEt, phoneNumEt;
     private ImageView profilePicture;
     private Uri filePath;
@@ -170,6 +171,7 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
+                    Log.d(TAG, "signInWithCustomToken:success");
                     //Set firebase user to current user instance
                     user = mAuth.getCurrentUser();
                     createUserAccount(
@@ -183,6 +185,7 @@ public class CreateAccount extends AppCompatActivity {
                     Toast.makeText(CreateAccount.this, "Successfully registered", Toast.LENGTH_LONG).show();
                     sendValidationEmail(user);
                 } else {
+                    Log.w(TAG, "signInWithCustomToken:failure", task.getException());
                     Toast.makeText(CreateAccount.this, "Sign up failed!",Toast.LENGTH_LONG).show();
                 }
                 progressDialog.dismiss();
@@ -220,8 +223,8 @@ public class CreateAccount extends AppCompatActivity {
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    FirebaseAuth.getInstance().signOut();
-                    openLoginScreen();
+                    Toast.makeText(CreateAccount.this, "Failed to store Image", Toast.LENGTH_SHORT).show();
+                    logout();
                 }
             });
 
@@ -235,16 +238,21 @@ public class CreateAccount extends AppCompatActivity {
                             String imageReference = uri.toString();
                             userReference.child("imageUrl").setValue(imageReference);
                             currentUser.setImageUrl(imageReference);
-                            FirebaseAuth.getInstance().signOut();
-                            openLoginScreen();
+                            logout();
                         }
                     });
                 }
             });
         }
+        else {
+            logout();
+        }
     }
 
-
+    public void logout() {
+        FirebaseAuth.getInstance().signOut();
+        openLoginScreen();
+    }
 
     // Opens Login Screen
     public void openLoginScreen() {
@@ -261,11 +269,6 @@ public class CreateAccount extends AppCompatActivity {
     // Displays when an incorrect email is provided
     public void displayMalformedEmailError() {
         Toast.makeText(CreateAccount.this, "Must provide an email ending in @student.csulb.edu",Toast.LENGTH_SHORT).show();
-    }
-
-    // Displays when a profile picture has not been added
-    public void displayEmptyImageError() {
-        Toast.makeText(CreateAccount.this, "Please pick a picture for your account!", Toast.LENGTH_LONG).show();
     }
 
     // Get the information entered by the user
