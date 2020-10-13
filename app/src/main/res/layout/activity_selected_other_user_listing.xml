@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#08AFD6">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#08AFD6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#08AFD6">
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_baseline_clear_24"
+                    tools:layout_editor_absoluteX="305dp"
+                    tools:layout_editor_absoluteY="431dp" />
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/colorPrimary"
+                    android:minHeight="?attr/actionBarSize"
+                    android:theme="?attr/actionBarTheme" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="listing descirption"
+                    app:layout_constraintBottom_toTopOf="@+id/textView16"
+                    tools:layout_editor_absoluteX="125dp" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="match_parent"
+                    android:layout_height="114dp"
+                    android:text="descirption here"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="551dp" />
+
+                <Button
+                    android:id="@+id/button5"
+                    android:layout_width="49dp"
+                    android:layout_height="38dp"
+                    android:background="@drawable/ic_baseline_share_24"
+                    tools:layout_editor_absoluteX="344dp"
+                    tools:layout_editor_absoluteY="7dp" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="395dp"
+                    android:layout_height="327dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="56dp"
+                    tools:srcCompat="@drawable/ic_baseline_image_24" />
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="68dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:text="price"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="470dp" />
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="143dp"
+                    android:layout_height="21dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="470dp"
+                    tools:text="$200.00" />
+
+                <Button
+                    android:id="@+id/button6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="modify post"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView6"
+                    tools:layout_editor_absoluteX="125dp" />
+
+                <Button
+                    android:id="@+id/button7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/ic_outline_arrow_back_ios_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="7dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,7 +25,7 @@ public class SelectedUserRecyclerAdapter extends RecyclerView.Adapter<SelectedUs
     @NonNull
     @Override
     public SelectedUserRecyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_selected_user_row,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_user_row,parent,false);
         return new MyViewHolder(view);
     }
 

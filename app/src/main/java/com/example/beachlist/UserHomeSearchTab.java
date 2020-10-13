@@ -59,8 +59,8 @@ public class UserHomeSearchTab extends Fragment implements View.OnClickListener{
         }
 //
 //        // Links recycler view adapter
-//        adapter = new SelectedUserRecyclerAdapter(getActivity(),list);
-//        recyclerView.setAdapter(adapter);
+        adapter = new SelectedUserRecyclerAdapter(getActivity(),list);
+        recyclerView.setAdapter(adapter);
 
 //        selectedUserButton = (Button) view.findViewById(R.id.test_to_selected_user);
 //        selectedUserButton.setOnClickListener(this);
