@@ -1,6 +1,9 @@
 package com.example.beachlist;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,10 +32,31 @@ public class SelectedUser extends AppCompatActivity {
         int position = getIntent().getIntExtra("position",1);
 
         // Sets the persons info in the correct fields to be displayed
-        profilePic.setImageResource(FriendsListTab.list.get(position).getImageProfile());
-        firstName.setText(FriendsListTab.list.get(position).getFirstName());
-        lastName.setText(FriendsListTab.list.get(position).getLastName());
+        profilePic.setImageResource(UserHomeSearchTab.user_list.get(position).getImageProfile());
+        firstName.setText(UserHomeSearchTab.user_list.get(position).getFirstName());
+        lastName.setText(UserHomeSearchTab.user_list.get(position).getLastName());
 
+        // Send user a friend request
+        Button addFriendButton = findViewById(R.id.btn_add_user);
+        addFriendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openHomeScreen();
+            }
+        });
 
+        // Go back to User search list (temporarily going back to home)
+        Button backButton = findViewById(R.id.selected_user_back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openHomeScreen();
+            }
+        });
+    }
+
+    public void openHomeScreen(){
+        Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
+        startActivity(openScreen);
     }
 }

@@ -39,7 +39,7 @@ public class SelectedUserRecyclerAdapter extends RecyclerView.Adapter<SelectedUs
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, SelectedPendingFriend.class);
+                Intent intent = new Intent(context, SelectedUser.class);
                 intent.putExtra("position", position);
                 context.startActivity(intent);
             }

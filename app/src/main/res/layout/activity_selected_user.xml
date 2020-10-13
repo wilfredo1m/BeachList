@@ -55,6 +55,14 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_report_user_lbl" />
 
     <Button
+        android:id="@+id/selected_user_back_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_outline_arrow_back_ios_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2" />
+
+    <Button
         android:id="@+id/btn_add_user"
         android:layout_width="40dp"
         android:layout_height="40dp"

@@ -19,13 +19,11 @@ import java.util.List;
  * Use the {@link UserHomeSearchTab#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserHomeSearchTab extends Fragment implements View.OnClickListener{
+public class UserHomeSearchTab extends Fragment{
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    List<FriendsData> list = new ArrayList<>();
-//    SelectedUserRecyclerAdapter adapter;
-    //Button selectedUserButton;
+    public static List<FriendsData> user_list = new ArrayList<>();
 
     public UserHomeSearchTab() {
         // Required empty public constructor
@@ -50,28 +48,18 @@ public class UserHomeSearchTab extends Fragment implements View.OnClickListener{
         String lastNames[] = getResources().getStringArray(R.array.last_names);
 
         // clears list each time to make sure no duplicates are added
-        list.clear();
+        user_list.clear();
 
         // adds the pending friends to be the list that will be displayed
         for(int i = 0; i < firstNames.length; i++){
             FriendsData selectedUser = new FriendsData(profilePics[i],firstNames[i],lastNames[i]);
-            list.add(selectedUser);
+            user_list.add(selectedUser);
         }
-//
-//        // Links recycler view adapter
-        adapter = new SelectedUserRecyclerAdapter(getActivity(),list);
+
+        // Links recycler view adapter
+        adapter = new SelectedUserRecyclerAdapter(getActivity(),user_list);
         recyclerView.setAdapter(adapter);
 
-//        selectedUserButton = (Button) view.findViewById(R.id.test_to_selected_user);
-//        selectedUserButton.setOnClickListener(this);
-
-
         return view;
-    }
-
-    @Override
-    public void onClick(View view) {
-        Intent intent = new Intent(getActivity(), SelectedUser.class);
-        startActivity(intent);
     }
 }

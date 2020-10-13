@@ -34,14 +34,16 @@ public class HomeScreenAfterLogin extends AppCompatActivity {
         // callingActivity will tell us which screen we just switched from
         // and what screen from the bottom nav should be displayed
         callingActivity = checkCallingActivity();
-        // display Messages Screen
+
+//        //display Messages Screen
 //        if(callingActivity == 1){
 //            bottomNavigationView.setSelectedItemId(R.id.fragment_messages);
 //        }
-        // display create post screen
+//        // display create post screen
 //        else if(callingActivity == 2){
 //            bottomNavigationView.setSelectedItemId(R.id.fragment_create_post);
 //        }
+
         //display account settings screen
         if(callingActivity == 3){
             bottomNavigationView.setSelectedItemId(R.id.fragment_account_settings);
