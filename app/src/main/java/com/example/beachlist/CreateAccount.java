@@ -223,8 +223,8 @@ public class CreateAccount extends AppCompatActivity {
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    FirebaseAuth.getInstance().signOut();
-                    openLoginScreen();
+                    Toast.makeText(CreateAccount.this, "Failed to store Image", Toast.LENGTH_SHORT).show();
+                    logout();
                 }
             });
 
@@ -238,16 +238,21 @@ public class CreateAccount extends AppCompatActivity {
                             String imageReference = uri.toString();
                             userReference.child("imageUrl").setValue(imageReference);
                             currentUser.setImageUrl(imageReference);
-                            FirebaseAuth.getInstance().signOut();
-                            openLoginScreen();
+                            logout();
                         }
                     });
                 }
             });
         }
+        else {
+            logout();
+        }
     }
 
-
+    public void logout() {
+        FirebaseAuth.getInstance().signOut();
+        openLoginScreen();
+    }
 
     // Opens Login Screen
     public void openLoginScreen() {

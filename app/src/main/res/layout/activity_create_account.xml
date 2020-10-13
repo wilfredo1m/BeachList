@@ -83,7 +83,7 @@
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:nextFocusForward="@+id/etIDNumber"
-        app:layout_constraintEnd_toEndOf="@+id/etFirstName"
+        app:layout_constraintEnd_toEndOf="@id/etFirstName"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/etFirstName"
         app:layout_constraintTop_toBottomOf="@id/etFirstName" />
