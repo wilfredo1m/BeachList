@@ -271,11 +271,6 @@ public class CreateAccount extends AppCompatActivity {
         Toast.makeText(CreateAccount.this, "Must provide an email ending in @student.csulb.edu",Toast.LENGTH_SHORT).show();
     }
 
-    // Displays when a profile picture has not been added
-    public void displayEmptyImageError() {
-        Toast.makeText(CreateAccount.this, "Please pick a picture for your account!", Toast.LENGTH_LONG).show();
-    }
-
     // Get the information entered by the user
     public void getUserInputs() {
         fNameEt = findViewById(R.id.etFirstName);
