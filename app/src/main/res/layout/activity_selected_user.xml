@@ -48,8 +48,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
         android:background="@drawable/ic_baseline_report_24"
         app:layout_constraintEnd_toStartOf="@+id/btn_add_user"
         app:layout_constraintTop_toBottomOf="@+id/tv_report_user_lbl" />
@@ -137,11 +137,13 @@
         android:id="@+id/tv_report_user_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="48dp"
         android:fontFamily="sans-serif"
         android:text="@string/report_user_label"
         android:textColor="#FFFFFF"
-        app:layout_constraintStart_toStartOf="@+id/selected_user_first_name"
+        app:layout_constraintStart_toStartOf="@+id/selected_user_last_name"
         app:layout_constraintTop_toBottomOf="@+id/selected_user_first_name" />
 
     <androidx.appcompat.widget.Toolbar
