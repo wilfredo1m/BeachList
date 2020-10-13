@@ -54,8 +54,8 @@ public class SelectedPendingFriend extends AppCompatActivity {
         rejectRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Temporarily sending to friends list to make sure it works
-                openFriendsListScreen();
+                // Temporarily sending to pending friends list to make sure it works
+                openPendingFriendListScreen();
             }
         });
     }

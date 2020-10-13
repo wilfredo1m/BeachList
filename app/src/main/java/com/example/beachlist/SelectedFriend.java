@@ -31,6 +31,15 @@ public class SelectedFriend extends AppCompatActivity {
         firstName.setText(FriendsListTab.list.get(position).getFirstName());
         lastName.setText(FriendsListTab.list.get(position).getLastName());
 
+        // Remove friend from friends list
+        Button unfriendButton = findViewById(R.id.btn_remove_friend);
+        unfriendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openFriendListScreen();
+            }
+        });
+
         // Go back to friends list
         Button backButton = findViewById(R.id.selected_friend_back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
