@@ -92,14 +92,14 @@
     <string-array name="first_names">
         <item>Viet</item>
         <item>Wilfredo</item>
-        <item>Randall</item>
+        <item>randall</item>
         <item>Bernie</item>
-        <item>Lebron</item>
-        <item>Kobe</item>
+        <item>foo</item>
+        <item>poopy</item>
         <item>Patrick</item>
         <item>Robert</item>
         <item>Randy</item>
-        <item>Snoop</item>
+        <item>wil</item>
     </string-array>
 
 
@@ -107,14 +107,14 @@
     <string-array name="last_names">
         <item>Nguyen</item>
         <item>Mendivil</item>
-        <item>Thornton</item>
+        <item>thornton</item>
         <item>Yusti</item>
-        <item>James</item>
-        <item>Bryant</item>
+        <item>boo</item>
+        <item>mcpooperson</item>
         <item>Mahomes</item>
         <item>Acuna Jr</item>
         <item>Moss</item>
-        <item>Dogg</item>
+        <item>medinval</item>
     </string-array>
 
 

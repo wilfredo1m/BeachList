@@ -43,8 +43,8 @@ public class UserHomeSearchTab extends Fragment{
 
         // This is temporary, added these to test the list would display
         String firstNames[] = getResources().getStringArray(R.array.first_names);
-        int profilePics[] = {R.drawable.bulbasaur, R.drawable.charmander, R.drawable.froakie, R.drawable.golem, R.drawable.jigglypuff,
-                R.drawable.pikachu, R.drawable.squirtle, R.drawable.sudowoodo, R.drawable.totodile, R.drawable.treeko};
+        int profilePics[] = {R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur,
+                R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur};
         String lastNames[] = getResources().getStringArray(R.array.last_names);
 
         // clears list each time to make sure no duplicates are added
