@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF4B00"
+    android:background="@drawable/gray_background"
     android:fitsSystemWindows="true">
     tools:context=".HomeFragment">
 
@@ -48,6 +48,7 @@
         android:id="@+id/home_menu_tab_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#535151"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_menu_toolbar">
@@ -75,7 +76,7 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="215dp"
+        android:layout_marginTop="208dp"
         android:paddingBottom="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

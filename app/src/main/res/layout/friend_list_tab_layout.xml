@@ -7,26 +7,26 @@
     android:layout_height="match_parent">
 
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/friends_list_both_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#535151"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/friends_list_both_tabs"
-            android:layout_width="match_parent"
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/friend_list_tab"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:text="@string/friend_list_tab" />
 
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/friend_list_tab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/friend_list_tab" />
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/pending_friend_list_tab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pending_friend_list_tab" />
-        </com.google.android.material.tabs.TabLayout>
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/pending_friend_list_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pending_friend_list_tab" />
+    </com.google.android.material.tabs.TabLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

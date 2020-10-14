@@ -21,12 +21,13 @@
 
             <TextView
                 android:id="@+id/friend_first_name"
-                android:layout_width="175dp"
-                android:layout_height="23dp"
+                android:layout_width="216dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="12dp"
                 android:fontFamily="casual"
                 android:text="@string/first_name"
                 android:textColor="#FFFFFF"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.412"
@@ -41,6 +42,7 @@
                 android:fontFamily="casual"
                 android:text="@string/last_name"
                 android:textColor="#FFFFFF"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/friend_first_name"
                 app:layout_constraintHorizontal_bias="0.0"

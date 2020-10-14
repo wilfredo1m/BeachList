@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#83DC1B"
-    tools:context=".AccountSettingsFragment" >
+    android:background="@drawable/gray_background"
+    tools:context=".AccountSettingsFragment">
 
     <ImageView
         android:id="@+id/iv_user_image"
@@ -104,10 +104,10 @@
 
     <RatingBar
         android:id="@+id/ratingBar"
-        android:isIndicator="true"
         android:layout_width="244dp"
         android:layout_height="43dp"
         android:layout_marginTop="8dp"
+        android:isIndicator="true"
         app:layout_constraintEnd_toEndOf="@+id/tv_last_name"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tv_last_name"
