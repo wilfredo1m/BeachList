@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0ACBD1"
+    android:background="@drawable/gray_background"
     android:fitsSystemWindows="true">
-android:id="@+id/friend_list_container">
+    android:id="@+id/friend_list_container">
 
     <include
         android:id="@+id/include"
         layout="@layout/friend_list_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#858080"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +56,7 @@ android:id="@+id/friend_list_container">
     <Button
         android:id="@+id/friends_btn_back_button"
         android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_height="37dp"
         android:background="@drawable/ic_outline_arrow_back_ios_24"
         app:layout_constraintBottom_toTopOf="@+id/include"
         app:layout_constraintEnd_toStartOf="@+id/tv_header"
