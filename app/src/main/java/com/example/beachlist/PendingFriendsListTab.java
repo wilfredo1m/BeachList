@@ -1,5 +1,6 @@
 package com.example.beachlist;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +27,18 @@ public class PendingFriendsListTab extends AppCompatActivity {
     RecyclerView recyclerView;
     List<FriendsData> list = new ArrayList<>();
     PendingFriendsRecyclerAdapter adapter;
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private FirebaseUser user;
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pending_friend);
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        String userId = user.getUid();
+        DatabaseReference pendingRef = database.getReference("/users/" + userId + "/pending");
 
         //******************************************Display Pending Friends List*******************************
         recyclerView = findViewById(R.id.pending_friends_recycler);
@@ -30,22 +46,34 @@ public class PendingFriendsListTab extends AppCompatActivity {
 
         // This is temporary, added these to test the list would display
         String firstNames[] = getResources().getStringArray(R.array.first_names);
-        int profilePics[] = {R.drawable.bulbasaur, R.drawable.charmander, R.drawable.froakie, R.drawable.golem, R.drawable.jigglypuff,
+        final int profilePics[] = {R.drawable.bulbasaur, R.drawable.charmander, R.drawable.froakie, R.drawable.golem, R.drawable.jigglypuff,
                 R.drawable.pikachu, R.drawable.squirtle, R.drawable.sudowoodo, R.drawable.totodile, R.drawable.treeko};
         String lastNames[] = getResources().getStringArray(R.array.last_names);
 
         // clears list each time to make sure no duplicates are added
         list.clear();
+        final Context context = this;
 
-        // adds the pending friends to be the list that will be displayed
-        for(int i = 0; i < firstNames.length; i++){
-            FriendsData pendingFriend = new FriendsData(profilePics[i],firstNames[i],lastNames[i]);
-            list.add(pendingFriend);
-        }
+        pendingRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        FriendsData friend = new FriendsData(profilePics[0], child.getValue(OtherUser.class).firstName, child.getValue(OtherUser.class).lastName);
+                        list.add(friend);
+                    }
+                }
 
-        // Links recycler view adapter
-        adapter = new PendingFriendsRecyclerAdapter(this,list);
-        recyclerView.setAdapter(adapter);
+                // Links recycler view adapter
+                adapter = new PendingFriendsRecyclerAdapter(context, list);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
 
         //****************************************Back Button and Accept/Reject Buttons*************************************************
         Button backButton = findViewById(R.id.pending_btn_back_button);

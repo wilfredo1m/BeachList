@@ -2,7 +2,7 @@ package com.example.beachlist;
 
 public class FriendsData {
     private int imageProfile;
-    private String firstName, lastName;
+    String firstName, lastName;
 
     public FriendsData(int imageProfile, String firstName, String lastName){
         this.imageProfile = imageProfile;
