@@ -27,9 +27,9 @@ public class SelectedPendingFriend extends AppCompatActivity {
         int position = getIntent().getIntExtra("position",1);
 
         // Sets the persons info in the correct fields to be displayed
-        profilePic.setImageResource(FriendsListTab.list.get(position).getImageProfile());
-        firstName.setText(FriendsListTab.list.get(position).getFirstName());
-        lastName.setText(FriendsListTab.list.get(position).getLastName());
+        profilePic.setImageResource(PendingFriendsListTab.list.get(position).getImageProfile());
+        firstName.setText(PendingFriendsListTab.list.get(position).getFirstName());
+        lastName.setText(PendingFriendsListTab.list.get(position).getLastName());
 
         // Go back to pending friends list
         Button backButton = findViewById(R.id.pending_friend_back_button);

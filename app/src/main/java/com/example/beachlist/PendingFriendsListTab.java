@@ -25,7 +25,7 @@ import java.util.List;
 
 public class PendingFriendsListTab extends AppCompatActivity {
     RecyclerView recyclerView;
-    List<FriendsData> list = new ArrayList<>();
+    public static List<FriendsData> list = new ArrayList<>();
     PendingFriendsRecyclerAdapter adapter;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private FirebaseUser user;
