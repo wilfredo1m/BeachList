@@ -52,7 +52,6 @@ public class FriendsListTab extends AppCompatActivity {
 
         // clears list each time to make sure no duplicates are added
         list.clear();
-        final Context context = this;
         friendsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -63,9 +62,7 @@ public class FriendsListTab extends AppCompatActivity {
                     }
                 }
 
-                // Links recycler view adapter
-                adapter = new FriendsRecyclerAdapter(context, list);
-                recyclerView.setAdapter(adapter);
+                onFriendsListQuery();
             }
 
             @Override
@@ -73,6 +70,8 @@ public class FriendsListTab extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
+
+
 
         //****************************************Back Button*************************************************
         Button backButton = findViewById(R.id.friends_btn_back_button);
@@ -113,6 +112,10 @@ public class FriendsListTab extends AppCompatActivity {
         //});
     }
 
+    public void onFriendsListQuery() {
+        adapter = new FriendsRecyclerAdapter(this, list);
+        recyclerView.setAdapter(adapter);
+    }
     // takes us back to Account Settings screen
     public void openAccountSettingsScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
