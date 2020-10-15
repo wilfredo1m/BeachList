@@ -4,18 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gray_background">
+    android:background="#000000">
+
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000000"
+        android:background="#292929"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Description"
+        app:titleMarginStart="150dp"
+        app:titleTextColor="#FFFFFF" />
 
 
     <SeekBar
@@ -24,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:background="#171717"
         android:max="3"
         android:progress="2"
         android:thumb="@drawable/ic_baseline_info_24"
@@ -83,25 +88,11 @@
         app:layout_constraintTop_toTopOf="@+id/textView14"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textView22"
-        android:layout_width="217dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="4dp"
-        android:text="Listing Information"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar9"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/btn_back"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/ic_outline_arrow_back_ios_24"
-        app:layout_constraintBottom_toBottomOf="@+id/textView22"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar9" />
 
@@ -109,19 +100,17 @@
         android:id="@+id/btn_cancel"
         android:layout_width="59dp"
         android:layout_height="39dp"
-        android:background="#000000"
+        android:background="#292929"
         android:text="cancel"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView22"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar9"
-        app:layout_constraintVertical_bias="0.909" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar9" />
 
     <Button
         android:id="@+id/btn_next_to_review"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_corners"
         android:text="Next"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -131,63 +120,65 @@
 
     <TextView
         android:id="@+id/tf_description_lbl"
-        android:layout_width="389dp"
+        android:layout_width="match_parent"
         android:layout_height="37dp"
-        android:layout_marginTop="20dp"
+        android:background="#2B2B2B"
         android:gravity="center_horizontal"
         android:text="Description"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/editTextNumberDecimal"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextNumberDecimal"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberDecimal" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
 
     <EditText
         android:id="@+id/editTextTextMultiLine"
         android:layout_width="match_parent"
         android:layout_height="154dp"
-        android:background="#A1000000"
+        android:background="#121212"
         android:ems="10"
         android:gravity="start|top"
+        android:hint="text goes here"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tf_description_lbl" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout9" />
 
     <EditText
         android:id="@+id/editTextNumberDecimal"
-        android:layout_width="390dp"
+        android:layout_width="match_parent"
         android:layout_height="38dp"
-        android:background="#86000000"
+        android:background="#121212"
         android:ems="10"
         android:hint="100.00"
         android:inputType="numberDecimal"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/textView25"
+        app:layout_constraintHorizontal_bias="0.238"
         app:layout_constraintStart_toStartOf="@+id/textView25"
-        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
 
     <TextView
         android:id="@+id/textView23"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:background="#2B2B2B"
         android:gravity="center_horizontal"
         android:text="Listing Type"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_seek_bar" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
     <TextView
         android:id="@+id/textView21"
         android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:layout_marginTop="8dp"
+        android:background="#2B2B2B"
         android:gravity="center_horizontal"
         android:text="Select A Categorie"
         android:textColor="#FFFFFF"
@@ -195,7 +186,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <Spinner
         android:id="@+id/spinner"
@@ -204,19 +195,20 @@
         android:animationCache="false"
         android:spinnerMode="dropdown"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
     <TextView
         android:id="@+id/textView25"
-        android:layout_width="392dp"
+        android:layout_width="match_parent"
         android:layout_height="32dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="4dp"
+        android:background="#2B2B2B"
         android:gravity="center_horizontal"
         android:text="Listing Price"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/spinner"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/spinner"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
@@ -224,11 +216,11 @@
         android:id="@+id/radioGroup2"
         android:layout_width="392dp"
         android:layout_height="34dp"
-        android:layout_marginTop="12dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/textView23"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView23"
-        app:layout_constraintTop_toBottomOf="@+id/textView23">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
         <RadioButton
             android:id="@+id/rb_item"
@@ -245,5 +237,87 @@
             android:layout_weight="1"
             android:text="Service" />
     </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="4dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="64dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_seek_bar"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/textView23"
+        tools:layout_editor_absoluteX="1dp"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="4dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup2"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView21"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/textView25"
+        tools:layout_editor_absoluteX="-1dp"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumberDecimal"
+        tools:layout_editor_absoluteX="201dp"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout9"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/tf_description_lbl"
+        tools:layout_editor_absoluteX="147dp"></LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

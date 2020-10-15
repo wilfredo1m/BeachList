@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gray_background">
+    android:background="#000000">
 
 
     <SeekBar
@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:background="#171717"
         android:max="3"
         android:progress="1"
         android:thumb="@drawable/ic_baseline_title_24"
@@ -78,12 +79,15 @@
         android:id="@+id/toolbar8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000000"
+        android:background="#292929"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Title Page"
+        app:titleMarginStart="150dp"
+        app:titleTextColor="#FFFFFF" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -100,6 +104,7 @@
         android:id="@+id/imageView4"
         android:layout_width="65dp"
         android:layout_height="60dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/ic_baseline_image_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
@@ -108,27 +113,27 @@
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:background="#121212"
         android:gravity="center_horizontal"
         android:text="Title"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginBottom="72dp"
-        android:background="#9E090000"
+        android:layout_height="25dp"
+        android:layout_marginBottom="96dp"
+        android:background="#2B2B2B"
         android:ems="10"
         android:hint="Title goes here"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/btn_next_page_desc"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -143,23 +148,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Title Page"
-        android:textAllCaps="true"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar8"
-        app:layout_constraintEnd_toStartOf="@+id/btn_cancel"
-        app:layout_constraintStart_toEndOf="@+id/btn_back"
-        app:layout_constraintTop_toTopOf="@+id/toolbar8" />
-
     <Button
         android:id="@+id/btn_cancel"
-        android:layout_width="48dp"
-        android:layout_height="26dp"
+        android:layout_width="63dp"
+        android:layout_height="35dp"
         android:background="#000000"
         android:text="cancel"
         android:textSize="10sp"
@@ -168,13 +160,17 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar8" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="313dp"
-        android:layout_height="67dp"
+        android:id="@+id/recyclerView4"
+        android:layout_width="323dp"
+        android:layout_height="92dp"
         android:layout_marginEnd="6dp"
         android:layout_marginRight="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btn_back"
@@ -184,5 +180,41 @@
         app:layout_constraintBottom_toBottomOf="@+id/toolbar8"
         app:layout_constraintStart_toStartOf="@+id/toolbar8"
         app:layout_constraintTop_toTopOf="@+id/toolbar8" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_seek_bar"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintVertical_bias="1.0"></LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

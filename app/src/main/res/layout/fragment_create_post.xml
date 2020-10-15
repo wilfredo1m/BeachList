@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gray_background"
+    android:background="#000000"
     tools:context=".CreatePostFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/fragment_create_post_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000000"
+        android:background="#292929"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,6 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="#171717"
         android:max="3"
         android:progress="0"
         android:thumb="@drawable/ic_baseline_camera_alt_24"
