@@ -94,6 +94,10 @@
         <item>electronic</item>
         <item>furniture</item>
         <item>game</item>
+        <item>collectible</item>
+        <item>art</item>
+        <item>appliances</item>
+        <item>jewelery</item>
         <item>misc</item>
     </string-array>
 

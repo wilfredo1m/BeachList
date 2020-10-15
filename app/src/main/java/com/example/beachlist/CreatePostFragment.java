@@ -31,7 +31,7 @@ public class CreatePostFragment extends Fragment implements View.OnClickListener
         fromGalleryButton = (Button) createPostScreen.findViewById(R.id.btn_gallery_button);
         fromGalleryButton.setOnClickListener(this);
         SeekBar seekBar = createPostScreen.findViewById(R.id.title_seek_bar);
-        seekBar.setEnabled(false);
+        seekBar.setClickable(false);
         return createPostScreen;
     }
 

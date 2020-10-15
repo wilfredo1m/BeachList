@@ -3,11 +3,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import java.io.File;
@@ -22,7 +20,7 @@ public class ListingTitlePage extends AppCompatActivity {
         setContentView(R.layout.activity_listing_title_image_page);
 
         SeekBar seekBar = findViewById(R.id.title_seek_bar);
-        seekBar.setEnabled(false);
+        seekBar.setClickable(false);
 
         //open camera roll
         //camera roll able to get more than one picture from gallery

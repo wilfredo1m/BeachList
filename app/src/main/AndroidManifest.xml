@@ -19,6 +19,7 @@
         <activity android:name=".SelectedPendingFriend"/>
         <activity android:name=".ListingTitlePage"/>
         <activity android:name=".ListingDescriptionPage"/>
+        <activity android:name=".PostListing"/>
         <activity android:name=".SelectedUser"/>
         <activity android:name=".MainActivity">
             <intent-filter>
