@@ -4,13 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.SeekBar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ListingDescriptionPage extends AppCompatActivity {
-    Button cancel_button,backButton,nextButton;
+    Button cancelButton,backButton,nextButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -19,15 +18,17 @@ public class ListingDescriptionPage extends AppCompatActivity {
 
 
 
-
-        cancel_button = findViewById(R.id.btn_cancel);
-        cancel_button.requestFocus();
-        cancel_button.setOnClickListener(new View.OnClickListener() {
+        // Cancels the post being created / clears all fields entered
+        cancelButton = findViewById(R.id.btn_cancel);
+        cancelButton.requestFocus();
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openHomeScreen();
+                openCreatePostScreen();
             }
         });
+
+        // Go back to the Listings Title Page
         backButton = findViewById(R.id.btn_back);
         backButton .requestFocus();
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -36,6 +37,8 @@ public class ListingDescriptionPage extends AppCompatActivity {
                 goBack();
             }
         });
+
+        // Continue to the Listing Review Page
         nextButton = findViewById(R.id.btn_next_to_review);
         nextButton.requestFocus();
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -47,17 +50,19 @@ public class ListingDescriptionPage extends AppCompatActivity {
     }
 
 
-    public void openHomeScreen(){
+    public void openCreatePostScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
+        openScreen.putExtra("screen",2);
         startActivity(openScreen);
     }
 
     public void goBack(){
         Intent openScreen = new Intent(this, ListingTitlePage.class);
+        openScreen.putExtra("screen",2);
         startActivity(openScreen);
     }
     public void goToPostListingPage(){
-        Intent openScreen = new Intent(this, PostListing.class);
+        Intent openScreen = new Intent(this, ListingReviewPage.class);
         startActivity(openScreen);
     }
 

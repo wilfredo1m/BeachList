@@ -38,6 +38,7 @@ public class CreatePostFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
         Intent openScreen = new Intent(getActivity(), ListingTitlePage.class);
+        openScreen.putExtra("screen",1);
         startActivity(openScreen);
     }
 

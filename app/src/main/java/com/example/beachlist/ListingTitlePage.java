@@ -13,6 +13,7 @@ import java.io.File;
 
 public class ListingTitlePage extends AppCompatActivity {
     public static final int IMAGE_REQUEST = 33;
+    int callingActivity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,11 +23,17 @@ public class ListingTitlePage extends AppCompatActivity {
         SeekBar seekBar = findViewById(R.id.title_seek_bar);
         seekBar.setClickable(false);
 
-        //open camera roll
-        //camera roll able to get more than one picture from gallery
-        openCameraRoll();
+        callingActivity = checkCallingActivity();
+        // If we came from CreatePostFragment, we want to open the gallery to let user pick pictures
+        if(callingActivity == 1){
+            // Open camera roll
+            openCameraRoll();
+        }
+        // If we came back from ListingDescriptionPage, we do not want the gallery to be accessed
+        else if(callingActivity == 2){
+        }
 
-
+        // Continue to the Listing Description Page
         Button nextButton = findViewById(R.id.btn_next_page_desc);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,13 +42,22 @@ public class ListingTitlePage extends AppCompatActivity {
             }
         });
 
+        // Cancels the post being created / clears all fields entered
         Button cancel_button = findViewById(R.id.btn_cancel);
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                  openHomeScreen();
+                  openCreatePostScreen();
             }
         });
+    }
+
+    // Check what activity sent us here
+    // 1 = CreatePostFragment
+    // 2 = ListingDescription
+    public int checkCallingActivity() {
+        callingActivity = getIntent().getIntExtra("screen",7);
+        return callingActivity;
     }
 
     // Opens Camera Roll
@@ -51,9 +67,12 @@ public class ListingTitlePage extends AppCompatActivity {
         File pictureDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         String pictureDirectoryPath = pictureDirectory.getPath();
 
+        // User is able to choose more than one picture from gallery
         openCameraRoll.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+
         //openCameraRoll.setAction(Intent.ACTION_GET_CONTENT);
         // startActivityForResult(Intent.createChooser(openCameraRoll,"Select Picture"), 1);
+
         // URI of the path to pictures
         Uri data = Uri.parse(pictureDirectoryPath);
         // Set data and type (* means all image types)
@@ -67,10 +86,10 @@ public class ListingTitlePage extends AppCompatActivity {
         Intent openScreen = new Intent(this, ListingDescriptionPage.class);
         startActivity(openScreen);
     }
-    public void openHomeScreen(){
+    public void openCreatePostScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
+        openScreen.putExtra("screen",2);
         startActivity(openScreen);
-
     }
 
 }
