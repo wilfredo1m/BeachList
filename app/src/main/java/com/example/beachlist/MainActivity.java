@@ -82,14 +82,14 @@ public class MainActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user.isEmailVerified() == false) {
-                            Toast.makeText(MainActivity.this, "Email not verified", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, "Email Not Verified", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(MainActivity.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
                             //to add this back later once page is fixed
                             openHomeScreen();
                         }
                     } else {
-                        Toast.makeText(MainActivity.this, "Log in failed!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Log In Failed!", Toast.LENGTH_LONG).show();
                     }
                     progressDialog.dismiss();
                 }
