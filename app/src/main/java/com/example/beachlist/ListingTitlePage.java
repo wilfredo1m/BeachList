@@ -37,8 +37,14 @@ public class ListingTitlePage extends AppCompatActivity {
             }
         });
 
+        Button cancel_button = findViewById(R.id.btn_cancel);
+        cancel_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                  openHomeScreen();
+            }
+        });
     }
-
 
     // Opens Camera Roll
     public void openCameraRoll() {
@@ -63,6 +69,10 @@ public class ListingTitlePage extends AppCompatActivity {
         Intent openScreen = new Intent(this, ListingDescriptionPage.class);
         startActivity(openScreen);
     }
+    public void openHomeScreen(){
+        Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
+        startActivity(openScreen);
 
+    }
 
 }
