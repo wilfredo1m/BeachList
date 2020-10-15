@@ -24,8 +24,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:max="4"
-        android:progress="3"
+        android:max="3"
+        android:progress="2"
         android:thumb="@drawable/ic_baseline_info_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -37,22 +37,22 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginLeft="88dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
         android:fontFamily="sans-serif-black"
         android:text="photo"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/textView7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView7"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginLeft="56dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginLeft="88dp"
         android:fontFamily="sans-serif-black"
         android:text="title"
         android:textColor="#FFFFFF"
@@ -63,8 +63,8 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="48dp"
-        android:layout_marginRight="48dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
         android:fontFamily="sans-serif-black"
         android:text="detail"
         android:textColor="#00F6FF"
@@ -75,8 +75,6 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:fontFamily="sans-serif-black"
         android:text="post"
         android:textColor="#FFFFFF"
@@ -86,9 +84,10 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="163dp"
-        android:layout_marginTop="24dp"
+        android:id="@+id/constraintLayout"
+        android:layout_width="414dp"
+        android:layout_height="210dp"
+        android:layout_marginTop="48dp"
         android:background="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -99,39 +98,45 @@
             android:id="@+id/textView21"
             android:layout_width="128dp"
             android:layout_height="25dp"
-            android:layout_marginTop="120dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
             android:text="Select A Categorie"
             android:textColor="#FFFFFF"
-            app:layout_constraintStart_toStartOf="@+id/textView23"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="187dp"
             android:layout_height="21dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.487"
-            app:layout_constraintStart_toEndOf="@+id/textView21"
-            app:layout_constraintTop_toTopOf="@+id/textView21" />
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView21"
+            app:layout_constraintHorizontal_bias="0.213"
+            app:layout_constraintStart_toStartOf="@+id/textView21"
+            app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
         <TextView
             android:id="@+id/textView23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginLeft="40dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginRight="36dp"
             android:text="Listing Type"
             android:textColor="#FFFFFF"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView21" />
 
         <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/spinner"
-            app:layout_constraintStart_toStartOf="@+id/spinner"
-            app:layout_constraintTop_toTopOf="@+id/textView23">
+            app:layout_constraintBottom_toBottomOf="@+id/editTextNumberDecimal"
+            app:layout_constraintEnd_toEndOf="@+id/textView23"
+            app:layout_constraintStart_toStartOf="@+id/textView23"
+            app:layout_constraintTop_toBottomOf="@+id/textView23">
 
             <RadioButton
                 android:id="@+id/rb_service_button"
@@ -145,6 +150,30 @@
                 android:layout_height="wrap_content"
                 android:text="Item" />
         </RadioGroup>
+
+        <EditText
+            android:id="@+id/editTextNumberDecimal"
+            android:layout_width="242dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="100.00"
+            android:inputType="numberDecimal"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toStartOf="@+id/radioGroup"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView25"
+            app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="40dp"
+            android:text="Listing Price"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -170,14 +199,43 @@
 
     <Button
         android:id="@+id/btn_cancel"
-        android:layout_width="48dp"
-        android:layout_height="26dp"
+        android:layout_width="59dp"
+        android:layout_height="39dp"
         android:background="#000000"
         android:text="cancel"
-        android:textSize="10sp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView22"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar9"
         app:layout_constraintVertical_bias="0.416" />
+
+    <Button
+        android:id="@+id/btn_next_to_review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <TextView
+        android:id="@+id/tf_description_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Description"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/editTextTextMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="178dp"
+        android:background="#A1000000"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tf_description_lbl" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

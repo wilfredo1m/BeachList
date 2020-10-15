@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gray_background"
-    tools:context=".CreatePostFragment">
+    android:background="@drawable/gray_background">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/fragment_create_post_toolbar"
+        android:id="@+id/toolbar10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#000000"
@@ -19,49 +18,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/create_post_header"
+        android:layout_marginTop="16dp"
+        android:text="Review"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_create_post_toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar10"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar10"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fragment_create_post_toolbar" />
-
-    <Button
-        android:id="@+id/btn_camera_roll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="164dp"
-        android:text="Camera Roll"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <Button
-        android:id="@+id/btn_gallery_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Select From Gallery"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btn_camera_roll"
-        app:layout_constraintTop_toBottomOf="@+id/btn_camera_roll" />
-
-    <Button
-        android:id="@+id/button9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="Next" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <SeekBar
         android:id="@+id/title_seek_bar"
@@ -70,12 +39,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:max="3"
-        android:progress="0"
-        android:thumb="@drawable/ic_baseline_camera_alt_24"
+        android:progress="3"
+        android:thumb="@drawable/ic_baseline_create_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_create_post_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar10"
         app:tickMarkTint="#00F8FF" />
 
     <TextView
@@ -84,11 +53,11 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
         android:text="photo"
-        android:textColor="#00F6FF"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/textView7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView7"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView7"
@@ -99,6 +68,8 @@
         android:fontFamily="sans-serif-black"
         android:text="title"
         android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/textView14"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/title_seek_bar" />
 
@@ -106,11 +77,11 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="88dp"
-        android:layout_marginRight="88dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginRight="96dp"
         android:fontFamily="sans-serif-black"
         android:text="detail"
-        android:textColor="#FFFFFF"
+        android:textColor="#00F6FF"
         app:layout_constraintEnd_toStartOf="@+id/textView19"
         app:layout_constraintTop_toBottomOf="@+id/title_seek_bar" />
 
@@ -118,8 +89,6 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
         android:fontFamily="sans-serif-black"
         android:text="post"
         android:textColor="#FFFFFF"
@@ -127,6 +96,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView14"
         app:layout_constraintVertical_bias="0.0" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
