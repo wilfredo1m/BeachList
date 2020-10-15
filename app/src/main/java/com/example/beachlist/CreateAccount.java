@@ -171,7 +171,7 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
-                    Log.d(TAG, "signInWithCustomToken:success");
+                    Log.d(TAG, "signInWithCustomToken: success");
                     //Set firebase user to current user instance
                     user = mAuth.getCurrentUser();
                     createUserAccount(
@@ -182,11 +182,11 @@ public class CreateAccount extends AppCompatActivity {
                             gradDateEt.getText().toString(),
                             phoneNumEt.getText().toString()
                             );
-                    Toast.makeText(CreateAccount.this, "Successfully registered", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CreateAccount.this, "Successfully Registered", Toast.LENGTH_LONG).show();
                     sendValidationEmail(user);
                 } else {
-                    Log.w(TAG, "signInWithCustomToken:failure", task.getException());
-                    Toast.makeText(CreateAccount.this, "Sign up failed!",Toast.LENGTH_LONG).show();
+                    Log.w(TAG, "signInWithCustomToken: failure", task.getException());
+                    Toast.makeText(CreateAccount.this, "Sign Up Failed",Toast.LENGTH_LONG).show();
                 }
                 progressDialog.dismiss();
             }
@@ -223,7 +223,8 @@ public class CreateAccount extends AppCompatActivity {
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(CreateAccount.this, "Failed to store Image", Toast.LENGTH_SHORT).show();
+                    Log.w(TAG, "signInWithCustomToken: failure", e.getCause());
+                    Toast.makeText(CreateAccount.this, "Failed to Store Image", Toast.LENGTH_SHORT).show();
                     logout();
                 }
             });
@@ -231,13 +232,13 @@ public class CreateAccount extends AppCompatActivity {
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Log.d(TAG, "uploadImageWithCustomToken: success");
                     Task<Uri> downloadUrl = imageRef.getDownloadUrl();
                     downloadUrl.addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
                             String imageReference = uri.toString();
                             userReference.child("imageUrl").setValue(imageReference);
-                            currentUser.setImageUrl(imageReference);
                             logout();
                         }
                     });
