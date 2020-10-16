@@ -38,7 +38,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
     private static final long ONE_MEGABYTE = 1024 * 1024;
 
     private View accountSettingsScreen;
-    private Button friendsListButton, backButton;
+    private Button friendsListButton, backButton, activeListingsButton,soldListingsButton,pendingFriend;
     private UserData currentUser;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
@@ -82,18 +82,45 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
                     }
             );
 
+//===================================================BUTTON CALL GROUP========================================================//
         // Takes us to friends list screen when we click the button
         friendsListButton = accountSettingsScreen.findViewById(R.id.btn_friend_list);
         friendsListButton.setOnClickListener(this);
 
+        pendingFriend= accountSettingsScreen.findViewById(R.id.btn_pending_friends);
+        pendingFriend.setOnClickListener(this);
+
+        activeListingsButton  = accountSettingsScreen.findViewById(R.id.btn_active_listings);
+        activeListingsButton.setOnClickListener(this);
+
+        soldListingsButton= accountSettingsScreen.findViewById(R.id.btn_sold_listings);
+        soldListingsButton.setOnClickListener(this);
+
+//===================================================END BUTTON CALL GROUP====================================================//
+
         return accountSettingsScreen;
 
     }
-
     @Override
     public void onClick(View view) {
-        Intent openScreen = new Intent(getActivity(), FriendsListTab.class);
-        startActivity(openScreen);
+        switch (view.getId()){
+            case R.id.btn_friend_list:
+                Intent openScreen = new Intent(getActivity(), FriendsListTab.class);
+                startActivity(openScreen);
+                break;
+            case R.id.btn_active_listings:
+                openScreen = new Intent(getActivity(), ActiveListings.class);
+                startActivity(openScreen);
+                break;
+            case R.id.btn_sold_listings:
+                openScreen = new Intent(getActivity(), SoldListings.class);
+                startActivity(openScreen);
+                break;
+            case R.id.btn_pending_friends:
+                openScreen = new Intent(getActivity(), PendingFriendsListTab.class);
+                startActivity(openScreen);
+                break;
+        }
     }
 
     public void displayUserInfo(UserData userData) {

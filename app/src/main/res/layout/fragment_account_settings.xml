@@ -7,6 +7,16 @@
     android:background="#000000"
     tools:context=".AccountSettingsFragment">
 
+    <LinearLayout
+        android:id="@+id/id_toolbar_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#575757"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/account_setting_toolbar"></LinearLayout>
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/account_setting_toolbar"
         android:layout_width="match_parent"
@@ -17,6 +27,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/id_photo_group_bottom_shadow"
+        android:layout_width="345dp"
+        android:layout_height="1dp"
+        android:background="#575757"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/id_button_group_Shadow"
+        android:layout_width="345dp"
+        android:layout_height="1dp"
+        android:background="#575757"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"></LinearLayout>
 
     <TextView
         android:id="@+id/tv_account_setting_label"
@@ -37,16 +67,17 @@
     <!-- Tabs that will change to different views in the same page -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
         android:layout_width="345dp"
         android:layout_height="266dp"
-        android:layout_marginBottom="108dp"
+        android:layout_marginBottom="92dp"
         android:background="#101010"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btn_active_listings"
             android:layout_width="150dp"
             android:layout_height="70dp"
             android:layout_marginStart="16dp"
@@ -56,13 +87,13 @@
             app:layout_constraintTop_toTopOf="@+id/btn_friend_list" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btn_sold_listings"
             android:layout_width="150dp"
             android:layout_height="70dp"
             android:layout_marginTop="4dp"
             android:text="Sold Listings"
-            app:layout_constraintStart_toStartOf="@+id/button4"
-            app:layout_constraintTop_toBottomOf="@+id/button4" />
+            app:layout_constraintStart_toStartOf="@+id/btn_active_listings"
+            app:layout_constraintTop_toBottomOf="@+id/btn_active_listings" />
 
         <Button
             android:id="@+id/btn_friend_list"
@@ -74,17 +105,17 @@
             android:text="@string/friend_list_button_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.058"
-            app:layout_constraintStart_toEndOf="@+id/button4"
+            app:layout_constraintStart_toEndOf="@+id/btn_active_listings"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
         <Button
-            android:id="@+id/button10"
+            android:id="@+id/btn_pending_friends"
             android:layout_width="150dp"
             android:layout_height="70dp"
             android:text="Pending Friend"
-            app:layout_constraintBottom_toBottomOf="@+id/button3"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_sold_listings"
             app:layout_constraintEnd_toEndOf="@+id/btn_friend_list"
-            app:layout_constraintTop_toTopOf="@+id/button3"
+            app:layout_constraintTop_toTopOf="@+id/btn_sold_listings"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -121,8 +152,10 @@
         app:layout_constraintTop_toTopOf="@+id/account_setting_toolbar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="345dp"
         android:layout_height="243dp"
+        android:layout_marginTop="20dp"
         android:background="#1C1C1C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -158,7 +191,7 @@
             android:id="@+id/tv_last_name"
             android:layout_width="match_parent"
             android:layout_height="34dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="24dp"
             android:background="#121212"
             android:gravity="center_horizontal"
             android:text="@string/last_name"

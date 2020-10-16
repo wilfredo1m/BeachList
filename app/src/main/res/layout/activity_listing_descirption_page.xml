@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     android:background="#000000">
 
+    <LinearLayout
+        android:id="@+id/id_photo_group_bottom_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#575757"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar8"></LinearLayout>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar9"
@@ -118,206 +129,138 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tf_description_lbl"
-        android:layout_width="match_parent"
-        android:layout_height="37dp"
-        android:background="#2B2B2B"
-        android:gravity="center_horizontal"
-        android:text="Description"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/editTextNumberDecimal"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextNumberDecimal"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
-
-    <EditText
-        android:id="@+id/editTextTextMultiLine"
-        android:layout_width="match_parent"
-        android:layout_height="154dp"
-        android:background="#121212"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="text goes here"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout9" />
-
-    <EditText
-        android:id="@+id/editTextNumberDecimal"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:background="#121212"
-        android:ems="10"
-        android:hint="100.00"
-        android:inputType="numberDecimal"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="@+id/textView25"
-        app:layout_constraintHorizontal_bias="0.238"
-        app:layout_constraintStart_toStartOf="@+id/textView25"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
-
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#2B2B2B"
-        android:gravity="center_horizontal"
-        android:text="Listing Type"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
-
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:background="#2B2B2B"
-        android:gravity="center_horizontal"
-        android:text="Select A Categorie"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:animationCache="false"
-        android:spinnerMode="dropdown"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
-
-    <TextView
-        android:id="@+id/textView25"
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:layout_marginTop="4dp"
-        android:background="#2B2B2B"
-        android:gravity="center_horizontal"
-        android:text="Listing Price"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/spinner"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/spinner"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup2"
-        android:layout_width="392dp"
-        android:layout_height="34dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/textView23"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView23"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
-
-        <RadioButton
-            android:id="@+id/rb_item"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Item"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <RadioButton
-            android:id="@+id/rb_service"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Service" />
-    </RadioGroup>
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="4dp"
-        android:background="#575757"
-        android:orientation="horizontal"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_width="394dp"
+        android:layout_height="395dp"
         android:layout_marginTop="64dp"
-        android:background="#575757"
-        android:orientation="horizontal"
-        android:visibility="visible"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/btn_next_to_review"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_seek_bar"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/title_seek_bar"
+        app:layout_constraintVertical_bias="0.106">
 
-    <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#575757"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/textView23"
-        tools:layout_editor_absoluteX="1dp"></LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#575757"
+            android:orientation="horizontal"
+            android:visibility="visible"></LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="4dp"
-        android:background="#575757"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup2"></LinearLayout>
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#2B2B2B"
+            android:gravity="center_horizontal"
+            android:text="Listing Type"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#575757"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView21"></LinearLayout>
+        <RadioGroup
+            android:id="@+id/radioGroup2"
+            android:layout_width="392dp"
+            android:layout_height="34dp"
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#575757"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/textView25"
-        tools:layout_editor_absoluteX="-1dp"></LinearLayout>
+            <RadioButton
+                android:id="@+id/rb_item"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Item"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout7"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#575757"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberDecimal"
-        tools:layout_editor_absoluteX="201dp"></LinearLayout>
+            <RadioButton
+                android:id="@+id/rb_service"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Service" />
+        </RadioGroup>
 
-    <LinearLayout
-        android:id="@+id/linearLayout9"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#575757"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/tf_description_lbl"
-        tools:layout_editor_absoluteX="147dp"></LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#575757"
+            android:orientation="horizontal"></LinearLayout>
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="#2B2B2B"
+            android:gravity="center_horizontal"
+            android:text="Select A Categorie"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:animationCache="false"
+            android:spinnerMode="dropdown" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#575757"
+            android:orientation="horizontal"></LinearLayout>
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:background="#2B2B2B"
+            android:gravity="center_horizontal"
+            android:text="Listing Price"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextNumberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="#121212"
+            android:ems="10"
+            android:hint="100.00"
+            android:inputType="numberDecimal"
+            android:textColor="#FFFFFF" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#575757"
+            android:orientation="horizontal"></LinearLayout>
+
+        <TextView
+            android:id="@+id/tf_description_lbl"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:background="#2B2B2B"
+            android:gravity="center_horizontal"
+            android:text="Description"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextTextMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="154dp"
+            android:background="#121212"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="text goes here"
+            android:inputType="textMultiLine" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

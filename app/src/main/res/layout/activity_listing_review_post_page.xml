@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     android:background="#000000">
 
+    <LinearLayout
+        android:id="@+id/id_photo_group_bottom_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#575757"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar10"></LinearLayout>
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar10"
         android:layout_width="match_parent"
@@ -110,62 +121,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_seek_bar" />
 
-    <TextView
-        android:id="@+id/textView26"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#2B2B2B"
-        android:gravity="center_horizontal"
-        android:text="TITLE"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="393dp"
-        android:layout_height="31dp"
-        android:background="#121212"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#2B2B2B"
-        android:gravity="center_horizontal"
-        android:text="price"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout11"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView29"
-        android:layout_width="match_parent"
-        android:layout_height="31dp"
-        android:layout_marginBottom="84dp"
-        android:background="#121212"
-        app:layout_constraintBottom_toTopOf="@+id/btn_submit_post"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:id="@+id/btn_submit_post"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/rounded_corners"
         android:text="submit"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="96dp" />
+        tools:layout_editor_absoluteX="1dp" />
 
     <Button
         android:id="@+id/btn_cancel"
@@ -195,52 +160,75 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.473" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <LinearLayout
         android:id="@+id/linearLayout12"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#FFFFFF"
+        android:layout_height="1dp"
+        android:background="#575757"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/textView26"
+        app:layout_constraintBottom_toTopOf="@+id/tv_title_lbl"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"></LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout8"
+    <TextView
+        android:id="@+id/tv_title_lbl"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#FFFFFF"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/textView27"
+        android:layout_height="wrap_content"
+        android:background="#2B2B2B"
+        android:gravity="center_horizontal"
+        android:text="TITLE"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/tv_title_to_enter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"></LinearLayout>
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title_to_enter"
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:background="#121212"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout10"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#FFFFFF"
+        android:layout_height="1dp"
+        android:background="#575757"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/textView28"
+        app:layout_constraintBottom_toTopOf="@+id/tv_price_lbl"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"></LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout11"
+    <TextView
+        android:id="@+id/tv_price_lbl"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginBottom="1dp"
-        android:background="#FFFFFF"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/textView29"
+        android:layout_height="wrap_content"
+        android:background="#2B2B2B"
+        android:gravity="center_horizontal"
+        android:text="price"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/tv_price_to_enter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_price_to_enter"
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:layout_marginBottom="136dp"
+        android:background="#121212"
+        app:layout_constraintBottom_toTopOf="@+id/btn_submit_post"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"></LinearLayout>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

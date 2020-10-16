@@ -91,8 +91,8 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="277dp"
+        android:layout_width="393dp"
+        android:layout_height="257dp"
         android:layout_marginTop="44dp"
         android:background="@drawable/ic_baseline_image_24"
         app:layout_constraintEnd_toEndOf="parent"
@@ -109,38 +109,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#121212"
-        android:gravity="center_horizontal"
-        android:text="Title"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_marginBottom="96dp"
-        android:background="#2B2B2B"
-        android:ems="10"
-        android:hint="Title goes here"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/btn_next_page_desc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:id="@+id/btn_next_page_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/rounded_corners"
         android:text="Next"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -165,7 +138,7 @@
         android:layout_height="92dp"
         android:layout_marginEnd="6dp"
         android:layout_marginRight="6dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
         app:layout_constraintEnd_toStartOf="@+id/imageView4"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -183,38 +156,65 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:background="#FFFFFF"
+        android:background="#575757"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_seek_bar"></LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#FFFFFF"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        android:layout_height="108dp"
+        android:layout_marginBottom="24dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/btn_next_page_desc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="1.0"></LinearLayout>
+        app:layout_constraintStart_toStartOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#575757"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:background="#121212"
+            android:gravity="center_horizontal"
+            android:text="Title"
+            android:textColor="#FFFFFF" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginBottom="44dp"
+            android:background="#2B2B2B"
+            android:ems="10"
+            android:hint="Title goes here"
+            android:inputType="textPersonName" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/id_photo_group_bottom_shadow"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#FFFFFF"
+        android:layout_height="1dp"
+        android:background="#575757"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/toolbar8"></LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

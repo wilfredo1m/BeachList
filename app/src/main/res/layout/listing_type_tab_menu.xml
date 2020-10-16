@@ -12,7 +12,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabSelectedTextColor="#FFFFFF">
+        app:tabSelectedTextColor="#03DAC5">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tv_item_tab"

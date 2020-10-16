@@ -7,6 +7,15 @@
     android:background="#000000"
     tools:context=".CreatePostFragment">
 
+    <LinearLayout
+        android:id="@+id/id_photo_group_bottom_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#575757"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_create_post_toolbar"></LinearLayout>
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/fragment_create_post_toolbar"
         android:layout_width="match_parent"
