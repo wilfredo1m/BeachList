@@ -105,7 +105,9 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
         final ImageView profileIV = accountSettingsScreen.findViewById(R.id.iv_user_image);
 
-        if(userData.imageUrl != " ") {
+        System.out.println("Hope"+userData.getImageUrl()+"Space");
+
+        if(userData.getImageUrl().compareTo(" ") != 0) {
             storageReference = FirebaseStorage.getInstance();
             final StorageReference imageRef = storageReference.getReferenceFromUrl(userData.imageUrl);
 
