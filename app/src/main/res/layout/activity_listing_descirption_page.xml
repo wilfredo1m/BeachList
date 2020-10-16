@@ -93,6 +93,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/ic_outline_arrow_back_ios_24"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar9" />
 
@@ -108,14 +109,13 @@
 
     <Button
         android:id="@+id/btn_next_to_review"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="357dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_corners"
         android:text="Next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -242,7 +242,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="4dp"
-        android:background="#FFFFFF"
+        android:background="#575757"
         android:orientation="horizontal"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -255,7 +255,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="64dp"
-        android:background="#FFFFFF"
+        android:background="#575757"
         android:orientation="horizontal"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -267,7 +267,7 @@
         android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#FFFFFF"
+        android:background="#575757"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/textView23"
         tools:layout_editor_absoluteX="1dp"></LinearLayout>
@@ -277,7 +277,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="4dp"
-        android:background="#FFFFFF"
+        android:background="#575757"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -287,7 +287,7 @@
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#FFFFFF"
+        android:background="#575757"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -297,7 +297,7 @@
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#FFFFFF"
+        android:background="#575757"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/textView25"
         tools:layout_editor_absoluteX="-1dp"></LinearLayout>
@@ -306,7 +306,7 @@
         android:id="@+id/linearLayout7"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#FFFFFF"
+        android:background="#575757"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/editTextNumberDecimal"
         tools:layout_editor_absoluteX="201dp"></LinearLayout>
@@ -315,7 +315,7 @@
         android:id="@+id/linearLayout9"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#FFFFFF"
+        android:background="#575757"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/tf_description_lbl"
         tools:layout_editor_absoluteX="147dp"></LinearLayout>
