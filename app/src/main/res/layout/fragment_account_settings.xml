@@ -4,51 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gray_background"
+    android:background="#000000"
     tools:context=".AccountSettingsFragment">
-
-    <ImageView
-        android:id="@+id/iv_user_image"
-        android:layout_width="135dp"
-        android:layout_height="115dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/ic_baseline_person_24"
-        android:contentDescription="@string/user_image_description"
-        app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
-        app:layout_constraintEnd_toStartOf="@+id/tv_last_name"
-        app:layout_constraintTop_toTopOf="@+id/tv_first_name"
-        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/account_setting_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000000"
+        android:background="#292929"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_edit_settings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/edit_settings_button_name"
-        app:layout_constraintEnd_toEndOf="@+id/ratingBar"
-        app:layout_constraintStart_toStartOf="@+id/iv_user_image"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
-
-    <Button
-        android:id="@+id/btn_friend_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/friend_list_button_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_edit_settings" />
 
     <TextView
         android:id="@+id/tv_account_setting_label"
@@ -68,74 +36,154 @@
     <!-- scroll view cann only have 1 child -->
     <!-- Tabs that will change to different views in the same page -->
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_friend_list">
-        <!-- curent listings will ba accesed from this tab -->
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tl_current_listings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tl_current_listings" />
-        <!-- sold listings will ba accesed from this tab -->
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tl_past_listings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tl_sold_listings" />
-    </com.google.android.material.tabs.TabLayout>
-
-    <TextView
-        android:id="@+id/tv_first_name"
-        android:layout_width="230dp"
-        android:layout_height="26dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="@string/first_name"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/account_setting_toolbar" />
-
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="244dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="8dp"
-        android:isIndicator="true"
-        app:layout_constraintEnd_toEndOf="@+id/tv_last_name"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_last_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_last_name" />
-
-    <TextView
-        android:id="@+id/tv_last_name"
-        android:layout_width="229dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/last_name"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_first_name"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_first_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_first_name" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="345dp"
+        android:layout_height="266dp"
+        android:layout_marginBottom="108dp"
+        android:background="#101010"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="active Listings"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_friend_list" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="4dp"
+            android:text="Sold Listings"
+            app:layout_constraintStart_toStartOf="@+id/button4"
+            app:layout_constraintTop_toBottomOf="@+id/button4" />
+
+        <Button
+            android:id="@+id/btn_friend_list"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/friend_list_button_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.058"
+            app:layout_constraintStart_toEndOf="@+id/button4"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+        <Button
+            android:id="@+id/button10"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:text="Pending Friend"
+            app:layout_constraintBottom_toBottomOf="@+id/button3"
+            app:layout_constraintEnd_toEndOf="@+id/btn_friend_list"
+            app:layout_constraintTop_toTopOf="@+id/button3"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="match_parent"
+            android:layout_height="39dp"
+            android:gravity="center_horizontal"
+            android:shadowColor="#191818"
+            android:text="Account Links"
+            android:textColor="#6C6C6C"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="58dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#575757"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView20">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btn_account_settings"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:background="@drawable/ic_baseline_settings_24"
+        app:layout_constraintBottom_toBottomOf="@+id/account_setting_toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/account_setting_toolbar"
+        app:layout_constraintTop_toTopOf="@+id/account_setting_toolbar" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="345dp"
+        android:layout_height="243dp"
+        android:background="#1C1C1C"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout">
+        app:layout_constraintTop_toBottomOf="@+id/account_setting_toolbar">
 
+        <ImageView
+            android:id="@+id/iv_user_image"
+            android:layout_width="124dp"
+            android:layout_height="108dp"
+            android:background="@drawable/ic_baseline_person_24"
+            android:contentDescription="@string/user_image_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.056" />
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <TextView
+            android:id="@+id/tv_first_name"
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:layout_marginBottom="4dp"
+            android:background="#121212"
+            android:gravity="center_horizontal"
+            android:text="@string/first_name"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_last_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Full name" />
+
+        <TextView
+            android:id="@+id/tv_last_name"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_marginBottom="4dp"
+            android:background="#121212"
+            android:gravity="center_horizontal"
+            android:text="@string/last_name"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_first_name"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tv_first_name"
+            tools:text="Email" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="242dp"
+            android:layout_height="46dp"
+            android:isIndicator="true"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:transformPivotX="25dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_first_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_user_image"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

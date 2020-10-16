@@ -88,6 +88,27 @@
         <item>game</item>
     </string-array>
 
+    <!-- Item Categories -->
+    <string-array name="items_categoies">
+        <item>Textbook-</item>
+        <item>electronic</item>
+        <item>furniture</item>
+        <item>game</item>
+        <item>collectible</item>
+        <item>art</item>
+        <item>appliances</item>
+        <item>jewelery</item>
+        <item>misc</item>
+    </string-array>
+
+    <!-- Item Categories -->
+    <string-array name="service_categoies">
+        <item>tutoring-</item>
+        <item>repair</item>
+        <item>furniture</item>
+        <item>game</item>
+        <item>misc</item>
+    </string-array>
     <!-- test first names  -->
     <string-array name="first_names">
         <item>Viet</item>
@@ -116,6 +137,9 @@
         <item>Moss</item>
         <item>medinval</item>
     </string-array>
+
+
+
 
 
 </resources>
