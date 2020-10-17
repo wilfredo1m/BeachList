@@ -8,33 +8,29 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ListingFragmentCollectionAdapter extends FragmentPagerAdapter {
-    private List<Fragment> fragmentList= new ArrayList<>();
-    private  List<String> fragmentNames = new ArrayList<>();
+    private int numOfTabs;
 
-    public ListingFragmentCollectionAdapter(@NonNull FragmentManager fm) {
-        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-
-
+    public ListingFragmentCollectionAdapter(@NonNull FragmentManager fm, int numOfTabs) {
+        super(fm);
+        this.numOfTabs = numOfTabs;
     }
 
     @NonNull
     @Override
-    public Fragment getItem(int position)  {
-        return fragmentList.get(position);
+    public Fragment getItem(int position) {
+        switch(position){
+            case 0:
+                return new CurrentListingsFragment();
+            case 1:
+                return new SoldListingsFragment();
+            default:
+                return null;
+        }
     }
 
     @Override
-    public int getCount()  {
-        return fragmentList.size();
+    public int getCount() {
+        return numOfTabs;
     }
-
-    public void addFragment(Fragment fragment, String name){
-        fragmentList.add(fragment);
-        fragmentNames.add(name);
-    }
-
 }

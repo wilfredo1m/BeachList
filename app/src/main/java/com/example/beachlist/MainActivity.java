@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Opens Create Account Screen
     public void openCreateAccountScreen(){
-        Intent openScreen = new Intent(this, CreateAccount.class);
+        Intent openScreen = new Intent(this, ActiveListings.class);
         startActivity(openScreen);
     }
 

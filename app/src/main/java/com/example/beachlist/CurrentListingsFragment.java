@@ -22,11 +22,6 @@ public class CurrentListingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View currentListing= inflater.inflate(R.layout.fragment_current_listings, container, false);
-        textview= currentListing.findViewById(R.id.test_current_listing_id);
-        String data=getArguments().getString("key");
-        textview.setText(data);
-
-
         return currentListing;
     }
 }

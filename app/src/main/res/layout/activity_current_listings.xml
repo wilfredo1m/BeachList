@@ -7,16 +7,6 @@
     android:background="#000000">
 
 
-    <include
-        android:id="@+id/tab_layout"
-        layout="@layout/current_listing_tab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar12" />
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar12"
         android:layout_width="match_parent"
@@ -52,6 +42,28 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </androidx.viewpager2.widget.ViewPager2>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/listings_tab_choices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar12">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/current_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current Listings" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/sold_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sold Listings" />
+
+    </com.google.android.material.tabs.TabLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
