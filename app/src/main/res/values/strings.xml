@@ -138,5 +138,89 @@
         <item>medinval</item>
     </string-array>
 
+    <!-- test listing names -->
+    <string-array name="listing_names">
+        <item>pencil</item>
+        <item>Wood</item>
+        <item>rake</item>
+        <item>Broom</item>
+        <item>cake</item>
+        <item>popcorn</item>
+        <item>Pen</item>
+        <item>Roomba</item>
+        <item>Radio</item>
+        <item>walkie-talkie</item>
+    </string-array>
+
+    <!-- test listing descriptions -->
+    <string-array name="listing_descriptions">
+        <item>.4 lead</item>
+        <item>2x4</item>
+        <item>from home depot</item>
+        <item>metal</item>
+        <item>vanilla</item>
+        <item>chocolate</item>
+        <item>blue ink</item>
+        <item>new</item>
+        <item>wireless</item>
+        <item>4 of them</item>
+    </string-array>
+
+    <!-- test listing asking prices -->
+    <string-array name="listing_asking_prices">
+        <item>2</item>
+        <item>24</item>
+        <item>12</item>
+        <item>4</item>
+        <item>89</item>
+        <item>3</item>
+        <item>11</item>
+        <item>80</item>
+        <item>30</item>
+        <item>44</item>
+    </string-array>
+
+    <!-- test listing sold prices -->
+    <string-array name="listing_sold_prices">
+        <item>1</item>
+        <item>23</item>
+        <item>11</item>
+        <item>12</item>
+        <item>1</item>
+        <item>5</item>
+        <item>5</item>
+        <item>8</item>
+        <item>23</item>
+        <item>40</item>
+    </string-array>
+
+    <!-- test listing sold to names  -->
+    <string-array name="listing_sold_names">
+        <item>Viettttt</item>
+        <item>Wilfrrrrredo</item>
+        <item>randalllll</item>
+        <item>Bernnnnnie</item>
+        <item>foooooo</item>
+        <item>poooooopy</item>
+        <item>Patrickkkkk</item>
+        <item>Robertttt</item>
+        <item>Randyyyy</item>
+        <item>willlllll</item>
+    </string-array>
+
+    <!-- test listing sold dates -->
+    <string-array name="listing_sold_dates">
+        <item>1/1/20</item>
+        <item>2/23/21</item>
+        <item>11/23/32</item>
+        <item>12/34/56</item>
+        <item>1/1/30</item>
+        <item>5/6/89</item>
+        <item>5/5/77</item>
+        <item>8/6/43</item>
+        <item>23/12/12</item>
+        <item>4/3/21</item>
+    </string-array>
+
 
 </resources>
