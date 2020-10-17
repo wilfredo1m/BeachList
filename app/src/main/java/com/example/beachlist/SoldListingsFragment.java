@@ -31,7 +31,7 @@ public class SoldListingsFragment extends Fragment {
         // Inflate the layout for this fragment
         View soldFragment=  inflater.inflate(R.layout.fragment_sold_listings, container, false);
 
-        //******************************************Display Friends List***************************************
+        //******************************************Display Sold Listings List***************************************
         recyclerView = soldFragment.findViewById(R.id.sold_listing_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -48,7 +48,7 @@ public class SoldListingsFragment extends Fragment {
         // clears list each time to make sure no duplicates are added
         list.clear();
 
-        // adds the friends to be the list that will be displayed
+        // adds the sold listings to be the list that will be displayed
         for(int i = 0; i < listingNames.length; i++){
             ListingData listing = new ListingData(listingPics[i],listingNames[i],listingDescriptions[i],listingAskingPrices[i],
                     listingSoldFor[i], listingSoldTo[i], listingSoldDate[i]);
@@ -58,29 +58,6 @@ public class SoldListingsFragment extends Fragment {
         // Links recycler view adapter
         adapter = new SoldListingsRecyclerAdapter(getContext(),list);
         recyclerView.setAdapter(adapter);
-
-//        recyclerView = soldFragment.findViewById(R.id.friends_recycler);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//
-//        // This is temporary, added these to test the list would display
-//        String firstNames[] = getResources().getStringArray(R.array.first_names);
-//        int profilePics[] = {R.drawable.bulbasaur, R.drawable.charmander, R.drawable.froakie, R.drawable.golem, R.drawable.jigglypuff,
-//                R.drawable.pikachu, R.drawable.squirtle, R.drawable.sudowoodo, R.drawable.totodile, R.drawable.treeko};
-//        String lastNames[] = getResources().getStringArray(R.array.last_names);
-//
-//        // clears list each time to make sure no duplicates are added
-//        list.clear();
-//
-//        // adds the friends to be the list that will be displayed
-//        for(int i = 0; i < firstNames.length; i++){
-//            FriendsData friend = new FriendsData(profilePics[i],firstNames[i],lastNames[i]);
-//            list.add(friend);
-//        }
-//
-//        // Links recycler view adapter
-//        adapter = new FriendsRecyclerAdapter(getContext(),list);
-//        recyclerView.setAdapter(adapter);
-
 
         return  soldFragment;
     }
