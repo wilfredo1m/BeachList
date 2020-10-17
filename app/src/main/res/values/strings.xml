@@ -154,16 +154,16 @@
 
     <!-- test listing descriptions -->
     <string-array name="listing_descriptions">
-        <item>.4 lead</item>
-        <item>2x4</item>
-        <item>from home depot</item>
-        <item>metal</item>
-        <item>vanilla</item>
-        <item>chocolate</item>
-        <item>blue ink</item>
-        <item>new</item>
-        <item>wireless</item>
-        <item>4 of them</item>
+        <item>this pencil is 0.7 lead with a pack of erasers</item>
+        <item>2x4 weather treated</item>
+        <item>From home depot, never used</item>
+        <item>metal handle, horse hair bristles</item>
+        <item>vanilla with strawberry icing</item>
+        <item>chocolate drizzle </item>
+        <item>blue ink, pack of 7</item>
+        <item>new, still in original packing</item>
+        <item>wireless, 75 channels</item>
+        <item>4 of them, range up to 80 miles</item>
     </string-array>
 
     <!-- test listing asking prices -->

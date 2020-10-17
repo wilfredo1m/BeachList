@@ -22,6 +22,7 @@
         <activity android:name=".ActiveListings"/>
         <activity android:name=".ListingReviewPage"/>
         <activity android:name=".SelectedUser"/>
+        <activity android:name=".SelectedOwnListing"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

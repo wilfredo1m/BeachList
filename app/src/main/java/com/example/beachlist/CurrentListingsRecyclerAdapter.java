@@ -1,6 +1,7 @@
 package com.example.beachlist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,10 +30,20 @@ public class CurrentListingsRecyclerAdapter extends RecyclerView.Adapter<Current
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CurrentListingsRecyclerAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CurrentListingsRecyclerAdapter.MyViewHolder holder, final int position) {
         holder.listingPic.setImageResource(list.get(position).getListingPhotos()[0]);
         holder.listingTitle.setText(list.get(position).getListingTitle());
         holder.listingPrice.setText(list.get(position).getAskingPrice());
+
+        // when a listing is clicked, the position is taken to get that person info
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, SelectedOwnListing.class);
+                intent.putExtra("position", position);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
