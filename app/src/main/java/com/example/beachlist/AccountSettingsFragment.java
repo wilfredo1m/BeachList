@@ -28,6 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.List;
+
 /**
  * A simple {@link **Fragment} subclass.
  * Use the {@link **AccountSettingsFragment#newInstance} factory method to
@@ -93,7 +95,8 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         activeListingsButton  = accountSettingsScreen.findViewById(R.id.btn_active_listings);
         activeListingsButton.setOnClickListener(this);
 
-
+        soldListingsButton  = accountSettingsScreen.findViewById(R.id.btn_sold_listings);
+        soldListingsButton.setOnClickListener(this);
 //===================================================END BUTTON CALL GROUP====================================================//
 
         return accountSettingsScreen;
@@ -114,8 +117,14 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
                 openScreen = new Intent(getActivity(), PendingFriendsListTab.class);
                 startActivity(openScreen);
                 break;
+            case R.id.btn_sold_listings:
+                String position = "sold";
+                openScreen = new Intent( getActivity(), ActiveListings.class);
+                openScreen.putExtra("id", position);
+                startActivity(openScreen);
         }
     }
+
 
     public void displayUserInfo(UserData userData) {
         TextView fnameTV = accountSettingsScreen.findViewById(R.id.tv_first_name);

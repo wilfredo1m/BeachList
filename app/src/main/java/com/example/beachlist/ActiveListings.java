@@ -43,6 +43,10 @@ public class ActiveListings extends AppCompatActivity {
                 ListingFragmentCollectionAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
         tabLayout.setupWithViewPager(viewpager);
         viewpager.setAdapter(pagerAdapter);
+
+        if(checkTabCall()==1) {
+            viewpager.setCurrentItem(1);
+        }
         //change tab view when user selects a tab
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -81,5 +85,19 @@ public class ActiveListings extends AppCompatActivity {
     }
 
 
+    public int checkTabCall()
+    {
+        //get intent for tab call
+        Intent i = getIntent();
+        if(i.hasExtra("id"))
+        {
+            String idCall = i.getStringExtra("id");
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
+    }
 
 }
