@@ -93,8 +93,6 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         activeListingsButton  = accountSettingsScreen.findViewById(R.id.btn_active_listings);
         activeListingsButton.setOnClickListener(this);
 
-        soldListingsButton= accountSettingsScreen.findViewById(R.id.btn_sold_listings);
-        soldListingsButton.setOnClickListener(this);
 
 //===================================================END BUTTON CALL GROUP====================================================//
 
@@ -110,10 +108,6 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
                 break;
             case R.id.btn_active_listings:
                 openScreen = new Intent(getActivity(), ActiveListings.class);
-                startActivity(openScreen);
-                break;
-            case R.id.btn_sold_listings:
-                openScreen = new Intent(getActivity(), SoldListings.class);
                 startActivity(openScreen);
                 break;
             case R.id.btn_pending_friends:

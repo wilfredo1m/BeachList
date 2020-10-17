@@ -19,7 +19,6 @@
         <activity android:name=".SelectedPendingFriend"/>
         <activity android:name=".ListingTitlePage"/>
         <activity android:name=".ListingDescriptionPage"/>
-        <activity android:name=".SoldListings"/>
         <activity android:name=".ActiveListings"/>
         <activity android:name=".ListingReviewPage"/>
         <activity android:name=".SelectedUser"/>
