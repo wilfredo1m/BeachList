@@ -33,4 +33,15 @@ public class ListingFragmentCollectionAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return numOfTabs;
     }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        switch (position) {
+            case 0:
+                return "Current Listing";
+            case 1:
+                return "Sold Listings";
+        }
+        return null;
+    }
 }

@@ -35,13 +35,13 @@ public class ActiveListings extends AppCompatActivity {
 
         //initializing tabs and pager
         tabLayout = findViewById(R.id.listings_tab_choices);
-       // TabItem currentTab = findViewById(R.id.current_tab);
-       // TabItem soldTab = findViewById(R.id.sold_tab);
+        TabItem currentTab = findViewById(R.id.current_tab);
+        TabItem soldTab = findViewById(R.id.sold_tab);
         viewpager = findViewById(R.id.listings_view_pager);
 
         ListingFragmentCollectionAdapter pagerAdapter= new
                 ListingFragmentCollectionAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
-
+        tabLayout.setupWithViewPager(viewpager);
         viewpager.setAdapter(pagerAdapter);
         //change tab view when user selects a tab
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -79,6 +79,7 @@ public class ActiveListings extends AppCompatActivity {
         openScreen.putExtra("screen",3);
         startActivity(openScreen);
     }
+
 
 
 }
