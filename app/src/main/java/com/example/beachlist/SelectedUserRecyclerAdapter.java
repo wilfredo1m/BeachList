@@ -31,7 +31,7 @@ public class SelectedUserRecyclerAdapter extends RecyclerView.Adapter<SelectedUs
 
     @Override
     public void onBindViewHolder(@NonNull SelectedUserRecyclerAdapter.MyViewHolder holder, final int position) {
-        holder.profilePic.setImageResource(list.get(position).getImageProfile());
+        holder.profilePic.setImageBitmap(list.get(position).getImageProfile());
         holder.firstName.setText(list.get(position).getFirstName());
         holder.lastName.setText(list.get(position).getLastName());
 

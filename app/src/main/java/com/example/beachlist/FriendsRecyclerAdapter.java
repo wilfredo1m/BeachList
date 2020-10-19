@@ -31,7 +31,7 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
 
     @Override
     public void onBindViewHolder(@NonNull FriendsRecyclerAdapter.MyViewHolder holder, final int position) {
-        holder.profilePic.setImageResource(list.get(position).getImageProfile());
+        holder.profilePic.setImageBitmap(list.get(position).getImageProfile());
         holder.firstName.setText(list.get(position).getFirstName());
         holder.lastName.setText(list.get(position).getLastName());
 
@@ -51,7 +51,7 @@ public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecycler
         return list.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView profilePic;
         TextView firstName, lastName;
         public MyViewHolder(@NonNull View itemView) {

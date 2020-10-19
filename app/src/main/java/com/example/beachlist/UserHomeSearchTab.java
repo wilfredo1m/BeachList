@@ -1,6 +1,7 @@
 package com.example.beachlist;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link UserHomeSearchTab#newInstance} factory method to
+ * A simple {@link *Fragment} subclass.
+ * Use the {@link *UserHomeSearchTab#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class UserHomeSearchTab extends Fragment{
@@ -52,7 +53,7 @@ public class UserHomeSearchTab extends Fragment{
 
         // adds the pending friends to be the list that will be displayed
         for(int i = 0; i < firstNames.length; i++){
-            FriendsData selectedUser = new FriendsData(profilePics[i],firstNames[i],lastNames[i]);
+            FriendsData selectedUser = new FriendsData(null,firstNames[i],lastNames[i]);
             user_list.add(selectedUser);
         }
 

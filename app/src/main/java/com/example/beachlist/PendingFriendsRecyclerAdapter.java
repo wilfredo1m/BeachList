@@ -32,7 +32,7 @@ public class PendingFriendsRecyclerAdapter extends RecyclerView.Adapter<PendingF
 
     @Override
     public void onBindViewHolder(@NonNull PendingFriendsRecyclerAdapter.MyViewHolder holder, final int position) {
-        holder.profilePic.setImageResource(list.get(position).getImageProfile());
+        holder.profilePic.setImageBitmap(list.get(position).getImageProfile());
         holder.firstName.setText(list.get(position).getFirstName());
         holder.lastName.setText(list.get(position).getLastName());
 

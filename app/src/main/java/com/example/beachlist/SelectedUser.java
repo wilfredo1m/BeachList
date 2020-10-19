@@ -32,7 +32,7 @@ public class SelectedUser extends AppCompatActivity {
         int position = getIntent().getIntExtra("position",1);
 
         // Sets the persons info in the correct fields to be displayed
-        profilePic.setImageResource(UserHomeSearchTab.user_list.get(position).getImageProfile());
+        profilePic.setImageBitmap(UserHomeSearchTab.user_list.get(position).getImageProfile());
         firstName.setText(UserHomeSearchTab.user_list.get(position).getFirstName());
         lastName.setText(UserHomeSearchTab.user_list.get(position).getLastName());
 
