@@ -90,7 +90,7 @@
         app:titleTextColor="#FFFFFF" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/et_listing_pic"
         android:layout_width="393dp"
         android:layout_height="257dp"
         android:layout_marginTop="44dp"
@@ -142,7 +142,7 @@
         app:layout_constraintEnd_toStartOf="@+id/imageView4"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/et_listing_pic"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
@@ -196,7 +196,7 @@
             android:textColor="#FFFFFF" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/et_listing_title"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_marginBottom="44dp"

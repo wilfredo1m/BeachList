@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,8 @@ import java.io.File;
 public class ListingTitlePage extends AppCompatActivity {
     public static final int IMAGE_REQUEST = 33;
     int callingActivity;
+    EditText listingTitle;
+    ImageView listingPic;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,6 +27,7 @@ public class ListingTitlePage extends AppCompatActivity {
         SeekBar seekBar = findViewById(R.id.title_seek_bar);
         seekBar.setClickable(false);
 
+        // Check which screen we just came from to determine whether we need to access the camera gallery
         callingActivity = checkCallingActivity();
         // If we came from CreatePostFragment, we want to open the gallery to let user pick pictures
         if(callingActivity == 1){
@@ -31,7 +36,11 @@ public class ListingTitlePage extends AppCompatActivity {
         }
         // If we came back from ListingDescriptionPage, we do not want the gallery to be accessed
         else if(callingActivity == 2){
+            // Do nothing
         }
+
+        // Get input fields
+        getUserInputs();
 
         // Continue to the Listing Description Page
         Button nextButton = findViewById(R.id.btn_next_page_desc);
@@ -81,7 +90,6 @@ public class ListingTitlePage extends AppCompatActivity {
         startActivityForResult(openCameraRoll, IMAGE_REQUEST);
     }
 
-
     public void openItemDescriptionScreen(){
         Intent openScreen = new Intent(this, ListingDescriptionPage.class);
         startActivity(openScreen);
@@ -90,6 +98,10 @@ public class ListingTitlePage extends AppCompatActivity {
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         openScreen.putExtra("screen",2);
         startActivity(openScreen);
+    }
+    public void getUserInputs(){
+        listingPic = findViewById(R.id.et_listing_pic); // will change once we figure out how to take in multiple pics
+        listingTitle = findViewById(R.id.et_listing_title);
     }
 
 }
