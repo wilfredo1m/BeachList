@@ -22,7 +22,7 @@ public class ListingDescriptionPage extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listing_descirption_page);
+        setContentView(R.layout.activity_listing_description_page);
 
 //       spinner.setAdapter(adapter);
 

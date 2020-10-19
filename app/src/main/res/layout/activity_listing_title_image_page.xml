@@ -7,6 +7,18 @@
     android:background="#000000">
 
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="65dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="108dp"
+        android:background="@drawable/ic_baseline_image_24"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_listing_pic" />
+
     <SeekBar
         android:id="@+id/title_seek_bar"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
@@ -100,15 +112,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_seek_bar" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="65dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/ic_baseline_image_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
     <Button
         android:id="@+id/btn_next_page_desc"
         android:layout_width="match_parent"
@@ -144,15 +147,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_listing_pic"
         app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/btn_back"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/ic_outline_arrow_back_ios_24"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar8"
-        app:layout_constraintStart_toStartOf="@+id/toolbar8"
-        app:layout_constraintTop_toTopOf="@+id/toolbar8" />
 
     <LinearLayout
         android:layout_width="match_parent"
