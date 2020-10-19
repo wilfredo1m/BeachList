@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class SelectedOwnListing extends AppCompatActivity {
     ImageView listingPic;
     TextView listingTitle, listingDescription, listingPrice;
-    Button backButton, shareButton;
+    Button backButton, shareButton,modListingButton;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,8 +36,8 @@ public class SelectedOwnListing extends AppCompatActivity {
         listingPrice.setText("$"+CurrentListingsFragment.list.get(position).getAskingPrice());
 
         // Modify current listing
-        backButton = findViewById(R.id.selected_own_listing_modify_btn);
-        backButton.setOnClickListener(new View.OnClickListener() {
+        modListingButton = findViewById(R.id.selected_own_listing_modify_btn);
+        modListingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openModifyListingScreen();
@@ -53,6 +53,10 @@ public class SelectedOwnListing extends AppCompatActivity {
             }
         });
 
+
+
+
+
         // Share listing through messages
         shareButton = findViewById(R.id.selected_listing_share_btn);
         shareButton.setOnClickListener(new View.OnClickListener() {
@@ -64,8 +68,8 @@ public class SelectedOwnListing extends AppCompatActivity {
     }
 
     public void openModifyListingScreen(){
-//        Intent openScreen = new Intent(this, ModifyListing.class);
-//        startActivity(openScreen);
+        Intent openScreen = new Intent(this, ModifyListing.class);
+        startActivity(openScreen);
     }
 
     public void openCurrentListingsListScreen(){
