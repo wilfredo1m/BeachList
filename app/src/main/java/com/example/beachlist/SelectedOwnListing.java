@@ -33,7 +33,7 @@ public class SelectedOwnListing extends AppCompatActivity {
         listingPic.setImageResource(CurrentListingsFragment.list.get(position).getListingPhotos()[0]);
         listingTitle.setText(CurrentListingsFragment.list.get(position).getListingTitle());
         listingDescription.setText(CurrentListingsFragment.list.get(position).getListingDescription());
-        listingPrice.setText(CurrentListingsFragment.list.get(position).getAskingPrice());
+        listingPrice.setText("$"+CurrentListingsFragment.list.get(position).getAskingPrice());
 
         // Modify current listing
         backButton = findViewById(R.id.selected_own_listing_modify_btn);

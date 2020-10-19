@@ -33,7 +33,7 @@ public class CurrentListingsRecyclerAdapter extends RecyclerView.Adapter<Current
     public void onBindViewHolder(@NonNull CurrentListingsRecyclerAdapter.MyViewHolder holder, final int position) {
         holder.listingPic.setImageResource(list.get(position).getListingPhotos()[0]);
         holder.listingTitle.setText(list.get(position).getListingTitle());
-        holder.listingPrice.setText(list.get(position).getAskingPrice());
+        holder.listingPrice.setText("$"+list.get(position).getAskingPrice());
 
         // when a listing is clicked, the position is taken to get that person info
         holder.itemView.setOnClickListener(new View.OnClickListener() {

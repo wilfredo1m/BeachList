@@ -225,7 +225,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editTextNumberDecimal"
+            android:id="@+id/et_listing_price"
             android:layout_width="match_parent"
             android:layout_height="38dp"
             android:background="#121212"
@@ -252,7 +252,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editTextTextMultiLine"
+            android:id="@+id/et_listing_description"
             android:layout_width="match_parent"
             android:layout_height="154dp"
             android:background="#121212"
