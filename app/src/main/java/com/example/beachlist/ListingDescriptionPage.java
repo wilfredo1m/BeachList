@@ -3,19 +3,31 @@ package com.example.beachlist;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ListingDescriptionPage extends AppCompatActivity {
     Button cancelButton,backButton,nextButton;
+    Spinner spinner;
+    RadioGroup radioGroup;
+    RadioButton radioButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listing_descirption_page);
 
+//       spinner.setAdapter(adapter);
+
+        //Radiotgroup initialization
+        radioGroup = findViewById(R.id.radioGroup2);
 
 
         // Cancels the post being created / clears all fields entered
@@ -66,4 +78,33 @@ public class ListingDescriptionPage extends AppCompatActivity {
         startActivity(openScreen);
     }
 
+    public void rbclick(View v){
+
+        //initiate the spinner
+        spinner = findViewById(R.id.categorie_spinner);
+        //setup adapter to be passed to spinner
+
+        int radiobuttonid = radioGroup.getCheckedRadioButtonId();
+        radioButton = findViewById(radiobuttonid);
+        String text = radioButton.getText().toString();
+        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+
+        if( text.equalsIgnoreCase("item"))
+        {
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,
+            getResources().getStringArray(R.array.items_categoies));
+            spinner.setAdapter(adapter);
+
+        }
+        else if( text.equalsIgnoreCase("service"))
+        {
+           ArrayAdapter<String> serviceAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,
+            getResources().getStringArray(R.array.service_categoies));
+            spinner.setAdapter(serviceAdapter);
+        }
+        else
+        {
+           //do nothing
+        }
+    }
 }

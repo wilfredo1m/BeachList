@@ -168,6 +168,7 @@
             <RadioButton
                 android:id="@+id/rb_item"
                 android:layout_width="0dp"
+                android:onClick="rbclick"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Item"
@@ -175,6 +176,7 @@
 
             <RadioButton
                 android:id="@+id/rb_service"
+                android:onClick="rbclick"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -199,7 +201,7 @@
             android:textStyle="bold" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/categorie_spinner"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:layout_marginStart="4dp"
