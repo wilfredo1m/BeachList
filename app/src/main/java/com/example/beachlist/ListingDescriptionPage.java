@@ -26,7 +26,7 @@ public class ListingDescriptionPage extends AppCompatActivity {
 
 //       spinner.setAdapter(adapter);
 
-        //Radiotgroup initialization
+        //Radio group initialization
         radioGroup = findViewById(R.id.radioGroup2);
 
 
