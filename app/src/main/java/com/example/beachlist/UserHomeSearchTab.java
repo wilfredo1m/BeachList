@@ -11,6 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +32,9 @@ public class UserHomeSearchTab extends Fragment{
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     public static List<FriendsData> user_list = new ArrayList<>();
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private FirebaseUser user;
+    private FirebaseAuth mAuth;
 
     public UserHomeSearchTab() {
         // Required empty public constructor
@@ -31,6 +42,10 @@ public class UserHomeSearchTab extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        String userId = user.getUid();
+        DatabaseReference usersReference = database.getReference().child("users");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_select_from_home, container, false);
 
@@ -43,23 +58,37 @@ public class UserHomeSearchTab extends Fragment{
 
         // This is temporary, added these to test the list would display
         String firstNames[] = getResources().getStringArray(R.array.first_names);
-        int profilePics[] = {R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur,
+        final int profilePics[] = {R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur,
                 R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur};
         String lastNames[] = getResources().getStringArray(R.array.last_names);
 
         // clears list each time to make sure no duplicates are added
         user_list.clear();
 
-        // adds the pending friends to be the list that will be displayed
-        for(int i = 0; i < firstNames.length; i++){
-            FriendsData selectedUser = new FriendsData(profilePics[i],firstNames[i],lastNames[i]);
-            user_list.add(selectedUser);
-        }
+        usersReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        FriendsData friend = new FriendsData(profilePics[0], child.child("data").getValue(UserData.class).firstName, child.child("data").getValue(UserData.class).lastName, child.getKey());
+                        user_list.add(friend);
+                    }
+                }
 
-        // Links recycler view adapter
-        adapter = new SelectedUserRecyclerAdapter(getActivity(),user_list);
-        recyclerView.setAdapter(adapter);
+                onUserListQuery();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
 
         return view;
+    }
+
+    public void onUserListQuery() {
+        adapter = new SelectedUserRecyclerAdapter(getActivity(),user_list);
+        recyclerView.setAdapter(adapter);
     }
 }
