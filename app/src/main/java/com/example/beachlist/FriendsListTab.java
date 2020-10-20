@@ -57,7 +57,7 @@ public class FriendsListTab extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        FriendsData friend = new FriendsData(profilePics[0], child.getValue(OtherUser.class).firstName, child.getValue(OtherUser.class).lastName);
+                        FriendsData friend = new FriendsData(profilePics[0], child.getValue(OtherUser.class).firstName, child.getValue(OtherUser.class).lastName, child.getValue(OtherUser.class).userId);
                         list.add(friend);
                     }
                 }

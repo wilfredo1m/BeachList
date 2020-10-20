@@ -2,12 +2,19 @@ package com.example.beachlist;
 
 public class FriendsData {
     private int imageProfile;
-    String firstName, lastName;
+    String firstName, lastName, userId;
 
     public FriendsData(int imageProfile, String firstName, String lastName){
         this.imageProfile = imageProfile;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public FriendsData(int imageProfile, String firstName, String lastName, String userId){
+        this.imageProfile = imageProfile;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userId = userId;
     }
 
     public int getImageProfile() {
@@ -33,4 +40,8 @@ public class FriendsData {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public String getUserId() { return userId; }
+
+    public void setUserId(String lastName) { this.userId = userId; }
 }

@@ -4,6 +4,7 @@ public class OtherUser {
     String firstName;
     String lastName;
     String imageUrl;
+    String userId;
 
     public OtherUser() {
         //default initialzer
@@ -14,6 +15,13 @@ public class OtherUser {
         this.firstName = firstName;
         this.lastName = lastName;
         this.imageUrl = imageUrl;
+    }
+
+    public OtherUser(String firstName, String lastName, String imageUrl, String userId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.imageUrl = imageUrl;
+        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -39,4 +47,8 @@ public class OtherUser {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    public String getUserId() { return userId; }
+
+    public void setUserId(String lastName) { this.userId = userId; }
 }
