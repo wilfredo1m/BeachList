@@ -23,7 +23,7 @@ public class ListingTitlePage extends AppCompatActivity {
     public static final int IMAGE_REQUEST = 33;
     int callingActivity;
     EditText listingTitle;
-    ImageView listingPic;
+    //ImageView listingPic;
     ViewPager2 viewPager;
     int[] images = {R.drawable.pokemon1, R.drawable.pokemon2,R.drawable.pokemon3,R.drawable.pokemon4,R.drawable.pokemon5};
 

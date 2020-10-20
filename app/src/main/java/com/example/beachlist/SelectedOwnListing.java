@@ -10,18 +10,28 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
 public class SelectedOwnListing extends AppCompatActivity {
-    ImageView listingPic;
+//    ImageView listingPic;
     TextView listingTitle, listingDescription, listingPrice;
     Button backButton, shareButton,modListingButton;
+
+    ViewPager2 viewPager;
+    int[] images = {R.drawable.pokemon1, R.drawable.pokemon2,R.drawable.pokemon3,R.drawable.pokemon4,R.drawable.pokemon5};
+    ImageAdapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_own_user_listing);
 
-        listingPic = findViewById(R.id.selected_listing_pic);
+        //*************Display Listing Images********************
+        viewPager = findViewById(R.id.own_listing_images);
+        adapter = new ImageAdapter(images);
+        viewPager.setAdapter(adapter);
+
+        //listingPic = findViewById(R.id.selected_listing_pic);
         listingTitle = findViewById(R.id.selected_listing_title);
         listingDescription = findViewById(R.id.selected_listing_description);
         listingPrice = findViewById(R.id.selected_listing_price);
@@ -30,7 +40,7 @@ public class SelectedOwnListing extends AppCompatActivity {
         int position = getIntent().getIntExtra("position",1);
 
         // Sets the listings info in the correct fields to be displayed
-        listingPic.setImageResource(CurrentListingsFragment.list.get(position).getListingPhotos()[0]);
+        //listingPic.setImageResource(CurrentListingsFragment.list.get(position).getListingPhotos()[0]);
         listingTitle.setText(CurrentListingsFragment.list.get(position).getListingTitle());
         listingDescription.setText(CurrentListingsFragment.list.get(position).getListingDescription());
         listingPrice.setText("$"+CurrentListingsFragment.list.get(position).getAskingPrice());
@@ -52,10 +62,6 @@ public class SelectedOwnListing extends AppCompatActivity {
                 openCurrentListingsListScreen();
             }
         });
-
-
-
-
 
         // Share listing through messages
         shareButton = findViewById(R.id.selected_listing_share_btn);

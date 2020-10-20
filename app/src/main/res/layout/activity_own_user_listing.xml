@@ -7,6 +7,20 @@
     android:background="#000000"
     tools:context=".SelectedOwnListing">
 
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/own_listing_images"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_margin="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.viewpager2.widget.ViewPager2>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -62,14 +76,14 @@
                     app:layout_constraintEnd_toEndOf="@+id/toolbar5"
                     app:layout_constraintTop_toTopOf="@+id/toolbar5" />
 
-                <ImageView
-                    android:id="@+id/selected_listing_pic"
-                    android:layout_width="345dp"
-                    android:layout_height="305dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbar5"
-                    tools:srcCompat="@drawable/ic_baseline_image_24" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/selected_listing_pic"-->
+<!--                    android:layout_width="345dp"-->
+<!--                    android:layout_height="305dp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/toolbar5"-->
+<!--                    tools:srcCompat="@drawable/ic_baseline_image_24" />-->
 
                 <Button
                     android:id="@+id/selected_own_listing_back_btn"
