@@ -18,8 +18,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,20 +61,29 @@ public class SelectedUser extends AppCompatActivity {
         addFriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference deleteFriendReference = database.getReference().child("users").child(user.getUid()).child("pending").child(UserHomeSearchTab.user_list.get(position).userId);
-                deleteFriendReference.setValue(new OtherUser(UserHomeSearchTab.user_list.get(position).getFirstName(), UserHomeSearchTab.user_list.get(position).getLastName(), "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F1595294896?alt=media&token=c341b259-f2a5-45ad-97e1-04b770734db1"))
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                openHomeScreen();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "could not delete value");
-                            }
-                        });
+
+                ValueEventListener userDataListener = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // Get Post object and use the values to update the UI
+                        UserData userData = dataSnapshot.getValue(UserData.class);
+                        addPendingFriend(position, userData);
+                        // ...
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        // Getting Post failed, log a message
+                        Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                        // ...
+                    }
+                };
+
+
+                DatabaseReference myDataReference = database.getReference().child("users").child(user.getUid()).child("data");
+                myDataReference.addValueEventListener(userDataListener);
+
+
             }
         });
 
@@ -88,5 +100,22 @@ public class SelectedUser extends AppCompatActivity {
     public void openHomeScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         startActivity(openScreen);
+    }
+
+    public void addPendingFriend(int position, UserData userData){
+        DatabaseReference addPendingFriendReference = database.getReference().child("users").child(UserHomeSearchTab.user_list.get(position).userId).child("pending").child(user.getUid());
+        addPendingFriendReference.setValue(new OtherUser(userData.getFirstName(), userData.getLastName(), "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F1595294896?alt=media&token=c341b259-f2a5-45ad-97e1-04b770734db1"))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        openHomeScreen();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "could not delete value");
+                    }
+                });
     }
 }
