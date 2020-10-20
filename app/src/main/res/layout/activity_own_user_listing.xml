@@ -8,20 +8,8 @@
     tools:context=".SelectedOwnListing">
 
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/own_listing_images"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_margin="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </androidx.viewpager2.widget.ViewPager2>
-
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#000000"
@@ -40,7 +28,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="304dp"
                 android:background="#1B1A1A">
 
 
@@ -59,6 +47,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/linearLayout8"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#575757"
@@ -76,14 +65,14 @@
                     app:layout_constraintEnd_toEndOf="@+id/toolbar5"
                     app:layout_constraintTop_toTopOf="@+id/toolbar5" />
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/selected_listing_pic"-->
-<!--                    android:layout_width="345dp"-->
-<!--                    android:layout_height="305dp"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/toolbar5"-->
-<!--                    tools:srcCompat="@drawable/ic_baseline_image_24" />-->
+                <!--                <ImageView-->
+                <!--                    android:id="@+id/selected_listing_pic"-->
+                <!--                    android:layout_width="345dp"-->
+                <!--                    android:layout_height="305dp"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/toolbar5"-->
+                <!--                    tools:srcCompat="@drawable/ic_baseline_image_24" />-->
 
                 <Button
                     android:id="@+id/selected_own_listing_back_btn"
@@ -96,11 +85,28 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/toolbar5"
                     app:layout_constraintVertical_bias="0.45" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/own_listing_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="63dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/toolbar5">
+
+                </androidx.viewpager2.widget.ViewPager2>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="328dp"
                 android:layout_marginTop="50dp"
                 android:orientation="vertical">
 
@@ -153,7 +159,7 @@
                 <TextView
                     android:id="@+id/textView15"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="#2B2B2B"
                     android:gravity="center_horizontal"
                     android:text="listing description"
