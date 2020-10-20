@@ -25,7 +25,7 @@ public class ListingTitlePage extends AppCompatActivity {
     EditText listingTitle;
     ImageView listingPic;
     ViewPager2 viewPager;
-    int[] images = {R.drawable.bulbasaur, R.drawable.charmander, R.drawable.sudowoodo};
+    int[] images = {R.drawable.pokemon1, R.drawable.pokemon2,R.drawable.pokemon3,R.drawable.pokemon4,R.drawable.pokemon5};
 
     ImageAdapter adapter;
 
@@ -40,9 +40,7 @@ public class ListingTitlePage extends AppCompatActivity {
 
         //*************Display Listing Images********************
         viewPager = findViewById(R.id.listing_images);
-
         adapter = new ImageAdapter(images);
-
         viewPager.setAdapter(adapter);
 
 //        CompositePageTransformer transformer = new CompositePageTransformer();
@@ -131,7 +129,7 @@ public class ListingTitlePage extends AppCompatActivity {
         startActivity(openScreen);
     }
     public void getUserInputs(){
-        listingPic = findViewById(R.id.et_listing_pic); // will change once we figure out how to take in multiple pics
+       // listingPic = findViewById(R.id.et_listing_pic); // will change once we figure out how to take in multiple pics
         listingTitle = findViewById(R.id.et_listing_title);
     }
 
