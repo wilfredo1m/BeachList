@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
 
-import com.example.beachlist.databinding.ActivityMainBinding;
-
 
 public class CreatePostFragment extends Fragment implements View.OnClickListener {
     String[] descriptionData= {"Select Photo","Item Description","Confirm"};

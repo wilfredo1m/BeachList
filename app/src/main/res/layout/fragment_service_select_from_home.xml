@@ -4,79 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gray_background"
-    tools:context=".ServiceHomeSearchTab">
+    android:background="#000000"
+    tools:context=".ServiceHomeSearchTab" >
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Service"
-        android:textSize="50dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/service_list_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <!--    <androidx.appcompat.widget.Toolbar-->
-    <!--        android:id="@+id/home_menu_toolbar"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:background="#000000"-->
-    <!--        android:minHeight="?attr/actionBarSize"-->
-    <!--        android:theme="?attr/actionBarTheme"-->
-    <!--        android:visibility="visible"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.0"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-    <!--    <SearchView-->
-    <!--        android:id="@+id/sv_Search_bar"-->
-    <!--        android:layout_width="325dp"-->
-    <!--        android:layout_height="35dp"-->
-    <!--        app:layout_constraintBottom_toBottomOf="@+id/home_menu_toolbar"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/home_menu_toolbar"-->
-    <!--        app:layout_constraintTop_toTopOf="@+id/home_menu_toolbar">-->
-
-    <!--    </SearchView>-->
-
-    <!--    <Button-->
-    <!--        android:id="@+id/btn_categories"-->
-    <!--        android:layout_width="41dp"-->
-    <!--        android:layout_height="38dp"-->
-    <!--        android:background="@drawable/ic_baseline_category_24"-->
-    <!--        app:layout_constraintBottom_toBottomOf="@+id/home_menu_toolbar"-->
-    <!--        app:layout_constraintEnd_toEndOf="@+id/home_menu_toolbar"-->
-    <!--        app:layout_constraintHorizontal_bias="0.377"-->
-    <!--        app:layout_constraintStart_toEndOf="@+id/sv_Search_bar"-->
-    <!--        app:layout_constraintTop_toTopOf="@+id/home_menu_toolbar"-->
-    <!--        app:layout_constraintVertical_bias="0.555" />-->
-
-
-    <!--    <com.google.android.material.tabs.TabLayout-->
-    <!--        android:layout_width="409dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/home_menu_toolbar">-->
-
-    <!--        <com.google.android.material.tabs.TabItem-->
-    <!--            android:id="@+id/tv_item_tab"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:text="@string/item_tab" />-->
-
-    <!--        <com.google.android.material.tabs.TabItem-->
-    <!--            android:id="@+id/tv_user_tab"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:text="@string/user_tab" />-->
-
-    <!--        <com.google.android.material.tabs.TabItem-->
-    <!--            android:id="@+id/tv_service_tab"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:text="@string/service_tab" />-->
-    <!--    </com.google.android.material.tabs.TabLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
