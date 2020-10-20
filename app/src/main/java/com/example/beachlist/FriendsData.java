@@ -41,7 +41,11 @@ public class FriendsData {
         this.lastName = lastName;
     }
 
-    public String getUserId() { return userId; }
+    public String getUserId() {
+        return userId;
+    }
 
-    public void setUserId(String lastName) { this.userId = userId; }
+    public void setUserId(String lastName) {
+        this.userId = userId;
+    }
 }
