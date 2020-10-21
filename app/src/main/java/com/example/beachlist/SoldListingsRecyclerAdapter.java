@@ -33,7 +33,7 @@ public class SoldListingsRecyclerAdapter extends RecyclerView.Adapter<SoldListin
         holder.listingPic.setImageResource(list.get(position).getListingPhotos()[0]);
         holder.listingTitle.setText(list.get(position).getListingTitle());
         holder.listingDate.setText(list.get(position).getListingSoldDate());
-        holder.listingSoldPrice.setText(list.get(position).getSoldPrice());
+        holder.listingSoldPrice.setText("$"+list.get(position).getSoldPrice());
         holder.listingSoldTo.setText(list.get(position).getListingSoldTo());
     }
 

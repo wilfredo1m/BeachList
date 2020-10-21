@@ -90,6 +90,7 @@
 
     <!-- Item Categories -->
     <string-array name="items_categoies">
+        <item>--select a category--</item>
         <item>Textbook-</item>
         <item>electronic</item>
         <item>furniture</item>
@@ -103,6 +104,7 @@
 
     <!-- Item Categories -->
     <string-array name="service_categoies">
+        <item>--select a service--</item>
         <item>tutoring-</item>
         <item>repair</item>
         <item>furniture</item>

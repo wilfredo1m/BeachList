@@ -1,28 +1,27 @@
 package com.example.beachlist;
 
-import android.graphics.Bitmap;
-
 public class FriendsData {
-    private Bitmap imageProfile;
-    private String firstName, lastName;
+    private int imageProfile;
+    String firstName, lastName, userId;
 
-    public FriendsData( ){
-        this.imageProfile = null;
-        this.firstName = " ";
-        this.lastName = " ";
-    }
-
-    public FriendsData(Bitmap imageProfile, String firstName, String lastName){
+    public FriendsData(int imageProfile, String firstName, String lastName){
         this.imageProfile = imageProfile;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public Bitmap getImageProfile() {
+    public FriendsData(int imageProfile, String firstName, String lastName, String userId){
+        this.imageProfile = imageProfile;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userId = userId;
+    }
+
+    public int getImageProfile() {
         return imageProfile;
     }
 
-    public void setImageProfile(Bitmap imageProfile) {
+    public void setImageProfile(int imageProfile) {
         this.imageProfile = imageProfile;
     }
 
@@ -40,5 +39,13 @@ public class FriendsData {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String lastName) {
+        this.userId = userId;
     }
 }

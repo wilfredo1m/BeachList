@@ -4,6 +4,7 @@ public class ListingData {
     private int[] listingPhotos;
     String listingTitle, listingDescription, listingSoldTo, listingSoldDate, soldPrice, askingPrice;
 
+    // For specific listings
     public ListingData(int[] photos, String title, String description, String askFor,
                        String soldFor, String soldTo, String soldDate){
         listingPhotos = photos;
@@ -13,6 +14,13 @@ public class ListingData {
         soldPrice = soldFor;
         listingSoldTo = soldTo;
         listingSoldDate = soldDate;
+    }
+
+    // For the display of all listings we only need the first photo, title and asking price
+    public ListingData(int[] photos, String title,String askFor){
+        listingPhotos = photos;
+        listingTitle = title;
+        askingPrice = askFor;
     }
 
     public String getListingSoldDate(){ return listingSoldDate; }

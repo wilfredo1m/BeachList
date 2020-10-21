@@ -2,20 +2,15 @@ package com.example.beachlist;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,22 +19,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PendingFriendsListTab extends AppCompatActivity {
-    private static final long ONE_MEGABYTE = 1024 * 1024;
-
     RecyclerView recyclerView;
     public static List<FriendsData> list = new ArrayList<>();
     PendingFriendsRecyclerAdapter adapter;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private FirebaseUser user;
     private FirebaseAuth mAuth;
-    private FirebaseStorage storageReference;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,9 +59,7 @@ public class PendingFriendsListTab extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
-//                        OtherUser friend = child.getValue(OtherUser.class);
-//                        getFriendInfoForDisplay(friend);
-                        FriendsData friend = new FriendsData(null, child.getValue(OtherUser.class).firstName, child.getValue(OtherUser.class).lastName);
+                        FriendsData friend = new FriendsData(profilePics[0], child.getValue(OtherUser.class).firstName, child.getValue(OtherUser.class).lastName, child.getKey());
                         list.add(friend);
                     }
                 }
@@ -124,26 +112,6 @@ public class PendingFriendsListTab extends AppCompatActivity {
         //    }
         //});
 
-    }
-
-    public void getFriendInfoForDisplay(final OtherUser friendsData) {
-        if(friendsData.getImageUrl().compareTo(" ") != 0) {
-            storageReference = FirebaseStorage.getInstance();
-            final StorageReference imageRef = storageReference.getReferenceFromUrl(friendsData.getImageUrl());
-            imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                @Override
-                public void onSuccess(byte[] bytes) {
-                    Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                    FriendsData friend = new FriendsData(bmp, friendsData.firstName, friendsData.lastName);
-                    list.add(friend);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    System.out.println("It did not work");
-                }
-            });
-        }
     }
 
     // takes us back to account settings screen

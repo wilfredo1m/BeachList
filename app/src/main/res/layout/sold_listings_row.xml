@@ -26,7 +26,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="298dp"
                 android:orientation="vertical"
-                android:paddingTop="3dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

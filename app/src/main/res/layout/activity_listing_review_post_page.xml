@@ -111,7 +111,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/et_listing_pic_review"
         android:layout_width="match_parent"
         android:layout_height="254dp"
         android:layout_marginTop="32dp"
@@ -154,13 +154,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="92dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/et_listing_pic_review" />
 
     <LinearLayout
         android:id="@+id/linearLayout12"
@@ -181,13 +182,13 @@
         android:gravity="center_horizontal"
         android:text="TITLE"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/tv_title_to_enter"
+        app:layout_constraintBottom_toTopOf="@+id/et_listing_title_review"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tv_title_to_enter"
+        android:id="@+id/et_listing_title_review"
         android:layout_width="match_parent"
         android:layout_height="31dp"
         android:background="#121212"
@@ -215,13 +216,13 @@
         android:gravity="center_horizontal"
         android:text="price"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/tv_price_to_enter"
+        app:layout_constraintBottom_toTopOf="@+id/et_listing_price_review"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tv_price_to_enter"
+        android:id="@+id/et_listing_price_review"
         android:layout_width="match_parent"
         android:layout_height="31dp"
         android:layout_marginBottom="136dp"
@@ -230,5 +231,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/et_listing_category_review"
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:background="#121212"
+        app:layout_constraintBottom_toTopOf="@+id/et_listing_description_review"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_listing_price_review" />
+
+    <TextView
+        android:id="@+id/et_listing_description_review"
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:background="#121212"
+        app:layout_constraintBottom_toTopOf="@+id/btn_submit_post"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_listing_price_review"
+        app:layout_constraintVertical_bias="0.788" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
