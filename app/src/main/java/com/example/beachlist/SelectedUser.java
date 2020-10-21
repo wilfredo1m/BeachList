@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,7 +53,10 @@ public class SelectedUser extends AppCompatActivity {
         final int position = getIntent().getIntExtra("position",1);
 
         // Sets the persons info in the correct fields to be displayed
-        profilePic.setImageResource(UserHomeSearchTab.user_list.get(position).getImageProfile());
+        Glide.with(this)
+                .load(UserHomeSearchTab.user_list.get(position).getImageProfile())
+                .centerCrop()
+                .into(profilePic);
         firstName.setText(UserHomeSearchTab.user_list.get(position).getFirstName());
         lastName.setText(UserHomeSearchTab.user_list.get(position).getLastName());
 

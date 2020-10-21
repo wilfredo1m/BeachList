@@ -206,8 +206,6 @@ public class CreateAccount extends AppCompatActivity {
         //Set authenticated user ID
         final String userId = user.getUid();
         currentUser.setUserId(userId);
-        //Blank to be updated later
-        currentUser.setImageUrl(" ");
         //testing github webhook hehehe
         //Initialize database within User reference with a child using user ID
         final DatabaseReference userReference = database.getReference("users").child(userId).child("data");

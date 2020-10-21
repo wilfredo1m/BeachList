@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapter.MyViewHolder> {
@@ -31,7 +33,10 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull UserRecyclerAdapter.MyViewHolder holder, final int position) {
-        holder.profilePic.setImageResource(list.get(position).getImageProfile());
+        Glide.with(context)
+                .load(list.get(position).getImageProfile())
+                .centerCrop()
+                .into(holder.profilePic);
         holder.firstName.setText(list.get(position).getFirstName());
         holder.lastName.setText(list.get(position).getLastName());
 

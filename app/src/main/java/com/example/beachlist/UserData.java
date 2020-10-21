@@ -9,7 +9,16 @@ public class UserData {
     String firstName, lastName, idNumber, email, gradDate, phoneNum;
     String userId, imageUrl;
 
-    public UserData() { }
+    public UserData() {
+        this.userId = " ";
+        this.firstName = " ";
+        this.lastName = " ";
+        this.idNumber = " ";
+        this.email = " ";
+        this.gradDate = " ";
+        this.phoneNum = " ";
+        this.imageUrl = " ";
+    }
 
     public UserData(String fname, String lname, String idNumber, String email, String gradDate, String phoneNum, String userId, String url) {
         this.userId = userId;

@@ -140,7 +140,6 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         if(userData.getImageUrl().compareTo(" ") != 0) {
             storageReference = FirebaseStorage.getInstance();
             final StorageReference imageRef = storageReference.getReferenceFromUrl(userData.imageUrl);
-
             imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                 @Override
                 public void onSuccess(byte[] bytes) {
