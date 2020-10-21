@@ -6,8 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemHomeSearchTab extends Fragment {
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    public static List<ListingData> listing_list = new ArrayList<>();
+
     public ItemHomeSearchTab() {
         // Required empty public constructor
     }
@@ -15,6 +25,33 @@ public class ItemHomeSearchTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_item_select_from_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_item_select_from_home, container, false);
+
+        //***********************DISPLAY LISTING*******************************
+        recyclerView = view.findViewById(R.id.item_tab_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        // Test Arrays to make sure the info displays correctly
+        int listingPics[][] = {{R.drawable.bulbasaur},{R.drawable.charmander}, {R.drawable.froakie}, {R.drawable.golem}, {R.drawable.jigglypuff},
+                {R.drawable.pikachu}, {R.drawable.squirtle}, {R.drawable.sudowoodo}, {R.drawable.totodile}, {R.drawable.treeko}};
+        String listingNames[] = getResources().getStringArray(R.array.listing_names);
+        String listingAskingPrices[] = getResources().getStringArray(R.array.listing_asking_prices);
+
+        // clears list each time to make sure no duplicates are added
+        listing_list.clear();
+
+        for(int i = 0; i < listingNames.length; i++){
+            ListingData listing = new ListingData(listingPics[i],listingNames[i],listingAskingPrices[i]);
+            listing_list.add(listing);
+        }
+
+        adapter = new ListingRecyclerAdapter(getActivity(),listing_list);
+        recyclerView.setAdapter(adapter);
+        //***********************************************************************
+
+        return view;
     }
 }

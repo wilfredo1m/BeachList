@@ -1,6 +1,5 @@
 package com.example.beachlist;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -88,7 +87,7 @@ public class UserHomeSearchTab extends Fragment{
     }
 
     public void onUserListQuery() {
-        adapter = new SelectedUserRecyclerAdapter(getActivity(),user_list);
+        adapter = new UserRecyclerAdapter(getActivity(),user_list);
         recyclerView.setAdapter(adapter);
     }
 }
