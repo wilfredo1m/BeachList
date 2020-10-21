@@ -46,19 +46,19 @@ public class SelectedFriend extends AppCompatActivity {
 
         // Sets the persons info in the correct fields to be displayed
         Glide.with(this)
-                .load(FriendsListTab.list.get(position).getImageProfile())
+                .load(FriendsListTab.list.get(position).getValue(OtherUser.class).getImageUrl())
                 .centerCrop()
                 .into(profilePic);
         //profilePic.setImageBitmap(null);
-        firstName.setText(FriendsListTab.list.get(position).getFirstName());
-        lastName.setText(FriendsListTab.list.get(position).getLastName());
+        firstName.setText(FriendsListTab.list.get(position).getValue(OtherUser.class).getFirstName());
+        lastName.setText(FriendsListTab.list.get(position).getValue(OtherUser.class).getLastName());
 
         // Remove friend from friends list
         Button unfriendButton = findViewById(R.id.btn_remove_friend);
         unfriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference deleteFriendReference = database.getReference().child("users").child(user.getUid()).child("friends").child(FriendsListTab.list.get(position).userId);
+                DatabaseReference deleteFriendReference = database.getReference().child("users").child(user.getUid()).child("friends").child(FriendsListTab.list.get(position).getKey());
                 deleteFriendReference.removeValue()
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
