@@ -63,7 +63,7 @@ public class SelectedFriend extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                openFriendListScreen();
+                                updateOtherUsersFriends(position);
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -89,4 +89,20 @@ public class SelectedFriend extends AppCompatActivity {
         Intent openScreen = new Intent(this, FriendsListTab.class);
         startActivity(openScreen);
     }
+     public void updateOtherUsersFriends(int position) {
+         DatabaseReference deleteFriendReference = database.getReference().child("users").child(FriendsListTab.list.get(position).getKey()).child("friends").child(user.getUid());
+         deleteFriendReference.removeValue()
+                 .addOnSuccessListener(new OnSuccessListener<Void>() {
+                     @Override
+                     public void onSuccess(Void aVoid) {
+                         openFriendListScreen();
+                     }
+                 })
+                 .addOnFailureListener(new OnFailureListener() {
+                     @Override
+                     public void onFailure(@NonNull Exception e) {
+                         Log.w(TAG, "could not delete value");
+                     }
+                 });
+     }
 }
