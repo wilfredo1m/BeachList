@@ -17,8 +17,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SelectedPendingFriend extends AppCompatActivity {
     private static final String TAG = "error";
@@ -60,37 +63,11 @@ public class SelectedPendingFriend extends AppCompatActivity {
         });
 
         // Accept and Reject Request buttons
-        Button acceptRequest = findViewById(R.id.btn_accept_user);
+        final Button acceptRequest = findViewById(R.id.btn_accept_user);
         acceptRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference newFriendReference = database.getReference().child("users").child(user.getUid()).child("friends").child(PendingFriendsListTab.list.get(position).getKey());
-                newFriendReference.setValue(new OtherUser(PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getFirstName(), PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getLastName(), PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getImageUrl()))
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                DatabaseReference deletePendingReference = database.getReference().child("users").child(user.getUid()).child("pending").child(PendingFriendsListTab.list.get(position).getKey());
-                                deletePendingReference.removeValue()
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                openFriendsListScreen();
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.w(TAG, "could not delete value");
-                                            }
-                                        });
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "could not add value");
-                            }
-                        });
+                acceptRequest(position);
             }
         });
 
@@ -124,5 +101,73 @@ public class SelectedPendingFriend extends AppCompatActivity {
     public void openFriendsListScreen(){
         Intent openScreen = new Intent(this, FriendsListTab.class);
         startActivity(openScreen);
+    }
+
+    public void acceptRequest(final int position) {
+        DatabaseReference newFriendReference = database.getReference().child("users").child(user.getUid()).child("friends").child(PendingFriendsListTab.list.get(position).getKey());
+        newFriendReference.setValue(new OtherUser(PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getFirstName(), PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getLastName(), PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getImageUrl()))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        removeFromPending(position);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "could not add value");
+                    }
+                });
+    }
+
+    public void removeFromPending(final int position) {
+        DatabaseReference deletePendingReference = database.getReference().child("users").child(user.getUid()).child("pending").child(PendingFriendsListTab.list.get(position).getKey());
+        deletePendingReference.removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        retrieveMyData(position);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "could not delete value");
+                    }
+                });
+    }
+
+    public void updateOtherUsersFriends(final int position, OtherUser myData) {
+        DatabaseReference updateOtherUserReference = database.getReference().child("users").child(PendingFriendsListTab.list.get(position).getKey()).child("friends").child(user.getUid());
+        updateOtherUserReference.setValue(myData)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        openFriendsListScreen();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "could not delete value");
+                    }
+                });
+
+    }
+
+    public void retrieveMyData(final int position) {
+        DatabaseReference retrieveMyDataReference = database.getReference().child("users").child(user.getUid()).child("data");
+        retrieveMyDataReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                OtherUser myData = new OtherUser(dataSnapshot.getValue(UserData.class).getFirstName(), dataSnapshot.getValue(UserData.class).getLastName(), dataSnapshot.getValue(UserData.class).getImageUrl());
+                updateOtherUsersFriends(position, myData);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
     }
 }
