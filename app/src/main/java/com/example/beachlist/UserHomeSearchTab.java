@@ -30,7 +30,7 @@ public class UserHomeSearchTab extends Fragment{
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    public static List<FriendsData> user_list = new ArrayList<>();
+    public static List<DataSnapshot> user_list = new ArrayList<>();
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private FirebaseUser user;
     private FirebaseAuth mAuth;
@@ -70,7 +70,7 @@ public class UserHomeSearchTab extends Fragment{
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         FriendsData friend = new FriendsData(child.child("data").getValue(UserData.class).imageUrl, child.child("data").getValue(UserData.class).firstName, child.child("data").getValue(UserData.class).lastName, child.getKey());
-                        user_list.add(friend);
+                        user_list.add(child);
                     }
                 }
 

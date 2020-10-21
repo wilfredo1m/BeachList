@@ -54,40 +54,36 @@ public class SelectedUser extends AppCompatActivity {
 
         // Sets the persons info in the correct fields to be displayed
         Glide.with(this)
-                .load(UserHomeSearchTab.user_list.get(position).getImageProfile())
+                .load(UserHomeSearchTab.user_list.get(position).child("data").getValue(UserData.class).getImageUrl())
                 .centerCrop()
                 .into(profilePic);
-        firstName.setText(UserHomeSearchTab.user_list.get(position).getFirstName());
-        lastName.setText(UserHomeSearchTab.user_list.get(position).getLastName());
+        firstName.setText(UserHomeSearchTab.user_list.get(position).child("data").getValue(UserData.class).getFirstName());
+        lastName.setText(UserHomeSearchTab.user_list.get(position).child("data").getValue(UserData.class).getLastName());
 
         // Send user a friend request
         Button addFriendButton = findViewById(R.id.btn_add_user);
         addFriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                ValueEventListener userDataListener = new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // Get Post object and use the values to update the UI
-                        UserData userData = dataSnapshot.getValue(UserData.class);
-                        addPendingFriend(position, userData);
-                        // ...
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        // Getting Post failed, log a message
-                        Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-                        // ...
-                    }
-                };
-
-
                 DatabaseReference myDataReference = database.getReference().child("users").child(user.getUid()).child("data");
-                myDataReference.addValueEventListener(userDataListener);
+                myDataReference.addListenerForSingleValueEvent(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                // Get Post object and use the values to update the UI
+                                UserData userData = dataSnapshot.getValue(UserData.class);
+                                addPendingFriend(position, userData);
+                                // ...
+                            }
 
-
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                // Getting Post failed, log a message
+                                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                                // ...
+                            }
+                        }
+                );
             }
         });
 
@@ -107,8 +103,8 @@ public class SelectedUser extends AppCompatActivity {
     }
 
     public void addPendingFriend(int position, UserData userData){
-        DatabaseReference addPendingFriendReference = database.getReference().child("users").child(UserHomeSearchTab.user_list.get(position).userId).child("pending").child(user.getUid());
-        addPendingFriendReference.setValue(new OtherUser(userData.getFirstName(), userData.getLastName(), "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F1595294896?alt=media&token=c341b259-f2a5-45ad-97e1-04b770734db1"))
+        DatabaseReference addPendingFriendReference = database.getReference().child("users").child(UserHomeSearchTab.user_list.get(position).child("data").getValue(UserData.class).getUserId()).child("pending").child(user.getUid());
+        addPendingFriendReference.setValue(new OtherUser(userData.getFirstName(), userData.getLastName(), userData.getImageUrl()))
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
