@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link UserHomeSearchTab#newInstance} factory method to
+ * A simple {@link *Fragment} subclass.
+ * Use the {@link *UserHomeSearchTab#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class UserHomeSearchTab extends Fragment{
@@ -69,7 +69,7 @@ public class UserHomeSearchTab extends Fragment{
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        FriendsData friend = new FriendsData(profilePics[0], child.child("data").getValue(UserData.class).firstName, child.child("data").getValue(UserData.class).lastName, child.getKey());
+                        FriendsData friend = new FriendsData(child.child("data").getValue(UserData.class).imageUrl, child.child("data").getValue(UserData.class).firstName, child.child("data").getValue(UserData.class).lastName, child.getKey());
                         user_list.add(friend);
                     }
                 }

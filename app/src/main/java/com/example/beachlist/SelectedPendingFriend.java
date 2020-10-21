@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,7 +43,10 @@ public class SelectedPendingFriend extends AppCompatActivity {
         final int position = getIntent().getIntExtra("position",1);
 
         // Sets the persons info in the correct fields to be displayed
-        profilePic.setImageBitmap(PendingFriendsListTab.list.get(position).getImageProfile());
+        Glide.with(this)
+                .load(PendingFriendsListTab.list.get(position).getImageProfile())
+                .centerCrop()
+                .into(profilePic);
         firstName.setText(PendingFriendsListTab.list.get(position).getFirstName());
         lastName.setText(PendingFriendsListTab.list.get(position).getLastName());
 

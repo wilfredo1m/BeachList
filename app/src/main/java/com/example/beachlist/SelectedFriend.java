@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,7 +45,11 @@ public class SelectedFriend extends AppCompatActivity {
         final int position = getIntent().getIntExtra("position",1);
 
         // Sets the persons info in the correct fields to be displayed
-        profilePic.setImageBitmap(FriendsListTab.list.get(position).getImageProfile());
+        Glide.with(this)
+                .load(FriendsListTab.list.get(position).getImageProfile())
+                .centerCrop()
+                .into(profilePic);
+        //profilePic.setImageBitmap(null);
         firstName.setText(FriendsListTab.list.get(position).getFirstName());
         lastName.setText(FriendsListTab.list.get(position).getLastName());
 
