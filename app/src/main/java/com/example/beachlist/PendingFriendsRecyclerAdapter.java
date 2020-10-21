@@ -12,14 +12,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
 
 import java.util.List;
 
 public class PendingFriendsRecyclerAdapter extends RecyclerView.Adapter<PendingFriendsRecyclerAdapter.MyViewHolder> {
     Context context;
-    List<FriendsData> list;
+    List<DataSnapshot> list;
 
-    public PendingFriendsRecyclerAdapter(Context context, List<FriendsData> list) {
+    public PendingFriendsRecyclerAdapter(Context context, List<DataSnapshot> list) {
         this.context = context;
         this.list = list;
     }
@@ -35,11 +36,11 @@ public class PendingFriendsRecyclerAdapter extends RecyclerView.Adapter<PendingF
     @Override
     public void onBindViewHolder(@NonNull PendingFriendsRecyclerAdapter.MyViewHolder holder, final int position) {
         Glide.with(context)
-                .load(list.get(position).getImageProfile())
+                .load(list.get(position).getValue(OtherUser.class).getImageUrl())
                 .centerCrop()
                 .into(holder.profilePic);
-        holder.firstName.setText(list.get(position).getFirstName());
-        holder.lastName.setText(list.get(position).getLastName());
+        holder.firstName.setText(list.get(position).getValue(OtherUser.class).getFirstName());
+        holder.lastName.setText(list.get(position).getValue(OtherUser.class).getLastName());
 
         // when a pending friend is clicked, the position is taken to get that person info
         holder.itemView.setOnClickListener(new View.OnClickListener() {

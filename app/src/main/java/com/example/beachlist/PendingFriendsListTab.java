@@ -25,7 +25,7 @@ import java.util.List;
 
 public class PendingFriendsListTab extends AppCompatActivity {
     RecyclerView recyclerView;
-    public static List<FriendsData> list = new ArrayList<>();
+    public static List<DataSnapshot> list = new ArrayList<>();
     PendingFriendsRecyclerAdapter adapter;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private FirebaseUser user;
@@ -59,8 +59,7 @@ public class PendingFriendsListTab extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        FriendsData friend = new FriendsData(child.getValue(OtherUser.class).imageUrl, child.getValue(OtherUser.class).firstName, child.getValue(OtherUser.class).lastName, child.getKey());
-                        list.add(friend);
+                        list.add(child);
                     }
                 }
 

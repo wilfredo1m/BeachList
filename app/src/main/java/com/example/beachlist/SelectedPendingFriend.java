@@ -44,11 +44,11 @@ public class SelectedPendingFriend extends AppCompatActivity {
 
         // Sets the persons info in the correct fields to be displayed
         Glide.with(this)
-                .load(PendingFriendsListTab.list.get(position).getImageProfile())
+                .load(PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getImageUrl())
                 .centerCrop()
                 .into(profilePic);
-        firstName.setText(PendingFriendsListTab.list.get(position).getFirstName());
-        lastName.setText(PendingFriendsListTab.list.get(position).getLastName());
+        firstName.setText(PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getFirstName());
+        lastName.setText(PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getLastName());
 
         // Go back to pending friends list
         Button backButton = findViewById(R.id.pending_friend_back_button);
@@ -64,12 +64,12 @@ public class SelectedPendingFriend extends AppCompatActivity {
         acceptRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference newFriendReference = database.getReference().child("users").child(user.getUid()).child("friends").child(PendingFriendsListTab.list.get(position).userId);
-                newFriendReference.setValue(new OtherUser(PendingFriendsListTab.list.get(position).getFirstName(), PendingFriendsListTab.list.get(position).getLastName(), "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F1595294896?alt=media&token=c341b259-f2a5-45ad-97e1-04b770734db1"))
+                DatabaseReference newFriendReference = database.getReference().child("users").child(user.getUid()).child("friends").child(PendingFriendsListTab.list.get(position).getKey());
+                newFriendReference.setValue(new OtherUser(PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getFirstName(), PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getLastName(), PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getImageUrl()))
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                DatabaseReference deletePendingReference = database.getReference().child("users").child(user.getUid()).child("pending").child(PendingFriendsListTab.list.get(position).userId);
+                                DatabaseReference deletePendingReference = database.getReference().child("users").child(user.getUid()).child("pending").child(PendingFriendsListTab.list.get(position).getKey());
                                 deletePendingReference.removeValue()
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
@@ -98,7 +98,7 @@ public class SelectedPendingFriend extends AppCompatActivity {
         rejectRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference deletePendingReference = database.getReference().child("users").child(user.getUid()).child("pending").child(PendingFriendsListTab.list.get(position).userId);
+                DatabaseReference deletePendingReference = database.getReference().child("users").child(user.getUid()).child("pending").child(PendingFriendsListTab.list.get(position).getKey());
                 deletePendingReference.removeValue()
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
