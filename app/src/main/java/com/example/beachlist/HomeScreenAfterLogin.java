@@ -31,6 +31,7 @@ public class HomeScreenAfterLogin extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this,  R.id.menu_bar_fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
+//************************BLOCK TO DETERMINE MENU SCREEN SELECT UPON BACK BUTTON PRESS**********************************************************//
         // CallingActivity will tell us which screen we just switched from
         // and what screen from the bottom nav should be displayed
         callingActivity = checkCallingActivity();
@@ -53,7 +54,10 @@ public class HomeScreenAfterLogin extends AppCompatActivity {
                 startActivity(intent);
             }
         }
+//************************END MENU SELECT BLOCK**********************************************************//
+//*******************************************************************************************************//
 
+//************************BLOCK TO DETERMINE TABS TO BE USED IN HOME PAGE AFTER BACK PRESS**********************************************************//
         // Display Messages screen
         if(callingActivity == 1){
             bottomNavigationView.setSelectedItemId(R.id.fragment_messages);
@@ -67,6 +71,8 @@ public class HomeScreenAfterLogin extends AppCompatActivity {
         if(callingActivity == 3){
             bottomNavigationView.setSelectedItemId(R.id.fragment_account_settings);
         }
+//************************END TAB SELECTION FOR HOME MENU**********************************************************//
+//*****************************************************************************************************************//
 
 
     }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +26,7 @@ public class ActiveListings extends AppCompatActivity {
     Button backButton;
     private TabLayout tabLayout;
     private ViewPager viewpager;
+    int tabPosition;
 
 
 
@@ -44,9 +46,17 @@ public class ActiveListings extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewpager);
         viewpager.setAdapter(pagerAdapter);
 
-        if(checkTabCall()==1) {
+        //set int to the returned value from sold listing/ active listing tab
+        tabPosition = checkTabCall();
+        if(tabPosition==1)
+        {
+            viewpager.setCurrentItem(0);
+        }
+        else if (tabPosition ==2)
+        {
             viewpager.setCurrentItem(1);
         }
+
         //change tab view when user selects a tab
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -84,20 +94,15 @@ public class ActiveListings extends AppCompatActivity {
         startActivity(openScreen);
     }
 
-
+    //gets which tab to go to based on back button call
+    // 1 active listing
+    // 2 sold listing
     public int checkTabCall()
     {
         //get intent for tab call
-        Intent i = getIntent();
-        if(i.hasExtra("id"))
-        {
-            String idCall = i.getStringExtra("id");
-            return 1;
-        }
-        else
-        {
-            return -1;
-        }
+        tabPosition= getIntent().getIntExtra("signedInUserListingTab",7);
+        return tabPosition;
+
     }
 
 }

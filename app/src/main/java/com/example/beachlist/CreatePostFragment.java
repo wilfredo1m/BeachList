@@ -31,7 +31,7 @@ public class CreatePostFragment extends Fragment implements View.OnClickListener
         SeekBar seekBar = createPostScreen.findViewById(R.id.title_seek_bar);
         seekBar.setClickable(false);
         return createPostScreen;
-    }
+    } //end on CreateView
 
     @Override
     public void onClick(View view) {

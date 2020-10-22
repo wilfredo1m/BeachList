@@ -41,6 +41,7 @@ public class SelectedUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_user);
 
+        //firebase values
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -60,6 +61,7 @@ public class SelectedUser extends AppCompatActivity {
         firstName.setText(UserHomeSearchTab.user_list.get(position).child("data").getValue(UserData.class).getFirstName());
         lastName.setText(UserHomeSearchTab.user_list.get(position).child("data").getValue(UserData.class).getLastName());
 
+// *****************************************************BUTTON GROUP********************************************************************************//
         // Send user a friend request
         Button addFriendButton = findViewById(R.id.btn_add_user);
         addFriendButton.setOnClickListener(new View.OnClickListener() {
@@ -95,14 +97,18 @@ public class SelectedUser extends AppCompatActivity {
                 openHomeScreen();
             }
         });
-    }
+// *****************************************************END BUTTON GROUP********************************************************************************//
 
+    }//end onCreate
+
+
+    //intent to change to homeafterlogin screen with 1st menu item selected
     public void openHomeScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         openScreen.putExtra("tab",1);
         startActivity(openScreen);
     }
-
+    //adds pending friend to firebase
     public void addPendingFriend(int position, UserData userData){
         DatabaseReference addPendingFriendReference = database.getReference().child("users").child(UserHomeSearchTab.user_list.get(position).child("data").getValue(UserData.class).getUserId()).child("pending").child(user.getUid());
         addPendingFriendReference.setValue(new OtherUser(userData.getFirstName(), userData.getLastName(), userData.getImageUrl()))

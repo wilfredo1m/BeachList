@@ -71,6 +71,7 @@ public class ListingTitlePage extends AppCompatActivity {
         // Get input fields
         getUserInputs();
 
+//*************************BUTTON BLOCK***********************************************************//
         // Continue to the Listing Description Page
         Button nextButton = findViewById(R.id.btn_next_page_desc);
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +89,9 @@ public class ListingTitlePage extends AppCompatActivity {
                   openCreatePostScreen();
             }
         });
-    }
+//*************************END BUTTON BLOCK*******************************************************//
+
+    }//end onCreate()
 
     // Check what activity sent us here
     // 1 = CreatePostFragment

@@ -24,6 +24,7 @@ public class ListingReviewPage extends AppCompatActivity {
         // Get input fields
         getUserInputs();
 
+//************************BUTTON BLOCK********************************************************//
         // Create Post
         submitPost = findViewById(R.id.btn_submit_post);
         submitPost.setOnClickListener(new View.OnClickListener() {
@@ -54,27 +55,32 @@ public class ListingReviewPage extends AppCompatActivity {
                 goBack();
             }
         });
-
+//************************END BUTTON BLOCK****************************************************//
 
     }
 
-
+    //intent to open homescreen
     public void openHomeScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         startActivity(openScreen);
     }
+    //intent to open createpost screen
     public void openCreatePostScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         openScreen.putExtra("screen", 2);
         startActivity(openScreen);
     }
+    //TODO to be populated by randy and bernie to save content to firebase
     public void submitPost(){
         // adds post and its information to database
     }
+
+    //intent to go back to listing description page
     public void goBack(){
         Intent openScreen = new Intent(this, ListingDescriptionPage.class);
         startActivity(openScreen);
     }
+    //retrieve all inputs from user
     public void getUserInputs(){
         listingPic = findViewById(R.id.et_listing_pic_review); // will change once we figure out how to take in multiple pics
         listingTitle = findViewById(R.id.et_listing_title_review);

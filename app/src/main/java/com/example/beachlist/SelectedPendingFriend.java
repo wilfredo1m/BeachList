@@ -53,6 +53,7 @@ public class SelectedPendingFriend extends AppCompatActivity {
         firstName.setText(PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getFirstName());
         lastName.setText(PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getLastName());
 
+//*****************************************************BUTTON GROUP******************************************************************************//
         // Go back to pending friends list
         Button backButton = findViewById(R.id.pending_friend_back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -91,13 +92,17 @@ public class SelectedPendingFriend extends AppCompatActivity {
                         });
             }
         });
-    }
+//*****************************************************END BUTTON GROUP******************************************************************************//
 
+    }//end onCreate()
+
+
+    //pending friendlist
     public void openPendingFriendListScreen(){
         Intent openScreen = new Intent(this, PendingFriendsListTab.class);
         startActivity(openScreen);
     }
-
+    //friendlist
     public void openFriendsListScreen(){
         Intent openScreen = new Intent(this, FriendsListTab.class);
         startActivity(openScreen);

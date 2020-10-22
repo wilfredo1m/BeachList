@@ -24,12 +24,10 @@ public class ListingDescriptionPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listing_description_page);
 
-//       spinner.setAdapter(adapter);
-
         //Radio group initialization
         radioGroup = findViewById(R.id.radioGroup2);
 
-
+//************************************BUTTON GROUP ************************************************//
         // Cancels the post being created / clears all fields entered
         cancelButton = findViewById(R.id.btn_cancel);
         cancelButton.requestFocus();
@@ -59,47 +57,59 @@ public class ListingDescriptionPage extends AppCompatActivity {
                 goToPostListingPage();
             }
         });
+//************************************END BUTTON GROUP**********************************************//
     }
 
-
+    //set intent to open createpost screen
     public void openCreatePostScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         openScreen.putExtra("screen",2);
         startActivity(openScreen);
     }
 
+    //set intent to open listing title page
     public void goBack(){
         Intent openScreen = new Intent(this, ListingTitlePage.class);
         openScreen.putExtra("screen",2);
         startActivity(openScreen);
     }
+    //set intent to open listing review page
     public void goToPostListingPage(){
         Intent openScreen = new Intent(this, ListingReviewPage.class);
         startActivity(openScreen);
     }
 
+    //radio button on click listener
     public void rbclick(View v){
 
         //initiate the spinner
         spinner = findViewById(R.id.categorie_spinner);
-        //setup adapter to be passed to spinner
 
+        //get the id of the radio button that is pressed ( not value we assign)
         int radiobuttonid = radioGroup.getCheckedRadioButtonId();
+        //radio button holds the id value of selected (this is the value we assign to it(the name)
         radioButton = findViewById(radiobuttonid);
+        //convert id value to a string
         String text = radioButton.getText().toString();
+        //print as a test statement to see which id is being pressed
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
 
+        //if blocks to check which radio button is pressed to populate the spinner
         if( text.equalsIgnoreCase("item"))
         {
+            //array adapter holding the array list of categories created in the strings.xml
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,
             getResources().getStringArray(R.array.items_categoies));
+            //setup adapter to be passed to spinner
             spinner.setAdapter(adapter);
 
         }
         else if( text.equalsIgnoreCase("service"))
         {
-           ArrayAdapter<String> serviceAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,
+            //array adapter holding the array list of services created in the strings.xml
+            ArrayAdapter<String> serviceAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,
             getResources().getStringArray(R.array.service_categoies));
+            //setup adapter to be passed to spinner
             spinner.setAdapter(serviceAdapter);
         }
         else

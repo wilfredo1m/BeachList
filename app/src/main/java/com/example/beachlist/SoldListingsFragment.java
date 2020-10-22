@@ -35,6 +35,8 @@ public class SoldListingsFragment extends Fragment {
         recyclerView = soldFragment.findViewById(R.id.sold_listing_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+
+//TODO REMOVE THIS BLOCK AND REPLACE WITH FIREBASE************************************************************************************************//
         // This is temporary, added these to test the list would display
         int listingPics[][] = {{R.drawable.bulbasaur},{R.drawable.charmander}, {R.drawable.froakie}, {R.drawable.golem}, {R.drawable.jigglypuff},
                 {R.drawable.pikachu}, {R.drawable.squirtle}, {R.drawable.sudowoodo}, {R.drawable.totodile}, {R.drawable.treeko}};
@@ -44,6 +46,7 @@ public class SoldListingsFragment extends Fragment {
         String listingSoldFor[] = getResources().getStringArray(R.array.listing_sold_prices);
         String listingSoldTo[] = getResources().getStringArray(R.array.listing_sold_names);
         String listingSoldDate[] = getResources().getStringArray(R.array.listing_sold_dates);
+//TODO END*************************************************************************************************************************************//
 
         // clears list each time to make sure no duplicates are added
         list.clear();

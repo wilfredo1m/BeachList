@@ -14,6 +14,7 @@ public class SelectedService extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_other_user_service);
 
+//*********************************BUTTON GROUP*******************************************//
         // Go back to User search list (temporarily going back to home)
         Button backButton = findViewById(R.id.btn_back_from_user_item_page);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -22,9 +23,11 @@ public class SelectedService extends AppCompatActivity {
                 openHomeScreen();
             }
         });
+//*********************************END BUTTON GROUP*******************************************//
 
     }
 
+    //service tab in HomeFragment
     public void openHomeScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         openScreen.putExtra("tab",2);

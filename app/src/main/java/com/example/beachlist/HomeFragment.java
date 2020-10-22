@@ -33,10 +33,8 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
-
         viewPager = view.findViewById(R.id.viewPager);
         tabLayout = view.findViewById(R.id.home_menu_tab_view);
-
 
         return view;
     }
@@ -48,6 +46,7 @@ public class HomeFragment extends Fragment {
         setUpViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
 
+        //*************************CALL FROM HOMEAFTERLOGIN TO SEE WHICH TAB TO GO TO AFTER BACKBUTTON PRESS IN A SELECTED PAGE***************************//
         // Open the correct tab based on which screen we came from
         int tab = getActivity().getIntent().getIntExtra("tab",8);
         // Users
@@ -58,7 +57,10 @@ public class HomeFragment extends Fragment {
         else if(tab == 2){
             tabLayout.getTabAt(2).select();
         }
+        //*************************END TAB SELECTION AFTER BACK BUTTON PRESS***************************************************************************//
 
+
+        //listener to see which tab is selected
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -77,13 +79,15 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    //pager will call the hometab adapter in order to switch between tab based on which was selected
     private void setUpViewPager(ViewPager viewPager) {
+        //creating a new tab adapter object with a child fragment manager for the 3 tabs that are fragment objects
         HomeTabsAdapter adapter = new HomeTabsAdapter(getChildFragmentManager());
-
+        //fragments added to the adapter to swap between
         adapter.addFragment(new ItemHomeSearchTab(), "Items");
         adapter.addFragment(new UserHomeSearchTab(), "Users");
         adapter.addFragment(new ServiceHomeSearchTab(), "Services");
-
+        //set the adapter to the view pager
         viewPager.setAdapter(adapter);
     }
 }

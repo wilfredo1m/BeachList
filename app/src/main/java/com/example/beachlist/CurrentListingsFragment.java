@@ -36,6 +36,8 @@ public class CurrentListingsFragment extends Fragment {
         recyclerView = currentListing.findViewById(R.id.current_listing_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+
+//TODO  REMOVE ALL THIS STUFF WHEN YOU ARE READY TO IMPLEMENT THE FIREBASE STUFF INTO THE PROGRAM. THIS IS BLOCK IS STRICTLY FOR TESTING*************************//
         // This is temporary, added these to test the list would display
         int listingPics[][] = {{R.drawable.bulbasaur},{R.drawable.charmander}, {R.drawable.froakie}, {R.drawable.golem}, {R.drawable.jigglypuff},
                 {R.drawable.pikachu}, {R.drawable.squirtle}, {R.drawable.sudowoodo}, {R.drawable.totodile}, {R.drawable.treeko}};
@@ -45,10 +47,14 @@ public class CurrentListingsFragment extends Fragment {
         String listingSoldFor[] = getResources().getStringArray(R.array.listing_sold_prices);
         String listingSoldTo[] = getResources().getStringArray(R.array.listing_sold_names);
         String listingSoldDate[] = getResources().getStringArray(R.array.listing_sold_dates);
+//TODO END BLOCK HERE******************************************************************************************************************************************//
 
+
+
+
+// *****************************BLOCK TO POPULATE SCREEN******************************************************************************************************//
         // clears list each time to make sure no duplicates are added
         list.clear();
-
         // adds the current listings to be the list that will be displayed
         for(int i = 0; i < listingNames.length; i++){
             ListingData listing = new ListingData(listingPics[i],listingNames[i],listingDescriptions[i],listingAskingPrices[i],
@@ -59,7 +65,8 @@ public class CurrentListingsFragment extends Fragment {
         // Links recycler view adapter
         adapter = new CurrentListingsRecyclerAdapter(getContext(),list);
         recyclerView.setAdapter(adapter);
-
+// *****************************END BLOCK TO POPULATE SCREEN******************************************************************************************************//
         return currentListing;
-    }
-}
+    } //end onCreateView()
+
+}//end CurrentListingFragment()
