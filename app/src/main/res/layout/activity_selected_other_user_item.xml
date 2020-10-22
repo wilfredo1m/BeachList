@@ -4,127 +4,168 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#08AFD6">
+    android:background="#000000">
 
-    <ScrollView
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar7"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#08AFD6"
+        android:layout_height="wrap_content"
+        android:background="#292929"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_selected_service_title"
+        android:layout_width="211dp"
+        android:layout_height="56dp"
+        android:text="other user Item"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar7"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar7"
+        app:layout_constraintHorizontal_bias="0.359"
+        app:layout_constraintStart_toEndOf="@+id/btn_back_from_user_item_page"
+        app:layout_constraintTop_toTopOf="@+id/toolbar7"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btn_back_from_user_item_page"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_outline_arrow_back_ios_24"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar7"
+        app:layout_constraintStart_toStartOf="@+id/toolbar7"
+        app:layout_constraintTop_toTopOf="@+id/toolbar7" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="389dp"
+        android:layout_height="576dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar7">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteY="90dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/item_image_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:background="#F61010">
+
+                </androidx.viewpager2.widget.ViewPager2>
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#121212"
+                    android:text="Title goes here"
+                    android:textColor="#FFFFFF"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/textView27"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#2B2B2B"
+                    android:gravity="center_horizontal"
+                    android:text="Category"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView29"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#121212"
+                    android:text="Category goes here"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/textView33"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#2B2B2B"
+                    android:gravity="center_horizontal"
+                    android:text="Price"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView35"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#121212"
+                    android:text="Price goes here"
+                    android:textColor="#FFFFFF" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/user_account_info_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="#FF03FA" />
+
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#2B2B2B"
+                    android:gravity="center_horizontal"
+                    android:text="Description"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="#121212"
+                    android:text="desciption goes here"
+                    android:textColor="#FFFFFF" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/button4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="share" />
+
+                    <Button
+                        android:id="@+id/button8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="report" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="contact seller"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#08AFD6">
-
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:background="@drawable/ic_baseline_report_24"
-                    app:layout_constraintEnd_toEndOf="@+id/button6"
-                    app:layout_constraintTop_toBottomOf="@+id/button6" />
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/colorPrimary"
-                    android:minHeight="?attr/actionBarSize"
-                    android:theme="?attr/actionBarTheme"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:text="listing descirption"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView18" />
-
-                <TextView
-                    android:id="@+id/textView16"
-                    android:layout_width="match_parent"
-                    android:layout_height="114dp"
-                    android:text="descirption here"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-                <Button
-                    android:id="@+id/button5"
-                    android:layout_width="49dp"
-                    android:layout_height="38dp"
-                    android:background="@drawable/ic_baseline_share_24"
-                    app:layout_constraintBottom_toBottomOf="@+id/toolbar5"
-                    app:layout_constraintEnd_toEndOf="@+id/toolbar5"
-                    app:layout_constraintTop_toTopOf="@+id/toolbar5" />
-
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="395dp"
-                    android:layout_height="327dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbar5"
-                    tools:srcCompat="@drawable/ic_baseline_image_24" />
-
-                <TextView
-                    android:id="@+id/textView17"
-                    android:layout_width="68dp"
-                    android:layout_height="21dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:text="price"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView18" />
-
-                <TextView
-                    android:id="@+id/textView18"
-                    android:layout_width="143dp"
-                    android:layout_height="21dp"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="48dp"
-                    app:layout_constraintStart_toEndOf="@+id/textView17"
-                    app:layout_constraintTop_toBottomOf="@+id/button6"
-                    tools:text="$200.00" />
-
-                <Button
-                    android:id="@+id/button6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="message user"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView6"
-                    tools:layout_editor_absoluteX="125dp" />
-
-                <Button
-                    android:id="@+id/button7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:background="@drawable/ic_outline_arrow_back_ios_24"
-                    app:layout_constraintBottom_toBottomOf="@+id/toolbar5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/toolbar5" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </LinearLayout>
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

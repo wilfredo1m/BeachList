@@ -26,12 +26,12 @@
         app:layout_constraintBottom_toBottomOf="@+id/toolbar7"
         app:layout_constraintEnd_toEndOf="@+id/toolbar7"
         app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toEndOf="@+id/btn_back_from_user_service_page"
+        app:layout_constraintStart_toEndOf="@+id/btn_back_from_user_item_page"
         app:layout_constraintTop_toTopOf="@+id/toolbar7"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/btn_back_from_user_service_page"
+        android:id="@+id/btn_back_from_user_item_page"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/ic_outline_arrow_back_ios_24"
@@ -58,7 +58,7 @@
                 android:orientation="vertical">
 
                 <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/service_image_pager"
+                    android:id="@+id/item_image_pager"
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
                     android:background="#E1DCDC">
