@@ -4,51 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="1dp"
-    android:background="#FFFFFF">
+    android:layout_margin="1dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="391dp"
+        android:layout_height="119dp"
         android:background="#605E5E"
         android:clickable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="390dp"
+            android:layout_height="114dp"
             android:layout_margin="3dp"
-            android:background="#000000">
-
-            <RatingBar
-                android:id="@+id/ratingBar4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="70dp"
-                android:layout_marginLeft="70dp"
-                android:isIndicator="true"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout9" />
+            android:background="#000000"
+            android:fadingEdge="horizontal"
+            android:requiresFadingEdge="horizontal|vertical">
 
             <LinearLayout
                 android:id="@+id/linearLayout9"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_width="381dp"
+                android:layout_height="108dp"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="2dp">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/ivProfileImage"
                     android:layout_width="103dp"
                     android:layout_height="100dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginLeft="4dp"
+                    android:layout_margin="1dp"
                     android:background="@drawable/ic_baseline_person_24"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="TODO"
+                    android:scaleType="centerCrop"
+                    app:civ_border_color="#7A7A7A"
+                    app:civ_border_width="4dp" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="279dp"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
@@ -75,6 +72,15 @@
                         android:text="@string/last_name"
                         android:textSize="18sp"
                         android:textStyle="bold" />
+
+                    <RatingBar
+                        android:id="@+id/ratingBar4"
+                        android:layout_width="241dp"
+                        android:layout_height="39dp"
+                        android:isIndicator="true"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5"
+                        android:transformPivotX="25dp" />
 
                 </LinearLayout>
             </LinearLayout>

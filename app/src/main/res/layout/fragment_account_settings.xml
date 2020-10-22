@@ -161,31 +161,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/account_setting_toolbar">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="#ff424242"
-            app:cardCornerRadius="100dp"
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_user_image"
+            android:layout_width="124dp"
+            android:layout_height="108dp"
+            android:background="@drawable/ic_baseline_person_24"
+            app:civ_border_color="#7A7A7A"
+            app:civ_border_width="4dp"
+            android:contentDescription="@string/user_image_description"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toTopOf="@+id/ratingBar"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="124dp"
-                android:layout_height="108dp"
-                android:layout_margin="5dp"
-                app:cardCornerRadius="100dp">
-
-                <ImageView
-                    android:id="@+id/iv_user_image"
-                    android:layout_width="124dp"
-                    android:layout_height="108dp"
-                    android:background="@drawable/ic_baseline_person_24"
-                    android:contentDescription="@string/user_image_description"
-                    android:scaleType="centerCrop" />
-            </androidx.cardview.widget.CardView>
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.222" />
 
         <TextView
             android:id="@+id/tv_first_name"
