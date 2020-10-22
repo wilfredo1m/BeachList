@@ -52,7 +52,7 @@ public class ServiceHomeSearchTab extends Fragment {
             listing_list.add(listing);
         }
 
-        adapter = new ListingRecyclerAdapter(getActivity(),listing_list);
+        adapter = new ServiceRecyclerAdapter(getActivity(),listing_list);
         recyclerView.setAdapter(adapter);
         //***********************************************************************
 

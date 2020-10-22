@@ -13,37 +13,37 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class ListingRecyclerAdapter extends RecyclerView.Adapter<ListingRecyclerAdapter.MyViewHolder> {
+public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecyclerAdapter.MyViewHolder> {
     Context context;
     List<ListingData> list;
 
-    public ListingRecyclerAdapter(Context context, List<ListingData> list) {
+    public ServiceRecyclerAdapter(Context context, List<ListingData> list) {
         this.context = context;
         this.list = list;
     }
 
     @NonNull
     @Override
-    public ListingRecyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ServiceRecyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.service_row,parent,false);
-        return new ListingRecyclerAdapter.MyViewHolder(view);
+        return new ServiceRecyclerAdapter.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListingRecyclerAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ServiceRecyclerAdapter.MyViewHolder holder, final int position) {
         holder.listingPic.setImageResource(list.get(position).getListingPhotos()[0]);
         holder.listingTitle.setText(list.get(position).getListingTitle());
         holder.listingPrice.setText("$" + list.get(position).getAskingPrice());
 
-//        // when a listing is clicked, the position is taken to get that listings info
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, SelectedUser.class);
-//                intent.putExtra("position", position);
-//                context.startActivity(intent);
-//            }
-//        });
+        // when a listing is clicked, the position is taken to get that listings info
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, SelectedService.class);
+                intent.putExtra("position", position);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

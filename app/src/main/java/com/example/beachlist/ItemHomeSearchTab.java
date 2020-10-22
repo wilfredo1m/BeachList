@@ -48,7 +48,7 @@ public class ItemHomeSearchTab extends Fragment {
             listing_list.add(listing);
         }
 
-        adapter = new ListingRecyclerAdapter(getActivity(),listing_list);
+        adapter = new ItemRecyclerAdapter(getActivity(),listing_list);
         recyclerView.setAdapter(adapter);
         //***********************************************************************
 
