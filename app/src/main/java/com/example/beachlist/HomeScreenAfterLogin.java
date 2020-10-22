@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeScreenAfterLogin extends AppCompatActivity {
-    int callingActivity;
+    int callingActivity, startTab;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +35,35 @@ public class HomeScreenAfterLogin extends AppCompatActivity {
         // and what screen from the bottom nav should be displayed
         callingActivity = checkCallingActivity();
 
-        // Display Messages Screen
+        // Display Home Tabs screen
+        if(callingActivity == 0){
+            startTab = startTab();
+
+            // Display Users tab
+            if(startTab == 1){
+                Intent intent = new Intent(this, HomeFragment.class);
+                intent.putExtra("tab", 1);
+                startActivity(intent);
+            }
+
+            // Display Services tab
+            else if(startTab == 2){
+                Intent intent = new Intent(this, HomeFragment.class);
+                intent.putExtra("tab", 2);
+                startActivity(intent);
+            }
+        }
+
+        // Display Messages screen
         if(callingActivity == 1){
             bottomNavigationView.setSelectedItemId(R.id.fragment_messages);
         }
-        // Display create post screen
+        // Display Create Post screen
         else if(callingActivity == 2){
             bottomNavigationView.setSelectedItemId(R.id.fragment_create_post);
         }
 
-        // Display account settings screen
+        // Display Account Settings screen
         if(callingActivity == 3){
             bottomNavigationView.setSelectedItemId(R.id.fragment_account_settings);
         }
@@ -59,5 +78,13 @@ public class HomeScreenAfterLogin extends AppCompatActivity {
     public int checkCallingActivity() {
         callingActivity = getIntent().getIntExtra("screen",7);
         return callingActivity;
+    }
+
+    // Will tell us which tab to open
+    // 1 is Users
+    // 2 is Services
+    public int startTab(){
+        startTab = getIntent().getIntExtra("tab",7);
+        return startTab;
     }
 }

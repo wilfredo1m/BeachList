@@ -27,6 +27,7 @@ public class SelectedService extends AppCompatActivity {
 
     public void openHomeScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
+        openScreen.putExtra("tab",2);
         startActivity(openScreen);
     }
 }

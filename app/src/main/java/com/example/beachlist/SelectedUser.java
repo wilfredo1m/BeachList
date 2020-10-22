@@ -99,6 +99,7 @@ public class SelectedUser extends AppCompatActivity {
 
     public void openHomeScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
+        openScreen.putExtra("tab",1);
         startActivity(openScreen);
     }
 

@@ -37,6 +37,7 @@ public class HomeFragment extends Fragment {
         viewPager = view.findViewById(R.id.viewPager);
         tabLayout = view.findViewById(R.id.home_menu_tab_view);
 
+
         return view;
     }
 
@@ -46,6 +47,17 @@ public class HomeFragment extends Fragment {
 
         setUpViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
+
+        // Open the correct tab based on which screen we came from
+        int tab = getActivity().getIntent().getIntExtra("tab",8);
+        // Users
+        if(tab == 1) {
+            tabLayout.getTabAt(1).select();
+        }
+        // Services
+        else if(tab == 2){
+            tabLayout.getTabAt(2).select();
+        }
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
