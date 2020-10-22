@@ -49,9 +49,11 @@
                 app:layout_constraintStart_toStartOf="@+id/friend_first_name"
                 app:layout_constraintTop_toBottomOf="@+id/friend_first_name" />
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivProfileImage"
                 android:layout_width="103dp"
+                app:civ_border_color="#7A7A7A"
+                app:civ_border_width="4dp"
                 android:layout_height="96dp"
                 android:layout_marginStart="4dp"
                 android:layout_marginLeft="4dp"
