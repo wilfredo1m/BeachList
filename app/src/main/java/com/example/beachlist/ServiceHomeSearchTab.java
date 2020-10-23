@@ -42,13 +42,18 @@ public class ServiceHomeSearchTab extends Fragment {
         int listingPics[][] = {{R.drawable.bulbasaur},{R.drawable.charmander}, {R.drawable.froakie}, {R.drawable.golem}, {R.drawable.jigglypuff},
                 {R.drawable.pikachu}, {R.drawable.squirtle}, {R.drawable.sudowoodo}, {R.drawable.totodile}, {R.drawable.treeko}};
         String listingNames[] = getResources().getStringArray(R.array.listing_names);
+        String listingDescriptions[] = getResources().getStringArray(R.array.listing_descriptions);
         String listingAskingPrices[] = getResources().getStringArray(R.array.listing_asking_prices);
+        String listingSoldFor[] = getResources().getStringArray(R.array.listing_sold_prices);
+        String listingSoldTo[] = getResources().getStringArray(R.array.listing_sold_names);
+        String listingSoldDate[] = getResources().getStringArray(R.array.listing_sold_dates);
 
         // clears list each time to make sure no duplicates are added
         listing_list.clear();
 
         for(int i = 0; i < listingNames.length; i++){
-            ListingData listing = new ListingData(listingPics[i],listingNames[i],listingAskingPrices[i]);
+            ListingData listing = new ListingData(listingPics[i],listingNames[i],listingDescriptions[i],listingAskingPrices[i],
+                    listingSoldFor[i], listingSoldTo[i], listingSoldDate[i]);
             listing_list.add(listing);
         }
 

@@ -16,12 +16,12 @@ public class ListingData {
         listingSoldDate = soldDate;
     }
 
-    // For the display of all listings we only need the first photo, title and asking price
-    public ListingData(int[] photos, String title,String askFor){
-        listingPhotos = photos;
-        listingTitle = title;
-        askingPrice = askFor;
-    }
+//    // For the display of all listings we only need the first photo, title and asking price
+//    public ListingData(int[] photos, String title,String askFor){
+//        listingPhotos = photos;
+//        listingTitle = title;
+//        askingPrice = askFor;
+//    }
 
     public String getListingSoldDate(){ return listingSoldDate; }
 

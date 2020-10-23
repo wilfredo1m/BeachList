@@ -44,6 +44,7 @@ public class SelectedOwnListing extends AppCompatActivity {
         listingTitle.setText(CurrentListingsFragment.list.get(position).getListingTitle());
         listingDescription.setText(CurrentListingsFragment.list.get(position).getListingDescription());
         listingPrice.setText("$"+CurrentListingsFragment.list.get(position).getAskingPrice());
+        //********************************************************
 
         // Modify current listing
         modListingButton = findViewById(R.id.selected_own_listing_modify_btn);
