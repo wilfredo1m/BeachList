@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -124,6 +125,8 @@ public class ListingTitlePage extends AppCompatActivity {
 
     public void openItemDescriptionScreen(){
         Intent openScreen = new Intent(this, ListingDescriptionPage.class);
+        TextView titleTextView = findViewById(R.id.et_listing_title);
+        openScreen.putExtra("ListingTitle", titleTextView.getText().toString());
         startActivity(openScreen);
     }
     public void openCreatePostScreen(){
