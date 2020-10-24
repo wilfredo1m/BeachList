@@ -79,17 +79,29 @@ public class ListingDescriptionPage extends AppCompatActivity {
         //get intent from previous screen
         Intent intent = getIntent();
         String title = intent.getExtras().getString("ListingTitle");
-        //Toast.makeText(getApplicationContext(), title, Toast.LENGTH_SHORT).show();
+
+        //get the filled information from this screen
+        //TODO this radiobutton & spinner call crashes it if you go back and replace with something else. We will prob need an intent to select upon back in order to fix this from crashing
+        String category = spinner.getSelectedItem().toString();
+        String listingType = radioButton.getText().toString();
+       //TODO end problem children
+        //Toast.makeText(getApplicationContext(), listingType, Toast.LENGTH_SHORT).show();
+
+        //pull typed value for listing price
+        TextView listingPrice = findViewById(R.id.et_listing_price);
+        TextView description = findViewById(R.id.et_listing_description);
 
         //begin intent to change screen
         Intent openScreen = new Intent(this, ListingReviewPage.class);
 
-        //pull typed value for listing price
-        TextView listingPrice = findViewById(R.id.et_listing_price);
+
 
         //block to pass intents to the next screen
         openScreen.putExtra("listingPrice", listingPrice.getText().toString());
         openScreen.putExtra("ListingTitle", title);
+        openScreen.putExtra("ListingCategory", category);
+        openScreen.putExtra("ListingType", listingType);
+        openScreen.putExtra("ListingDescription", description.getText().toString());
         //go to next screen
         startActivity(openScreen);
     }//end goToPostListingPage()

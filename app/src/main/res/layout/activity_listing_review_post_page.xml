@@ -110,17 +110,6 @@
         app:layout_constraintTop_toTopOf="@+id/textView14"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/et_listing_pic_review"
-        android:layout_width="match_parent"
-        android:layout_height="254dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/ic_baseline_image_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_seek_bar" />
-
     <Button
         android:id="@+id/btn_submit_post"
         android:layout_width="match_parent"
@@ -152,16 +141,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/toolbar10"
         app:layout_constraintStart_toStartOf="@+id/toolbar10"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="92dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_listing_pic_review" />
 
     <LinearLayout
         android:id="@+id/linearLayout12"
@@ -254,5 +233,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_listing_price_review"
         app:layout_constraintVertical_bias="0.788" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="394dp"
+        android:layout_height="277dp"
+        android:layout_marginTop="28dp"
+        android:background="#E12B2B"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_seek_bar"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/CategoryLbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2B2B2B"
+        android:gravity="center_horizontal"
+        android:text="Category"
+        app:layout_constraintBottom_toTopOf="@+id/et_listing_category_review"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_listing_price_review" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2B2B2B"
+        android:gravity="center_horizontal"
+        android:text="Description"
+        app:layout_constraintBottom_toTopOf="@+id/et_listing_description_review"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_listing_category_review" />
+
+    <TextView
+        android:id="@+id/et_listing_type_review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#121212"
+        app:layout_constraintTop_toBottomOf="@+id/et_listing_description_review"
+        tools:layout_editor_absoluteX="102dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

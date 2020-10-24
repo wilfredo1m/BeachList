@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ListingReviewPage extends AppCompatActivity {
     Button submitPost, cancelButton, backButton;
     ImageView listingPic;
-    TextView listingTitle, listingDescription, listingPrice, listingCategory;
+    TextView listingTitle, listingDescription, listingPrice, listingCategory, listingType;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,14 +91,32 @@ public class ListingReviewPage extends AppCompatActivity {
         //pull value of the listing price to the screen
         String price = intent.getExtras().getString("listingPrice");
         String title = intent.getExtras().getString("ListingTitle");
+        String description = intent.getExtras().getString("ListingDescription");
+        String category = intent.getExtras().getString("ListingCategory");
+        String type = intent.getExtras().getString("ListingType");
+
+
         //Toast.makeText(getApplicationContext(), price, Toast.LENGTH_SHORT).show();
-        listingPic = findViewById(R.id.et_listing_pic_review); // will change once we figure out how to take in multiple pics
+        //listingPic = findViewById(R.id.et_listing_pic_review); // will change once we figure out how to take in multiple pics
+
+
+//working group that populates the screen***************************************//
+        //works
         listingTitle = findViewById(R.id.et_listing_title_review);
         listingTitle.setText(title);
+        //works
         listingPrice = findViewById(R.id.et_listing_price_review);
         listingPrice.setText(price);
-        listingDescription = findViewById(R.id.et_listing_description);
+        //works
+        listingDescription = findViewById(R.id.et_listing_description_review);
+        listingDescription.setText(description);
+        //works
         listingCategory = findViewById(R.id.et_listing_category_review);
+        listingCategory.setText(category);
+        //works
+        listingType = findViewById(R.id.et_listing_type_review);
+        listingType.setText(type);
+//end working group*********************************************************//
     }
 
 

@@ -102,14 +102,12 @@
         <item>misc</item>
     </string-array>
 
-    <!-- Item Categories -->
+    <!-- Service Categories -->
     <string-array name="service_categoies">
         <item>--select a service--</item>
         <item>tutoring-</item>
         <item>repair</item>
-        <item>furniture</item>
-        <item>game</item>
-        <item>misc</item>
+        <item>commission</item>
     </string-array>
     <!-- test first names  -->
     <string-array name="first_names">
