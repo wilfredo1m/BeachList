@@ -2,12 +2,14 @@ package com.example.beachlist;
 
 public class ListingData {
     private int[] listingPhotos;
-    String listingTitle, listingDescription, listingSoldTo, listingSoldDate, soldPrice, askingPrice;
+    String listingTitle, listingDescription, listingSoldTo, listingSoldDate, soldPrice, askingPrice, sellerFirstName, sellerLastName;
 
     // For specific listings
-    public ListingData(int[] photos, String title, String description, String askFor,
+    public ListingData(int[] photos, String firstName, String lastName, String title, String description, String askFor,
                        String soldFor, String soldTo, String soldDate){
         listingPhotos = photos;
+        sellerFirstName = firstName;
+        sellerLastName = lastName;
         listingTitle = title;
         listingDescription = description;
         askingPrice = askFor;
@@ -16,7 +18,6 @@ public class ListingData {
         listingSoldDate = soldDate;
     }
 
-//    // For the display of all listings we only need the first photo, title and asking price
 //    public ListingData(int[] photos, String title,String askFor){
 //        listingPhotos = photos;
 //        listingTitle = title;
@@ -73,5 +74,21 @@ public class ListingData {
 
     public void setSoldPrice(String soldPrice) {
         this.soldPrice = soldPrice;
+    }
+
+    public String getSellerFirstName() {
+        return sellerFirstName;
+    }
+
+    public void setSellerFirstName(String sellerFirstName) {
+        this.sellerFirstName = sellerFirstName;
+    }
+
+    public String getSellerLastName() {
+        return sellerLastName;
+    }
+
+    public void setSellerLastName(String sellerLastName) {
+        this.sellerLastName = sellerLastName;
     }
 }

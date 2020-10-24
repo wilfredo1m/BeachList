@@ -15,7 +15,7 @@ public class SelectedItem extends AppCompatActivity {
     ViewPager2 viewPager;
     int[] images = {R.drawable.pokemon1, R.drawable.pokemon2,R.drawable.pokemon3,R.drawable.pokemon4,R.drawable.pokemon5};
     ImageAdapter adapter;
-    TextView itemTitle, itemDescription, itemPrice, itemCategory;
+    TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,7 +31,9 @@ public class SelectedItem extends AppCompatActivity {
         itemTitle = findViewById(R.id.selected_item_title);
         itemDescription = findViewById(R.id.selected_item_description);
         itemPrice = findViewById(R.id.selected_item_price);
-        //itemCategory = findViewById(R.id.selected_item_category);
+        //itemCategory = findViewById(R.id.selected_service_category);
+        itemSellerFirstName = findViewById(R.id.item_seller_firstname);
+        itemSellerLastName = findViewById(R.id.item_seller_lastname);
 
         // gets the item's information to display
         int position = getIntent().getIntExtra("position",1);
@@ -40,7 +42,9 @@ public class SelectedItem extends AppCompatActivity {
         itemTitle.setText(ItemHomeSearchTab.listing_list.get(position).getListingTitle());
         itemDescription.setText(ItemHomeSearchTab.listing_list.get(position).getListingDescription());
         itemPrice.setText("$"+ItemHomeSearchTab.listing_list.get(position).getAskingPrice());
-        //itemCategory.setText(ItemHomeSearchTab.listing_list.get(position).getCategory());
+        itemSellerFirstName.setText(ItemHomeSearchTab.listing_list.get(position).getSellerFirstName());
+        itemSellerLastName.setText(ItemHomeSearchTab.listing_list.get(position).getSellerLastName());
+        //itemCategory.setText(ServiceHomeSearchTab.listing_list.get(position).getCategory());
 
         //********************************************************
 
@@ -59,5 +63,10 @@ public class SelectedItem extends AppCompatActivity {
     public void openHomeScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         startActivity(openScreen);
+    }
+
+    public void SendToUserPage(View view) {
+        Intent intent = new Intent(this, SelectedUser.class);
+        startActivity(intent);
     }
 }

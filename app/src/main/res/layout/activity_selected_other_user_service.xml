@@ -112,8 +112,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:background="#292929">
+                    android:layout_height="wrap_content"
+                    android:background="#F4F4F4">
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="391dp"
@@ -158,7 +158,7 @@
 
                                     <TextView
 
-                                        android:id="@+id/service_user_f_name"
+                                        android:id="@+id/service_seller_firstname"
                                         android:layout_width="match_parent"
                                         android:layout_height="30dp"
                                         android:layout_marginTop="12dp"
@@ -170,7 +170,7 @@
                                         android:textStyle="bold" />
 
                                     <TextView
-                                        android:id="@+id/service_user_l_name"
+                                        android:id="@+id/service_seller_lastname"
                                         android:layout_width="match_parent"
                                         android:layout_height="30dp"
                                         android:layout_marginTop="12dp"
@@ -183,7 +183,7 @@
 
                                     <RatingBar
 
-                                        android:id="@+id/service_user_rating"
+                                        android:id="@+id/service_seller_rating"
                                         android:layout_width="241dp"
                                         android:layout_height="39dp"
                                         android:isIndicator="true"

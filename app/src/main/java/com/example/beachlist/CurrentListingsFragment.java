@@ -41,6 +41,8 @@ public class CurrentListingsFragment extends Fragment {
         // This is temporary, added these to test the list would display
         int listingPics[][] = {{R.drawable.bulbasaur},{R.drawable.charmander}, {R.drawable.froakie}, {R.drawable.golem}, {R.drawable.jigglypuff},
                 {R.drawable.pikachu}, {R.drawable.squirtle}, {R.drawable.sudowoodo}, {R.drawable.totodile}, {R.drawable.treeko}};
+        String sellerFirstNames[] = getResources().getStringArray(R.array.first_names);
+        String sellerLastNames[] = getResources().getStringArray(R.array.last_names);
         String listingNames[] = getResources().getStringArray(R.array.listing_names);
         String listingDescriptions[] = getResources().getStringArray(R.array.listing_descriptions);
         String listingAskingPrices[] = getResources().getStringArray(R.array.listing_asking_prices);
@@ -57,7 +59,7 @@ public class CurrentListingsFragment extends Fragment {
         list.clear();
         // adds the current listings to be the list that will be displayed
         for(int i = 0; i < listingNames.length; i++){
-            ListingData listing = new ListingData(listingPics[i],listingNames[i],listingDescriptions[i],listingAskingPrices[i],
+            ListingData listing = new ListingData(listingPics[i],sellerFirstNames[i], sellerLastNames[i], listingNames[i],listingDescriptions[i],listingAskingPrices[i],
                     listingSoldFor[i], listingSoldTo[i], listingSoldDate[i]);
             list.add(listing);
         }

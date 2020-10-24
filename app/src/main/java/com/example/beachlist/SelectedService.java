@@ -14,7 +14,7 @@ public class SelectedService extends AppCompatActivity {
     ViewPager2 viewPager;
     int[] images = {R.drawable.pokemon1, R.drawable.pokemon2,R.drawable.pokemon3,R.drawable.pokemon4,R.drawable.pokemon5};
     ImageAdapter adapter;
-    TextView itemTitle, itemDescription, itemPrice, itemCategory;
+    TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,6 +31,8 @@ public class SelectedService extends AppCompatActivity {
         itemDescription = findViewById(R.id.selected_service_description);
         itemPrice = findViewById(R.id.selected_service_price);
         //itemCategory = findViewById(R.id.selected_service_category);
+        itemSellerFirstName = findViewById(R.id.service_seller_firstname);
+        itemSellerLastName = findViewById(R.id.service_seller_lastname);
 
         // gets the service's information to display
         int position = getIntent().getIntExtra("position",1);
@@ -39,6 +41,8 @@ public class SelectedService extends AppCompatActivity {
         itemTitle.setText(ServiceHomeSearchTab.listing_list.get(position).getListingTitle());
         itemDescription.setText(ServiceHomeSearchTab.listing_list.get(position).getListingDescription());
         itemPrice.setText("$"+ServiceHomeSearchTab.listing_list.get(position).getAskingPrice());
+        itemSellerFirstName.setText(ServiceHomeSearchTab.listing_list.get(position).getSellerFirstName());
+        itemSellerLastName.setText(ServiceHomeSearchTab.listing_list.get(position).getSellerLastName());
         //itemCategory.setText(ServiceHomeSearchTab.listing_list.get(position).getCategory());
 
         //********************************************************
@@ -61,5 +65,10 @@ public class SelectedService extends AppCompatActivity {
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         openScreen.putExtra("tab",2);
         startActivity(openScreen);
+    }
+
+    public void SendToUserPage(View view) {
+        Intent intent = new Intent(this, SelectedUser.class);
+        startActivity(intent);
     }
 }
