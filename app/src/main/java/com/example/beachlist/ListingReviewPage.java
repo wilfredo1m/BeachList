@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,9 @@ public class ListingReviewPage extends AppCompatActivity {
 
         // Get input fields
         getUserInputs();
+
+
+
 
 //************************BUTTON BLOCK********************************************************//
         // Create Post
@@ -82,9 +86,17 @@ public class ListingReviewPage extends AppCompatActivity {
     }
     //retrieve all inputs from user
     public void getUserInputs(){
+        //INTENT IN ORDER TO RECEIVE THE TITLE FROM THE HOME PAGE
+        Intent intent = getIntent();
+        //pull value of the listing price to the screen
+        String price = intent.getExtras().getString("listingPrice");
+        String title = intent.getExtras().getString("ListingTitle");
+        //Toast.makeText(getApplicationContext(), price, Toast.LENGTH_SHORT).show();
         listingPic = findViewById(R.id.et_listing_pic_review); // will change once we figure out how to take in multiple pics
         listingTitle = findViewById(R.id.et_listing_title_review);
+        listingTitle.setText(title);
         listingPrice = findViewById(R.id.et_listing_price_review);
+        listingPrice.setText(price);
         listingDescription = findViewById(R.id.et_listing_description);
         listingCategory = findViewById(R.id.et_listing_category_review);
     }

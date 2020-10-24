@@ -76,15 +76,23 @@ public class ListingDescriptionPage extends AppCompatActivity {
     }
     //set intent to open listing review page
     public void goToPostListingPage(){
+        //get intent from previous screen
+        Intent intent = getIntent();
+        String title = intent.getExtras().getString("ListingTitle");
+        //Toast.makeText(getApplicationContext(), title, Toast.LENGTH_SHORT).show();
+
+        //begin intent to change screen
         Intent openScreen = new Intent(this, ListingReviewPage.class);
-     //   TextView descriptionTextView = findViewById(R.id.et_listing_description);
-     //   TextView listingPrice = findViewById(R.id.et_listing_price);
-     //   openScreen.putExtra("listingDescription", descriptionTextView.getText().toString());
-     //   openScreen.putExtra("listingPrice", listingPrice.getText().toString());
-     //   openScreen.putExtra("category", spinner.getSelectedItem().toString());
-     //   openScreen.putExtra("listingType", radioButton.getText().toString());
+
+        //pull typed value for listing price
+        TextView listingPrice = findViewById(R.id.et_listing_price);
+
+        //block to pass intents to the next screen
+        openScreen.putExtra("listingPrice", listingPrice.getText().toString());
+        openScreen.putExtra("ListingTitle", title);
+        //go to next screen
         startActivity(openScreen);
-    }
+    }//end goToPostListingPage()
 
     //radio button on click listener
     public void rbclick(View v){
@@ -99,7 +107,7 @@ public class ListingDescriptionPage extends AppCompatActivity {
         //convert id value to a string
         String text = radioButton.getText().toString();
         //print as a test statement to see which id is being pressed
-        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
 
         //if blocks to check which radio button is pressed to populate the spinner
         if( text.equalsIgnoreCase("item"))
