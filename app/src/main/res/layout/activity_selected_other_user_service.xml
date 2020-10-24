@@ -118,6 +118,7 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="391dp"
                         android:layout_height="119dp"
+                        android:layout_margin="2dp"
                         android:background="#605E5E"
                         android:clickable="true"
                         android:onClick="SendToUserPage"
@@ -154,7 +155,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:orientation="vertical" >
+                                    android:orientation="vertical">
 
                                     <TextView
 
