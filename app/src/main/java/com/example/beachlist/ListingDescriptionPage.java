@@ -77,12 +77,12 @@ public class ListingDescriptionPage extends AppCompatActivity {
     //set intent to open listing review page
     public void goToPostListingPage(){
         Intent openScreen = new Intent(this, ListingReviewPage.class);
-        TextView descriptionTextView = findViewById(R.id.et_listing_description);
-        TextView listingPrice = findViewById(R.id.et_listing_price);
-        openScreen.putExtra("listingDescription", descriptionTextView.getText().toString());
-        openScreen.putExtra("listingPrice", listingPrice.getText().toString());
-        openScreen.putExtra("category", spinner.getSelectedItem().toString());
-        openScreen.putExtra("listingType", radioButton.getText().toString());
+     //   TextView descriptionTextView = findViewById(R.id.et_listing_description);
+     //   TextView listingPrice = findViewById(R.id.et_listing_price);
+     //   openScreen.putExtra("listingDescription", descriptionTextView.getText().toString());
+     //   openScreen.putExtra("listingPrice", listingPrice.getText().toString());
+     //   openScreen.putExtra("category", spinner.getSelectedItem().toString());
+     //   openScreen.putExtra("listingType", radioButton.getText().toString());
         startActivity(openScreen);
     }
 
