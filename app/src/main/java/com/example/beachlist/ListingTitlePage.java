@@ -43,18 +43,6 @@ public class ListingTitlePage extends AppCompatActivity {
         viewPager = findViewById(R.id.listing_images);
         adapter = new ImageAdapter(images);
         viewPager.setAdapter(adapter);
-
-//        CompositePageTransformer transformer = new CompositePageTransformer();
-//        transformer.addTransformer(new MarginPageTransformer(8));
-//        transformer.addTransformer(new ViewPager2.PageTransformer() {
-//            @Override
-//            public void transformPage(@NonNull View page, float position) {
-//                float v = 1 - Math.abs(position);
-//                page.setScaleY(0.8f+v*0.2f);
-//            }
-//        });
-//
-//        viewPager.setPageTransformer(transformer);
         //********************************************************
 
         // Check which screen we just came from to determine whether we need to access the camera gallery
@@ -127,6 +115,7 @@ public class ListingTitlePage extends AppCompatActivity {
         Intent openScreen = new Intent(this, ListingDescriptionPage.class);
         TextView titleTextView = findViewById(R.id.et_listing_title);
         openScreen.putExtra("ListingTitle", titleTextView.getText().toString());
+        openScreen.putExtra("ListingPics", images);
         startActivity(openScreen);
     }
     public void openCreatePostScreen(){

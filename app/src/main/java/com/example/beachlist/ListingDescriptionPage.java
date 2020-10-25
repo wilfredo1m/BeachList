@@ -79,6 +79,7 @@ public class ListingDescriptionPage extends AppCompatActivity {
         //get intent from previous screen
         Intent intent = getIntent();
         String title = intent.getExtras().getString("ListingTitle");
+        int [] images = intent.getExtras().getIntArray("ListingPics");
 
         //get the filled information from this screen
         //TODO this radiobutton & spinner call crashes it if you go back and replace with something else. We will prob need an intent to select upon back in order to fix this from crashing
@@ -97,7 +98,8 @@ public class ListingDescriptionPage extends AppCompatActivity {
 
 
         //block to pass intents to the next screen
-        openScreen.putExtra("listingPrice", listingPrice.getText().toString());
+        openScreen.putExtra("ListingPics", images);
+        openScreen.putExtra("ListingPrice", listingPrice.getText().toString());
         openScreen.putExtra("ListingTitle", title);
         openScreen.putExtra("ListingCategory", category);
         openScreen.putExtra("ListingType", listingType);

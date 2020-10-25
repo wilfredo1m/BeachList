@@ -11,10 +11,13 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
 public class ListingReviewPage extends AppCompatActivity {
     Button submitPost, cancelButton, backButton;
-    ImageView listingPic;
+    //ImageView listingPic;
+    ViewPager2 viewPager;
+    ImageAdapter adapter;
     TextView listingTitle, listingDescription, listingPrice, listingCategory, listingType;
 
     @Override
@@ -24,6 +27,7 @@ public class ListingReviewPage extends AppCompatActivity {
 
         // Get input fields
         getUserInputs();
+
 
 
 
@@ -63,12 +67,12 @@ public class ListingReviewPage extends AppCompatActivity {
 
     }
 
-    //intent to open homescreen
+    //intent to open home screen
     public void openHomeScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         startActivity(openScreen);
     }
-    //intent to open createpost screen
+    //intent to open create post screen
     public void openCreatePostScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         openScreen.putExtra("screen", 2);
@@ -89,7 +93,8 @@ public class ListingReviewPage extends AppCompatActivity {
         //INTENT IN ORDER TO RECEIVE THE TITLE FROM THE HOME PAGE
         Intent intent = getIntent();
         //pull value of the listing price to the screen
-        String price = intent.getExtras().getString("listingPrice");
+        int[] pics = intent.getExtras().getIntArray("ListingPics");
+        String price = intent.getExtras().getString("ListingPrice");
         String title = intent.getExtras().getString("ListingTitle");
         String description = intent.getExtras().getString("ListingDescription");
         String category = intent.getExtras().getString("ListingCategory");
@@ -101,6 +106,11 @@ public class ListingReviewPage extends AppCompatActivity {
 
 
 //working group that populates the screen***************************************//
+
+        viewPager = findViewById(R.id.review_listing_images);
+        adapter = new ImageAdapter(pics);
+        viewPager.setAdapter(adapter);
+
         //works
         listingTitle = findViewById(R.id.et_listing_title_review);
         listingTitle.setText(title);
