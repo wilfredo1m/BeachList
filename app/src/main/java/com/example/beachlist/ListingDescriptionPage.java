@@ -62,7 +62,7 @@ public class ListingDescriptionPage extends AppCompatActivity {
 //************************************END BUTTON GROUP**********************************************//
     }
 
-    //set intent to open createpost screen
+    //set intent to open create post screen
     public void openCreatePostScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         openScreen.putExtra("screen",2);

@@ -102,19 +102,10 @@ public class ListingReviewPage extends AppCompatActivity {
         String type = intent.getExtras().getString("ListingType");
 
 
-        //Toast.makeText(getApplicationContext(), price, Toast.LENGTH_SHORT).show();
-        //listingPic = findViewById(R.id.et_listing_pic_review); // will change once we figure out how to take in multiple pics
-
-
         //working group that populates the screen***************************************//
-
-//        viewPager = findViewById(R.id.review_listing_images);
-//        adapter = new ImageAdapter(pics);
-//        viewPager.setAdapter(adapter);
 
         byte[] byteArray = getIntent().getByteArrayExtra("ListingPics");
         Bitmap images = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-
         listingPic.setImageBitmap(images);
 
 

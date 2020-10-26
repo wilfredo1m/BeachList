@@ -36,12 +36,8 @@ public class ListingTitlePage extends AppCompatActivity {
     InputStream input;
     private Uri filePath;
     int callingActivity;
-    public static List<InputStream> listing_images;
-    EditText listingTitle;
     ImageView listingPic;
     ViewPager2 viewPager;
-//    int[] images = {R.drawable.pokemon1, R.drawable.pokemon2,R.drawable.pokemon3,R.drawable.pokemon4,R.drawable.pokemon5};
-
     ImageAdapter adapter;
 
     @Override
@@ -135,9 +131,6 @@ public class ListingTitlePage extends AppCompatActivity {
 
                 // Address of image in phone
                 filePath = data.getData();
-
-                // Stream to read image data
-//                InputStream input;
 
                 try {
                     input = getContentResolver().openInputStream(filePath);
