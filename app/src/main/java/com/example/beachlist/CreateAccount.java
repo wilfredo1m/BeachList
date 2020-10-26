@@ -152,15 +152,15 @@ public class CreateAccount extends AppCompatActivity {
         final String email = emailEt.getText().toString();
 
         // Provided email cant be shorter than 19 characters since "@student.csulb.edu" is fixed at 18 characters
-        if (email.length() <= 18) {
-            displayMalformedEmailError();
-            return;
-        }
-        // Checks if the email provided is a student csulb email
-        else if (!isValidSchoolEmail(email)) {
-            displayMalformedEmailError();
-            return;
-        }
+//        if (email.length() <= 18) {
+//            displayMalformedEmailError();
+//            return;
+//        }
+//        // Checks if the email provided is a student csulb email
+//        else if (!isValidSchoolEmail(email)) {
+//            displayMalformedEmailError();
+//            return;
+//        }
 
         //Login progress dialog
         final ProgressDialog progressDialog = new ProgressDialog(this);
