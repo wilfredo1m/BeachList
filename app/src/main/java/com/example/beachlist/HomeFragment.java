@@ -45,6 +45,7 @@ public class HomeFragment extends Fragment {
 
         setUpViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(0).select();
 
         //*************************CALL FROM HOMEAFTERLOGIN TO SEE WHICH TAB TO GO TO AFTER BACKBUTTON PRESS IN A SELECTED PAGE***************************//
         // Open the correct tab based on which screen we came from

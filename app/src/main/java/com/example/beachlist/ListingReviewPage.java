@@ -1,6 +1,8 @@
 package com.example.beachlist;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +17,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 public class ListingReviewPage extends AppCompatActivity {
     Button submitPost, cancelButton, backButton;
-    //ImageView listingPic;
+    ImageView listingPic;
     ViewPager2 viewPager;
     ImageAdapter adapter;
     TextView listingTitle, listingDescription, listingPrice, listingCategory, listingType;
@@ -25,11 +27,10 @@ public class ListingReviewPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listing_review_post_page);
 
+        listingPic = findViewById(R.id.review_listing_images);
+
         // Get input fields
         getUserInputs();
-
-
-
 
 
 //************************BUTTON BLOCK********************************************************//
@@ -93,7 +94,7 @@ public class ListingReviewPage extends AppCompatActivity {
         //INTENT IN ORDER TO RECEIVE THE TITLE FROM THE HOME PAGE
         Intent intent = getIntent();
         //pull value of the listing price to the screen
-        int[] pics = intent.getExtras().getIntArray("ListingPics");
+//        int pic = intent.getExtras().getInt("ListingPics");
         String price = intent.getExtras().getString("ListingPrice");
         String title = intent.getExtras().getString("ListingTitle");
         String description = intent.getExtras().getString("ListingDescription");
@@ -105,11 +106,18 @@ public class ListingReviewPage extends AppCompatActivity {
         //listingPic = findViewById(R.id.et_listing_pic_review); // will change once we figure out how to take in multiple pics
 
 
-//working group that populates the screen***************************************//
+        //working group that populates the screen***************************************//
 
-        viewPager = findViewById(R.id.review_listing_images);
-        adapter = new ImageAdapter(pics);
-        viewPager.setAdapter(adapter);
+//        viewPager = findViewById(R.id.review_listing_images);
+//        adapter = new ImageAdapter(pics);
+//        viewPager.setAdapter(adapter);
+
+        byte[] byteArray = getIntent().getByteArrayExtra("ListingPics");
+        Bitmap images = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+
+        listingPic.setImageBitmap(images);
+
+
 
         //works
         listingTitle = findViewById(R.id.et_listing_title_review);

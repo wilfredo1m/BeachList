@@ -234,7 +234,20 @@
         app:layout_constraintTop_toBottomOf="@+id/et_listing_price_review"
         app:layout_constraintVertical_bias="0.788" />
 
-    <androidx.viewpager2.widget.ViewPager2
+<!--    <androidx.viewpager2.widget.ViewPager2-->
+<!--        android:id="@+id/review_listing_images"-->
+<!--        android:layout_width="394dp"-->
+<!--        android:layout_height="277dp"-->
+<!--        android:layout_marginTop="28dp"-->
+<!--        android:background="#E12B2B"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/linearLayout12"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/title_seek_bar"-->
+<!--        app:layout_constraintVertical_bias="0.0" />-->
+
+    <ImageView
         android:id="@+id/review_listing_images"
         android:layout_width="394dp"
         android:layout_height="277dp"
@@ -245,7 +258,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_seek_bar"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"/>
 
     <TextView
         android:id="@+id/CategoryLbl"
