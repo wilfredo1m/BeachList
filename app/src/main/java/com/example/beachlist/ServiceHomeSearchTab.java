@@ -29,7 +29,6 @@ public class ServiceHomeSearchTab extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     public static List<DataSnapshot> listing_list = new ArrayList<>();
-    public static List<String> listing_images = new ArrayList<>();
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private FirebaseUser user;
     private FirebaseAuth mAuth;
@@ -55,17 +54,17 @@ public class ServiceHomeSearchTab extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        // Test Arrays to make sure the info displays correctly
-        int listingPics[][] = {{R.drawable.bulbasaur},{R.drawable.charmander}, {R.drawable.froakie}, {R.drawable.golem}, {R.drawable.jigglypuff},
-                {R.drawable.pikachu}, {R.drawable.squirtle}, {R.drawable.sudowoodo}, {R.drawable.totodile}, {R.drawable.treeko}};
-        String sellerFirstNames[] = getResources().getStringArray(R.array.first_names);
-        String sellerLastNames[] = getResources().getStringArray(R.array.last_names);
-        String listingNames[] = getResources().getStringArray(R.array.listing_names);
-        String listingDescriptions[] = getResources().getStringArray(R.array.listing_descriptions);
-        String listingAskingPrices[] = getResources().getStringArray(R.array.listing_asking_prices);
-        String listingSoldFor[] = getResources().getStringArray(R.array.listing_sold_prices);
-        String listingSoldTo[] = getResources().getStringArray(R.array.listing_sold_names);
-        String listingSoldDate[] = getResources().getStringArray(R.array.listing_sold_dates);
+//        // Test Arrays to make sure the info displays correctly
+//        int listingPics[][] = {{R.drawable.bulbasaur},{R.drawable.charmander}, {R.drawable.froakie}, {R.drawable.golem}, {R.drawable.jigglypuff},
+//                {R.drawable.pikachu}, {R.drawable.squirtle}, {R.drawable.sudowoodo}, {R.drawable.totodile}, {R.drawable.treeko}};
+//        String sellerFirstNames[] = getResources().getStringArray(R.array.first_names);
+//        String sellerLastNames[] = getResources().getStringArray(R.array.last_names);
+//        String listingNames[] = getResources().getStringArray(R.array.listing_names);
+//        String listingDescriptions[] = getResources().getStringArray(R.array.listing_descriptions);
+//        String listingAskingPrices[] = getResources().getStringArray(R.array.listing_asking_prices);
+//        String listingSoldFor[] = getResources().getStringArray(R.array.listing_sold_prices);
+//        String listingSoldTo[] = getResources().getStringArray(R.array.listing_sold_names);
+//        String listingSoldDate[] = getResources().getStringArray(R.array.listing_sold_dates);
 
         // clears list each time to make sure no duplicates are added
         listing_list.clear();
@@ -96,24 +95,6 @@ public class ServiceHomeSearchTab extends Fragment {
         });
         return view;
     }
-
-//    public void getChildImages(DatabaseReference imagesRef) {
-//        imagesRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.hasChildren()) {
-//                    for (DataSnapshot child : snapshot.getChildren()) {
-//                        listing_images.add(child.getValue(String.class));
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
 
     public void onServiceListQuery() {
         adapter = new ServiceRecyclerAdapter(getActivity(),listing_list);

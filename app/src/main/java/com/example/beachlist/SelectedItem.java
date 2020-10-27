@@ -11,9 +11,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import java.util.ArrayList;
+
 public class SelectedItem extends AppCompatActivity {
     ViewPager2 viewPager;
-    int[] images = {R.drawable.pokemon1, R.drawable.pokemon2,R.drawable.pokemon3,R.drawable.pokemon4,R.drawable.pokemon5};
+    String[] images = {"https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F1595294896?alt=media&token=c341b259-f2a5-45ad-97e1-04b770734db1",
+            "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F258260727?alt=media&token=e319e597-2fee-4790-b630-db4d6df4cf12",
+            "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F267055780?alt=media&token=1e386df7-470b-431a-b58c-bb0d86450d2c"};
+    ArrayList<String> listingImages;
     ImageAdapter adapter;
     TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName;
 
@@ -25,7 +30,7 @@ public class SelectedItem extends AppCompatActivity {
         //*************Display Item info**************************
 
         viewPager = findViewById(R.id.selected_item_images);
-        adapter = new ImageAdapter(images);
+        adapter = new ImageAdapter(this, listingImages);
         viewPager.setAdapter(adapter);
 
         itemTitle = findViewById(R.id.selected_item_title);

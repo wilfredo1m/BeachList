@@ -35,9 +35,10 @@ public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecycler
     @Override
     public void onBindViewHolder(@NonNull ServiceRecyclerAdapter.MyViewHolder holder, final int position) {
         Glide.with(context)
-                .load(list.get(position).getValue(ListingData.class).getImageUrl())
+                .load(list.get(position).child("listingImages").child("headerImage").getValue(String.class))
                 .centerCrop()
                 .into(holder.listingPic);
+        String url = list.get(position).child("listingImages").child("headerImage").getValue(String.class);
         //holder.listingPic.setImageResource(list.get(position).getValue(ListingData.class).getImageUrl());
         holder.listingTitle.setText(list.get(position).getValue(ListingData.class).getTitle());
         holder.listingPrice.setText("$" + list.get(position).getValue(ListingData.class).getPrice());
