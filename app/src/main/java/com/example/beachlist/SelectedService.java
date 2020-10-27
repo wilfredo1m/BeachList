@@ -24,7 +24,7 @@ public class SelectedService extends AppCompatActivity {
     String[] images = {"https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F1595294896?alt=media&token=c341b259-f2a5-45ad-97e1-04b770734db1",
             "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F258260727?alt=media&token=e319e597-2fee-4790-b630-db4d6df4cf12",
             "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F267055780?alt=media&token=1e386df7-470b-431a-b58c-bb0d86450d2c"};
-    ArrayList<String> listingImages = new ArrayList<>();
+    private ArrayList<String> serviceImages = new ArrayList<>();
     ImageAdapter adapter;
     TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName;
 
@@ -45,18 +45,18 @@ public class SelectedService extends AppCompatActivity {
         // gets the service's information to display
         int position = getIntent().getIntExtra("position",1);
 
-        getListingImages(ServiceHomeSearchTab.listing_list.get(position).child("listingImages"));
+        getListingImages(ServiceHomeSearchTab.service_list.get(position).child("listingImages"));
         viewPager = findViewById(R.id.selected_service_images);
-        adapter = new ImageAdapter(this, listingImages);
+        adapter = new ImageAdapter(this, serviceImages);
         viewPager.setAdapter(adapter);
 
         // Sets the service info in the correct fields to be displayed
-        itemTitle.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getTitle());
-        itemDescription.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getDescription());
-        itemPrice.setText("$"+ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getPrice());
+        itemTitle.setText(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getTitle());
+        itemDescription.setText(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getDescription());
+        itemPrice.setText("$"+ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getPrice());
 //        itemSellerFirstName.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getSellerFirstName());
 //        itemSellerLastName.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getSellerLastName());
-        itemCategory.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getCategory());
+        itemCategory.setText(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getCategory());
         //********************************************************
 
 //*********************************BUTTON GROUP*******************************************//
@@ -74,8 +74,8 @@ public class SelectedService extends AppCompatActivity {
 
     private void getListingImages(DataSnapshot dataSnapshot) {
         for (DataSnapshot child : dataSnapshot.getChildren()) {
-            String url = (String) child.getValue();
-            listingImages.add(url);
+            //String url = (String) child.getValue();
+            serviceImages.add(child.getValue(String.class));
         }
     }
 

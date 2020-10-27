@@ -28,7 +28,7 @@ public class ServiceHomeSearchTab extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    public static List<DataSnapshot> listing_list = new ArrayList<>();
+    public static List<DataSnapshot> service_list = new ArrayList<>();
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private FirebaseUser user;
     private FirebaseAuth mAuth;
@@ -42,7 +42,6 @@ public class ServiceHomeSearchTab extends Fragment {
                              Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-        String userId = user.getUid();
         DatabaseReference usersReference = database.getReference().child("listings").child("service");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_service_select_from_home, container, false);
@@ -67,7 +66,7 @@ public class ServiceHomeSearchTab extends Fragment {
 //        String listingSoldDate[] = getResources().getStringArray(R.array.listing_sold_dates);
 
         // clears list each time to make sure no duplicates are added
-        listing_list.clear();
+        service_list.clear();
 
 //        for(int i = 0; i < listingNames.length; i++){
 //            ListingData listing = new ListingData(listingPics[i],sellerFirstNames[i], sellerLastNames[i], listingNames[i],listingDescriptions[i],listingAskingPrices[i],
@@ -80,7 +79,7 @@ public class ServiceHomeSearchTab extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        listing_list.add(child);
+                        service_list.add(child);
                         //getChildImages(child.getRef().child("listingImages"));
                     }
                 }
@@ -97,7 +96,7 @@ public class ServiceHomeSearchTab extends Fragment {
     }
 
     public void onServiceListQuery() {
-        adapter = new ServiceRecyclerAdapter(getActivity(),listing_list);
+        adapter = new ServiceRecyclerAdapter(getActivity(),service_list);
         recyclerView.setAdapter(adapter);
     }
 }
