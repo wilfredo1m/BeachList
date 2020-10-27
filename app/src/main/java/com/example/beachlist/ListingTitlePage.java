@@ -155,7 +155,7 @@ public class ListingTitlePage extends AppCompatActivity {
         openScreen.putExtra("ListingTitle", titleTextView.getText().toString());
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        profileImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        profileImage.compress(Bitmap.CompressFormat.JPEG, 10, stream);
         byte[] byteArray = stream.toByteArray();
         openScreen.putExtra("ListingPics", byteArray);
 
