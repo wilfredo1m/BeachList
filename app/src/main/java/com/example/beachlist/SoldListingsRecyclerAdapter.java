@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class SoldListingsRecyclerAdapter extends RecyclerView.Adapter<SoldListingsRecyclerAdapter.MyViewHolder> {
@@ -30,11 +32,15 @@ public class SoldListingsRecyclerAdapter extends RecyclerView.Adapter<SoldListin
 
     @Override
     public void onBindViewHolder(@NonNull SoldListingsRecyclerAdapter.MyViewHolder holder, int position) {
-        holder.listingPic.setImageResource(list.get(position).getListingPhotos()[0]);
-        holder.listingTitle.setText(list.get(position).getListingTitle());
-        holder.listingDate.setText(list.get(position).getListingSoldDate());
-        holder.listingSoldPrice.setText("$"+list.get(position).getSoldPrice());
-        holder.listingSoldTo.setText(list.get(position).getListingSoldTo());
+        Glide.with(context)
+                .load(list.get(position).getImageUrl())
+                .centerCrop()
+                .into(holder.listingPic);
+        //holder.listingPic.setImageResource(list.get(position).getListingPhotos()[0]);
+        holder.listingTitle.setText(list.get(position).getTitle());
+        holder.listingDate.setText(list.get(position).getSellDate());
+        holder.listingSoldPrice.setText("$"+list.get(position).getSellPrice());
+        holder.listingSoldTo.setText(list.get(position).getBuyerId());
     }
 
     @Override

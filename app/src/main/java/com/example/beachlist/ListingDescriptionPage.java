@@ -20,6 +20,7 @@ public class ListingDescriptionPage extends AppCompatActivity {
     Spinner spinner;
     RadioGroup radioGroup;
     RadioButton radioButton;
+    TypeOfListing listingType;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class ListingDescriptionPage extends AppCompatActivity {
 
         // Go back to the Listings Title Page
         backButton = findViewById(R.id.btn_back);
-        backButton .requestFocus();
+        backButton.requestFocus();
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,7 +119,7 @@ public class ListingDescriptionPage extends AppCompatActivity {
 
         //get the id of the radio button that is pressed ( not value we assign)
         int radiobuttonid = radioGroup.getCheckedRadioButtonId();
-        //radio button holds the id value of selected (this is the value we assign to it(the name)
+        //radio button holds the id value of selected (this is the value we assign to it (the name))
         radioButton = findViewById(radiobuttonid);
         //convert id value to a string
         String text = radioButton.getText().toString();
@@ -131,6 +132,8 @@ public class ListingDescriptionPage extends AppCompatActivity {
             //array adapter holding the array list of categories created in the strings.xml
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,
             getResources().getStringArray(R.array.items_categoies));
+            //Assign listing type for post
+            listingType = TypeOfListing.ITEM;
             //setup adapter to be passed to spinner
             spinner.setAdapter(adapter);
 
@@ -140,6 +143,8 @@ public class ListingDescriptionPage extends AppCompatActivity {
             //array adapter holding the array list of services created in the strings.xml
             ArrayAdapter<String> serviceAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,
             getResources().getStringArray(R.array.service_categoies));
+            //Assign listing type for post
+            listingType = TypeOfListing.SERVICE;
             //setup adapter to be passed to spinner
             spinner.setAdapter(serviceAdapter);
         }

@@ -55,8 +55,8 @@ public class SoldListingsFragment extends Fragment {
 
         // adds the sold listings to be the list that will be displayed
         for(int i = 0; i < listingNames.length; i++){
-            ListingData listing = new ListingData(listingPics[i],sellerFirstNames[i], sellerLastNames[i], listingNames[i],listingDescriptions[i],listingAskingPrices[i],
-                    listingSoldFor[i], listingSoldTo[i], listingSoldDate[i]);
+            ListingData listing = new ListingData("https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F997005285?alt=media&token=af988212-f736-4eec-86e6-fd3ffb521547", sellerLastNames[i], listingNames[i],listingDescriptions[i],listingAskingPrices[i],
+                    listingSoldFor[i], listingSoldTo[i], listingSoldDate[i], "filler", "filler");
             list.add(listing);
         }
 

@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapter.MyViewHolder> {
@@ -31,9 +33,13 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ItemRecyclerAdapter.MyViewHolder holder, final int position) {
-        holder.listingPic.setImageResource(list.get(position).getListingPhotos()[0]);
-        holder.listingTitle.setText(list.get(position).getListingTitle());
-        holder.listingPrice.setText("$" + list.get(position).getAskingPrice());
+        Glide.with(context)
+                .load(list.get(position).getImageUrl())
+                .centerCrop()
+                .into(holder.listingPic);
+        //holder.listingPic.setImageResource(list.get(position).getListingPhotos()[0]);
+        holder.listingTitle.setText(list.get(position).getTitle());
+        holder.listingPrice.setText("$" + list.get(position).getPrice());
 
         // when a listing is clicked, the position is taken to get that listings info
         holder.itemView.setOnClickListener(new View.OnClickListener() {

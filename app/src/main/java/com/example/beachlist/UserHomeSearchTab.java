@@ -43,7 +43,6 @@ public class UserHomeSearchTab extends Fragment{
                              Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-        String userId = user.getUid();
         DatabaseReference usersReference = database.getReference().child("users");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_select_from_home, container, false);
@@ -56,10 +55,10 @@ public class UserHomeSearchTab extends Fragment{
         recyclerView.setLayoutManager(layoutManager);
 
         // This is temporary, added these to test the list would display
-        String firstNames[] = getResources().getStringArray(R.array.first_names);
-        final int profilePics[] = {R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur,
-                R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur};
-        String lastNames[] = getResources().getStringArray(R.array.last_names);
+//        String firstNames[] = getResources().getStringArray(R.array.first_names);
+//        final int profilePics[] = {R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur,
+//                R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur, R.drawable.bulbasaur};
+//        String lastNames[] = getResources().getStringArray(R.array.last_names);
 
         // clears list each time to make sure no duplicates are added
         user_list.clear();
@@ -69,11 +68,10 @@ public class UserHomeSearchTab extends Fragment{
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        FriendsData friend = new FriendsData(child.child("data").getValue(UserData.class).imageUrl, child.child("data").getValue(UserData.class).firstName, child.child("data").getValue(UserData.class).lastName, child.getKey());
+                        //FriendsData friend = new FriendsData(child.child("data").getValue(UserData.class).imageUrl, child.child("data").getValue(UserData.class).firstName, child.child("data").getValue(UserData.class).lastName, child.getKey());
                         user_list.add(child);
                     }
                 }
-
                 onUserListQuery();
             }
 

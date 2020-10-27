@@ -41,9 +41,9 @@ public class SelectedOwnListing extends AppCompatActivity {
 
         // Sets the listings info in the correct fields to be displayed
         //listingPic.setImageResource(CurrentListingsFragment.list.get(position).getListingPhotos()[0]);
-        listingTitle.setText(CurrentListingsFragment.list.get(position).getListingTitle());
-        listingDescription.setText(CurrentListingsFragment.list.get(position).getListingDescription());
-        listingPrice.setText("$"+CurrentListingsFragment.list.get(position).getAskingPrice());
+        listingTitle.setText(CurrentListingsFragment.list.get(position).getTitle());
+        listingDescription.setText(CurrentListingsFragment.list.get(position).getDescription());
+        listingPrice.setText("$"+CurrentListingsFragment.list.get(position).getPrice());
         //********************************************************
 
         // Modify current listing

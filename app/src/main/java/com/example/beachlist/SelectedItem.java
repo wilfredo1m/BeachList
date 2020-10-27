@@ -39,11 +39,11 @@ public class SelectedItem extends AppCompatActivity {
         int position = getIntent().getIntExtra("position",1);
 
         // Sets the item info in the correct fields to be displayed
-        itemTitle.setText(ItemHomeSearchTab.listing_list.get(position).getListingTitle());
-        itemDescription.setText(ItemHomeSearchTab.listing_list.get(position).getListingDescription());
-        itemPrice.setText("$"+ItemHomeSearchTab.listing_list.get(position).getAskingPrice());
-        itemSellerFirstName.setText(ItemHomeSearchTab.listing_list.get(position).getSellerFirstName());
-        itemSellerLastName.setText(ItemHomeSearchTab.listing_list.get(position).getSellerLastName());
+        itemTitle.setText(ItemHomeSearchTab.listing_list.get(position).getTitle());
+        itemDescription.setText(ItemHomeSearchTab.listing_list.get(position).getDescription());
+        itemPrice.setText("$"+ItemHomeSearchTab.listing_list.get(position).getPrice());
+//        itemSellerFirstName.setText(ItemHomeSearchTab.listing_list.get(position).getSellerFirstName());
+//        itemSellerLastName.setText(ItemHomeSearchTab.listing_list.get(position).getSellerLastName());
         //itemCategory.setText(ServiceHomeSearchTab.listing_list.get(position).getCategory());
 
         //********************************************************

@@ -11,13 +11,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+
 import java.util.List;
 
 public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecyclerAdapter.MyViewHolder> {
     Context context;
-    List<ListingData> list;
+    List<DataSnapshot> list;
 
-    public ServiceRecyclerAdapter(Context context, List<ListingData> list) {
+    public ServiceRecyclerAdapter(Context context, List<DataSnapshot> list) {
         this.context = context;
         this.list = list;
     }
@@ -31,9 +34,13 @@ public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecycler
 
     @Override
     public void onBindViewHolder(@NonNull ServiceRecyclerAdapter.MyViewHolder holder, final int position) {
-        holder.listingPic.setImageResource(list.get(position).getListingPhotos()[0]);
-        holder.listingTitle.setText(list.get(position).getListingTitle());
-        holder.listingPrice.setText("$" + list.get(position).getAskingPrice());
+        Glide.with(context)
+                .load(list.get(position).getValue(ListingData.class).getImageUrl())
+                .centerCrop()
+                .into(holder.listingPic);
+        //holder.listingPic.setImageResource(list.get(position).getValue(ListingData.class).getImageUrl());
+        holder.listingTitle.setText(list.get(position).getValue(ListingData.class).getTitle());
+        holder.listingPrice.setText("$" + list.get(position).getValue(ListingData.class).getPrice());
 
         // when a listing is clicked, the position is taken to get that listings info
         holder.itemView.setOnClickListener(new View.OnClickListener() {

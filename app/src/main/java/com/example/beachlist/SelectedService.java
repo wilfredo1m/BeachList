@@ -30,7 +30,7 @@ public class SelectedService extends AppCompatActivity {
         itemTitle = findViewById(R.id.selected_service_title);
         itemDescription = findViewById(R.id.selected_service_description);
         itemPrice = findViewById(R.id.selected_service_price);
-        //itemCategory = findViewById(R.id.selected_service_category);
+        itemCategory = findViewById(R.id.selected_service_category);
         itemSellerFirstName = findViewById(R.id.service_seller_firstname);
         itemSellerLastName = findViewById(R.id.service_seller_lastname);
 
@@ -38,12 +38,12 @@ public class SelectedService extends AppCompatActivity {
         int position = getIntent().getIntExtra("position",1);
 
         // Sets the service info in the correct fields to be displayed
-        itemTitle.setText(ServiceHomeSearchTab.listing_list.get(position).getListingTitle());
-        itemDescription.setText(ServiceHomeSearchTab.listing_list.get(position).getListingDescription());
-        itemPrice.setText("$"+ServiceHomeSearchTab.listing_list.get(position).getAskingPrice());
-        itemSellerFirstName.setText(ServiceHomeSearchTab.listing_list.get(position).getSellerFirstName());
-        itemSellerLastName.setText(ServiceHomeSearchTab.listing_list.get(position).getSellerLastName());
-        //itemCategory.setText(ServiceHomeSearchTab.listing_list.get(position).getCategory());
+        itemTitle.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getTitle());
+        itemDescription.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getDescription());
+        itemPrice.setText("$"+ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getPrice());
+//        itemSellerFirstName.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getSellerFirstName());
+//        itemSellerLastName.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getSellerLastName());
+        itemCategory.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getCategory());
 
         //********************************************************
 
