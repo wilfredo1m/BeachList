@@ -36,6 +36,8 @@
                     <ImageView
                         android:id="@+id/current_listing_pic"
                         android:layout_width="125dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
                         android:layout_height="match_parent" />
                 </LinearLayout>
 
