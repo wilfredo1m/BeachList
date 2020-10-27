@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ListingDescriptionPage extends AppCompatActivity {
-    Button cancelButton,backButton,nextButton;
+    Button cancelButton,nextButton;
     Spinner spinner;
     RadioGroup radioGroup;
     RadioButton radioButton;
@@ -38,16 +38,6 @@ public class ListingDescriptionPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openCreatePostScreen();
-            }
-        });
-
-        // Go back to the Listings Title Page
-        backButton = findViewById(R.id.btn_back);
-        backButton.requestFocus();
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goBack();
             }
         });
 

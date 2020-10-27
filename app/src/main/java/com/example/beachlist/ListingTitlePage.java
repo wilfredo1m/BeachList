@@ -156,6 +156,8 @@ public class ListingTitlePage extends AppCompatActivity {
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         profileImage.compress(Bitmap.CompressFormat.JPEG, 10, stream);
+        //Bitmap.createScaledBitmap(profileImage, 200, 200, true);
+
         byte[] byteArray = stream.toByteArray();
         openScreen.putExtra("ListingPics", byteArray);
 

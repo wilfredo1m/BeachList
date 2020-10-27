@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 public class ListingReviewPage extends AppCompatActivity {
-    Button submitPost, cancelButton, backButton;
+    Button submitPost, cancelButton;
     ImageView listingPic;
     ViewPager2 viewPager;
     ImageAdapter adapter;
@@ -56,14 +56,6 @@ public class ListingReviewPage extends AppCompatActivity {
             }
         });
 
-        // Go back to the Listing Description Page
-        backButton = findViewById(R.id.btn_back);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goBack();
-            }
-        });
 //************************END BUTTON BLOCK****************************************************//
 
     }
