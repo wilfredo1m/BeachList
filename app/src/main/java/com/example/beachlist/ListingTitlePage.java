@@ -1,5 +1,6 @@
 package com.example.beachlist;
 import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Parcelable;
+import android.renderscript.ScriptGroup;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +28,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -38,7 +41,8 @@ public class ListingTitlePage extends AppCompatActivity {
     int callingActivity;
     ImageView listingPic;
     ViewPager2 viewPager;
-    ImageAdapter adapter;
+    ImageAdapter2 adapter;
+    ArrayList<Bitmap> bitmaps;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,12 +67,8 @@ public class ListingTitlePage extends AppCompatActivity {
         }
 
 
-        listingPic = findViewById(R.id.listing_images);
-//        //*************Display Listing Images********************
-//        viewPager = findViewById(R.id.listing_images);
-//        adapter = new ImageAdapter(images);
-//        viewPager.setAdapter(adapter);
-//        //********************************************************
+//        listingPic = findViewById(R.id.listing_images);
+
 
 
 //*************************BUTTON BLOCK***********************************************************//
@@ -109,7 +109,7 @@ public class ListingTitlePage extends AppCompatActivity {
         String pictureDirectoryPath = pictureDirectory.getPath();
 
         // User is able to choose more than one picture from gallery
-//        openCameraRoll.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        openCameraRoll.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
 
         //openCameraRoll.setAction(Intent.ACTION_GET_CONTENT);
         // startActivityForResult(Intent.createChooser(openCameraRoll,"Select Picture"), 1);
@@ -129,22 +129,42 @@ public class ListingTitlePage extends AppCompatActivity {
             if(requestCode == IMAGE_REQUEST) {
                 // Camera roll sent back a picture
 
-                // Address of image in phone
-                filePath = data.getData();
+          //  listingPic = findViewById(R.id.listing_images);
 
-                try {
-                    input = getContentResolver().openInputStream(filePath);
-
-                    // Get Bitmap from InputStream
-                    profileImage = BitmapFactory.decodeStream(input);
-
-                    // Displays image in the application
-                    listingPic.setImageBitmap(profileImage);
-
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                    Toast.makeText(this, "Unable to load image", Toast.LENGTH_SHORT).show();
+            bitmaps = new ArrayList<>();
+            ClipData clipData = data.getClipData();
+            if(clipData != null){
+                for(int i=0;i <clipData.getItemCount();i++){
+                    Uri imageUri = clipData.getItemAt(i).getUri();
+                    try{
+                        InputStream is = getContentResolver().openInputStream(imageUri);
+                        Bitmap bitmap = BitmapFactory.decodeStream(is);
+                        bitmaps.add(bitmap);
+        //*************Display Listing Images********************
+                        viewPager = findViewById(R.id.selected_images_pager);
+                        adapter = new ImageAdapter2(this,bitmaps);
+                        viewPager.setAdapter(adapter);
+//        //********************************************************
+                    }catch (FileNotFoundException e){
+                        e.printStackTrace();
+                    }
                 }
+            }else{
+                Uri imageUri = data.getData();
+                try{
+                    InputStream is = getContentResolver().openInputStream(imageUri);
+                    Bitmap bitmap = BitmapFactory.decodeStream(is);
+                    bitmaps.add(bitmap);
+//        //*************Display Listing Images********************
+                    viewPager = findViewById(R.id.selected_images_pager);
+                    adapter = new ImageAdapter2(this,bitmaps);
+                    viewPager.setAdapter(adapter);
+//        //********************************************************
+                }catch (FileNotFoundException e){
+                    e.printStackTrace();
+                }
+            }
+
             }
         }
     }
@@ -154,12 +174,12 @@ public class ListingTitlePage extends AppCompatActivity {
         TextView titleTextView = findViewById(R.id.et_listing_title);
         openScreen.putExtra("ListingTitle", titleTextView.getText().toString());
 
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        profileImage.compress(Bitmap.CompressFormat.JPEG, 10, stream);
+//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//        profileImage.compress(Bitmap.CompressFormat.JPEG, 10, stream);
         //Bitmap.createScaledBitmap(profileImage, 200, 200, true);
 
-        byte[] byteArray = stream.toByteArray();
-        openScreen.putExtra("ListingPics", byteArray);
+//        byte[] byteArray = stream.toByteArray();
+//        openScreen.putExtra("ListingPics", byteArray);
 
         startActivity(openScreen);
     }

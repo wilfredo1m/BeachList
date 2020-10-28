@@ -71,7 +71,7 @@ public class ListingDescriptionPage extends AppCompatActivity {
         //get intent from previous screen
         Intent intent = getIntent();
         String title = intent.getExtras().getString("ListingTitle");
-        byte[] byteArray = getIntent().getByteArrayExtra("ListingPics");
+        //byte[] byteArray = getIntent().getByteArrayExtra("ListingPics");
         //Bitmap images = intent.getParcelableExtra("ListingPics");
 
         //get the filled information from this screen
@@ -91,7 +91,7 @@ public class ListingDescriptionPage extends AppCompatActivity {
 
 
         //block to pass intents to the next screen
-        openScreen.putExtra("ListingPics", byteArray);
+      //  openScreen.putExtra("ListingPics", byteArray);
         openScreen.putExtra("ListingPrice", listingPrice.getText().toString());
         openScreen.putExtra("ListingTitle", title);
         openScreen.putExtra("ListingCategory", category);

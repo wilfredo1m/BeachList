@@ -26,8 +26,7 @@ public class ListingReviewPage extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listing_review_post_page);
-
-        listingPic = findViewById(R.id.review_listing_images);
+        //listingPic = findViewById(R.id.review_listing_images);
 
         // Get input fields
         getUserInputs();
@@ -96,9 +95,9 @@ public class ListingReviewPage extends AppCompatActivity {
 
         //working group that populates the screen***************************************//
 
-        byte[] byteArray = getIntent().getByteArrayExtra("ListingPics");
-        Bitmap images = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-        listingPic.setImageBitmap(images);
+       // byte[] byteArray = getIntent().getByteArrayExtra("ListingPics");
+       // Bitmap images = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+       // listingPic.setImageBitmap(images);
 
 
 
