@@ -19,16 +19,16 @@
 
     <TextView
         android:id="@+id/tv_selected_service_title"
-        android:layout_width="211dp"
-        android:layout_height="56dp"
-        android:text="other user Item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Listing"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar7"
         app:layout_constraintEnd_toEndOf="@+id/toolbar7"
-        app:layout_constraintHorizontal_bias="0.359"
+        app:layout_constraintHorizontal_bias="0.427"
         app:layout_constraintStart_toEndOf="@+id/btn_back_from_user_item_page"
         app:layout_constraintTop_toTopOf="@+id/toolbar7"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.333" />
 
     <Button
         android:id="@+id/btn_back_from_user_item_page"
@@ -41,8 +41,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
-        android:layout_width="389dp"
-        android:layout_height="wrap_content"
+        android:layout_width="383dp"
+        android:layout_height="585dp"
+        app:layout_constraintBottom_toTopOf="@+id/button9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar7">
@@ -60,20 +61,41 @@
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/selected_item_images"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
-                    android:background="#F61010">
+                    android:layout_height="473dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="#000000">
 
                 </androidx.viewpager2.widget.ViewPager2>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#575757"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#2B2B2B"
+                    android:gravity="center_horizontal"
+                    android:text="Title"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/selected_item_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#121212"
+                    android:gravity="center_horizontal"
                     android:text="Title goes here"
                     android:textColor="#FFFFFF"
                     android:textSize="22sp" />
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#575757"
+                    android:orientation="horizontal"></LinearLayout>
                 <TextView
                     android:id="@+id/textView27"
                     android:layout_width="match_parent"
@@ -89,9 +111,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#121212"
+                    android:gravity="center_horizontal"
                     android:text="Category goes here"
                     android:textColor="#FFFFFF" />
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#575757"
+                    android:orientation="horizontal"></LinearLayout>
                 <TextView
                     android:id="@+id/textView33"
                     android:layout_width="match_parent"
@@ -107,13 +134,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#121212"
+                    android:gravity="center_horizontal"
                     android:text="Price goes here"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#F4F4F4">
+                    android:layout_margin="1dp"
+                    android:background="#2B2B2B">
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="391dp"
@@ -158,7 +189,6 @@
                                     android:orientation="vertical">
 
                                     <TextView
-
                                         android:id="@+id/item_seller_firstname"
                                         android:layout_width="match_parent"
                                         android:layout_height="30dp"
@@ -183,7 +213,6 @@
                                         android:textStyle="bold" />
 
                                     <RatingBar
-
                                         android:id="@+id/item_user_rating"
                                         android:layout_width="241dp"
                                         android:layout_height="39dp"
@@ -200,6 +229,11 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#575757"
+                    android:orientation="horizontal"></LinearLayout>
                 <TextView
                     android:id="@+id/textView22"
                     android:layout_width="match_parent"
@@ -249,7 +283,6 @@
         android:text="contact seller"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

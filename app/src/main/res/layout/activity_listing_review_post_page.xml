@@ -123,27 +123,6 @@
                 android:orientation="horizontal"></LinearLayout>
 
             <TextView
-                android:id="@+id/textView8"
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:background="#2B2B2B"
-                android:gravity="center_horizontal"
-                android:text="Description" />
-
-            <TextView
-                android:id="@+id/et_listing_description_review"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="#121212" />
-
-            <LinearLayout
-                android:id="@+id/linearLayout13"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#575757"
-                android:orientation="horizontal"></LinearLayout>
-
-            <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
@@ -155,7 +134,30 @@
                 android:id="@+id/et_listing_type_review"
                 android:layout_width="match_parent"
                 android:layout_height="31dp"
-                android:layout_marginBottom="40dp"
+                android:background="#121212" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout13"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#575757"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="#2B2B2B"
+                android:gravity="center_horizontal"
+                android:text="Description" />
+
+            <TextView
+                android:id="@+id/et_listing_description_review"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="20dp"
                 android:background="#121212" />
 
         </LinearLayout>
