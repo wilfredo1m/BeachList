@@ -12,10 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -110,10 +113,27 @@ public class ListingReviewPage extends AppCompatActivity {
         currentListing.setSellDate(" ");
         currentListing.setSellPrice(" ");
 
-        DatabaseReference listingReference = database.getReference("listings").child(type).push();
+        DatabaseReference listingReference = database.getReference("listings").child(type.toLowerCase());
+        String key = listingReference.push().getKey();
+        listingReference = listingReference.child(key);
+
+        final Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
+
         //TODO test this set up of the setvalue
-        listingReference.setValue(currentListing);
-        //It should only be a few more lines if even that
+        listingReference.setValue(currentListing)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    startActivity(openScreen);
+                }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Write failed
+                        // ...
+                    }
+                });
     }
 
     //intent to go back to listing description page
