@@ -20,7 +20,6 @@ public class ListingDescriptionPage extends AppCompatActivity {
     Spinner spinner;
     RadioGroup radioGroup;
     RadioButton radioButton;
-    TypeOfListing listingType;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -122,8 +121,6 @@ public class ListingDescriptionPage extends AppCompatActivity {
             //array adapter holding the array list of categories created in the strings.xml
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,
             getResources().getStringArray(R.array.items_categoies));
-            //Assign listing type for post
-            listingType = TypeOfListing.ITEM;
             //setup adapter to be passed to spinner
             spinner.setAdapter(adapter);
 
@@ -133,8 +130,6 @@ public class ListingDescriptionPage extends AppCompatActivity {
             //array adapter holding the array list of services created in the strings.xml
             ArrayAdapter<String> serviceAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,
             getResources().getStringArray(R.array.service_categoies));
-            //Assign listing type for post
-            listingType = TypeOfListing.SERVICE;
             //setup adapter to be passed to spinner
             spinner.setAdapter(serviceAdapter);
         }

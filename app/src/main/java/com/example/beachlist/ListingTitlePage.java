@@ -43,6 +43,7 @@ public class ListingTitlePage extends AppCompatActivity {
     ViewPager2 viewPager;
     ImageAdapter2 adapter;
     ArrayList<Bitmap> bitmaps;
+    ArrayList<Uri> imageUriList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -132,10 +133,12 @@ public class ListingTitlePage extends AppCompatActivity {
           //  listingPic = findViewById(R.id.listing_images);
 
             bitmaps = new ArrayList<>();
+            imageUriList = new ArrayList<>();
             ClipData clipData = data.getClipData();
-            if(clipData != null){
+            if(clipData != null) {
                 for(int i=0;i <clipData.getItemCount();i++){
                     Uri imageUri = clipData.getItemAt(i).getUri();
+                    imageUriList.add(imageUri);
                     try{
                         InputStream is = getContentResolver().openInputStream(imageUri);
                         Bitmap bitmap = BitmapFactory.decodeStream(is);
@@ -151,6 +154,7 @@ public class ListingTitlePage extends AppCompatActivity {
                 }
             }else{
                 Uri imageUri = data.getData();
+                imageUriList.add(imageUri);
                 try{
                     InputStream is = getContentResolver().openInputStream(imageUri);
                     Bitmap bitmap = BitmapFactory.decodeStream(is);
