@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,8 +29,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.util.List;
-
 /**
  * A simple {@link **Fragment} subclass.
  * Use the {@link **AccountSettingsFragment#newInstance} factory method to
@@ -40,7 +39,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
     private static final long ONE_MEGABYTE = 1024 * 1024;
 
     private View accountSettingsScreen;
-    private Button friendsListButton, backButton, activeListingsButton,soldListingsButton,pendingFriend;
+    private Button friendsListButton, backButton, activeListingsButton,soldListingsButton,pendingFriend,reportedUser, reportedListing;
     private UserData currentUser;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
@@ -66,6 +65,9 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         user = mAuth.getCurrentUser();
         final String userId = user.getUid();
 
+
+
+
         //Database reference to the users data
         final DatabaseReference userReference = database.getReference("users").child(userId).child("data");
         userReference
@@ -84,6 +86,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
                     }
             );
 
+
 //===================================================BUTTON CALL GROUP========================================================//
         // Takes us to friends list screen when we click the button
         friendsListButton = accountSettingsScreen.findViewById(R.id.btn_friend_list);
@@ -97,7 +100,30 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
         soldListingsButton  = accountSettingsScreen.findViewById(R.id.btn_sold_listings);
         soldListingsButton.setOnClickListener(this);
+
+        reportedUser = accountSettingsScreen.findViewById(R.id.btn_reported_user);
+        reportedUser.setOnClickListener(this);
+
+        reportedListing = accountSettingsScreen.findViewById(R.id.btn_reported_listing);
+        reportedListing.setOnClickListener(this);
+
 //===================================================END BUTTON CALL GROUP====================================================//
+
+
+
+//***********************CHECK TO SEE IF THE USER WILL BE A ADMIN **********************************************************//
+//*********************IF USER IS ADMIN DISPLAY EXTRA BUTTONS WITH ADMIN RIGHTS********************************************//
+        String emailString = user.getEmail();
+//        Toast.makeText(accountSettingsScreen.getContext(), emailString, Toast.LENGTH_SHORT).show();
+
+        if (emailString.contains("@yahoo.com")){
+            reportedUser.setVisibility(View.VISIBLE);
+            reportedListing.setVisibility(View.VISIBLE);
+        }else{
+            //dont display the screens
+        }
+//***********************END CHECK TO SEE IF THE USER WILL BE A ADMIN **********************************************************//
+
 
         return accountSettingsScreen;
 
@@ -111,12 +137,12 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
                 break;
             case R.id.btn_active_listings:
                 openScreen = new Intent(getActivity(), ActiveListings.class);
+                openScreen.putExtra("signedInUserListingTab", 1);
                 startActivity(openScreen);
                 break;
             case R.id.btn_pending_friends:
                 openScreen = new Intent(getActivity(), PendingFriendsListTab.class);
                 //sets which tab will be displayed
-                openScreen.putExtra("signedInUserListingTab", 1);
                 startActivity(openScreen);
                 break;
             case R.id.btn_sold_listings:
@@ -125,16 +151,30 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
                 //sets which tab will be displayed
                 openScreen.putExtra("signedInUserListingTab", 2);
                 startActivity(openScreen);
+                break;
+            case R.id.btn_reported_user:
+                //set intent to select position of tab when button clicked
+                openScreen = new Intent( getActivity(), ReportedScreen.class);
+                //sets which tab will be displayed
+                openScreen.putExtra("reportedPageTab", 1);
+                startActivity(openScreen);
+                break;
+            case R.id.btn_reported_listing:
+                //set intent to select position of tab when button clicked
+                openScreen = new Intent( getActivity(), ReportedScreen.class);
+                openScreen.putExtra("reportedPageTab", 2);
+                //sets which tab will be displayed
+                startActivity(openScreen);
+                break;
         }
     }
 
 
     public void displayUserInfo(UserData userData) {
-        TextView fnameTV = accountSettingsScreen.findViewById(R.id.tv_first_name);
-        TextView lnameTV = accountSettingsScreen.findViewById(R.id.tv_last_name);
-
-        fnameTV.setText(userData.firstName);
-        lnameTV.setText(userData.lastName);
+        TextView fnameTV = accountSettingsScreen.findViewById(R.id.tv_full_name);
+        TextView email = accountSettingsScreen.findViewById(R.id.tv_email);
+        fnameTV.setText(userData.firstName + " "+ userData.lastName);
+        email.setText(userData.email);
 
         final ImageView profileIV = accountSettingsScreen.findViewById(R.id.iv_user_image);
 

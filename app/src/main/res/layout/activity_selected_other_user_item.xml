@@ -17,6 +17,112 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fuzzy_item_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E4040303"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="140dp"
+            android:background="#1C1C1C"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/reported_item_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="#131313">
+
+                </androidx.viewpager2.widget.ViewPager2>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="11dp"
+                android:background="#575757"
+                android:orientation="horizontal"></LinearLayout>
+
+            <TextView
+                android:id="@+id/reported_item_title_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#2B2B2B"
+                android:gravity="center_horizontal"
+                android:text="Title:" />
+
+            <TextView
+                android:id="@+id/reported_item_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#121212"
+                android:gravity="center_horizontal"
+                android:text="Title Goes Here" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#575757"
+                android:orientation="horizontal"></LinearLayout>
+
+            <TextView
+                android:id="@+id/reported_item_reason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#2B2B2B"
+                android:gravity="center_horizontal"
+                android:text="Reason:" />
+
+            <Spinner
+                android:id="@+id/reported_item_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginBottom="40dp"
+                android:background="#3E3E3E" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout12"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/cancel_report_item_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cancel" />
+
+                <Button
+                    android:id="@+id/confirm_report_item_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Report" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <TextView
         android:id="@+id/tv_selected_service_title"
         android:layout_width="wrap_content"
@@ -40,10 +146,11 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar7" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout4"
+        android:id="@+id/scroll_container"
         android:layout_width="383dp"
         android:layout_height="585dp"
-        app:layout_constraintBottom_toTopOf="@+id/button9"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/contact_seller_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar7">
@@ -66,6 +173,7 @@
                     android:background="#000000">
 
                 </androidx.viewpager2.widget.ViewPager2>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -91,11 +199,13 @@
                     android:text="Title goes here"
                     android:textColor="#FFFFFF"
                     android:textSize="22sp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#575757"
                     android:orientation="horizontal"></LinearLayout>
+
                 <TextView
                     android:id="@+id/textView27"
                     android:layout_width="match_parent"
@@ -114,11 +224,13 @@
                     android:gravity="center_horizontal"
                     android:text="Category goes here"
                     android:textColor="#FFFFFF" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#575757"
                     android:orientation="horizontal"></LinearLayout>
+
                 <TextView
                     android:id="@+id/textView33"
                     android:layout_width="match_parent"
@@ -234,6 +346,7 @@
                     android:layout_height="1dp"
                     android:background="#575757"
                     android:orientation="horizontal"></LinearLayout>
+
                 <TextView
                     android:id="@+id/textView22"
                     android:layout_width="match_parent"
@@ -258,14 +371,14 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/button4"
+                        android:id="@+id/share_item_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="share" />
 
                     <Button
-                        android:id="@+id/button8"
+                        android:id="@+id/report_item_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -277,7 +390,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/contact_seller_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="contact seller"
