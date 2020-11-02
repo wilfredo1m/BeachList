@@ -104,7 +104,11 @@ public class SelectedService extends AppCompatActivity {
 
         //TODO remove comment from line below once images are implemented
         //populates image of the first listing
-        //firstImageOfService.add(serviceImages.get(0));
+        if(serviceImages.isEmpty()){
+
+        }else{
+            firstImageOfService.add(serviceImages.get(0));
+        }
 //********************************************************************************************************************************************//
 //*****************************************END IMAGE SELECTION SECTION************************************************************************//
 
@@ -215,11 +219,13 @@ public class SelectedService extends AppCompatActivity {
     public void populateReportScreen(){
         reportedServiceTitle = findViewById(R.id.reportedServiceTitle);
         reportedServiceTitle.setText(itemTitle.getText());
-        /*
-        adapter2 = new ImageAdapter(getApplicationContext(), firstImageOfService);
-        reportPager = findViewById(R.id.reported_Service_pager);
-        reportPager.setAdapter(adapter2);
-         */
+        if(firstImageOfService.isEmpty()){
+            //do nothing
+        }else {
+            adapter2 = new ImageAdapter(getApplicationContext(), firstImageOfService);
+            reportPager = findViewById(R.id.reported_Service_pager);
+            reportPager.setAdapter(adapter2);
+        }
     }
 
     public void setupPopUpScreenView(){

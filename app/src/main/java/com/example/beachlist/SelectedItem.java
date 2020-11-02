@@ -102,7 +102,11 @@ public class SelectedItem extends AppCompatActivity {
 
         //TODO remove commment from this line once images are implemented
         //populates image of the first listing
-    //    firstImageOfItem.add(itemImages.get(0));
+        if(itemImages.isEmpty()){
+
+        }else{
+            firstImageOfItem.add(itemImages.get(0));
+        }
 //********************************************************************************************************************************************//
 //*****************************************END IMAGE SELECTION SECTION************************************************************************//
 
@@ -210,12 +214,15 @@ public class SelectedItem extends AppCompatActivity {
         reportedItemTitle = findViewById(R.id.reported_item_title);
         reportedItemTitle.setText(itemTitle.getText());
         //TODO uncomment this part in once images are implemented
-        /*
-        adapter2 = new ImageAdapter(getApplicationContext(), firstImageOfItem);
-        reportedPager = findViewById(R.id.reported_item_pager);
-        reportedPager.setAdapter(adapter2);
+        if(firstImageOfItem.isEmpty()){
+        //do nothing
+        }else {
 
-         */
+            adapter2 = new ImageAdapter(getApplicationContext(), firstImageOfItem);
+            reportedPager = findViewById(R.id.reported_item_pager);
+            reportedPager.setAdapter(adapter2);
+
+        }
 
     }
 
