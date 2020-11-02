@@ -72,8 +72,6 @@ public class ListingReviewPage extends AppCompatActivity {
                 // Adds post to database
                 submitPost();
 
-                // Return to home screen
-                openHomeScreen();
             }
         });
 
@@ -119,9 +117,9 @@ public class ListingReviewPage extends AppCompatActivity {
 
         //This should become obsolete but i didn't want to change listing data again right now
         listingImages = new HashMap();
-        ArrayList<String> imageUrls = this.getIntent().getStringArrayListExtra("Listing Images");
+        ArrayList<String> imageUris = this.getIntent().getStringArrayListExtra("Listing Images");
 
-        getUrls(imageUrls, imageUrls.size());
+        getUrls(imageUris, imageUris.size());
 
     }
 
@@ -183,7 +181,8 @@ public class ListingReviewPage extends AppCompatActivity {
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            startActivity(openScreen);
+                                            // Return to home screen
+                                            openHomeScreen();
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
