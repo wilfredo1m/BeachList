@@ -11,6 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +23,9 @@ public class CurrentListingsFragment extends Fragment {
     RecyclerView recyclerView;
     CurrentListingsRecyclerAdapter adapter;
     public static List<ListingData> list = new ArrayList<>();
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private FirebaseUser user;
+    private FirebaseAuth mAuth;
 
     private TextView textview;
     public CurrentListingsFragment() {
@@ -29,6 +37,9 @@ public class CurrentListingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        DatabaseReference usersReference = database.getReference().child("listings").child("item");
         // Inflate the layout for this fragment
         View currentListing= inflater.inflate(R.layout.fragment_current_listings, container, false);
 

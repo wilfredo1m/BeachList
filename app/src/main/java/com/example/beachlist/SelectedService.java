@@ -24,9 +24,6 @@ import java.util.ArrayList;
 
 public class SelectedService extends AppCompatActivity {
     ViewPager2 viewPager;
-    String[] images = {"https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F1595294896?alt=media&token=c341b259-f2a5-45ad-97e1-04b770734db1",
-            "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F258260727?alt=media&token=e319e597-2fee-4790-b630-db4d6df4cf12",
-            "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F267055780?alt=media&token=1e386df7-470b-431a-b58c-bb0d86450d2c"};
     private ArrayList<String> serviceImages = new ArrayList<>();
     private FirebaseDatabase firebaseDatabase;
     ImageAdapter adapter;
@@ -68,7 +65,7 @@ public class SelectedService extends AppCompatActivity {
         //********************************************************
 
         //Get user info and display it to screen
-        getUserInfo(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getOwnerId());
+        getSellerInfo(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getOwnerId());
 
 //*********************************BUTTON GROUP*******************************************//
         // Go back to User search list (temporarily going back to home)
@@ -83,7 +80,7 @@ public class SelectedService extends AppCompatActivity {
 
     }
 
-    private void getUserInfo(String ownerId) {
+    private void getSellerInfo(String ownerId) {
         final Context context = this;
         DatabaseReference userRef = firebaseDatabase.getReference().child("users").child(ownerId);
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {

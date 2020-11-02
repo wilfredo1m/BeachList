@@ -99,7 +99,7 @@ public class ListingReviewPage extends AppCompatActivity {
         openScreen.putExtra("screen", 2);
         startActivity(openScreen);
     }
-    //TODO to be populated by randy and bernie to save content to firebase
+    //Submit post to firebase
     public void submitPost(){
         //Get current date and format
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -146,11 +146,7 @@ public class ListingReviewPage extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             String imageReference = uri.toString();
-                            if (n == 1) {
-                                listingImages.put("headerImage", imageReference);
-                            } else {
-                                listingImages.put(String.valueOf(n), imageReference);
-                            }
+                            listingImages.put(String.valueOf(n), imageReference);
                             getUrls(imageUrls, n - 1);
                         }
                     });
@@ -169,9 +165,6 @@ public class ListingReviewPage extends AppCompatActivity {
             String key = listingReference.push().getKey();
             listingReference = listingReference.child(key);
 
-            final Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
-
-            //TODO test this set up of the setvalue
             final DatabaseReference finalListingReference = listingReference;
             listingReference.setValue(currentListing)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
