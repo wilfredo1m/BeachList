@@ -38,8 +38,8 @@ public class SelectedFriend extends AppCompatActivity {
         user = mAuth.getCurrentUser();
 
         profilePic = findViewById(R.id.iv_selected_friend_image);
-        firstName = findViewById(R.id.tv_first_name);
-        lastName = findViewById(R.id.tv_last_name);
+        firstName = findViewById(R.id.tv_full_name);
+        lastName = findViewById(R.id.tv_email);
 
         // gets the pic and name of the user to display
         final int position = getIntent().getIntExtra("position",1);

@@ -4,13 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,11 +36,15 @@ import java.util.List;
 
 public class SelectedUser extends AppCompatActivity {
     private static final String TAG = "error";
-    ImageView profilePic;
-    TextView firstName, lastName;
+    ImageView profilePic,reportedPersonImage;
+    TextView firstName, lastName, reportedUserName;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
     FirebaseUser user;
+    Button reportUser,cancelReport,submitReport,addFriendButton;
+    ConstraintLayout constraintLayout;
+    Spinner reportUserSpinner;
+    String reportedUser;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,10 +56,45 @@ public class SelectedUser extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
+        //this layout is the pop up menu layout
+        constraintLayout = findViewById(R.id.fuzzy_background);
         profilePic = findViewById(R.id.selected_user_profile_pic);
         firstName = findViewById(R.id.selected_user_first_name);
         lastName = findViewById(R.id.selected_user_last_name);
+        addFriendButton = findViewById(R.id.btn_add_user);
 
+//***********************************INITIALIZE SPINNER SECTION************************************************************************************//
+//**********************SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST***********************************************************************//
+//****************************ON SELECT LISTENER TO BE ABLE TO PASS THE SELECTED INFORMATION TO THE CONFIRM REPORT BUTTON************************//
+        //initiate the spinner
+        reportUserSpinner = findViewById(R.id.report_user_spinner);
+        //array adapter holding the array list of categories created in the strings.xml
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.report_user));
+        //setup adapter to be passed to spinner
+        reportUserSpinner.setAdapter(arrayAdapter);
+        reportUserSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                reportedUser =  reportUserSpinner.getSelectedItem().toString();
+                // your code here
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
+//********************************************************************************************************************************************//
+//********************************END SPINNER SECTION*****************************************************************************************//
+
+
+
+
+//*****************************************GET USER INFO FROM FIREBASE***********************************************************************//
+//********************************************************************************************************************************************//
         // gets the pic and name of the user to display
         final int position = getIntent().getIntExtra("position",1);
 
@@ -60,10 +105,16 @@ public class SelectedUser extends AppCompatActivity {
                 .into(profilePic);
         firstName.setText(UserHomeSearchTab.user_list.get(position).child("data").getValue(UserData.class).getFirstName());
         lastName.setText(UserHomeSearchTab.user_list.get(position).child("data").getValue(UserData.class).getLastName());
+//********************************************************************************************************************************************//
+//*****************************************END USER SELECTION SECTION************************************************************************//
 
-// *****************************************************BUTTON GROUP********************************************************************************//
+
+
+
+//*********************************BUTTON GROUP***********************************************************************************************//
+//********************************************************************************************************************************************//
         // Send user a friend request
-        Button addFriendButton = findViewById(R.id.btn_add_user);
+        addFriendButton = findViewById(R.id.btn_add_user);
         addFriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,8 +148,37 @@ public class SelectedUser extends AppCompatActivity {
                 openHomeScreen();
             }
         });
-// *****************************************************END BUTTON GROUP********************************************************************************//
 
+        //user clicks on report user button in order to populate pop up menu to report user
+        reportUser = findViewById(R.id.btn_report_user);
+        reportUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                populateReportedUserScreen();
+                setupPopUpScreenView();
+            }
+        });
+
+        //user cancels the report to set the view back to the original view
+        cancelReport = findViewById(R.id.cancel_report_button);
+        cancelReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setupRevertScreenView();
+            }
+        });
+
+        //user clicks on submit button to send the report to the admin page
+       submitReport = findViewById(R.id.confirm_report_user_button);
+       submitReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), reportedUser, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+//*********************************END BUTTON GROUP***********************************************************************************//
+//***********************************************************************************************************************************//
     }//end onCreate
 
 
@@ -124,5 +204,28 @@ public class SelectedUser extends AppCompatActivity {
                         Log.w(TAG, "could not delete value");
                     }
                 });
+    }
+
+    //populates fields for user being reported
+    public void populateReportedUserScreen(){
+        //reported user information
+        reportedUserName = findViewById(R.id.reported_user_name);
+        reportedUserName.setText(firstName.getText()+" " + lastName.getText());
+        reportedPersonImage = findViewById(R.id.reportedUserImage);
+        reportedPersonImage.setImageDrawable(profilePic.getDrawable());
+    }
+    public void setupPopUpScreenView(){
+        // change visibility to views
+        constraintLayout.setVisibility(View.VISIBLE);
+        //buttons were an issue so they need to be invisible
+        reportUser.setVisibility(View.INVISIBLE);
+        addFriendButton.setVisibility(View.INVISIBLE);
+    }
+
+    public void setupRevertScreenView(){
+        //set visibility to views
+        reportUser.setVisibility(View.VISIBLE);
+        addFriendButton.setVisibility(View.VISIBLE);
+        constraintLayout.setVisibility(View.INVISIBLE);
     }
 }
