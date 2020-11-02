@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class ListingDescriptionPage extends AppCompatActivity {
     Button cancelButton,nextButton;
     Spinner spinner;
@@ -23,6 +25,7 @@ public class ListingDescriptionPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        ArrayList<String> test = this.getIntent().getStringArrayListExtra("Listing Images");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listing_description_page);
 
@@ -96,6 +99,7 @@ public class ListingDescriptionPage extends AppCompatActivity {
         openScreen.putExtra("ListingCategory", category);
         openScreen.putExtra("ListingType", listingType);
         openScreen.putExtra("ListingDescription", description.getText().toString());
+        openScreen.putStringArrayListExtra("Listing Images", this.getIntent().getStringArrayListExtra("Listing Images"));
         //go to next screen
         startActivity(openScreen);
     }//end goToPostListingPage()

@@ -43,7 +43,7 @@ public class ListingTitlePage extends AppCompatActivity {
     ViewPager2 viewPager;
     ImageAdapter2 adapter;
     ArrayList<Bitmap> bitmaps;
-    ArrayList<Uri> imageUriList;
+    ArrayList<String> imageUriList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -138,7 +138,7 @@ public class ListingTitlePage extends AppCompatActivity {
             if(clipData != null) {
                 for(int i=0;i <clipData.getItemCount();i++){
                     Uri imageUri = clipData.getItemAt(i).getUri();
-                    imageUriList.add(imageUri);
+                    imageUriList.add(imageUri.toString());
                     try{
                         InputStream is = getContentResolver().openInputStream(imageUri);
                         Bitmap bitmap = BitmapFactory.decodeStream(is);
@@ -154,7 +154,7 @@ public class ListingTitlePage extends AppCompatActivity {
                 }
             }else{
                 Uri imageUri = data.getData();
-                imageUriList.add(imageUri);
+                imageUriList.add(imageUri.toString());
                 try{
                     InputStream is = getContentResolver().openInputStream(imageUri);
                     Bitmap bitmap = BitmapFactory.decodeStream(is);
@@ -169,6 +169,8 @@ public class ListingTitlePage extends AppCompatActivity {
                 }
             }
 
+
+
             }
         }
     }
@@ -177,7 +179,7 @@ public class ListingTitlePage extends AppCompatActivity {
         Intent openScreen = new Intent(this, ListingDescriptionPage.class);
         TextView titleTextView = findViewById(R.id.et_listing_title);
         openScreen.putExtra("ListingTitle", titleTextView.getText().toString());
-
+        openScreen.putStringArrayListExtra("Listing Images", imageUriList);
 //        ByteArrayOutputStream stream = new ByteArrayOutputStream();
 //        profileImage.compress(Bitmap.CompressFormat.JPEG, 10, stream);
         //Bitmap.createScaledBitmap(profileImage, 200, 200, true);
