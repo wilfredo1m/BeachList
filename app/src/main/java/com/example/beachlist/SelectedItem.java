@@ -1,17 +1,21 @@
 package com.example.beachlist;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
@@ -24,16 +28,20 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class SelectedItem extends AppCompatActivity {
-    ViewPager2 viewPager;
+    ViewPager2 viewPager,reportedPager;
     String[] images = {"https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F1595294896?alt=media&token=c341b259-f2a5-45ad-97e1-04b770734db1",
             "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F258260727?alt=media&token=e319e597-2fee-4790-b630-db4d6df4cf12",
             "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F267055780?alt=media&token=1e386df7-470b-431a-b58c-bb0d86450d2c"};
     private ArrayList<String> itemImages = new ArrayList<>();
+    private ArrayList<String> firstImageOfItem = new ArrayList<>();
     private FirebaseDatabase firebaseDatabase;
-    ImageAdapter adapter;
+    ImageAdapter adapter,adapter2;
     ImageView userPicture;
-    TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName;
-
+    TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName, reportedItemTitle;
+    ConstraintLayout itemPopUpWindow, mainItemWindow;
+    Button reportItem, cancelReport,backButton,contactSeller,confirmReport;
+    Spinner reportItemSpinner;
+    String selectedItem;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +50,10 @@ public class SelectedItem extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         //*************Display Item info**************************
-
+        contactSeller = findViewById(R.id.contact_seller_button);
+        itemPopUpWindow = findViewById(R.id.fuzzy_item_layout);
+        mainItemWindow = findViewById(R.id.scroll_container);
+        backButton = findViewById(R.id.btn_back_from_user_item_page);
         itemTitle = findViewById(R.id.selected_item_title);
         itemDescription = findViewById(R.id.selected_item_description);
         itemPrice = findViewById(R.id.selected_item_price);
@@ -51,30 +62,74 @@ public class SelectedItem extends AppCompatActivity {
         itemSellerLastName = findViewById(R.id.item_seller_lastname);
         userPicture = findViewById(R.id.item_user_image);
 
+//***********************************INITIALIZE SPINNER SECTION************************************************************************************//
+//**********************SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST***********************************************************************//
+//****************************ON SELECT LISTENER TO BE ABLE TO PASS THE SELECTED INFORMATION TO THE CONFIRM REPORT BUTTON************************//
+        //initiate the spinner
+        reportItemSpinner = findViewById(R.id.reported_item_spinner);
+        //array adapter holding the array list of categories created in the strings.xml
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.report_item));
+        //setup adapter to be passed to spinner
+        reportItemSpinner.setAdapter(arrayAdapter);
+        reportItemSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                selectedItem =  reportItemSpinner.getSelectedItem().toString();
+                // your code here
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
+//********************************************************************************************************************************************//
+//********************************END SPINNER SECTION*****************************************************************************************//
+
+
+
+//*****************************************GET IMAGE SELECTION SECTION************************************************************************//
+//********************************************************************************************************************************************//
         // gets the item's information to display
         int position = getIntent().getIntExtra("position",1);
-
         getListingImages(ItemHomeSearchTab.item_list.get(position).child("listingImages"));
         viewPager = findViewById(R.id.selected_item_images);
         adapter = new ImageAdapter(this, itemImages);
         viewPager.setAdapter(adapter);
 
+        //TODO remove commment from this line once images are implemented
+        //populates image of the first listing
+    //    firstImageOfItem.add(itemImages.get(0));
+//********************************************************************************************************************************************//
+//*****************************************END IMAGE SELECTION SECTION************************************************************************//
+
+
+
+//********************************************GET VALUES FROM FIREBASE ***********************************************************************//
+//********************************************************************************************************************************************//
         // Sets the item info in the correct fields to be displayed
         itemTitle.setText(ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getTitle());
         itemDescription.setText(ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getDescription());
         itemPrice.setText("$"+ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getPrice());
-//        itemSellerFirstName.setText(ItemHomeSearchTab.listing_list.get(position).getSellerFirstName());
-//        itemSellerLastName.setText(ItemHomeSearchTab.listing_list.get(position).getSellerLastName());
-//        itemCategory.setText(ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getCategory());
+        //itemSellerFirstName.setText(ItemHomeSearchTab.listing_list.get(position).getSellerFirstName());
+        //itemSellerLastName.setText(ItemHomeSearchTab.listing_list.get(position).getSellerLastName());
+        //itemCategory.setText(ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getCategory());
         ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getOwnerId();
 
         //Get user info and display it to screen
         getUserInfo(ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getOwnerId());
-        //********************************************************
+//********************************************************************************************************************************************//
+//********************************************END VALUES FROM FIREBASE ***********************************************************************//
 
 
+
+//*********************************BUTTON GROUP***********************************************************************************************//
+//********************************************************************************************************************************************//
         // Go back to Home Screen
-        Button backButton = findViewById(R.id.btn_back_from_user_item_page);
+        final Button backButton = findViewById(R.id.btn_back_from_user_item_page);
         backButton.setOnClickListener(new View.OnClickListener()
         {
         @Override
@@ -82,7 +137,37 @@ public class SelectedItem extends AppCompatActivity {
             openHomeScreen();
             }
         });
-    }
+
+        reportItem = findViewById(R.id.report_item_button);
+        reportItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                populateReportScreen();
+                setupPopUpScreenView();
+            }
+        });
+
+        cancelReport = findViewById(R.id.cancel_report_item_button);
+        cancelReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setupRevertScreenView();
+            }
+        });
+
+        confirmReport = findViewById(R.id.confirm_report_item_button);
+        confirmReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), selectedItem, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+//*********************************END BUTTON GROUP***********************************************************************************//
+//***********************************************************************************************************************************//
+    }//end onCreate()
 
     private void getUserInfo(String ownerId) {
         final Context context = this;
@@ -120,4 +205,33 @@ public class SelectedItem extends AppCompatActivity {
         Intent intent = new Intent(this, SelectedUser.class);
         startActivity(intent);
     }
+
+    public void populateReportScreen(){
+        reportedItemTitle = findViewById(R.id.reported_item_title);
+        reportedItemTitle.setText(itemTitle.getText());
+        //TODO uncomment this part in once images are implemented
+        /*
+        adapter2 = new ImageAdapter(getApplicationContext(), firstImageOfItem);
+        reportedPager = findViewById(R.id.reported_item_pager);
+        reportedPager.setAdapter(adapter2);
+
+         */
+
+    }
+
+    public void setupPopUpScreenView(){
+        itemPopUpWindow.setVisibility(View.VISIBLE);
+        mainItemWindow.setVisibility(View.INVISIBLE);
+        backButton.setVisibility(View.INVISIBLE);
+        contactSeller.setVisibility(View.INVISIBLE);
+    }
+
+
+    public void setupRevertScreenView(){
+        itemPopUpWindow.setVisibility(View.INVISIBLE);
+        mainItemWindow.setVisibility(View.VISIBLE);
+        backButton.setVisibility(View.VISIBLE);
+        contactSeller.setVisibility(View.VISIBLE);
+    }
+
 }

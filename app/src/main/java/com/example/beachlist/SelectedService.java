@@ -4,13 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
@@ -23,15 +28,22 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class SelectedService extends AppCompatActivity {
-    ViewPager2 viewPager;
+    ViewPager2 viewPager,reportPager;
     String[] images = {"https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F1595294896?alt=media&token=c341b259-f2a5-45ad-97e1-04b770734db1",
             "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F258260727?alt=media&token=e319e597-2fee-4790-b630-db4d6df4cf12",
             "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F267055780?alt=media&token=1e386df7-470b-431a-b58c-bb0d86450d2c"};
     private ArrayList<String> serviceImages = new ArrayList<>();
+    private ArrayList<String> firstImageOfService = new ArrayList<>();
+
     private FirebaseDatabase firebaseDatabase;
-    ImageAdapter adapter;
+    ImageAdapter adapter,adapter2;
+    int displayReportPagerView;
     ImageView userPicture;
-    TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName;
+    TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName, reportedServiceTitle;
+    Button reportService, cancelReport, submitReport,contactSeller,backButton;
+    ConstraintLayout popupWindow,mainConstraint;
+    Spinner reportServiceSpinner;
+    String reportedSpinnerSelection;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,9 +51,11 @@ public class SelectedService extends AppCompatActivity {
         setContentView(R.layout.activity_selected_other_user_service);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
+        //setup for visibility of main view in the page
+        mainConstraint = findViewById(R.id.scroll_container);
+        popupWindow = findViewById(R.id.fuzzy_layout_service);
 
         //*************Display Service info**************************
-
         itemTitle = findViewById(R.id.selected_service_title);
         itemDescription = findViewById(R.id.selected_service_description);
         itemPrice = findViewById(R.id.selected_service_price);
@@ -50,38 +64,114 @@ public class SelectedService extends AppCompatActivity {
         itemSellerLastName = findViewById(R.id.service_seller_lastname);
         userPicture = findViewById(R.id.service_user_image);
 
-        // gets the service's information to display
-        int position = getIntent().getIntExtra("position",1);
 
+//***********************************INITIALIZE SPINNER SECTION************************************************************************************//
+//**********************SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST***********************************************************************//
+//****************************ON SELECT LISTENER TO BE ABLE TO PASS THE SELECTED INFORMATION TO THE CONFIRM REPORT BUTTON************************//
+        //initiate the spinner
+        reportServiceSpinner = findViewById(R.id.reported_service_spinner);
+        //array adapter holding the array list of categories created in the strings.xml
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.report_service));
+        //setup adapter to be passed to spinner
+        reportServiceSpinner.setAdapter(arrayAdapter);
+        reportServiceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                reportedSpinnerSelection =  reportServiceSpinner.getSelectedItem().toString();
+                // your code here
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
+//********************************************************************************************************************************************//
+//********************************END SPINNER SECTION*****************************************************************************************//
+
+
+//*****************************************GET IMAGE SELECTION SECTION************************************************************************//
+//********************************************************************************************************************************************//
+
+        // gets the service's information to display
+        final int position = getIntent().getIntExtra("position",1);
         getListingImages(ServiceHomeSearchTab.service_list.get(position).child("listingImages"));
         viewPager = findViewById(R.id.selected_service_images);
         adapter = new ImageAdapter(this, serviceImages);
         viewPager.setAdapter(adapter);
 
+        //TODO remove comment from line below once images are implemented
+        //populates image of the first listing
+        //firstImageOfService.add(serviceImages.get(0));
+//********************************************************************************************************************************************//
+//*****************************************END IMAGE SELECTION SECTION************************************************************************//
+
+
+
+//********************************************GET VALUES FROM FIREBASE ***********************************************************************//
+//********************************************************************************************************************************************//
         // Sets the service info in the correct fields to be displayed
         itemTitle.setText(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getTitle());
         itemDescription.setText(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getDescription());
         itemPrice.setText("$"+ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getPrice());
-//        itemSellerFirstName.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getSellerFirstName());
-//        itemSellerLastName.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getSellerLastName());
+        //itemSellerFirstName.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getSellerFirstName());
+        //itemSellerLastName.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getSellerLastName());
         itemCategory.setText(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getCategory());
-        //********************************************************
-
         //Get user info and display it to screen
         getUserInfo(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getOwnerId());
+//********************************************************************************************************************************************//
+//********************************************END VALUES FROM FIREBASE ***********************************************************************//
 
-//*********************************BUTTON GROUP*******************************************//
+
+//*********************************BUTTON GROUP***********************************************************************************************//
+//********************************************************************************************************************************************//
+
+        contactSeller = findViewById(R.id.contact_seller_button);
+
         // Go back to User search list (temporarily going back to home)
-        Button backButton = findViewById(R.id.btn_back_from_user_item_page);
+        backButton = findViewById(R.id.btn_back_from_user_item_page);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openHomeScreen();
             }
         });
-//*********************************END BUTTON GROUP*******************************************//
 
-    }
+        //report button in main window to triggerpop up window
+        reportService = findViewById(R.id.report_item_button);
+        reportService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               populateReportScreen();
+               setupPopUpScreenView();
+
+            }
+        });
+
+
+        //Cancel Report button in pop up window
+        cancelReport = findViewById(R.id.cancer_report_service_button);
+        cancelReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setupRevertScreenView();
+            }
+        });
+
+        //Submit Report button in pop up window
+        submitReport = findViewById(R.id.submit_service_report);
+        submitReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), reportedSpinnerSelection, Toast.LENGTH_SHORT).show();
+            }
+        });
+//*********************************END BUTTON GROUP***********************************************************************************//
+//***********************************************************************************************************************************//
+
+    }//end onCreate()
 
     private void getUserInfo(String ownerId) {
         final Context context = this;
@@ -120,5 +210,31 @@ public class SelectedService extends AppCompatActivity {
     public void SendToUserPage(View view) {
         Intent intent = new Intent(this, SelectedUser.class);
         startActivity(intent);
+    }
+
+    public void populateReportScreen(){
+        reportedServiceTitle = findViewById(R.id.reportedServiceTitle);
+        reportedServiceTitle.setText(itemTitle.getText());
+        /*
+        adapter2 = new ImageAdapter(getApplicationContext(), firstImageOfService);
+        reportPager = findViewById(R.id.reported_Service_pager);
+        reportPager.setAdapter(adapter2);
+         */
+    }
+
+    public void setupPopUpScreenView(){
+        // ****group to fix visibilities for screen ****//
+        popupWindow.setVisibility(View.VISIBLE);
+        contactSeller.setVisibility(View.INVISIBLE);
+        mainConstraint.setVisibility(View.INVISIBLE);
+        backButton.setVisibility(View.INVISIBLE);
+    }
+
+    public void setupRevertScreenView(){
+        // ****group to fix visibilities for screen ****//
+        popupWindow.setVisibility(View.INVISIBLE);
+        mainConstraint.setVisibility(View.VISIBLE);
+        contactSeller.setVisibility(View.VISIBLE);
+        backButton.setVisibility(View.VISIBLE);
     }
 }

@@ -25,6 +25,7 @@
         <activity android:name=".ListingReviewPage"/>
         <activity android:name=".ModifyListing"/>
         <activity android:name=".SelectedUser"/>
+        <activity android:name=".ReportedScreen"/>
         <activity android:name=".SelectedOwnListing"/>
         <activity android:name=".SelectedItem"/>
         <activity android:name=".SelectedService"/>

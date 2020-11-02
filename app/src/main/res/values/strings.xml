@@ -109,6 +109,35 @@
         <item>repair</item>
         <item>commission</item>
     </string-array>
+
+    <!-- report Service Categories -->
+    <string-array name="report_service">
+        <item>--select a reason--</item>
+        <item>inappropriate listing image</item>
+        <item>inappropriate content listed</item>
+        <item>wrong category</item>
+        <item>looks like spam</item>
+    </string-array>
+
+    <!-- report item Categories -->
+    <string-array name="report_item">
+        <item>--select a reason--</item>
+        <item>inappropriate listing image</item>
+        <item>inappropriate content listed</item>
+        <item>wrong category</item>
+        <item>looks like spam</item>
+        <item>appears stolen</item>
+    </string-array>
+
+    <!-- report user Categories -->
+    <string-array name="report_user">
+        <item>--select a reason--</item>
+        <item>failed to show up to meeting</item>
+        <item>Inappropriate Profile Picture</item>
+        <item>rude</item>
+        <item>sold broken content</item>
+
+    </string-array>
     <!-- test first names  -->
     <string-array name="first_names">
         <item>Viet</item>
