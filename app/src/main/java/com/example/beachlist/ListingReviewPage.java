@@ -44,7 +44,7 @@ public class ListingReviewPage extends AppCompatActivity {
     TextView listingTitle, listingDescription, listingPrice, listingCategory, listingType;
     String title, description, category, price, type;
     Map<String, String> listingImages;
-    CoolListingData currentListing;
+    ListingData currentListing;
     private StorageReference storageReference;
 
     private FirebaseDatabase database;
@@ -106,7 +106,7 @@ public class ListingReviewPage extends AppCompatActivity {
         Date date = new Date();
         String postDate = dateFormat.format(date);
 
-        currentListing = new CoolListingData();
+        currentListing = new ListingData();
 
         currentListing.setTitle(title);
         currentListing.setCategory(category);
@@ -158,7 +158,7 @@ public class ListingReviewPage extends AppCompatActivity {
             });
         }
         else {
-            currentListing.setListingImages(" ");
+            currentListing.setImageUrl(" ");
 
             //To be updated at a later interaction with the item
             currentListing.setBuyerId(" ");
@@ -177,7 +177,7 @@ public class ListingReviewPage extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            finalListingReference.child("listingImages").setValue(listingImages)
+                            finalListingReference.child("imageUrl").setValue(listingImages)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
