@@ -29,12 +29,11 @@ import java.util.ArrayList;
 
 public class SelectedService extends AppCompatActivity {
     ViewPager2 viewPager, reportPager;
-    private ArrayList<String> serviceImages = new ArrayList<>();
-    private ArrayList<String> firstImageOfService = new ArrayList<>();
+    private final ArrayList<String> serviceImages = new ArrayList<>();
+    private final ArrayList<String> firstImageOfService = new ArrayList<>();
 
     private FirebaseDatabase firebaseDatabase;
     ImageAdapter adapter, adapter2;
-    int displayReportPagerView;
     ImageView userPicture;
     TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName, reportedServiceTitle;
     Button reportService, cancelReport, submitReport, contactSeller, backButton;
@@ -68,7 +67,7 @@ public class SelectedService extends AppCompatActivity {
         //initiate the spinner
         reportServiceSpinner = findViewById(R.id.reported_service_spinner);
         //array adapter holding the array list of categories created in the strings.xml
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
                 getResources().getStringArray(R.array.report_service));
         //setup adapter to be passed to spinner
         reportServiceSpinner.setAdapter(arrayAdapter);
@@ -102,6 +101,7 @@ public class SelectedService extends AppCompatActivity {
                 getListingImages(snapshot.child("listingImages"));
                 //Get data and display info
                 ListingData selectedListing = snapshot.getValue(ListingData.class);
+                assert selectedListing != null;
                 displayListingInfo(selectedListing);
                 //display owner Info
                 getOwnerInfo(selectedListing.getOwnerId());
@@ -115,9 +115,7 @@ public class SelectedService extends AppCompatActivity {
 
         //TODO remove comment from line below once images are implemented
         //populates image of the first listing
-        if (serviceImages.isEmpty()) {
-
-        } else {
+        if (!serviceImages.isEmpty()) {
             firstImageOfService.add(serviceImages.get(0));
         }
 //********************************************************************************************************************************************//

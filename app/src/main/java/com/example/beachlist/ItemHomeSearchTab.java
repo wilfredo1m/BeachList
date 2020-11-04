@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,12 +23,8 @@ import java.util.List;
 
 public class ItemHomeSearchTab extends Fragment {
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
     public static List<DataSnapshot> item_list = new ArrayList<>();
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private FirebaseUser user;
-    private FirebaseAuth mAuth;
 
     public ItemHomeSearchTab() {
         // Required empty public constructor
@@ -36,8 +33,6 @@ public class ItemHomeSearchTab extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser();
         DatabaseReference usersReference = database.getReference().child("listings").child("item");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_item_select_from_home, container, false);
@@ -46,7 +41,7 @@ public class ItemHomeSearchTab extends Fragment {
         recyclerView = view.findViewById(R.id.item_tab_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        layoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
         // clears list each time to make sure no duplicates are added
@@ -54,7 +49,7 @@ public class ItemHomeSearchTab extends Fragment {
 
         usersReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         item_list.add(child);
@@ -64,7 +59,7 @@ public class ItemHomeSearchTab extends Fragment {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
@@ -72,7 +67,7 @@ public class ItemHomeSearchTab extends Fragment {
     }
 
     public void onServiceListQuery() {
-        adapter = new ItemRecyclerAdapter(getActivity(), item_list);
+        RecyclerView.Adapter adapter = new ItemRecyclerAdapter(getActivity(), item_list);
         recyclerView.setAdapter(adapter);
     }
 }
