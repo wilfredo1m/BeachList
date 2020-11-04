@@ -63,11 +63,9 @@ public class ServiceHomeSearchTab extends Fragment {
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         service_list.add(child);
-                        //getChildImages(child.getRef().child("listingImages"));
                     }
                 }
                 onServiceListQuery();
-                //***********************************************************************
             }
 
             @Override
