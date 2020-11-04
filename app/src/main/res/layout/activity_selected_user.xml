@@ -141,13 +141,11 @@
                 android:layout_height="wrap_content"
                 android:text="items" />
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/item_pager"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/item_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="#BDBCBC">
-
-            </androidx.viewpager.widget.ViewPager>
+                android:layout_height="match_parent"
+                android:background="#FF0606" />
 
             <TextView
                 android:id="@+id/textView29"
@@ -155,12 +153,11 @@
                 android:layout_height="wrap_content"
                 android:text="services" />
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/service_pager"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/service_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginBottom="100dp"
-                android:background="#FF0000" />
+                android:layout_height="match_parent"
+                android:background="#0D21E1" />
 
         </LinearLayout>
     </ScrollView>
