@@ -28,20 +28,17 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class SelectedService extends AppCompatActivity {
-    ViewPager2 viewPager,reportPager;
-    String[] images = {"https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F1595294896?alt=media&token=c341b259-f2a5-45ad-97e1-04b770734db1",
-            "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F258260727?alt=media&token=e319e597-2fee-4790-b630-db4d6df4cf12",
-            "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F267055780?alt=media&token=1e386df7-470b-431a-b58c-bb0d86450d2c"};
+    ViewPager2 viewPager, reportPager;
     private ArrayList<String> serviceImages = new ArrayList<>();
     private ArrayList<String> firstImageOfService = new ArrayList<>();
 
     private FirebaseDatabase firebaseDatabase;
-    ImageAdapter adapter,adapter2;
+    ImageAdapter adapter, adapter2;
     int displayReportPagerView;
     ImageView userPicture;
     TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName, reportedServiceTitle;
-    Button reportService, cancelReport, submitReport,contactSeller,backButton;
-    ConstraintLayout popupWindow,mainConstraint;
+    Button reportService, cancelReport, submitReport, contactSeller, backButton;
+    ConstraintLayout popupWindow, mainConstraint;
     Spinner reportServiceSpinner;
     String reportedSpinnerSelection;
 
@@ -71,7 +68,7 @@ public class SelectedService extends AppCompatActivity {
         //initiate the spinner
         reportServiceSpinner = findViewById(R.id.reported_service_spinner);
         //array adapter holding the array list of categories created in the strings.xml
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
                 getResources().getStringArray(R.array.report_service));
         //setup adapter to be passed to spinner
         reportServiceSpinner.setAdapter(arrayAdapter);
@@ -79,10 +76,11 @@ public class SelectedService extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                reportedSpinnerSelection =  reportServiceSpinner.getSelectedItem().toString();
+                reportedSpinnerSelection = reportServiceSpinner.getSelectedItem().toString();
                 // your code here
 
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
@@ -92,9 +90,8 @@ public class SelectedService extends AppCompatActivity {
 //********************************END SPINNER SECTION*****************************************************************************************//
 
 
-//*****************************************GET IMAGE SELECTION SECTION************************************************************************//
+//********************************************GET VALUES FROM FIREBASE AND IMAGE SELECTION****************************************************//
 //********************************************************************************************************************************************//
-
         String listingId = getIntent().getStringExtra("ListingID");
 
         DatabaseReference listingRef = firebaseDatabase.getReference().child("listings").child("service").child(listingId);
@@ -109,41 +106,20 @@ public class SelectedService extends AppCompatActivity {
                 //display owner Info
                 getOwnerInfo(selectedListing.getOwnerId());
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 //TODO Handle this error
             }
         });
 
-        // gets the service's information to display
-//        final int position = getIntent().getIntExtra("position",1);
-//        getListingImages(ServiceHomeSearchTab.service_list.get(position).child("listingImages"));
-//        viewPager = findViewById(R.id.selected_service_images);
-//        adapter = new ImageAdapter(this, serviceImages);
-//        viewPager.setAdapter(adapter);
-
         //TODO remove comment from line below once images are implemented
         //populates image of the first listing
-        if(serviceImages.isEmpty()){
+        if (serviceImages.isEmpty()) {
 
-        }else{
+        } else {
             firstImageOfService.add(serviceImages.get(0));
         }
-//********************************************************************************************************************************************//
-//*****************************************END IMAGE SELECTION SECTION************************************************************************//
-
-
-
-//********************************************GET VALUES FROM FIREBASE ***********************************************************************//
-//********************************************************************************************************************************************//
-        // Sets the service info in the correct fields to be displayed
-//        itemTitle.setText(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getTitle());
-//        itemDescription.setText(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getDescription());
-//        itemPrice.setText("$"+ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getPrice());
-//        //itemSellerFirstName.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getSellerFirstName());
-//        //itemSellerLastName.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getSellerLastName());
-//        itemCategory.setText(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getCategory());
-        //Get user info and display it to screen
 //********************************************************************************************************************************************//
 //********************************************END VALUES FROM FIREBASE ***********************************************************************//
 
@@ -167,8 +143,8 @@ public class SelectedService extends AppCompatActivity {
         reportService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               populateReportScreen();
-               setupPopUpScreenView();
+                populateReportScreen();
+                setupPopUpScreenView();
 
             }
         });
@@ -204,7 +180,7 @@ public class SelectedService extends AppCompatActivity {
     private void displayListingInfo(ListingData selectedListing) {
         itemTitle.setText(selectedListing.getTitle());
         itemDescription.setText(selectedListing.getDescription());
-        itemPrice.setText("$"+selectedListing.getPrice());
+        itemPrice.setText("$" + selectedListing.getPrice());
         itemCategory.setText(selectedListing.getCategory());
 
         viewPager = findViewById(R.id.selected_service_images);
@@ -225,6 +201,7 @@ public class SelectedService extends AppCompatActivity {
                         .centerCrop()
                         .into(userPicture);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 //TODO Handle this error
@@ -235,7 +212,7 @@ public class SelectedService extends AppCompatActivity {
     //service tab in HomeFragment
     public void openHomeScreen() {
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
-        openScreen.putExtra("tab",2);
+        openScreen.putExtra("tab", 2);
         startActivity(openScreen);
     }
 
@@ -247,7 +224,7 @@ public class SelectedService extends AppCompatActivity {
     public void populateReportScreen() {
         reportedServiceTitle = findViewById(R.id.reportedServiceTitle);
         reportedServiceTitle.setText(itemTitle.getText());
-        if(!firstImageOfService.isEmpty()){
+        if (!firstImageOfService.isEmpty()) {
             adapter2 = new ImageAdapter(getApplicationContext(), firstImageOfService);
             reportPager = findViewById(R.id.reported_Service_pager);
             reportPager.setAdapter(adapter2);

@@ -28,7 +28,7 @@ public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecycler
     @NonNull
     @Override
     public ServiceRecyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.service_row,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.service_row, parent, false);
         return new ServiceRecyclerAdapter.MyViewHolder(view);
     }
 
@@ -60,6 +60,7 @@ public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecycler
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView listingPic;
         TextView listingTitle, listingPrice;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             listingPic = itemView.findViewById(R.id.listing_image);

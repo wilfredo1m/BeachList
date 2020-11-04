@@ -32,6 +32,7 @@ public class ItemHomeSearchTab extends Fragment {
     public ItemHomeSearchTab() {
         // Required empty public constructor
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,26 +49,8 @@ public class ItemHomeSearchTab extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-//        // Test Arrays to make sure the info displays correctly
-//        int listingPics[][] = {{R.drawable.bulbasaur},{R.drawable.charmander}, {R.drawable.froakie}, {R.drawable.golem}, {R.drawable.jigglypuff},
-//                {R.drawable.pikachu}, {R.drawable.squirtle}, {R.drawable.sudowoodo}, {R.drawable.totodile}, {R.drawable.treeko}};
-//        String sellerFirstNames[] = getResources().getStringArray(R.array.first_names);
-//        String sellerLastNames[] = getResources().getStringArray(R.array.last_names);
-//        String listingNames[] = getResources().getStringArray(R.array.listing_names);
-//        String listingDescriptions[] = getResources().getStringArray(R.array.listing_descriptions);
-//        String listingAskingPrices[] = getResources().getStringArray(R.array.listing_asking_prices);
-//        String listingSoldFor[] = getResources().getStringArray(R.array.listing_sold_prices);
-//        String listingSoldTo[] = getResources().getStringArray(R.array.listing_sold_names);
-//        String listingSoldDate[] = getResources().getStringArray(R.array.listing_sold_dates);
-
         // clears list each time to make sure no duplicates are added
         item_list.clear();
-
-//        for(int i = 0; i < listingNames.length; i++){
-//            ListingData listing = new ListingData("https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F997005285?alt=media&token=af988212-f736-4eec-86e6-fd3ffb521547",sellerFirstNames[i], listingNames[i],listingDescriptions[i],listingAskingPrices[i], "another",
-//                    listingSoldFor[i], "yump", listingSoldTo[i], listingSoldDate[i]);
-//            listing_list.add(listing);
-//        }
 
         usersReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -91,7 +74,7 @@ public class ItemHomeSearchTab extends Fragment {
     }
 
     public void onServiceListQuery() {
-        adapter = new ItemRecyclerAdapter(getActivity(),item_list);
+        adapter = new ItemRecyclerAdapter(getActivity(), item_list);
         recyclerView.setAdapter(adapter);
     }
 }

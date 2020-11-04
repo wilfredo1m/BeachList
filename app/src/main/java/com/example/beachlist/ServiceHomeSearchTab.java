@@ -37,6 +37,7 @@ public class ServiceHomeSearchTab extends Fragment {
     public ServiceHomeSearchTab() {
         // Required empty public constructor
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,26 +54,8 @@ public class ServiceHomeSearchTab extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-//        // Test Arrays to make sure the info displays correctly
-//        int listingPics[][] = {{R.drawable.bulbasaur},{R.drawable.charmander}, {R.drawable.froakie}, {R.drawable.golem}, {R.drawable.jigglypuff},
-//                {R.drawable.pikachu}, {R.drawable.squirtle}, {R.drawable.sudowoodo}, {R.drawable.totodile}, {R.drawable.treeko}};
-//        String sellerFirstNames[] = getResources().getStringArray(R.array.first_names);
-//        String sellerLastNames[] = getResources().getStringArray(R.array.last_names);
-//        String listingNames[] = getResources().getStringArray(R.array.listing_names);
-//        String listingDescriptions[] = getResources().getStringArray(R.array.listing_descriptions);
-//        String listingAskingPrices[] = getResources().getStringArray(R.array.listing_asking_prices);
-//        String listingSoldFor[] = getResources().getStringArray(R.array.listing_sold_prices);
-//        String listingSoldTo[] = getResources().getStringArray(R.array.listing_sold_names);
-//        String listingSoldDate[] = getResources().getStringArray(R.array.listing_sold_dates);
-
         // clears list each time to make sure no duplicates are added
         service_list.clear();
-
-//        for(int i = 0; i < listingNames.length; i++){
-//            ListingData listing = new ListingData(listingPics[i],sellerFirstNames[i], sellerLastNames[i], listingNames[i],listingDescriptions[i],listingAskingPrices[i],
-//                    listingSoldFor[i], listingSoldTo[i], listingSoldDate[i]);
-//            listing_list.add(listing);
-//        }
 
         usersReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -96,7 +79,7 @@ public class ServiceHomeSearchTab extends Fragment {
     }
 
     public void onServiceListQuery() {
-        adapter = new ServiceRecyclerAdapter(getActivity(),service_list);
+        adapter = new ServiceRecyclerAdapter(getActivity(), service_list);
         recyclerView.setAdapter(adapter);
     }
 }

@@ -3,7 +3,6 @@ package com.example.beachlist;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,9 +29,6 @@ import java.util.ArrayList;
 
 public class SelectedItem extends AppCompatActivity {
     ViewPager2 viewPager,reportedPager;
-    String[] images = {"https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F1595294896?alt=media&token=c341b259-f2a5-45ad-97e1-04b770734db1",
-            "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F258260727?alt=media&token=e319e597-2fee-4790-b630-db4d6df4cf12",
-            "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F267055780?alt=media&token=1e386df7-470b-431a-b58c-bb0d86450d2c"};
     private ArrayList<String> itemImages = new ArrayList<>();
     private ArrayList<String> firstImageOfItem = new ArrayList<>();
     private FirebaseDatabase firebaseDatabase;
@@ -92,10 +88,9 @@ public class SelectedItem extends AppCompatActivity {
 
 
 
-//*****************************************GET IMAGE SELECTION SECTION************************************************************************//
+//********************************************GET VALUES FROM FIREBASE AND IMAGE SELECTION****************************************************//
 //********************************************************************************************************************************************//
         // gets the item's information to display
-        //int position = getIntent().getIntExtra("position",1);
         String listingId = getIntent().getStringExtra("ListingID");
 
         DatabaseReference listingRef = firebaseDatabase.getReference().child("listings").child("item").child(listingId);
@@ -116,34 +111,10 @@ public class SelectedItem extends AppCompatActivity {
             }
         });
 
-//        getListingImages(ItemHomeSearchTab.item_list.get(position).child("listingImages"));
-//        viewPager = findViewById(R.id.selected_item_images);
-//        adapter = new ImageAdapter(this, itemImages);
-//        viewPager.setAdapter(adapter);
-
         //populates image of the first listing
-        if(itemImages.isEmpty()){
-
-        }else{
+        if(!itemImages.isEmpty()){
             firstImageOfItem.add(itemImages.get(0));
         }
-//********************************************************************************************************************************************//
-//*****************************************END IMAGE SELECTION SECTION************************************************************************//
-
-
-
-//********************************************GET VALUES FROM FIREBASE ***********************************************************************//
-//********************************************************************************************************************************************//
-        // Sets the item info in the correct fields to be displayed
-//        itemTitle.setText(ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getTitle());
-//        itemDescription.setText(ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getDescription());
-//        itemPrice.setText("$"+ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getPrice());
-        //itemSellerFirstName.setText(ItemHomeSearchTab.listing_list.get(position).getSellerFirstName());
-        //itemSellerLastName.setText(ItemHomeSearchTab.listing_list.get(position).getSellerLastName());
-        //itemCategory.setText(ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getCategory());
-
-        //Get user info and display it to screen
-//        getUserInfo(ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getOwnerId());
 //********************************************************************************************************************************************//
 //********************************************END VALUES FROM FIREBASE ***********************************************************************//
 
