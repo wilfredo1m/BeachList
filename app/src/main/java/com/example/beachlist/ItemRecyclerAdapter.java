@@ -29,7 +29,7 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
     @Override
     public ItemRecyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.service_row,parent,false);
-        return new ItemRecyclerAdapter.MyViewHolder(view);
+        return new MyViewHolder(view);
     }
 
     @Override
@@ -38,7 +38,6 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
                 .load(list.get(position).child("listingImages").child("1").getValue(String.class))
                 .centerCrop()
                 .into(holder.listingPic);
-        //holder.listingPic.setImageResource(list.get(position).getListingPhotos()[0]);
         holder.listingTitle.setText(list.get(position).getValue(ListingData.class).getTitle());
         holder.listingPrice.setText("$" + list.get(position).getValue(ListingData.class).getPrice());
 
@@ -47,7 +46,7 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, SelectedItem.class);
-                intent.putExtra("position", position);
+                intent.putExtra("ListingID", list.get(position).getKey());
                 context.startActivity(intent);
             }
         });
@@ -58,7 +57,7 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
         return list.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView listingPic;
         TextView listingTitle, listingPrice;
         public MyViewHolder(@NonNull View itemView) {

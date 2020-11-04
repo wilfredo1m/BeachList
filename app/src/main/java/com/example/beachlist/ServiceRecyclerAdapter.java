@@ -38,7 +38,6 @@ public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecycler
                 .load(list.get(position).child("listingImages").child("1").getValue(String.class))
                 .centerCrop()
                 .into(holder.listingPic);
-        //holder.listingPic.setImageResource(list.get(position).getValue(ListingData.class).getImageUrl());
         holder.listingTitle.setText(list.get(position).getValue(ListingData.class).getTitle());
         holder.listingPrice.setText("$" + list.get(position).getValue(ListingData.class).getPrice());
 
@@ -47,7 +46,7 @@ public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecycler
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, SelectedService.class);
-                intent.putExtra("position", position);
+                intent.putExtra("ListingID", list.get(position).getKey());
                 context.startActivity(intent);
             }
         });

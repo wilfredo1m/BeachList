@@ -3,6 +3,7 @@ package com.example.beachlist;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -57,7 +58,7 @@ public class SelectedItem extends AppCompatActivity {
         itemTitle = findViewById(R.id.selected_item_title);
         itemDescription = findViewById(R.id.selected_item_description);
         itemPrice = findViewById(R.id.selected_item_price);
-        itemCategory = findViewById(R.id.selected_service_category);
+        itemCategory = findViewById(R.id.selected_item_category);
         itemSellerFirstName = findViewById(R.id.item_seller_firstname);
         itemSellerLastName = findViewById(R.id.item_seller_lastname);
         userPicture = findViewById(R.id.item_user_image);
@@ -94,13 +95,32 @@ public class SelectedItem extends AppCompatActivity {
 //*****************************************GET IMAGE SELECTION SECTION************************************************************************//
 //********************************************************************************************************************************************//
         // gets the item's information to display
-        int position = getIntent().getIntExtra("position",1);
-        getListingImages(ItemHomeSearchTab.item_list.get(position).child("listingImages"));
-        viewPager = findViewById(R.id.selected_item_images);
-        adapter = new ImageAdapter(this, itemImages);
-        viewPager.setAdapter(adapter);
+        //int position = getIntent().getIntExtra("position",1);
+        String listingId = getIntent().getStringExtra("ListingID");
 
-        //TODO remove commment from this line once images are implemented
+        DatabaseReference listingRef = firebaseDatabase.getReference().child("listings").child("item").child(listingId);
+        listingRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //Populate image URLs in global variable
+                getListingImages(snapshot.child("listingImages"));
+                //Get data and display info
+                ListingData selectedListing = snapshot.getValue(ListingData.class);
+                displayListingInfo(selectedListing);
+                //display owner Info
+                getOwnerInfo(selectedListing.getOwnerId());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //TODO Handle this error
+            }
+        });
+
+//        getListingImages(ItemHomeSearchTab.item_list.get(position).child("listingImages"));
+//        viewPager = findViewById(R.id.selected_item_images);
+//        adapter = new ImageAdapter(this, itemImages);
+//        viewPager.setAdapter(adapter);
+
         //populates image of the first listing
         if(itemImages.isEmpty()){
 
@@ -115,16 +135,15 @@ public class SelectedItem extends AppCompatActivity {
 //********************************************GET VALUES FROM FIREBASE ***********************************************************************//
 //********************************************************************************************************************************************//
         // Sets the item info in the correct fields to be displayed
-        itemTitle.setText(ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getTitle());
-        itemDescription.setText(ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getDescription());
-        itemPrice.setText("$"+ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getPrice());
+//        itemTitle.setText(ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getTitle());
+//        itemDescription.setText(ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getDescription());
+//        itemPrice.setText("$"+ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getPrice());
         //itemSellerFirstName.setText(ItemHomeSearchTab.listing_list.get(position).getSellerFirstName());
         //itemSellerLastName.setText(ItemHomeSearchTab.listing_list.get(position).getSellerLastName());
         //itemCategory.setText(ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getCategory());
-        ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getOwnerId();
 
         //Get user info and display it to screen
-        getUserInfo(ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getOwnerId());
+//        getUserInfo(ItemHomeSearchTab.item_list.get(position).getValue(ListingData.class).getOwnerId());
 //********************************************************************************************************************************************//
 //********************************************END VALUES FROM FIREBASE ***********************************************************************//
 
@@ -173,7 +192,24 @@ public class SelectedItem extends AppCompatActivity {
 //***********************************************************************************************************************************//
     }//end onCreate()
 
-    private void getUserInfo(String ownerId) {
+    private void getListingImages(DataSnapshot dataSnapshot) {
+        for (DataSnapshot child : dataSnapshot.getChildren()) {
+            itemImages.add(child.getValue(String.class));
+        }
+    }
+
+    private void displayListingInfo(ListingData selectedListing) {
+        itemTitle.setText(selectedListing.getTitle());
+        itemDescription.setText(selectedListing.getDescription());
+        itemPrice.setText("$"+selectedListing.getPrice());
+        itemCategory.setText(selectedListing.getCategory());
+
+        viewPager = findViewById(R.id.selected_item_images);
+        adapter = new ImageAdapter(this, itemImages);
+        viewPager.setAdapter(adapter);
+    }
+
+    private void getOwnerInfo(String ownerId) {
         final Context context = this;
         DatabaseReference userRef = firebaseDatabase.getReference().child("users").child(ownerId);
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -193,13 +229,6 @@ public class SelectedItem extends AppCompatActivity {
         });
     }
 
-    private void getListingImages(DataSnapshot dataSnapshot) {
-        for (DataSnapshot child : dataSnapshot.getChildren()) {
-            //String url = (String) child.getValue();
-            itemImages.add(child.getValue(String.class));
-        }
-    }
-
     public void openHomeScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         startActivity(openScreen);
@@ -210,23 +239,18 @@ public class SelectedItem extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void populateReportScreen(){
+    public void populateReportScreen() {
         reportedItemTitle = findViewById(R.id.reported_item_title);
         reportedItemTitle.setText(itemTitle.getText());
         //TODO uncomment this part in once images are implemented
-        if(firstImageOfItem.isEmpty()){
-        //do nothing
-        }else {
-
+        if(!firstImageOfItem.isEmpty()) {
             adapter2 = new ImageAdapter(getApplicationContext(), firstImageOfItem);
             reportedPager = findViewById(R.id.reported_item_pager);
             reportedPager.setAdapter(adapter2);
-
         }
-
     }
 
-    public void setupPopUpScreenView(){
+    public void setupPopUpScreenView() {
         itemPopUpWindow.setVisibility(View.VISIBLE);
         mainItemWindow.setVisibility(View.INVISIBLE);
         backButton.setVisibility(View.INVISIBLE);
@@ -234,7 +258,7 @@ public class SelectedItem extends AppCompatActivity {
     }
 
 
-    public void setupRevertScreenView(){
+    public void setupRevertScreenView() {
         itemPopUpWindow.setVisibility(View.INVISIBLE);
         mainItemWindow.setVisibility(View.VISIBLE);
         backButton.setVisibility(View.VISIBLE);

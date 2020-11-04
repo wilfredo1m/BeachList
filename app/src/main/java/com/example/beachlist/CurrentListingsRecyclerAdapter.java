@@ -12,14 +12,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
 
 import java.util.List;
 
 public class CurrentListingsRecyclerAdapter extends RecyclerView.Adapter<CurrentListingsRecyclerAdapter.MyViewHolder> {
     Context context;
-    List<ListingData> list;
+    List<DataSnapshot> list;
 
-    public CurrentListingsRecyclerAdapter(Context context, List<ListingData> list){
+    public CurrentListingsRecyclerAdapter(Context context, List<DataSnapshot> list){
         this.context = context;
         this.list = list;
     }
@@ -34,12 +35,12 @@ public class CurrentListingsRecyclerAdapter extends RecyclerView.Adapter<Current
     @Override
     public void onBindViewHolder(@NonNull CurrentListingsRecyclerAdapter.MyViewHolder holder, final int position) {
         Glide.with(context)
-                .load(list.get(position).getImageUrl())
+                .load(list.get(position).child("imageUrl").getValue(String.class))
                 .centerCrop()
                 .into(holder.listingPic);
         //holder.listingPic.setImageResource(list.get(position).getListingPhotos()[0]);
-        holder.listingTitle.setText(list.get(position).getTitle());
-        holder.listingPrice.setText("$"+list.get(position).getPrice());
+        holder.listingTitle.setText(list.get(position).child("title").getValue(String.class));
+        holder.listingPrice.setText("$"+list.get(position).child("price").getValue(String.class));
 
         // when a listing is clicked, the position is taken to get that person info
         holder.itemView.setOnClickListener(new View.OnClickListener() {

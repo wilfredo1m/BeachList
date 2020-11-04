@@ -95,12 +95,32 @@ public class SelectedService extends AppCompatActivity {
 //*****************************************GET IMAGE SELECTION SECTION************************************************************************//
 //********************************************************************************************************************************************//
 
+        String listingId = getIntent().getStringExtra("ListingID");
+
+        DatabaseReference listingRef = firebaseDatabase.getReference().child("listings").child("service").child(listingId);
+        listingRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //Populate image URLs in global variable
+                getListingImages(snapshot.child("listingImages"));
+                //Get data and display info
+                ListingData selectedListing = snapshot.getValue(ListingData.class);
+                displayListingInfo(selectedListing);
+                //display owner Info
+                getOwnerInfo(selectedListing.getOwnerId());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //TODO Handle this error
+            }
+        });
+
         // gets the service's information to display
-        final int position = getIntent().getIntExtra("position",1);
-        getListingImages(ServiceHomeSearchTab.service_list.get(position).child("listingImages"));
-        viewPager = findViewById(R.id.selected_service_images);
-        adapter = new ImageAdapter(this, serviceImages);
-        viewPager.setAdapter(adapter);
+//        final int position = getIntent().getIntExtra("position",1);
+//        getListingImages(ServiceHomeSearchTab.service_list.get(position).child("listingImages"));
+//        viewPager = findViewById(R.id.selected_service_images);
+//        adapter = new ImageAdapter(this, serviceImages);
+//        viewPager.setAdapter(adapter);
 
         //TODO remove comment from line below once images are implemented
         //populates image of the first listing
@@ -117,14 +137,13 @@ public class SelectedService extends AppCompatActivity {
 //********************************************GET VALUES FROM FIREBASE ***********************************************************************//
 //********************************************************************************************************************************************//
         // Sets the service info in the correct fields to be displayed
-        itemTitle.setText(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getTitle());
-        itemDescription.setText(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getDescription());
-        itemPrice.setText("$"+ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getPrice());
-        //itemSellerFirstName.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getSellerFirstName());
-        //itemSellerLastName.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getSellerLastName());
-        itemCategory.setText(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getCategory());
+//        itemTitle.setText(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getTitle());
+//        itemDescription.setText(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getDescription());
+//        itemPrice.setText("$"+ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getPrice());
+//        //itemSellerFirstName.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getSellerFirstName());
+//        //itemSellerLastName.setText(ServiceHomeSearchTab.listing_list.get(position).getValue(ListingData.class).getSellerLastName());
+//        itemCategory.setText(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getCategory());
         //Get user info and display it to screen
-        getUserInfo(ServiceHomeSearchTab.service_list.get(position).getValue(ListingData.class).getOwnerId());
 //********************************************************************************************************************************************//
 //********************************************END VALUES FROM FIREBASE ***********************************************************************//
 
@@ -154,7 +173,6 @@ public class SelectedService extends AppCompatActivity {
             }
         });
 
-
         //Cancel Report button in pop up window
         cancelReport = findViewById(R.id.cancer_report_service_button);
         cancelReport.setOnClickListener(new View.OnClickListener() {
@@ -177,7 +195,24 @@ public class SelectedService extends AppCompatActivity {
 
     }//end onCreate()
 
-    private void getUserInfo(String ownerId) {
+    private void getListingImages(DataSnapshot dataSnapshot) {
+        for (DataSnapshot child : dataSnapshot.getChildren()) {
+            serviceImages.add(child.getValue(String.class));
+        }
+    }
+
+    private void displayListingInfo(ListingData selectedListing) {
+        itemTitle.setText(selectedListing.getTitle());
+        itemDescription.setText(selectedListing.getDescription());
+        itemPrice.setText("$"+selectedListing.getPrice());
+        itemCategory.setText(selectedListing.getCategory());
+
+        viewPager = findViewById(R.id.selected_service_images);
+        adapter = new ImageAdapter(this, serviceImages);
+        viewPager.setAdapter(adapter);
+    }
+
+    private void getOwnerInfo(String ownerId) {
         final Context context = this;
         DatabaseReference userRef = firebaseDatabase.getReference().child("users").child(ownerId);
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -197,15 +232,8 @@ public class SelectedService extends AppCompatActivity {
         });
     }
 
-    private void getListingImages(DataSnapshot dataSnapshot) {
-        for (DataSnapshot child : dataSnapshot.getChildren()) {
-            //String url = (String) child.getValue();
-            serviceImages.add(child.getValue(String.class));
-        }
-    }
-
     //service tab in HomeFragment
-    public void openHomeScreen(){
+    public void openHomeScreen() {
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         openScreen.putExtra("tab",2);
         startActivity(openScreen);
@@ -216,19 +244,17 @@ public class SelectedService extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void populateReportScreen(){
+    public void populateReportScreen() {
         reportedServiceTitle = findViewById(R.id.reportedServiceTitle);
         reportedServiceTitle.setText(itemTitle.getText());
-        if(firstImageOfService.isEmpty()){
-            //do nothing
-        }else {
+        if(!firstImageOfService.isEmpty()){
             adapter2 = new ImageAdapter(getApplicationContext(), firstImageOfService);
             reportPager = findViewById(R.id.reported_Service_pager);
             reportPager.setAdapter(adapter2);
         }
     }
 
-    public void setupPopUpScreenView(){
+    public void setupPopUpScreenView() {
         // ****group to fix visibilities for screen ****//
         popupWindow.setVisibility(View.VISIBLE);
         contactSeller.setVisibility(View.INVISIBLE);
@@ -236,7 +262,7 @@ public class SelectedService extends AppCompatActivity {
         backButton.setVisibility(View.INVISIBLE);
     }
 
-    public void setupRevertScreenView(){
+    public void setupRevertScreenView() {
         // ****group to fix visibilities for screen ****//
         popupWindow.setVisibility(View.INVISIBLE);
         mainConstraint.setVisibility(View.VISIBLE);
