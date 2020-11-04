@@ -29,7 +29,7 @@ public class CurrentListingsRecyclerAdapter extends RecyclerView.Adapter<Current
     @Override
     public CurrentListingsRecyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.current_listing_row,parent,false);
-        return new CurrentListingsRecyclerAdapter.MyViewHolder(view);
+        return new MyViewHolder(view);
     }
 
     @Override
@@ -38,7 +38,6 @@ public class CurrentListingsRecyclerAdapter extends RecyclerView.Adapter<Current
                 .load(list.get(position).child("imageUrl").getValue(String.class))
                 .centerCrop()
                 .into(holder.listingPic);
-        //holder.listingPic.setImageResource(list.get(position).getListingPhotos()[0]);
         holder.listingTitle.setText(list.get(position).child("title").getValue(String.class));
         holder.listingPrice.setText("$"+list.get(position).child("price").getValue(String.class));
 
@@ -58,7 +57,7 @@ public class CurrentListingsRecyclerAdapter extends RecyclerView.Adapter<Current
         return list.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView listingPic;
         TextView listingTitle, listingPrice;
 

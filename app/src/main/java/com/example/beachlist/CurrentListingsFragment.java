@@ -2,6 +2,7 @@ package com.example.beachlist;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,8 +28,6 @@ public class CurrentListingsFragment extends Fragment {
     CurrentListingsRecyclerAdapter adapter;
     public static List<DataSnapshot> list = new ArrayList<>();
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private FirebaseUser user;
-    private FirebaseAuth mAuth;
 
     public CurrentListingsFragment() {
         // Required empty public constructor
@@ -39,8 +38,8 @@ public class CurrentListingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
         DatabaseReference usersReference = database.getReference().child("users").child(user.getUid()).child("listings");
         // Inflate the layout for this fragment
         View currentListing= inflater.inflate(R.layout.fragment_current_listings, container, false);
@@ -49,29 +48,13 @@ public class CurrentListingsFragment extends Fragment {
         recyclerView = currentListing.findViewById(R.id.current_listing_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-
-//// REMOVE ALL THIS STUFF WHEN YOU ARE READY TO IMPLEMENT THE FIREBASE STUFF INTO THE PROGRAM. THIS IS BLOCK IS STRICTLY FOR TESTING*************************//
-//        // This is temporary, added these to test the list would display
-//        int listingPics[][] = {{R.drawable.bulbasaur},{R.drawable.charmander}, {R.drawable.froakie}, {R.drawable.golem}, {R.drawable.jigglypuff},
-//                {R.drawable.pikachu}, {R.drawable.squirtle}, {R.drawable.sudowoodo}, {R.drawable.totodile}, {R.drawable.treeko}};
-//        String sellerFirstNames[] = getResources().getStringArray(R.array.first_names);
-//        String sellerLastNames[] = getResources().getStringArray(R.array.last_names);
-//        String listingNames[] = getResources().getStringArray(R.array.listing_names);
-//        String listingDescriptions[] = getResources().getStringArray(R.array.listing_descriptions);
-//        String listingAskingPrices[] = getResources().getStringArray(R.array.listing_asking_prices);
-//        String listingSoldFor[] = getResources().getStringArray(R.array.listing_sold_prices);
-//        String listingSoldTo[] = getResources().getStringArray(R.array.listing_sold_names);
-//        String listingSoldDate[] = getResources().getStringArray(R.array.listing_sold_dates);
-//// END BLOCK HERE******************************************************************************************************************************************//
-
-
 // *****************************BLOCK TO POPULATE SCREEN******************************************************************************************************//
         // clears list each time to make sure no duplicates are added
         list.clear();
         // adds the current listings to be the list that will be displayed
         usersReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         list.add(child);
@@ -84,7 +67,7 @@ public class CurrentListingsFragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
