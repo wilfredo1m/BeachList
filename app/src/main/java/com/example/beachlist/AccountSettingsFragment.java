@@ -37,15 +37,9 @@ import com.google.firebase.storage.StorageReference;
  */
 public class AccountSettingsFragment extends Fragment implements View.OnClickListener{
     private static final String TAG = "CustomAuthActivity";
-    private static final long ONE_MEGABYTE = 1024 * 1024;
 
     private View accountSettingsScreen;
-    private Button friendsListButton, backButton, activeListingsButton,soldListingsButton,pendingFriend,reportedUser, reportedListing;
     private UserData currentUser;
-    private FirebaseAuth mAuth;
-    private FirebaseUser user;
-    private FirebaseDatabase database;
-    private FirebaseStorage storageReference;
 
     public AccountSettingsFragment() {
         // Required empty public constructor
@@ -58,12 +52,12 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         accountSettingsScreen = inflater.inflate(R.layout.fragment_account_settings, container, false);
 
         //instance of authentication
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         //instance of the database
-        database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         //current user and their ID
-        user = mAuth.getCurrentUser();
+        FirebaseUser user = mAuth.getCurrentUser();
         final String userId = user.getUid();
 
 
@@ -90,22 +84,22 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
 //===================================================BUTTON CALL GROUP========================================================//
         // Takes us to friends list screen when we click the button
-        friendsListButton = accountSettingsScreen.findViewById(R.id.btn_friend_list);
+        Button friendsListButton = accountSettingsScreen.findViewById(R.id.btn_friend_list);
         friendsListButton.setOnClickListener(this);
 
-        pendingFriend= accountSettingsScreen.findViewById(R.id.btn_pending_friends);
+        Button pendingFriend = accountSettingsScreen.findViewById(R.id.btn_pending_friends);
         pendingFriend.setOnClickListener(this);
 
-        activeListingsButton  = accountSettingsScreen.findViewById(R.id.btn_active_listings);
+        Button activeListingsButton = accountSettingsScreen.findViewById(R.id.btn_active_listings);
         activeListingsButton.setOnClickListener(this);
 
-        soldListingsButton  = accountSettingsScreen.findViewById(R.id.btn_sold_listings);
+        Button soldListingsButton = accountSettingsScreen.findViewById(R.id.btn_sold_listings);
         soldListingsButton.setOnClickListener(this);
 
-        reportedUser = accountSettingsScreen.findViewById(R.id.btn_reported_user);
+        Button reportedUser = accountSettingsScreen.findViewById(R.id.btn_reported_user);
         reportedUser.setOnClickListener(this);
 
-        reportedListing = accountSettingsScreen.findViewById(R.id.btn_reported_listing);
+        Button reportedListing = accountSettingsScreen.findViewById(R.id.btn_reported_listing);
         reportedListing.setOnClickListener(this);
 
 //===================================================END BUTTON CALL GROUP====================================================//

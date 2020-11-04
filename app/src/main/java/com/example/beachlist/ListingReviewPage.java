@@ -78,18 +78,18 @@ public class ListingReviewPage extends AppCompatActivity {
     }
 
     //intent to open home screen
-    public void openHomeScreen(){
+    public void openHomeScreen() {
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         startActivity(openScreen);
     }
     //intent to open create post screen
-    public void openCreatePostScreen(){
+    public void openCreatePostScreen() {
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         openScreen.putExtra("screen", 2);
         startActivity(openScreen);
     }
     //Submit post to firebase
-    public void submitPost(){
+    public void submitPost() {
         //Get current date and format
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
         Date date = new Date();
@@ -211,12 +211,12 @@ public class ListingReviewPage extends AppCompatActivity {
     }
 
     //intent to go back to listing description page
-    public void goBack(){
+    public void goBack() {
         Intent openScreen = new Intent(this, ListingDescriptionPage.class);
         startActivity(openScreen);
     }
     //retrieve all inputs from user
-    public void getUserInputs(){
+    public void getUserInputs() {
         //INTENT IN ORDER TO RECEIVE THE TITLE FROM THE HOME PAGE
         Intent intent = getIntent();
         //pull value of the listing price to the screen
@@ -245,6 +245,4 @@ public class ListingReviewPage extends AppCompatActivity {
         listingType.setText(type);
 //end working group*********************************************************//
     }
-
-
 }
