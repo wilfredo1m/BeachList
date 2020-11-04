@@ -47,7 +47,11 @@ public class SelectedUser extends AppCompatActivity {
     ConstraintLayout constraintLayout;
     Spinner reportUserSpinner;
     String reportedUser;
-    ViewPager itemPager,servicePager;
+    RecyclerView itemRecycler, serviceRecycler;
+    ItemRecyclerAdapter itemAdapter;
+    ServiceRecyclerAdapter serviceAdapter;
+    List<DataSnapshot> itemList, serviceList;
+//    ViewPager itemPager,servicePager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,9 +70,22 @@ public class SelectedUser extends AppCompatActivity {
         lastName = findViewById(R.id.selected_user_last_name);
         addFriendButton = findViewById(R.id.btn_add_user);
 
-        //pagers are called from the file
-        itemPager = findViewById(R.id.item_pager);
-        servicePager = findViewById(R.id.service_pager);
+
+
+        itemRecycler = findViewById(R.id.item_recycler);
+        serviceRecycler = findViewById(R.id.service_recycler);
+
+        itemAdapter = new ItemRecyclerAdapter(this,itemList);
+        itemRecycler.setAdapter(itemAdapter);
+
+        serviceAdapter = new ServiceRecyclerAdapter(this, serviceList);
+        serviceRecycler.setAdapter(serviceAdapter);
+
+
+
+//        //pagers are called from the file
+//        itemPager = findViewById(R.id.item_pager);
+//        servicePager = findViewById(R.id.service_pager);
 
 //***********************************INITIALIZE SPINNER SECTION************************************************************************************//
 //**********************SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST***********************************************************************//
