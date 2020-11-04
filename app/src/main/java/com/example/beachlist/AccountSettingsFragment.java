@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -181,20 +182,13 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         System.out.println("Hope"+userData.getImageUrl()+"Space");
 
         if(userData.getImageUrl().compareTo(" ") != 0) {
-            storageReference = FirebaseStorage.getInstance();
-            final StorageReference imageRef = storageReference.getReferenceFromUrl(userData.imageUrl);
-            imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                @Override
-                public void onSuccess(byte[] bytes) {
-                    Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                    profileIV.setImageBitmap(bmp);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    profileIV.setImageResource(R.mipmap.ic_launcher);
-                }
-            });
+            Glide.with(this)
+                    .load(userData.getImageUrl())
+                    .centerCrop()
+                    .into(profileIV);
+        }
+        else {
+            profileIV.setImageResource(R.mipmap.ic_launcher);
         }
     }
 }
