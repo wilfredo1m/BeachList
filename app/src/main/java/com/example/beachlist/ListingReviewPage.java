@@ -1,29 +1,22 @@
 package com.example.beachlist;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -34,18 +27,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class ListingReviewPage extends AppCompatActivity {
     Button submitPost, cancelButton;
-    ImageView listingPic;
-    ViewPager2 viewPager;
-    ImageAdapter adapter;
     TextView listingTitle, listingDescription, listingPrice, listingCategory, listingType;
     String title, description, category, price, type;
     Map<String, String> listingImages;
     NewListingData currentListing;
-    private StorageReference storageReference;
 
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
@@ -54,11 +44,10 @@ public class ListingReviewPage extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listing_review_post_page);
-        //listingPic = findViewById(R.id.review_listing_images);
 
         mAuth = FirebaseAuth.getInstance();
-
         database = FirebaseDatabase.getInstance();
+
         // Get input fields
         getUserInputs();
 
@@ -102,7 +91,7 @@ public class ListingReviewPage extends AppCompatActivity {
     //Submit post to firebase
     public void submitPost(){
         //Get current date and format
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
         Date date = new Date();
         String postDate = dateFormat.format(date);
 
@@ -116,7 +105,7 @@ public class ListingReviewPage extends AppCompatActivity {
         currentListing.setPostDate(postDate);
 
         //This should become obsolete but i didn't want to change listing data again right now
-        listingImages = new HashMap();
+        listingImages = new HashMap<>();
         ArrayList<String> imageUris = this.getIntent().getStringArrayListExtra("Listing Images");
 
         getUrls(imageUris, imageUris.size());
@@ -125,7 +114,7 @@ public class ListingReviewPage extends AppCompatActivity {
 
     public void getUrls(final ArrayList<String> imageUrls, final int n) {
         if ((n - 1) >= 0) {
-            storageReference = FirebaseStorage.getInstance().getReference();
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
             final StorageReference imageRef = storageReference.child("images/" + Uri.parse(imageUrls.get(n-1)).getLastPathSegment());
             UploadTask uploadTask = imageRef.putFile(Uri.parse(imageUrls.get(n-1)));
 
@@ -161,8 +150,9 @@ public class ListingReviewPage extends AppCompatActivity {
             currentListing.setSellDate(" ");
             currentListing.setSellPrice(" ");
 
-            DatabaseReference listingReference = database.getReference("listings").child(type.toLowerCase());
-            String key = listingReference.push().getKey();
+            DatabaseReference listingReference = database.getReference("listings").child(type);
+            final String key = listingReference.push().getKey();
+            assert key != null;
             listingReference = listingReference.child(key);
 
             final DatabaseReference finalListingReference = listingReference;
@@ -174,8 +164,8 @@ public class ListingReviewPage extends AppCompatActivity {
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            // Return to home screen
-                                            openHomeScreen();
+                                            //Create listing reference under user
+                                            createListingUnderUser(key);
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
@@ -197,6 +187,29 @@ public class ListingReviewPage extends AppCompatActivity {
         }
     }
 
+    public void createListingUnderUser(String listingID) {
+        Map<String, String> userListingData = new HashMap<>();
+        userListingData.put("title", title);
+        userListingData.put("price", price);
+        userListingData.put("imageUrl", listingImages.get("1"));
+        userListingData.put("type", type);
+        final DatabaseReference userListingRef = database.getReference("users").child(currentListing.getOwnerId()).child("listings").child(listingID);
+        userListingRef.setValue(userListingData)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Return to home screen
+                        openHomeScreen();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Write failed
+                    }
+                });
+    }
+
     //intent to go back to listing description page
     public void goBack(){
         Intent openScreen = new Intent(this, ListingDescriptionPage.class);
@@ -212,17 +225,9 @@ public class ListingReviewPage extends AppCompatActivity {
         title = intent.getExtras().getString("ListingTitle");
         description = intent.getExtras().getString("ListingDescription");
         category = intent.getExtras().getString("ListingCategory");
-        type = intent.getExtras().getString("ListingType");
-
+        type = intent.getExtras().getString("ListingType").toLowerCase();
 
         //working group that populates the screen***************************************//
-
-       // byte[] byteArray = getIntent().getByteArrayExtra("ListingPics");
-       // Bitmap images = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-       // listingPic.setImageBitmap(images);
-
-
-
         //works
         listingTitle = findViewById(R.id.et_listing_title_review);
         listingTitle.setText(title);
