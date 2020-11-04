@@ -6,6 +6,7 @@
     tools:context=".ItemsInUser">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/item_in_user_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#0067D5" />
