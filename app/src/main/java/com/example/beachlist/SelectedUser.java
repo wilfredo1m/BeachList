@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -45,6 +47,7 @@ public class SelectedUser extends AppCompatActivity {
     ConstraintLayout constraintLayout;
     Spinner reportUserSpinner;
     String reportedUser;
+    ViewPager itemPager,servicePager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,6 +65,10 @@ public class SelectedUser extends AppCompatActivity {
         firstName = findViewById(R.id.selected_user_first_name);
         lastName = findViewById(R.id.selected_user_last_name);
         addFriendButton = findViewById(R.id.btn_add_user);
+
+        //pagers are called from the file
+        itemPager = findViewById(R.id.item_pager);
+        servicePager = findViewById(R.id.service_pager);
 
 //***********************************INITIALIZE SPINNER SECTION************************************************************************************//
 //**********************SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST***********************************************************************//
