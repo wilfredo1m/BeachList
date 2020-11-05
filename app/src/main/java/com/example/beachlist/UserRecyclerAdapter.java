@@ -57,7 +57,7 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
         return list.size() ;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView profilePic;
         TextView firstName, lastName;
         public MyViewHolder(@NonNull View itemView) {

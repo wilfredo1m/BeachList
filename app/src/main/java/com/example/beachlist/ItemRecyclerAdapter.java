@@ -34,10 +34,17 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ItemRecyclerAdapter.MyViewHolder holder, final int position) {
-        Glide.with(context)
-                .load(list.get(position).child("listingImages").child("1").getValue(String.class))
-                .centerCrop()
-                .into(holder.listingPic);
+        if (list.get(position).child("listingImages").exists()) {
+            Glide.with(context)
+                    .load(list.get(position).child("listingImages").child("1").getValue(String.class))
+                    .centerCrop()
+                    .into(holder.listingPic);
+        } else {
+            Glide.with(context)
+                    .load(list.get(position).child("imageUrl").getValue(String.class))
+                    .centerCrop()
+                    .into(holder.listingPic);
+        }
         holder.listingTitle.setText(list.get(position).getValue(ListingData.class).getTitle());
         holder.listingPrice.setText("$" + list.get(position).getValue(ListingData.class).getPrice());
 

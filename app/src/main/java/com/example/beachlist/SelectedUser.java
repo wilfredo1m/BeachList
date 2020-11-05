@@ -8,7 +8,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,8 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -70,30 +67,13 @@ public class SelectedUser extends AppCompatActivity {
         lastName = findViewById(R.id.selected_user_last_name);
         addFriendButton = findViewById(R.id.btn_add_user);
 
-
-
-        itemRecycler = findViewById(R.id.item_recycler);
-        serviceRecycler = findViewById(R.id.service_recycler);
-
-        itemAdapter = new ItemRecyclerAdapter(this,itemList);
-        itemRecycler.setAdapter(itemAdapter);
-
-        serviceAdapter = new ServiceRecyclerAdapter(this, serviceList);
-        serviceRecycler.setAdapter(serviceAdapter);
-
-
-
-//        //pagers are called from the file
-//        itemPager = findViewById(R.id.item_pager);
-//        servicePager = findViewById(R.id.service_pager);
-
 //***********************************INITIALIZE SPINNER SECTION************************************************************************************//
 //**********************SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST***********************************************************************//
 //****************************ON SELECT LISTENER TO BE ABLE TO PASS THE SELECTED INFORMATION TO THE CONFIRM REPORT BUTTON************************//
         //initiate the spinner
         reportUserSpinner = findViewById(R.id.report_user_spinner);
         //array adapter holding the array list of categories created in the strings.xml
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
                 getResources().getStringArray(R.array.report_user));
         //setup adapter to be passed to spinner
         reportUserSpinner.setAdapter(arrayAdapter);
@@ -115,8 +95,6 @@ public class SelectedUser extends AppCompatActivity {
 //********************************END SPINNER SECTION*****************************************************************************************//
 
 
-
-
 //*****************************************GET USER INFO FROM FIREBASE***********************************************************************//
 //********************************************************************************************************************************************//
         // gets the pic and name of the user to display
@@ -133,6 +111,33 @@ public class SelectedUser extends AppCompatActivity {
 //*****************************************END USER SELECTION SECTION************************************************************************//
 
 
+//*****************************************GET USER LISTING FROM FIREBASE***********************************************************************//
+//********************************************************************************************************************************************//
+        itemRecycler = findViewById(R.id.item_recycler);
+        itemRecycler.setLayoutManager(new LinearLayoutManager(this));
+
+        serviceRecycler = findViewById(R.id.service_recycler);
+        serviceRecycler.setLayoutManager(new LinearLayoutManager(this));
+        itemList = new ArrayList<>();
+        serviceList = new ArrayList<>();
+        //Get all snapshots of user listings
+        DataSnapshot userListings = UserHomeSearchTab.user_list.get(position).child("listings");
+        for (DataSnapshot child : userListings.getChildren()) {
+            if(child.child("type").getValue(String.class).compareTo("item") == 0) {
+                itemList.add(child);
+            }
+            else {
+                serviceList.add(child);
+            }
+        }
+
+        itemAdapter = new ItemRecyclerAdapter(this,itemList);
+        itemRecycler.setAdapter(itemAdapter);
+
+        serviceAdapter = new ServiceRecyclerAdapter(this, serviceList);
+        serviceRecycler.setAdapter(serviceAdapter);
+//********************************************************************************************************************************************//
+//*****************************************END USER LISTING SECTION************************************************************************//
 
 
 //*********************************BUTTON GROUP***********************************************************************************************//
@@ -146,7 +151,7 @@ public class SelectedUser extends AppCompatActivity {
                 myDataReference.addListenerForSingleValueEvent(
                         new ValueEventListener() {
                             @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 // Get Post object and use the values to update the UI
                                 UserData userData = dataSnapshot.getValue(UserData.class);
                                 addPendingFriend(position, userData);
@@ -154,7 +159,7 @@ public class SelectedUser extends AppCompatActivity {
                             }
 
                             @Override
-                            public void onCancelled(DatabaseError databaseError) {
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
                                 // Getting Post failed, log a message
                                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
                                 // ...
@@ -234,7 +239,7 @@ public class SelectedUser extends AppCompatActivity {
     public void populateReportedUserScreen(){
         //reported user information
         reportedUserName = findViewById(R.id.reported_user_name);
-        reportedUserName.setText(firstName.getText()+" " + lastName.getText());
+        reportedUserName.setText(String.format("%s %s", firstName.getText(), lastName.getText()));
         reportedPersonImage = findViewById(R.id.reportedUserImage);
         reportedPersonImage.setImageDrawable(profilePic.getDrawable());
     }

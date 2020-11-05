@@ -119,7 +119,6 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         }
 //***********************END CHECK TO SEE IF THE USER WILL BE A ADMIN **********************************************************//
 
-
         return accountSettingsScreen;
 
     }
@@ -163,7 +162,6 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
                 break;
         }
     }
-
 
     public void displayUserInfo(UserData userData) {
         TextView fnameTV = accountSettingsScreen.findViewById(R.id.tv_full_name);

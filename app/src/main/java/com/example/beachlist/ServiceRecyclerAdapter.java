@@ -29,15 +29,22 @@ public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecycler
     @Override
     public ServiceRecyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.service_row, parent, false);
-        return new ServiceRecyclerAdapter.MyViewHolder(view);
+        return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ServiceRecyclerAdapter.MyViewHolder holder, final int position) {
-        Glide.with(context)
-                .load(list.get(position).child("listingImages").child("1").getValue(String.class))
-                .centerCrop()
-                .into(holder.listingPic);
+        if(list.get(position).child("listingImages").exists()) {
+            Glide.with(context)
+                    .load(list.get(position).child("listingImages").child("1").getValue(String.class))
+                    .centerCrop()
+                    .into(holder.listingPic);
+        } else {
+            Glide.with(context)
+                    .load(list.get(position).child("imageUrl").getValue(String.class))
+                    .centerCrop()
+                    .into(holder.listingPic);
+        }
         holder.listingTitle.setText(list.get(position).getValue(ListingData.class).getTitle());
         holder.listingPrice.setText("$" + list.get(position).getValue(ListingData.class).getPrice());
 
@@ -57,7 +64,7 @@ public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecycler
         return list.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView listingPic;
         TextView listingTitle, listingPrice;
 

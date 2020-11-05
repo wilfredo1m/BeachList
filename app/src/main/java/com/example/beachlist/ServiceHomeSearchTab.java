@@ -66,7 +66,7 @@ public class ServiceHomeSearchTab extends Fragment {
     }
 
     public void onServiceListQuery() {
-        RecyclerView.Adapter adapter = new ServiceRecyclerAdapter(getActivity(), service_list);
+        ServiceRecyclerAdapter adapter = new ServiceRecyclerAdapter(getActivity(), service_list);
         recyclerView.setAdapter(adapter);
     }
 }
