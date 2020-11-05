@@ -71,7 +71,7 @@ public class UserHomeSearchTab extends Fragment{
     }
 
     public void onUserListQuery() {
-        RecyclerView.Adapter adapter = new UserRecyclerAdapter(getActivity(), user_list);
+        UserRecyclerAdapter adapter = new UserRecyclerAdapter(getActivity(), user_list);
         recyclerView.setAdapter(adapter);
     }
 }

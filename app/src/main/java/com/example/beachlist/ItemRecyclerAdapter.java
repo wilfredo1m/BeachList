@@ -46,7 +46,7 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
                     .into(holder.listingPic);
         }
         holder.listingTitle.setText(list.get(position).getValue(ListingData.class).getTitle());
-        holder.listingPrice.setText("$" + list.get(position).getValue(ListingData.class).getPrice());
+        holder.listingPrice.setText(String.format("$%s", list.get(position).getValue(ListingData.class).getPrice()));
 
         // when a listing is clicked, the position is taken to get that listings info
         holder.itemView.setOnClickListener(new View.OnClickListener() {
