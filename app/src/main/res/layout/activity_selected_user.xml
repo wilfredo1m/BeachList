@@ -190,7 +190,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#DD000000"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tb_primary_toolbar">
@@ -237,12 +237,12 @@
                 android:orientation="horizontal"></LinearLayout>
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/name_of_reported_user_lbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#2B2B2B"
                 android:gravity="center_horizontal"
-                android:text="Name:" />
+                android:text="@string/full_name" />
 
             <TextView
                 android:id="@+id/reported_user_name"
@@ -250,7 +250,7 @@
                 android:layout_height="wrap_content"
                 android:background="#121212"
                 android:gravity="center_horizontal"
-                android:text="Name of Reported User" />
+                tools:text="Name of Reported User" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -264,7 +264,7 @@
                 android:layout_height="wrap_content"
                 android:background="#2B2B2B"
                 android:gravity="center_horizontal"
-                android:text="Reason:" />
+                android:text="@string/reason_for_report" />
 
             <Spinner
                 android:id="@+id/report_user_spinner"
@@ -283,14 +283,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="cancel" />
+                    android:text="@string/cancelBtn" />
 
                 <Button
                     android:id="@+id/confirm_report_user_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="report" />
+                    android:text="@string/report_button" />
             </LinearLayout>
 
         </LinearLayout>
