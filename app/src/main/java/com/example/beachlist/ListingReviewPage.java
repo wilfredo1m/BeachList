@@ -1,6 +1,8 @@
 package com.example.beachlist;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -23,6 +26,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,6 +41,9 @@ public class ListingReviewPage extends AppCompatActivity {
     String title, description, category, price, type;
     Map<String, String> listingImages;
     NewListingData currentListing;
+    ArrayList<Bitmap> bitmaps;
+    ViewPager2 viewPager;
+    ImageAdapter2 adapter;
 
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
@@ -50,6 +58,24 @@ public class ListingReviewPage extends AppCompatActivity {
 
         // Get input fields
         getUserInputs();
+
+        ArrayList<String> imageUris = this.getIntent().getStringArrayListExtra("Listing Images");
+        bitmaps = new ArrayList<>();
+
+        for (int i = 0; i < imageUris.size(); i++) {
+            try{
+                InputStream is = getContentResolver().openInputStream(Uri.parse(imageUris.get(i)));
+                Bitmap bitmap = BitmapFactory.decodeStream(is);
+                bitmaps.add(bitmap);
+                //*************Display Listing Images********************
+                viewPager = findViewById(R.id.final_images_pager);
+                adapter = new ImageAdapter2(this,bitmaps);
+                viewPager.setAdapter(adapter);
+//        //********************************************************
+            }catch (FileNotFoundException e){
+                e.printStackTrace();
+            }
+        }
 
 
 //************************BUTTON BLOCK********************************************************//
