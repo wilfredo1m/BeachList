@@ -4,13 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,11 +38,15 @@ public class SelectedFriend extends AppCompatActivity {
     public static List<DataSnapshot> itemList = new ArrayList<>();
     public static List<DataSnapshot> serviceList = new ArrayList<>();
     private static final String TAG = "error";
-    ImageView profilePic;
-    TextView firstName, lastName;
+    Button reportFriend, unfriendButton, cancelReport,submitReport;
+    ImageView profilePic, reportedPersonImage;
+    TextView firstName, lastName, reportedUserName;
+    ConstraintLayout constraintLayout;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
     FirebaseUser user;
+    Spinner reportUserSpinner;
+    String reportedUser;
     ItemRecyclerAdapter itemRecyclerAdapter;
     ServiceRecyclerAdapter serviceRecyclerAdapter;
     RecyclerView recyclerViewItem;
@@ -51,6 +60,8 @@ public class SelectedFriend extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
+
+        constraintLayout = findViewById(R.id.popup_layout);
 
         profilePic = findViewById(R.id.iv_selected_friend_image);
         firstName = findViewById(R.id.tv_full_name);
@@ -116,8 +127,55 @@ public class SelectedFriend extends AppCompatActivity {
             }
         });
 
+        // Go back to friends list
+        Button backButton = findViewById(R.id.selected_friend_back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openFriendListScreen();
+            }
+        });
+
+        //user clicks on report user button in order to populate pop up menu to report user
+        reportFriend = findViewById(R.id.btn_report_friend);
+        reportFriend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                populateReportedUserScreen();
+                setupPopUpScreenView();
+            }
+        });
+
+        //***********************************INITIALIZE SPINNER SECTION************************************************************************************//
+//**********************SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST***********************************************************************//
+//****************************ON SELECT LISTENER TO BE ABLE TO PASS THE SELECTED INFORMATION TO THE CONFIRM REPORT BUTTON************************//
+        //initiate the spinner
+        reportUserSpinner = findViewById(R.id.report_friend_spinner);
+        //array adapter holding the array list of categories created in the strings.xml
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.report_user));
+        //setup adapter to be passed to spinner
+        reportUserSpinner.setAdapter(arrayAdapter);
+        reportUserSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                reportedUser =  reportUserSpinner.getSelectedItem().toString();
+                // your code here
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
+//********************************************************************************************************************************************//
+//********************************END SPINNER SECTION*****************************************************************************************//
+
+
         // Remove friend from friends list
-        Button unfriendButton = findViewById(R.id.btn_remove_friend);
+        unfriendButton = findViewById(R.id.btn_remove_friend);
         unfriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -138,12 +196,22 @@ public class SelectedFriend extends AppCompatActivity {
             }
         });
 
-        // Go back to friends list
-        Button backButton = findViewById(R.id.selected_friend_back_button);
-        backButton.setOnClickListener(new View.OnClickListener() {
+        //user cancels the report to set the view back to the original view
+        cancelReport = findViewById(R.id.cancel_button);
+        cancelReport.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                openFriendListScreen();
+            public void onClick(View v) {
+                setupRevertScreenView();
+            }
+        });
+
+        //user clicks on submit button to send the report to the admin page
+        submitReport = findViewById(R.id.submit_button);
+        submitReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), reportedUser, Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -178,5 +246,28 @@ public class SelectedFriend extends AppCompatActivity {
                         Log.w(TAG, "could not delete value");
                     }
                 });
+    }
+
+    //populates fields for user being reported
+    public void populateReportedUserScreen(){
+        //reported user information
+        reportedUserName = findViewById(R.id.reported_user_display_name);
+        reportedUserName.setText(String.format("%s %s", firstName.getText(), lastName.getText()));
+        reportedPersonImage = findViewById(R.id.reported_friend_image);
+        reportedPersonImage.setImageDrawable(profilePic.getDrawable());
+    }
+    public void setupPopUpScreenView(){
+        // change visibility to views
+        constraintLayout.setVisibility(View.VISIBLE);
+        //buttons were an issue so they need to be invisible
+        reportFriend.setVisibility(View.INVISIBLE);
+        unfriendButton.setVisibility(View.INVISIBLE);
+    }
+
+    public void setupRevertScreenView(){
+        //set visibility to views
+        reportFriend.setVisibility(View.VISIBLE);
+        unfriendButton.setVisibility(View.VISIBLE);
+        constraintLayout.setVisibility(View.INVISIBLE);
     }
 }

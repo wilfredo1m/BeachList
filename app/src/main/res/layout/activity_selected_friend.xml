@@ -90,7 +90,7 @@
         android:background="@drawable/ic_baseline_person_add_disabled_24"
         app:layout_constraintEnd_toEndOf="@+id/textView11"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintStart_toEndOf="@+id/btn_report_friend"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <RatingBar
@@ -106,7 +106,7 @@
         app:layout_constraintTop_toBottomOf="@+id/iv_selected_friend_image" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_report_friend"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="12dp"
@@ -162,7 +162,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/reported_friend_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/bulbasaur" />
@@ -204,7 +204,7 @@
                     android:text="@string/reason_for_report" />
 
                 <Spinner
-                    android:id="@+id/spinner"
+                    android:id="@+id/report_friend_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginBottom="40dp"
@@ -216,14 +216,14 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/button4"
+                        android:id="@+id/cancel_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/cancelBtn" />
 
                     <Button
-                        android:id="@+id/button8"
+                        android:id="@+id/submit_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
