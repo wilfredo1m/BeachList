@@ -1,13 +1,7 @@
 package com.example.beachlist;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +9,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,8 +21,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 /**
  * A simple {@link **Fragment} subclass.
@@ -166,7 +158,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
     public void displayUserInfo(UserData userData) {
         TextView fnameTV = accountSettingsScreen.findViewById(R.id.tv_full_name);
         TextView email = accountSettingsScreen.findViewById(R.id.tv_email);
-        fnameTV.setText(userData.firstName + " "+ userData.lastName);
+        fnameTV.setText(String.format("%s %s", userData.firstName, userData.lastName));
         email.setText(userData.email);
 
         final ImageView profileIV = accountSettingsScreen.findViewById(R.id.iv_user_image);

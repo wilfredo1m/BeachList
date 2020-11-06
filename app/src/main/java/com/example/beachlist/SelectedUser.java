@@ -108,7 +108,7 @@ public class SelectedUser extends AppCompatActivity {
         firstName.setText(UserHomeSearchTab.user_list.get(position).child("data").getValue(UserData.class).getFirstName());
         lastName.setText(UserHomeSearchTab.user_list.get(position).child("data").getValue(UserData.class).getLastName());
 //********************************************************************************************************************************************//
-//*****************************************END USER SELECTION SECTION************************************************************************//
+//*****************************************END USER INFO SECTION************************************************************************//
 
 
 //*****************************************GET USER LISTING FROM FIREBASE***********************************************************************//

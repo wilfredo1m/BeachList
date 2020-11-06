@@ -46,7 +46,8 @@ public class CurrentListingsRecyclerAdapter extends RecyclerView.Adapter<Current
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, SelectedOwnListing.class);
-                intent.putExtra("position", position);
+                intent.putExtra("type", list.get(position).child("type").getValue(String.class));
+                intent.putExtra("listingID", list.get(position).getKey());
                 context.startActivity(intent);
             }
         });

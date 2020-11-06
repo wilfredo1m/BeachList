@@ -4,27 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ActiveListings extends AppCompatActivity {
     Button backButton;
-    private TabLayout tabLayout;
     private ViewPager viewpager;
     int tabPosition;
 
@@ -36,13 +24,11 @@ public class ActiveListings extends AppCompatActivity {
         setContentView(R.layout.activity_current_listings);
 
         //initializing tabs and pager
-        tabLayout = findViewById(R.id.listings_tab_choices);
-        TabItem currentTab = findViewById(R.id.current_tab);
-        TabItem soldTab = findViewById(R.id.sold_tab);
+        TabLayout tabLayout = findViewById(R.id.listings_tab_choices);
         viewpager = findViewById(R.id.listings_view_pager);
 
         ListingFragmentCollectionAdapter pagerAdapter= new
-                ListingFragmentCollectionAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+                ListingFragmentCollectionAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         tabLayout.setupWithViewPager(viewpager);
         viewpager.setAdapter(pagerAdapter);
 
