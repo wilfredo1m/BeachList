@@ -113,9 +113,9 @@ public class SelectedItem extends AppCompatActivity {
         });
 
         //populates image of the first listing
-        if(!itemImages.isEmpty()){
-            firstImageOfItem.add(itemImages.get(0));
-        }
+//        if(!itemImages.isEmpty()){
+//            firstImageOfItem.add(itemImages.get(0));
+//        }
 //********************************************************************************************************************************************//
 //********************************************END VALUES FROM FIREBASE ***********************************************************************//
 
@@ -215,11 +215,11 @@ public class SelectedItem extends AppCompatActivity {
         reportedItemTitle = findViewById(R.id.reported_item_title);
         reportedItemTitle.setText(itemTitle.getText());
         //TODO uncomment this part in once images are implemented
-        if(!firstImageOfItem.isEmpty()) {
-            adapter2 = new ImageAdapter(getApplicationContext(), firstImageOfItem);
+       // if(!firstImageOfItem.isEmpty()) {
+            adapter2 = new ImageAdapter(getApplicationContext(), itemImages);
             reportedPager = findViewById(R.id.reported_item_pager);
             reportedPager.setAdapter(adapter2);
-        }
+       // }
     }
 
     public void setupPopUpScreenView() {

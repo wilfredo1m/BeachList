@@ -114,10 +114,10 @@ public class SelectedService extends AppCompatActivity {
         });
 
         //TODO remove comment from line below once images are implemented
-        //populates image of the first listing
-        if (!serviceImages.isEmpty()) {
-            firstImageOfService.add(serviceImages.get(0));
-        }
+  //      //populates image of the first listing
+  //      if (!serviceImages.isEmpty()) {
+  //          firstImageOfService.add(serviceImages.get(0));
+  //      }
 //********************************************************************************************************************************************//
 //********************************************END VALUES FROM FIREBASE ***********************************************************************//
 
@@ -172,6 +172,7 @@ public class SelectedService extends AppCompatActivity {
     private void getListingImages(DataSnapshot dataSnapshot) {
         for (DataSnapshot child : dataSnapshot.getChildren()) {
             serviceImages.add(child.getValue(String.class));
+            firstImageOfService.add(serviceImages.get(0));
         }
     }
 
@@ -222,11 +223,10 @@ public class SelectedService extends AppCompatActivity {
     public void populateReportScreen() {
         reportedServiceTitle = findViewById(R.id.reportedServiceTitle);
         reportedServiceTitle.setText(itemTitle.getText());
-        if (!firstImageOfService.isEmpty()) {
-            adapter2 = new ImageAdapter(getApplicationContext(), firstImageOfService);
-            reportPager = findViewById(R.id.reported_Service_pager);
-            reportPager.setAdapter(adapter2);
-        }
+        adapter2 = new ImageAdapter(getApplicationContext(), serviceImages);
+        reportPager = findViewById(R.id.reported_Service_pager);
+        reportPager.setAdapter(adapter2);
+
     }
 
     public void setupPopUpScreenView() {

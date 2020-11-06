@@ -44,6 +44,7 @@
     <string name="pending_friend_list_header">Pending Requests</string>
     <string name="friend_list_header">Friend List</string>
     <string name="friend_image_description">friend Image</string>
+    <string name="report_button">Report</string>
     <!-- Pending Friends List Text -->
     <string name="pending_friend_image_description">potential friend Image</string>
     <string name="report_user_lbl">Report</string>
@@ -51,6 +52,9 @@
     <string name="selected_friend_image_description">selected friend Image</string>
     <string name="selected_friend_header">Selected Friend</string>
     <string name="remove_friend_label">Remove Friend</string>
+    <string name="Title_lbl">Remove Title</string>
+    <string name="reason_for_report">Reason:</string>
+    <string name="full_name">Name:</string>
 
     <!-- Messages text -->
     <string name="messages_header"> Messages</string>
