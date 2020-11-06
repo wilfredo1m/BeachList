@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +51,7 @@ public class SelectedFriend extends AppCompatActivity {
     ItemRecyclerAdapter itemRecyclerAdapter;
     ServiceRecyclerAdapter serviceRecyclerAdapter;
     RecyclerView recyclerViewItem;
+    ScrollView listingScroll;
     RecyclerView recyclerViewService;
 
     @Override
@@ -66,7 +68,7 @@ public class SelectedFriend extends AppCompatActivity {
         profilePic = findViewById(R.id.iv_selected_friend_image);
         firstName = findViewById(R.id.tv_full_name);
         lastName = findViewById(R.id.tv_email);
-
+        listingScroll = findViewById(R.id.listing_scroll_view);
         // gets the pic and name of the user to display
         final int position = getIntent().getIntExtra("position",1);
 
@@ -262,6 +264,7 @@ public class SelectedFriend extends AppCompatActivity {
         //buttons were an issue so they need to be invisible
         reportFriend.setVisibility(View.INVISIBLE);
         unfriendButton.setVisibility(View.INVISIBLE);
+        listingScroll.setVisibility(View.INVISIBLE);
     }
 
     public void setupRevertScreenView(){
@@ -269,5 +272,6 @@ public class SelectedFriend extends AppCompatActivity {
         reportFriend.setVisibility(View.VISIBLE);
         unfriendButton.setVisibility(View.VISIBLE);
         constraintLayout.setVisibility(View.INVISIBLE);
+        listingScroll.setVisibility(View.VISIBLE);
     }
 }
