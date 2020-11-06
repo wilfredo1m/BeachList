@@ -230,11 +230,12 @@
         app:layout_constraintTop_toTopOf="@+id/tv_reject_user_lbl" />
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="472dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="396dp"
+        android:layout_height="644dp"
+        android:layout_marginTop="36dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar3">
 
@@ -263,9 +264,10 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pending_friend_item_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="#3F51B5" />
+                android:layout_height="match_parent"
+                android:background="#3F51B5">
+
+            </androidx.recyclerview.widget.RecyclerView>
 
             <TextView
                 android:id="@+id/textView38"
@@ -277,11 +279,10 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pending_friend_service_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFEB3B" />
-
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="#2196F3" />
         </LinearLayout>
     </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

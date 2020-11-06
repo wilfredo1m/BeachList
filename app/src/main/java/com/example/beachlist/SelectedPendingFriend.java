@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -21,7 +23,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SelectedPendingFriend extends AppCompatActivity {
     private static final String TAG = "error";
@@ -30,6 +36,12 @@ public class SelectedPendingFriend extends AppCompatActivity {
     FirebaseDatabase database;
     FirebaseAuth mAuth;
     FirebaseUser user;
+    public static List<DataSnapshot> itemList = new ArrayList<>();
+    public static List<DataSnapshot> serviceList = new ArrayList<>();
+    ItemRecyclerAdapter itemRecyclerAdapter;
+    ServiceRecyclerAdapter serviceRecyclerAdapter;
+    RecyclerView recyclerViewItem;
+    RecyclerView recyclerViewService;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +64,54 @@ public class SelectedPendingFriend extends AppCompatActivity {
                 .into(profilePic);
         firstName.setText(PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getFirstName());
         lastName.setText(PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getLastName());
+
+        // get selected friend's active listings
+        Query itemsQuery = database.getReference().child("listings").child("item").orderByChild("ownerId").equalTo(PendingFriendsListTab.list.get(position).getKey());
+        Query serviceQuery = database.getReference().child("listings").child("service").orderByChild("ownerId").equalTo(PendingFriendsListTab.list.get(position).getKey());
+
+        recyclerViewItem = findViewById(R.id.pending_friend_item_recycler);
+        recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
+
+        recyclerViewService = findViewById(R.id.pending_friend_service_recycler);
+        recyclerViewService.setLayoutManager(new LinearLayoutManager(this));
+
+        itemsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    itemList.clear();
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        itemList.add(child);
+                    }
+
+                    onItemListQuery();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
+        serviceQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    serviceList.clear();
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        serviceList.add(child);
+                    }
+
+                    onServiceListQuery();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
 
 //*****************************************************BUTTON GROUP******************************************************************************//
         // Go back to pending friends list
@@ -174,5 +234,15 @@ public class SelectedPendingFriend extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
+    }
+
+    public void onItemListQuery() {
+        itemRecyclerAdapter = new ItemRecyclerAdapter(this, itemList);
+        recyclerViewItem.setAdapter(itemRecyclerAdapter);
+    }
+
+    public void onServiceListQuery() {
+        serviceRecyclerAdapter = new ServiceRecyclerAdapter(this, serviceList);
+        recyclerViewService.setAdapter(serviceRecyclerAdapter);
     }
 }
