@@ -120,79 +120,6 @@
         app:layout_constraintStart_toEndOf="@+id/btn_accept_user"
         app:layout_constraintTop_toBottomOf="@+id/tv_reject_user_lbl" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#000000"
-        android:visibility="invisible">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#1C1C1C"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/bulbasaur" />
-
-                <TextView
-                    android:id="@+id/name_lbl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="@string/full_name" />
-
-                <TextView
-                    android:id="@+id/display_reported_user_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    tools:text="full name goes here" />
-
-                <TextView
-                    android:id="@+id/report_reason_lbl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="@string/reason_for_report" />
-
-                <Spinner
-                    android:id="@+id/report_reason_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="#2B2A2A" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/cancel_report_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/cancelBtn" />
-
-                    <Button
-                        android:id="@+id/submit_report_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/report_button" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <TextView
         android:id="@+id/tv_accept_user_lbl"
         android:layout_width="wrap_content"
@@ -230,12 +157,11 @@
         app:layout_constraintTop_toTopOf="@+id/tv_reject_user_lbl" />
 
     <ScrollView
-        android:layout_width="396dp"
-        android:layout_height="644dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="match_parent"
+        android:layout_height="472dp"
+        android:layout_marginTop="12dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar3">
 
@@ -264,10 +190,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pending_friend_item_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#3F51B5">
-
-            </androidx.recyclerview.widget.RecyclerView>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#3F51B5" />
 
             <TextView
                 android:id="@+id/textView38"
@@ -279,10 +204,105 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pending_friend_service_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:background="#2196F3" />
+                android:layout_height="match_parent"
+                android:background="#FFEB3B" />
+
         </LinearLayout>
     </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/popup_window"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E9000000"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="100dp"
+            android:background="#1C1C1C"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/bulbasaur" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#575757"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <TextView
+                    android:id="@+id/name_lbl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#2B2B2B"
+                    android:gravity="center_horizontal"
+                    android:text="@string/full_name" />
+
+                <TextView
+                    android:id="@+id/display_reported_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#121212"
+                    android:gravity="center_horizontal"
+                    tools:text="full name goes here" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#575757"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <TextView
+                    android:id="@+id/report_reason_lbl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#2B2B2B"
+                    android:gravity="center_horizontal"
+                    android:text="@string/reason_for_report" />
+
+                <Spinner
+                    android:id="@+id/report_reason_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="#3E3E3E" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/cancel_report_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/cancelBtn" />
+
+                    <Button
+                        android:id="@+id/submit_report_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/report_button" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

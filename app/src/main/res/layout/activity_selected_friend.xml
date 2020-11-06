@@ -149,6 +149,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="100dp"
             android:background="#1C1C1C"
             android:orientation="vertical">
 
@@ -163,10 +167,17 @@
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/bulbasaur" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#575757"
+                    android:orientation="horizontal"></LinearLayout>
+
                 <TextView
                     android:id="@+id/reported_user_name_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="#2B2B2B"
                     android:gravity="center_horizontal"
                     android:text="@string/full_name" />
 
@@ -174,13 +185,21 @@
                     android:id="@+id/reported_user_display_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="#121212"
                     android:gravity="center_horizontal"
                     tools:text="name goes here" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#575757"
+                    android:orientation="horizontal"></LinearLayout>
 
                 <TextView
                     android:id="@+id/reason_for_report_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="#2B2B2B"
                     android:gravity="center_horizontal"
                     android:text="@string/reason_for_report" />
 
@@ -188,7 +207,8 @@
                     android:id="@+id/spinner"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:background="#3C3C3C" />
+                    android:layout_marginBottom="40dp"
+                    android:background="#3E3E3E" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
