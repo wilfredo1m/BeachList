@@ -157,6 +157,7 @@
         app:layout_constraintTop_toTopOf="@+id/tv_reject_user_lbl" />
 
     <ScrollView
+        android:id="@+id/listing_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="472dp"
         android:layout_marginTop="12dp"
@@ -233,7 +234,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/reported_user_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/bulbasaur" />
