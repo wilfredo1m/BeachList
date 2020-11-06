@@ -148,7 +148,7 @@ public class SelectedFriend extends AppCompatActivity {
             }
         });
 
-        //***********************************INITIALIZE SPINNER SECTION************************************************************************************//
+//***********************************INITIALIZE SPINNER SECTION************************************************************************************//
 //**********************SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST***********************************************************************//
 //****************************ON SELECT LISTENER TO BE ABLE TO PASS THE SELECTED INFORMATION TO THE CONFIRM REPORT BUTTON************************//
         //initiate the spinner
