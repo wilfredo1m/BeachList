@@ -141,7 +141,7 @@ public class SelectedService extends AppCompatActivity {
         reportService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                populateReportScreen();
+                //populateReportScreen();
                 setupPopUpScreenView();
 
             }

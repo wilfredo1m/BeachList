@@ -35,8 +35,6 @@ import java.util.List;
 public class ListingTitlePage extends AppCompatActivity {
     public static final int IMAGE_REQUEST = 33;
     public static final int PROCESSED_OK = -1;
-    Bitmap profileImage;
-    InputStream input;
     private Uri filePath;
     int callingActivity;
     ImageView listingPic;
@@ -180,13 +178,6 @@ public class ListingTitlePage extends AppCompatActivity {
         TextView titleTextView = findViewById(R.id.et_listing_title);
         openScreen.putExtra("ListingTitle", titleTextView.getText().toString());
         openScreen.putStringArrayListExtra("Listing Images", imageUriList);
-//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//        profileImage.compress(Bitmap.CompressFormat.JPEG, 10, stream);
-        //Bitmap.createScaledBitmap(profileImage, 200, 200, true);
-
-//        byte[] byteArray = stream.toByteArray();
-//        openScreen.putExtra("ListingPics", byteArray);
-
         startActivity(openScreen);
     }
 

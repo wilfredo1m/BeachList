@@ -84,6 +84,7 @@ public class ListingReviewPage extends AppCompatActivity {
         submitPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                submitPost.setClickable(false);
                 // Adds post to database
                 submitPost();
 
@@ -106,6 +107,7 @@ public class ListingReviewPage extends AppCompatActivity {
     //intent to open home screen
     public void openHomeScreen() {
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
+        submitPost.setClickable(false);
         startActivity(openScreen);
     }
     //intent to open create post screen
@@ -120,9 +122,7 @@ public class ListingReviewPage extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
         Date date = new Date();
         String postDate = dateFormat.format(date);
-
         currentListing = new NewListingData();
-
         currentListing.setTitle(title);
         currentListing.setCategory(category);
         currentListing.setDescription(description);
@@ -133,7 +133,6 @@ public class ListingReviewPage extends AppCompatActivity {
         //This should become obsolete but i didn't want to change listing data again right now
         listingImages = new HashMap<>();
         ArrayList<String> imageUris = this.getIntent().getStringArrayListExtra("Listing Images");
-
         getUrls(imageUris, imageUris.size());
 
     }
@@ -236,11 +235,6 @@ public class ListingReviewPage extends AppCompatActivity {
                 });
     }
 
-    //intent to go back to listing description page
-    public void goBack() {
-        Intent openScreen = new Intent(this, ListingDescriptionPage.class);
-        startActivity(openScreen);
-    }
     //retrieve all inputs from user
     public void getUserInputs() {
         //INTENT IN ORDER TO RECEIVE THE TITLE FROM THE HOME PAGE

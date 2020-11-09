@@ -15,15 +15,11 @@ import android.widget.TableLayout;
 
 import com.google.android.material.tabs.TabLayout;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class HomeFragment extends Fragment {
     View view;
     ViewPager viewPager;
     TabLayout tabLayout;
+    Button categoryBtn;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -36,9 +32,21 @@ public class HomeFragment extends Fragment {
         viewPager = view.findViewById(R.id.viewPager);
         tabLayout = view.findViewById(R.id.home_menu_tab_view);
 
+
+
+//********************************BUTTON GROUP*************************************************************//
+        categoryBtn = view.findViewById(R.id.btn_categories);
+        categoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openScreen = new Intent(getActivity(), CategorySelection.class);
+                startActivity(openScreen);
+            }
+        });
+
         return view;
     }
-
+//***************************END BUTTON GROUP************************************************************//
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

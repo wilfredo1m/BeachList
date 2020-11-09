@@ -43,7 +43,7 @@
         android:id="@+id/fuzzy_layout_service"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E8040303"
+        android:background="#E9000000"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,90 +52,125 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="100dp"
+            android:layout_height="wrap_content"
             android:background="#1C1C1C"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="20dp"
+                android:background="#1C1C1C"
                 android:orientation="vertical">
 
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/reported_Service_pager"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:background="#2E2E2E"
+                    android:orientation="vertical">
 
-            </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/spinner_holder_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="#131313"
+                        android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="11dp"
-                android:background="#575757"
-                android:orientation="horizontal"></LinearLayout>
+                        <TextView
+                            android:id="@+id/textView44"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center|center_horizontal"
+                            android:text="REPORT"
+                            android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/textView35"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#2B2B2B"
-                android:gravity="center_horizontal"
-                android:text="Title:" />
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/reported_Service_pager"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone">
 
-            <TextView
-                android:id="@+id/reportedServiceTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#121212"
-                android:gravity="center_horizontal"
-                android:text="Title Goes Here" />
+                        </androidx.viewpager2.widget.ViewPager2>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#575757"
-                android:orientation="horizontal"></LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#2B2B2B"
-                android:gravity="center_horizontal"
-                android:text="Reason:" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#575757"
+                    android:orientation="horizontal"></LinearLayout>
 
-            <Spinner
-                android:id="@+id/reported_service_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginBottom="40dp"
-                android:background="#3E3E3E" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/cancer_report_service_button"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/textView35"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="cancel report" />
+                    android:background="#2B2B2B"
+                    android:gravity="center_horizontal"
+                    android:text="Title:"
+                    android:visibility="gone" />
 
-                <Button
-                    android:id="@+id/submit_service_report"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/reportedServiceTitle"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="submit report" />
+                    android:background="#121212"
+                    android:gravity="center_horizontal"
+                    android:text="Title Goes Here"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#575757"
+                    android:orientation="horizontal"
+                    android:visibility="gone"></LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#2B2B2B"
+                    android:gravity="center_horizontal"
+                    android:text="@string/reason_for_report_listing" />
+
+                <Spinner
+                    android:id="@+id/reported_service_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="#3E3E3E" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/cancer_report_service_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="cancel report" />
+
+                    <Button
+                        android:id="@+id/submit_service_report"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="submit report" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

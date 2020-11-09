@@ -137,7 +137,7 @@ public class SelectedItem extends AppCompatActivity {
         reportItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                populateReportScreen();
+                //populateReportScreen();
                 setupPopUpScreenView();
             }
         });

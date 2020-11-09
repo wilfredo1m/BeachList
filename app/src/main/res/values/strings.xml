@@ -53,7 +53,9 @@
     <string name="selected_friend_header">Selected Friend</string>
     <string name="remove_friend_label">Remove Friend</string>
     <string name="Title_lbl">Remove Title</string>
-    <string name="reason_for_report">Reason:</string>
+    <string name="reason_for_report">What is the reason you want to report the user</string>
+    <string name="reason_for_report_listing">What is the reason you want to report this Listing</string>
+    <string name="reason_header">REASON</string>
     <string name="full_name">Name:</string>
 
     <!-- Messages text -->
@@ -83,6 +85,20 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- category names -->
+    <string name="books_category">Textbooks</string>
+    <string name="electronics_category">Electronics</string>
+    <string name="furniture_category">Furniture</string>
+    <string name="games_category">Games</string>
+    <string name="collectible_category">Collectibles</string>
+    <string name="jewelry_category">Jewelry</string>
+    <string name="misc_category">Miscellaneous</string>
+
+    <string name="art_category">Art/Craft</string>
+    <string name="appliances_category">Appliances</string>
+    <string name="tutoring_category">Tutoring</string>
+    <string name="repair_category">Electronic Repair</string>
+    <string name="commission_category">Commission</string>
 
     <!-- spinner stuff -->
     <string-array name="categories">
@@ -102,7 +118,7 @@
         <item>collectible</item>
         <item>art</item>
         <item>appliances</item>
-        <item>jewelery</item>
+        <item>jewelry </item>
         <item>misc</item>
     </string-array>
 

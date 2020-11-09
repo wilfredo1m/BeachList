@@ -114,9 +114,11 @@
         app:layout_constraintTop_toBottomOf="@+id/selected_user_profile_pic" />
 
     <ScrollView
+        android:id="@+id/user_listing_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="449dp"
         android:layout_marginTop="10dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar3">
@@ -189,22 +191,19 @@
         android:id="@+id/fuzzy_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#DD000000"
+        android:background="#E9000000"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tb_primary_toolbar">
 
         <LinearLayout
-            android:id="@+id/report_user_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="100dp"
+            android:layout_height="250dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="20dp"
             android:background="#1C1C1C"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -214,86 +213,111 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#00DFFF"
-                android:gravity="center_horizontal|center_vertical"
+                android:layout_height="match_parent"
+                android:background="#1C1C1C"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/reportedUserImage"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/bulbasaur" />
-            </LinearLayout>
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#2E2E2E"
+                    android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="11dp"
-                android:background="#575757"
-                android:orientation="horizontal"></LinearLayout>
+                    <TextView
+                        android:id="@+id/reason_header_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="#131313"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/reason_header"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/name_of_reported_user_lbl"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#2B2B2B"
-                android:gravity="center_horizontal"
-                android:text="@string/full_name" />
+                    <ImageView
+                        android:id="@+id/reportedUserImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:scaleType="fitCenter"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/bulbasaur" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/reported_user_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#121212"
-                android:gravity="center_horizontal"
-                tools:text="Name of Reported User" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#575757"
+                    android:orientation="horizontal"></LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#575757"
-                android:orientation="horizontal"></LinearLayout>
-
-            <TextView
-                android:id="@+id/textView26"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#2B2B2B"
-                android:gravity="center_horizontal"
-                android:text="@string/reason_for_report" />
-
-            <Spinner
-                android:id="@+id/report_user_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginBottom="40dp"
-                android:background="#3E3E3E" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/cancel_report_button"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/name_of_reported_user_lbl"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/cancelBtn" />
+                    android:background="#2B2B2B"
+                    android:gravity="center_horizontal"
+                    android:text="@string/full_name"
+                    android:visibility="gone" />
 
-                <Button
-                    android:id="@+id/confirm_report_user_button"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/reported_user_name"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/report_button" />
-            </LinearLayout>
+                    android:background="#121212"
+                    android:gravity="center_horizontal"
+                    android:visibility="gone"
+                    tools:text="Name of Reported User" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#575757"
+                    android:orientation="horizontal"
+                    android:visibility="gone"></LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#2B2B2B"
+                    android:gravity="center_horizontal"
+                    android:text="@string/reason_for_report" />
+
+                <Spinner
+                    android:id="@+id/report_user_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="#3E3E3E" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/cancel_report_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/cancelBtn" />
+
+                    <Button
+                        android:id="@+id/confirm_report_user_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/report_button" />
+                </LinearLayout>
+
+            </LinearLayout>
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

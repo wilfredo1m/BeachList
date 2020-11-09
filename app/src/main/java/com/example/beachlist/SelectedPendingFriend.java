@@ -63,15 +63,23 @@ public class SelectedPendingFriend extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-        profilePic = findViewById(R.id.iv_selected_pending_friend_image);
-        firstName = findViewById(R.id.tv_pending_first_name);
-        lastName = findViewById(R.id.tv_pending_last_name);
-        listingView = findViewById(R.id.listing_scroll_view);
-        popupWindow = findViewById(R.id.popup_window);
+
+        profilePic = findViewById(R.id.iv_selected_pending_friend_image);                                    //link profile pic to xml
+        firstName = findViewById(R.id.tv_pending_first_name);                                                //link firstName to xml
+        lastName = findViewById(R.id.tv_pending_last_name);                                                  //link lastName to xml
+        listingView = findViewById(R.id.listing_scroll_view);                                                //link listingView to xml
+        popupWindow = findViewById(R.id.popup_window);                                                       //link popupWindow view to xml
+
+        recyclerViewItem = findViewById(R.id.pending_friend_item_recycler);                                 //link recyclerViewItem view to xml
+        recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
+
+        recyclerViewService = findViewById(R.id.pending_friend_service_recycler);                           //link recyclerViewService view to xml
+        recyclerViewService.setLayoutManager(new LinearLayoutManager(this));
 
         // gets the pic and name of the user to display
-        final int position = getIntent().getIntExtra("position",1);
+        final int position = getIntent().getIntExtra("position",1);                       //retrieve position from a intent passed
 
+//********************************SETS PERSON INFO FROM FIREBASE**************************************************************************//
         // Sets the persons info in the correct fields to be displayed
         Glide.with(this)
                 .load(PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getImageUrl())
@@ -83,12 +91,6 @@ public class SelectedPendingFriend extends AppCompatActivity {
         // get selected friend's active listings
         Query itemsQuery = database.getReference().child("listings").child("item").orderByChild("ownerId").equalTo(PendingFriendsListTab.list.get(position).getKey());
         Query serviceQuery = database.getReference().child("listings").child("service").orderByChild("ownerId").equalTo(PendingFriendsListTab.list.get(position).getKey());
-
-        recyclerViewItem = findViewById(R.id.pending_friend_item_recycler);
-        recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
-
-        recyclerViewService = findViewById(R.id.pending_friend_service_recycler);
-        recyclerViewService.setLayoutManager(new LinearLayoutManager(this));
 
         itemsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -127,26 +129,22 @@ public class SelectedPendingFriend extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
+//********************************END SETS PERSON INFO FROM FIREBASE**************************************************************************//
+
 
 //***********************************INITIALIZE SPINNER SECTION************************************************************************************//
-//**********************SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST***********************************************************************//
-//****************************ON SELECT LISTENER TO BE ABLE TO PASS THE SELECTED INFORMATION TO THE CONFIRM REPORT BUTTON************************//
-        //initiate the spinner
-        reportUserSpinner = findViewById(R.id.report_reason_spinner);
-        //array adapter holding the array list of categories created in the strings.xml
+        //SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST
+        //ON SELECT LISTENER TO BE ABLE TO PASS THE SELECTED INFORMATION TO THE CONFIRM REPORT BUTTON
+        reportUserSpinner = findViewById(R.id.report_reason_spinner);                                                     //link reportUserSpinner to xml
+
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
                 getResources().getStringArray(R.array.report_user));
-        //setup adapter to be passed to spinner
-        reportUserSpinner.setAdapter(arrayAdapter);
+        reportUserSpinner.setAdapter(arrayAdapter);                                                                      //setup adapter to be passed to spinner
         reportUserSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                reportedUser =  reportUserSpinner.getSelectedItem().toString();
-                // your code here
-
+                reportedUser =  reportUserSpinner.getSelectedItem().toString();                                         //set reportedUser to the string selected
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
@@ -156,11 +154,10 @@ public class SelectedPendingFriend extends AppCompatActivity {
 //********************************END SPINNER SECTION*****************************************************************************************//
 
 
-
 //*****************************************************BUTTON GROUP******************************************************************************//
         // Go back to pending friends list
-        backButton = findViewById(R.id.pending_friend_back_button);
-        backButton.setOnClickListener(new View.OnClickListener() {
+        backButton = findViewById(R.id.pending_friend_back_button);                                                   //link button to xml
+        backButton.setOnClickListener(new View.OnClickListener() {                                                   //set onclicklistner to button
             @Override
             public void onClick(View view) {
                 openPendingFriendListScreen();
@@ -168,16 +165,16 @@ public class SelectedPendingFriend extends AppCompatActivity {
         });
 
         // Accept and Reject Request buttons
-        acceptRequest = findViewById(R.id.btn_accept_user);
-        acceptRequest.setOnClickListener(new View.OnClickListener() {
+        acceptRequest = findViewById(R.id.btn_accept_user);                                                       //link button to xml
+        acceptRequest.setOnClickListener(new View.OnClickListener() {                                            //set onclicklistner to button
             @Override
             public void onClick(View view) {
                 acceptRequest(position);
             }
         });
 
-        rejectRequest = findViewById(R.id.btn_reject_user);
-        rejectRequest.setOnClickListener(new View.OnClickListener() {
+        rejectRequest = findViewById(R.id.btn_reject_user);                                                     //link button to xml
+        rejectRequest.setOnClickListener(new View.OnClickListener() {                                           //set onclicklistner to button
             @Override
             public void onClick(View view) {
                 DatabaseReference deletePendingReference = database.getReference().child("users").child(user.getUid()).child("pending").child(PendingFriendsListTab.list.get(position).getKey());
@@ -196,28 +193,32 @@ public class SelectedPendingFriend extends AppCompatActivity {
                         });
             }
         });
-        reportButton = findViewById(R.id.btn_report_user);
-        reportButton.setOnClickListener(new View.OnClickListener() {
+        reportButton = findViewById(R.id.btn_report_user);                                                    //link button to xml
+        reportButton.setOnClickListener(new View.OnClickListener() {                                          //set onclicklistner to button
             @Override
             public void onClick(View v) {
-                populateReportedUserScreen();
+                //populateReportedUserScreen();
                 setupPopUpScreenView();
+                recyclerViewItem.setVisibility(View.INVISIBLE);
+                recyclerViewService.setVisibility(View.INVISIBLE);
             }
         });
 
-        submitReport = findViewById(R.id.submit_report_btn);
-        submitReport.setOnClickListener(new View.OnClickListener() {
+        submitReport = findViewById(R.id.submit_report_btn);                                                   //link button to xml
+        submitReport.setOnClickListener(new View.OnClickListener() {                                          //set onclicklistner to button
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), reportedUser, Toast.LENGTH_SHORT).show();
             }
         });
 
-        cancelReport = findViewById(R.id.cancel_report_btn);
-        cancelReport.setOnClickListener(new View.OnClickListener() {
+        cancelReport = findViewById(R.id.cancel_report_btn);                                                   //link button to xml
+        cancelReport.setOnClickListener(new View.OnClickListener() {                                          //set onclicklistner to button
             @Override
             public void onClick(View v) {
                 setupRevertScreenView();
+                recyclerViewItem.setVisibility(View.VISIBLE);
+                recyclerViewService.setVisibility(View.VISIBLE);
             }
         });
 

@@ -29,6 +29,8 @@
         <activity android:name=".SelectedOwnListing"/>
         <activity android:name=".SelectedItem"/>
         <activity android:name=".SelectedService"/>
+        <activity android:name=".CategorySelection"/>
+        <activity android:name=".FilteredCategory"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

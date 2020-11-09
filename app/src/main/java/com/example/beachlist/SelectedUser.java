@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +49,7 @@ public class SelectedUser extends AppCompatActivity {
     ItemRecyclerAdapter itemAdapter;
     ServiceRecyclerAdapter serviceAdapter;
     List<DataSnapshot> itemList, serviceList;
+    ScrollView scrollView;
 //    ViewPager itemPager,servicePager;
 
     @Override
@@ -61,31 +63,26 @@ public class SelectedUser extends AppCompatActivity {
         user = mAuth.getCurrentUser();
 
         //this layout is the pop up menu layout
-        constraintLayout = findViewById(R.id.fuzzy_background);
-        profilePic = findViewById(R.id.selected_user_profile_pic);
-        firstName = findViewById(R.id.selected_user_first_name);
-        lastName = findViewById(R.id.selected_user_last_name);
-        addFriendButton = findViewById(R.id.btn_add_user);
+        scrollView = findViewById(R.id.user_listing_scroll_view);                                     //link scrollView to xml
+        constraintLayout = findViewById(R.id.fuzzy_background);                                       //link constraintLayout to xml
+        profilePic = findViewById(R.id.selected_user_profile_pic);                                    //link profilePic to xml
+        firstName = findViewById(R.id.selected_user_first_name);                                      //link firstName to xml
+        lastName = findViewById(R.id.selected_user_last_name);                                        //link lastName to xml
+        addFriendButton = findViewById(R.id.btn_add_user);                                            //link addFriendButton to xml
 
 //***********************************INITIALIZE SPINNER SECTION************************************************************************************//
-//**********************SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST***********************************************************************//
-//****************************ON SELECT LISTENER TO BE ABLE TO PASS THE SELECTED INFORMATION TO THE CONFIRM REPORT BUTTON************************//
-        //initiate the spinner
-        reportUserSpinner = findViewById(R.id.report_user_spinner);
-        //array adapter holding the array list of categories created in the strings.xml
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
+        //SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST
+        //ON SELECT LISTENER TO BE ABLE TO PASS THE SELECTED INFORMATION TO THE CONFIRM REPORT BUTTON
+        reportUserSpinner = findViewById(R.id.report_user_spinner);                                                        //initiate the spinner
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,        //array adapter holding the array list of categories created in the strings.xml
                 getResources().getStringArray(R.array.report_user));
-        //setup adapter to be passed to spinner
-        reportUserSpinner.setAdapter(arrayAdapter);
-        reportUserSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        reportUserSpinner.setAdapter(arrayAdapter);                                                                       //setup adapter to be passed to spinner
+        reportUserSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {                            //set listener to item selected
 
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                reportedUser =  reportUserSpinner.getSelectedItem().toString();
-                // your code here
-
+                reportedUser =  reportUserSpinner.getSelectedItem().toString();                                          //set selected value in spinner to the reportedUser string
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
@@ -113,29 +110,28 @@ public class SelectedUser extends AppCompatActivity {
 
 //*****************************************GET USER LISTING FROM FIREBASE***********************************************************************//
 //********************************************************************************************************************************************//
-        itemRecycler = findViewById(R.id.item_recycler);
-        itemRecycler.setLayoutManager(new LinearLayoutManager(this));
+        itemRecycler = findViewById(R.id.item_recycler);                                              //link itemRecycler to xml
+        itemRecycler.setLayoutManager(new LinearLayoutManager(this));                         //set recycler to the layout
 
-        serviceRecycler = findViewById(R.id.service_recycler);
-        serviceRecycler.setLayoutManager(new LinearLayoutManager(this));
-        itemList = new ArrayList<>();
-        serviceList = new ArrayList<>();
-        //Get all snapshots of user listings
-        DataSnapshot userListings = UserHomeSearchTab.user_list.get(position).child("listings");
-        for (DataSnapshot child : userListings.getChildren()) {
+        serviceRecycler = findViewById(R.id.service_recycler);                                        //link serviceRecycler to xml
+        serviceRecycler.setLayoutManager(new LinearLayoutManager(this));                      //set recycler to the layout
+        itemList = new ArrayList<>();                                                                 //initialize itemList arraylist
+        serviceList = new ArrayList<>();                                                              //initialize serviceList arraylist
+        DataSnapshot userListings = UserHomeSearchTab.user_list.get(position).child("listings");      //Get all snapshots of user listings
+for (DataSnapshot child : userListings.getChildren()) {                                               //for loop to populate lists
             if(child.child("type").getValue(String.class).compareTo("item") == 0) {
-                itemList.add(child);
+                itemList.add(child);                                                                  //add item to item arraylist
             }
             else {
-                serviceList.add(child);
+                serviceList.add(child);                                                               //add item to service arraylist
             }
         }
 
-        itemAdapter = new ItemRecyclerAdapter(this,itemList);
-        itemRecycler.setAdapter(itemAdapter);
+        itemAdapter = new ItemRecyclerAdapter(this,itemList);                                 //set adapter to itemlist
+        itemRecycler.setAdapter(itemAdapter);                                                         //pass recycler to the adapter
 
-        serviceAdapter = new ServiceRecyclerAdapter(this, serviceList);
-        serviceRecycler.setAdapter(serviceAdapter);
+        serviceAdapter = new ServiceRecyclerAdapter(this, serviceList);                       //set adapter to servicelist
+        serviceRecycler.setAdapter(serviceAdapter);                                                   //pass recycler to the adapter
 //********************************************************************************************************************************************//
 //*****************************************END USER LISTING SECTION************************************************************************//
 
@@ -143,8 +139,8 @@ public class SelectedUser extends AppCompatActivity {
 //*********************************BUTTON GROUP***********************************************************************************************//
 //********************************************************************************************************************************************//
         // Send user a friend request
-        addFriendButton = findViewById(R.id.btn_add_user);
-        addFriendButton.setOnClickListener(new View.OnClickListener() {
+        addFriendButton = findViewById(R.id.btn_add_user);                                                                        //link button to xml
+        addFriendButton.setOnClickListener(new View.OnClickListener() {                                                           //set on click listener for button
             @Override
             public void onClick(View view) {
                 DatabaseReference myDataReference = database.getReference().child("users").child(user.getUid()).child("data");
@@ -170,8 +166,8 @@ public class SelectedUser extends AppCompatActivity {
         });
 
         // Go back to User search list (temporarily going back to home)
-        Button backButton = findViewById(R.id.selected_user_back_button);
-        backButton.setOnClickListener(new View.OnClickListener() {
+        Button backButton = findViewById(R.id.selected_user_back_button);                               //link button to xml
+        backButton.setOnClickListener(new View.OnClickListener() {                                      //set on click listener for button
             @Override
             public void onClick(View view) {
                 openHomeScreen();
@@ -179,27 +175,32 @@ public class SelectedUser extends AppCompatActivity {
         });
 
         //user clicks on report user button in order to populate pop up menu to report user
-        reportUser = findViewById(R.id.btn_report_user);
-        reportUser.setOnClickListener(new View.OnClickListener() {
+        reportUser = findViewById(R.id.btn_report_user);                                              //link button to xml
+        reportUser.setOnClickListener(new View.OnClickListener() {                                    //set on click listener for button
             @Override
             public void onClick(View v) {
-                populateReportedUserScreen();
+                //populateReportedUserScreen();
                 setupPopUpScreenView();
+                itemRecycler.setVisibility(View.INVISIBLE);
+                serviceRecycler.setVisibility(View.INVISIBLE);
+
             }
         });
 
         //user cancels the report to set the view back to the original view
-        cancelReport = findViewById(R.id.cancel_report_button);
-        cancelReport.setOnClickListener(new View.OnClickListener() {
+        cancelReport = findViewById(R.id.cancel_report_button);                                           //link button to xml
+        cancelReport.setOnClickListener(new View.OnClickListener() {                                      //set on click listener for button
             @Override
             public void onClick(View v) {
                 setupRevertScreenView();
+                itemRecycler.setVisibility(View.VISIBLE);
+                serviceRecycler.setVisibility(View.VISIBLE);
             }
         });
 
         //user clicks on submit button to send the report to the admin page
-       submitReport = findViewById(R.id.confirm_report_user_button);
-       submitReport.setOnClickListener(new View.OnClickListener() {
+       submitReport = findViewById(R.id.confirm_report_user_button);                                     //link button to xml
+       submitReport.setOnClickListener(new View.OnClickListener() {                                      //set on click listener for button
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), reportedUser, Toast.LENGTH_SHORT).show();
