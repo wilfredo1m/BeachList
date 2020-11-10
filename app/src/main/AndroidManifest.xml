@@ -39,6 +39,7 @@
         </activity>
         <activity android:name=".FriendsListTab"></activity>
         <activity android:name=".PendingFriendsListTab"></activity>
+        <activity android:name=".Conversation" />
     </application>
 
 </manifest>
