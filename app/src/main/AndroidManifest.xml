@@ -23,7 +23,6 @@
         <activity android:name=".ListingDescriptionPage"/>
         <activity android:name=".ActiveListings"/>
         <activity android:name=".ListingReviewPage"/>
-        <activity android:name=".ModifyListing"/>
         <activity android:name=".SelectedUser"/>
         <activity android:name=".ReportedScreen"/>
         <activity android:name=".SelectedOwnListing"/>

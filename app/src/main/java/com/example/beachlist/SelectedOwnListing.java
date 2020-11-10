@@ -59,6 +59,7 @@ public class SelectedOwnListing extends AppCompatActivity {
     ImageAdapter2 adapterForNewImages;                                                                //adapter that uses bitmaps instead of array of strings
     public static final int IMAGE_REQUEST = 33;
     public static final int PROCESSED_OK = -1;
+    boolean pictureFlag, descriptionFlag, priceFlag, categoryFlag,titleFlag;                          //keep track of what was modified in order to update
 
 
 
@@ -89,7 +90,11 @@ public class SelectedOwnListing extends AppCompatActivity {
         updatedPrice = findViewById(R.id.change_price_txt);                                           //update price edit text to be populated at button press
         updatedDescription = findViewById(R.id.change_description_ml_text);                           //update description edit text to be populated at button press
         updatedImages = findViewById(R.id.new_pictures_pager);                                        //update images pager to be populated at button press
-
+        pictureFlag=false;
+        descriptionFlag = false;
+        priceFlag=false;
+        categoryFlag=false;
+        titleFlag=false;
 //****************************END POP UP WINDOW ITEMS************************//
 
 
@@ -151,6 +156,7 @@ public class SelectedOwnListing extends AppCompatActivity {
         changeTitle.setOnClickListener(new View.OnClickListener() {                                   //set on click listener to button
             @Override
             public void onClick(View v) {
+                titleFlag= true;                                                                      //set flag to true meaning that there is an updated being performed
                 currentTitle.setVisibility(View.GONE);                                                //remove currentTitle textView from screen and layout weight
                 updatedTitle.setVisibility(View.VISIBLE);                                             //place updatedTitle textview in screen in place of currentTitle
                 changeTitle.setClickable(false);                                                      //set button to not be clickable
@@ -160,6 +166,7 @@ public class SelectedOwnListing extends AppCompatActivity {
         changePrice.setOnClickListener(new View.OnClickListener() {                                   //set on click listener to button
             @Override
             public void onClick(View v) {
+                priceFlag= true;                                                                      //set flag to true meaning that there is an updated being performed
                 currentPrice.setVisibility(View.GONE);                                                //remove currentPrice textView from screen and layout weight
                 updatedPrice.setVisibility(View.VISIBLE);                                             //place updatedPrice textview in screen in place of currentPrice
                 changePrice.setClickable(false);                                                      //set button to not be clickable
@@ -169,6 +176,7 @@ public class SelectedOwnListing extends AppCompatActivity {
         changeDescription.setOnClickListener(new View.OnClickListener() {                             //set on click listener to button
             @Override
             public void onClick(View v) {
+                descriptionFlag=true;                                                                 //set flag to true meaning that there is an updated being performed
                 currentDescription.setVisibility(View.GONE);                                          //remove currentDescription textView from screen and layout weight
                 updatedDescription.setVisibility(View.VISIBLE);                                       //place updatedDescription textview in screen in place of currentDescription
                 changeDescription.setClickable(false);                                                //set button to not be clickable
@@ -179,6 +187,7 @@ public class SelectedOwnListing extends AppCompatActivity {
         changeCategory.setOnClickListener(new View.OnClickListener() {                                //set on click listener to button
             @Override
             public void onClick(View v) {
+                categoryFlag = true;                                                                  //set flag to true meaning that there is an updated being performed                                                                 //set flag to true so that we know we need to update this system
                 currentCategory.setVisibility(View.GONE);                                             //remove currentCategory textview from screen and layout weight
                 categorySpinner.setVisibility(View.VISIBLE);                                          //place categorySpinner spinner in screen in place of currentCategory textview
                 changeCategory.setClickable(false);                                                   //set button to not be clickable
@@ -191,6 +200,11 @@ public class SelectedOwnListing extends AppCompatActivity {
             public void onClick(View v) {
                 RevertScreens();                                                                     //call method to change screen layout back to normal
                 revertButtonStatus();                                                                //call method to make buttons clickable again
+                pictureFlag=false;                                                                   //set flag back to false since no update took place
+                descriptionFlag = false;                                                             //set flag back to false since no update took place
+                priceFlag=false;                                                                     //set flag back to false since no update took place
+                categoryFlag=false;                                                                  //set flag back to false since no update took place
+                titleFlag=false;                                                                     //set flag back to false since no update took place
             }
         });
 
@@ -200,6 +214,33 @@ public class SelectedOwnListing extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                //Content fields that hold updated values
+                //bitmaps                                                                            //this is the array holding the new arrays. its a bitmap array so you will prob need to add the lines at the bottom to have a string array
+                //updatedPrice.getText().toString();                                                 //this is the updated edittext for price as a string
+                //updatedDescription.getText().toString();                                           //this is the updated edittext for description as a string
+                //updatedPrice.getText().toString();                                                 //this is the updated edittext for price as a string
+                //updatedTitle.getText().toString();                                                 //this is the updated edittext for title as a string
+                String newCategory = categorySpinner.getSelectedItem().toString();
+                //todo use the flags that have been created to check which item was modified
+                //todo this group can be nested or whatever method you want to implent it as, this just felt like the best way instead of updating blank fields or all fields
+                /*
+                if(!titleFlag){
+
+                }
+                if(!categoryFlag){
+
+                }
+                if(!priceFlag){
+
+                }
+                if(!pictureFlag){
+
+                }
+                if(!descriptionFlag){
+
+                }
+                 */
+                Toast.makeText(getApplicationContext(),newCategory , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -207,6 +248,7 @@ public class SelectedOwnListing extends AppCompatActivity {
         updateImages.setOnClickListener(new View.OnClickListener() {                                  //set on click listener to button
             @Override
             public void onClick(View v) {
+                pictureFlag= true;
                 currentImages.setVisibility(View.GONE);                                               //remove currentImages pager from screen and layout weight
                 updatedImages.setVisibility(View.VISIBLE);                                            //place updatedImages pager in screen in place of currentImages pager
                 openCameraRoll();                                                                     //call function to open camera
@@ -218,7 +260,7 @@ public class SelectedOwnListing extends AppCompatActivity {
         deleteListingBtn.setOnClickListener(new View.OnClickListener() {                              //set on click listener to button
             @Override
             public void onClick(View v) {
-
+                //Toast.makeText(getApplicationContext(), "testing button", Toast.LENGTH_SHORT).show();
             }
         });
 //************************************END POP UP MENU BUTTONS********************************************//
