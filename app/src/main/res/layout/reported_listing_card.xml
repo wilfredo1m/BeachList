@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#171717"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/collectibles" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/reported_listing_header_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#2B2B2B"
+                        android:gravity="center|center_horizontal"
+                        android:text="Reported Listing Title" />
+
+                    <TextView
+                        android:id="@+id/reported_listing_name_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#121212"
+                        android:text="reported listing Name" />
+
+                    <TextView
+                        android:id="@+id/reason_listing_report_header_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#2B2B2B"
+                        android:gravity="center|center_horizontal"
+                        android:text="Reason for Report" />
+
+                    <TextView
+                        android:id="@+id/reason_for_report_listing_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#121212"
+                        android:text="reason for report goes here" />
+
+                    <TextView
+                        android:id="@+id/num_times_reported_header_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#2B2B2B"
+                        android:gravity="center|center_horizontal"
+                        android:text="number of times reported" />
+
+                    <TextView
+                        android:id="@+id/num_times_list_reported_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#121212"
+                        android:text="number of times reported goes here" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/waive_report_listing_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="waive" />
+
+                <Button
+                    android:id="@+id/delete_post_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Delete" />
+
+                <Button
+                    android:id="@+id/ban_owner_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ban owner" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
