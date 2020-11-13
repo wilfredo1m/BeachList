@@ -17,6 +17,84 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/share_service_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CC1818"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/layout_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:background="#8E24AA"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/share_service_title_lbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|center_horizontal"
+                android:text="SHARE LISTING"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:id="@+id/divider_layout1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#575757"
+                android:orientation="vertical"></LinearLayout>
+
+            <TextView
+                android:id="@+id/select_friend_for_service_lbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Friend" />
+
+            <LinearLayout
+                android:id="@+id/divider_layout2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#575757"
+                android:orientation="vertical"></LinearLayout>
+
+            <Spinner
+                android:id="@+id/seleted_friend_to_share_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <LinearLayout
+                android:id="@+id/share_service_btn_holder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/cancel_share_service_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/cancelBtn" />
+
+                <Button
+                    android:id="@+id/confirm_share_service_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="share link" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <TextView
         android:id="@+id/tv_selected_service_title"
         android:layout_width="wrap_content"

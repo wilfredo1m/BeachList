@@ -2,11 +2,200 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_own_listing_constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
     tools:context=".SelectedOwnListing">
 
+
+    <!-- this is the share button xml side -->
+    <ScrollView
+        android:id="@+id/signed_in_user_listing_sv"
+        android:layout_width="409dp"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#000000"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="395dp"
+                android:background="#202020">
+
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#292929"
+                    android:minHeight="?attr/actionBarSize"
+                    android:theme="?attr/actionBarTheme"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:title="Listing"
+                    app:titleMarginStart="165dp" />
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout8"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#575757"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toolbar5"></LinearLayout>
+
+                <Button
+                    android:id="@+id/selected_listing_share_btn"
+                    android:layout_width="49dp"
+                    android:layout_height="38dp"
+                    android:background="@drawable/ic_baseline_share_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/toolbar5"
+                    app:layout_constraintEnd_toEndOf="@+id/toolbar5"
+                    app:layout_constraintTop_toTopOf="@+id/toolbar5" />
+
+                <!--                <ImageView-->
+                <!--                    android:id="@+id/selected_listing_pic"-->
+                <!--                    android:layout_width="345dp"-->
+                <!--                    android:layout_height="305dp"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/toolbar5"-->
+                <!--                    tools:srcCompat="@drawable/ic_baseline_image_24" />-->
+
+                <Button
+                    android:id="@+id/selected_own_listing_back_btn"
+                    android:layout_width="54dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:background="@drawable/ic_outline_arrow_back_ios_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/toolbar5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/toolbar5"
+                    app:layout_constraintVertical_bias="0.45" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/own_listing_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="64dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/toolbar5">
+
+                </androidx.viewpager2.widget.ViewPager2>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="328dp"
+                android:layout_marginTop="50dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#2B2B2B"
+                    android:gravity="center_horizontal"
+                    android:text="Title"
+                    android:textColor="#B5B5B5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#575757"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <TextView
+                    android:id="@+id/selected_listing_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#121212"
+                    android:text="title will go here"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#2B2B2B"
+                    android:gravity="center_horizontal"
+                    android:text="price"
+                    android:textColor="#B5B5B5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#575757"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <TextView
+                    android:id="@+id/selected_listing_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="21dp"
+                    android:background="#121212"
+                    android:textColor="#FFFFFF"
+                    tools:text="$200.00" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#2B2B2B"
+                    android:gravity="center_horizontal"
+                    android:text="listing description"
+                    android:textColor="#B5B5B5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#575757"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <TextView
+                    android:id="@+id/selected_listing_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="114dp"
+                    android:background="#121212"
+                    android:text="description here"
+                    android:textColor="#FFFFFF" />
+
+                <Button
+                    android:id="@+id/selected_own_listing_modify_btn"
+                    android:layout_width="357dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_corners"
+                    android:text="modify post" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <!-- this is the popup  window xml -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mod_listing_view"
         android:layout_width="match_parent"
@@ -14,6 +203,7 @@
         android:background="#000000"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/signed_in_user_listing_sv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -309,189 +499,83 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
-        android:id="@+id/signed_in_user_listing_sv"
+
+    <!-- this is the share button xml side -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/share_own_button_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000000"
-        android:visibility="visible"
+        android:background="#CC1818"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#000000"
-            android:orientation="vertical">
+            android:layout_margin="3dp"
+            android:background="#8E24AA"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <TextView
+                android:id="@+id/share__own_listing_header_lbl"
                 android:layout_width="match_parent"
-                android:layout_height="395dp"
-                android:background="#202020">
+                android:layout_height="wrap_content"
+                android:gravity="center|center_horizontal"
+                android:text="SHARE LISTING"
+                android:textSize="24sp" />
 
+            <LinearLayout
+                android:id="@+id/share_own_listing_divider_1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#575757"
+                android:orientation="vertical"></LinearLayout>
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#292929"
-                    android:minHeight="?attr/actionBarSize"
-                    android:theme="?attr/actionBarTheme"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:title="Listing"
-                    app:titleMarginStart="165dp" />
+            <TextView
+                android:id="@+id/select_friend_to_share_own_listing_lbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Friend" />
 
+            <LinearLayout
+                android:id="@+id/share_own_listing_divider_2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#575757"
+                android:orientation="vertical"></LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/linearLayout8"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#575757"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbar5"></LinearLayout>
-
-                <Button
-                    android:id="@+id/selected_listing_share_btn"
-                    android:layout_width="49dp"
-                    android:layout_height="38dp"
-                    android:background="@drawable/ic_baseline_share_24"
-                    app:layout_constraintBottom_toBottomOf="@+id/toolbar5"
-                    app:layout_constraintEnd_toEndOf="@+id/toolbar5"
-                    app:layout_constraintTop_toTopOf="@+id/toolbar5" />
-
-                <!--                <ImageView-->
-                <!--                    android:id="@+id/selected_listing_pic"-->
-                <!--                    android:layout_width="345dp"-->
-                <!--                    android:layout_height="305dp"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@+id/toolbar5"-->
-                <!--                    tools:srcCompat="@drawable/ic_baseline_image_24" />-->
-
-                <Button
-                    android:id="@+id/selected_own_listing_back_btn"
-                    android:layout_width="54dp"
-                    android:layout_height="36dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginLeft="4dp"
-                    android:background="@drawable/ic_outline_arrow_back_ios_24"
-                    app:layout_constraintBottom_toBottomOf="@+id/toolbar5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/toolbar5"
-                    app:layout_constraintVertical_bias="0.45" />
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/own_listing_images"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="64dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/toolbar5">
-
-                </androidx.viewpager2.widget.ViewPager2>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <Spinner
+                android:id="@+id/seleted_friend_to_share_own_listing_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="328dp"
-                android:layout_marginTop="50dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView21"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#2B2B2B"
-                    android:gravity="center_horizontal"
-                    android:text="Title"
-                    android:textColor="#B5B5B5" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#575757"
-                    android:orientation="horizontal"></LinearLayout>
-
-                <TextView
-                    android:id="@+id/selected_listing_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#121212"
-                    android:text="title will go here"
-                    android:textColor="#FFFFFF" />
-
-                <TextView
-                    android:id="@+id/textView17"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#2B2B2B"
-                    android:gravity="center_horizontal"
-                    android:text="price"
-                    android:textColor="#B5B5B5" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#575757"
-                    android:orientation="horizontal"></LinearLayout>
-
-                <TextView
-                    android:id="@+id/selected_listing_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="21dp"
-                    android:background="#121212"
-                    android:textColor="#FFFFFF"
-                    tools:text="$200.00" />
-
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#2B2B2B"
-                    android:gravity="center_horizontal"
-                    android:text="listing description"
-                    android:textColor="#B5B5B5" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#575757"
-                    android:orientation="horizontal"></LinearLayout>
-
-                <TextView
-                    android:id="@+id/selected_listing_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="114dp"
-                    android:background="#121212"
-                    android:text="description here"
-                    android:textColor="#FFFFFF" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/selected_own_listing_modify_btn"
-                    android:layout_width="357dp"
+                    android:id="@+id/cancel_share_own_listing_btn"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="4dp"
-                    android:background="@drawable/rounded_corners"
-                    android:text="modify post" />
+                    android:layout_weight="1"
+                    android:text="@string/cancelBtn" />
 
+                <Button
+                    android:id="@+id/confirm_share_own_listing_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="share link" />
             </LinearLayout>
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
