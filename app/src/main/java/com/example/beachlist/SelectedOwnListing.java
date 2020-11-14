@@ -61,7 +61,12 @@ public class SelectedOwnListing extends AppCompatActivity {
     public static final int PROCESSED_OK = -1;
     boolean pictureFlag, descriptionFlag, priceFlag, categoryFlag,titleFlag;                          //keep track of what was modified in order to update
 
-
+//*************poup window for share screen****************//
+    ConstraintLayout shareScreen;                                                                     //pop up window setup for share screen settings
+    Spinner userSpinner;                                                                              //should be populated with fb friends
+    Button cancelShare, confirmShare;                                                                 //buttons to either revert screen or to send a message
+    EditText commentForShareScreen;                                                                   //be able to retrieve whatever is typed in the comment section
+    String commentFromText;                                                                           //will be used to hold the comment value
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,6 +102,13 @@ public class SelectedOwnListing extends AppCompatActivity {
         titleFlag=false;
 //****************************END POP UP WINDOW ITEMS************************//
 
+//**************************SHARE SCREEN ITEMS******************************/
+        shareScreen = findViewById(R.id.share_own_button_layout);
+        commentForShareScreen = findViewById(R.id.comment_description_ET);
+
+
+//******************END SHARE SCREEN ITEMS******************************//
+
 
         // gets the listing's information to display
         type = getIntent().getStringExtra("type");                                             //get type of listing( item or service) from an intent
@@ -120,6 +132,7 @@ public class SelectedOwnListing extends AppCompatActivity {
         });
 
 //******************************** BUTTON GROUP*******************************************************//
+//********************************START AT LINE 136- 168*********************************************//
         // Modify current listing
         modListingButton = findViewById(R.id.selected_own_listing_modify_btn);                        //set modListingButton to the xml
         modListingButton.setOnClickListener(new View.OnClickListener() {                              //set on click listener to button
@@ -146,12 +159,15 @@ public class SelectedOwnListing extends AppCompatActivity {
         shareButton.setOnClickListener(new View.OnClickListener() {                                   //set on click listener to button
             @Override
             public void onClick(View view) {
-                openMessagesScreen();                                                                 //call method to send user to message screen
+                displayShareScreen();
+                //openMessagesScreen();                                                                 //call method to send user to message screen
+                modListingButton.setClickable(false);
             }
         });
 //****************************END BUTTON GROUP*********************************************************//
 
 //******************************POP UP MENU BUTTONS***************************************************//
+//********************************START AT LINE 170- 283**********************************************//
         changeTitle = findViewById(R.id.change_title_button);                                         //set changeTitle to the xml
         changeTitle.setOnClickListener(new View.OnClickListener() {                                   //set on click listener to button
             @Override
@@ -265,6 +281,24 @@ public class SelectedOwnListing extends AppCompatActivity {
         });
 //************************************END POP UP MENU BUTTONS********************************************//
 
+        cancelShare = findViewById(R.id.cancel_share_own_listing_btn);
+        cancelShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RevertScreens();
+                revertButtonStatus();
+
+
+            }
+        });
+        confirmShare = findViewById(R.id.confirm_share_own_listing_btn);
+        confirmShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+//***********************************SHARE SCREEN BUTTONS**********************************************//
 
     }//end on create()
 
@@ -299,7 +333,7 @@ public class SelectedOwnListing extends AppCompatActivity {
     }
 
 //************************POP UP MENU FUNCTIONS*************************************//
-
+//************************starts line 300 - 473*************************************//
     //set category
     public void setCategory(String cat){
         categoryString = cat;                                                                         //set categoryString to category passed in
@@ -346,7 +380,11 @@ public class SelectedOwnListing extends AppCompatActivity {
         //visibility of image pagers
         currentImages.setVisibility(View.VISIBLE);                                                    //change item visibility to visible
         updatedImages.setVisibility(View.GONE);                                                       //change item visibility to Invisible and remove layout location
+
+        shareScreen.setVisibility(View.INVISIBLE);                                                    //remove the popup screen from the view
+
     }
+
 
     //revert clickable status for the buttons
     //to be used when:
@@ -357,6 +395,8 @@ public class SelectedOwnListing extends AppCompatActivity {
         changePrice.setClickable(true);                                                               //set clickable status back to true
         changeDescription.setClickable(true);                                                         //set clickable status back to true
         changeCategory.setClickable(true);                                                            //set clickable status back to true
+        modListingButton.setClickable(true);
+
 
     }
 
@@ -442,5 +482,12 @@ public class SelectedOwnListing extends AppCompatActivity {
             }// end (requestCode == IMAGE_REQUEST)
         }// end if(resultCode == PROCESSED_OK)
     }
+
+//********************************************************SHARE POPUP SCREEN FUNCTIONS*************************************************//
+    public void displayShareScreen(){
+        //listingInfo.setVisibility(View.INVISIBLE);                                                    //set old window to invisible
+        shareScreen.setVisibility(View.VISIBLE);
+    }
+
 
 }
