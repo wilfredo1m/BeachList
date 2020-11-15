@@ -1,21 +1,41 @@
 package com.example.beachlist;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class Conversation extends AppCompatActivity {
 
     //***main page items used******************//
     Button sendMessage, backButton,soldButton;                                                        //buttons to navitage screen
     ConstraintLayout mainPage;                                                                        //layout for main page incase we need to make it invisible
+    String listingId;
+    private FirebaseDatabase firebaseDatabase;
+    private final ArrayList<String> itemImages = new ArrayList<>();
+    TextView userName,userEmail;
+    String ownerOfListingName, ownerOfListingEmail;
+    String potentialBuyerName, potentialBuyerEmail;
+    ImageView listingImage;
     //**end main page items used *************//
 
     //****popup window items used************//
@@ -32,10 +52,39 @@ public class Conversation extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_conversation);                                      //used to display the activity_message_conversation.xml
-
+        userName = findViewById(R.id.user_full_name_tv);
         mainPage = findViewById(R.id.main_page_layout);
         soldView = findViewById(R.id.sold_page_layout);
         rating = findViewById(R.id.rate_user_rb);
+        userEmail = findViewById(R.id.user_email);
+        listingImage = findViewById(R.id.listing_image_iv);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+        // gets the item's information to display
+        listingId = getIntent().getStringExtra("ListingID");
+
+        DatabaseReference listingRef = firebaseDatabase.getReference().child("listings").child("item").child(listingId);
+        listingRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //Populate image URLs in global variable
+                getListingImages(snapshot.child("listingImages"));
+                //Get data and display info
+                ListingData selectedListing = snapshot.getValue(ListingData.class);
+                assert selectedListing != null;
+                displayProfileImage();
+                //display owner Info
+                getOwnerInfo(selectedListing.getOwnerId());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //TODO Handle this error
+            }
+        });
+
+
+
+
 
 
         //*****************main page buttons***************************//
@@ -119,6 +168,32 @@ public class Conversation extends AppCompatActivity {
         soldView.setVisibility(View.INVISIBLE);
     }
 
+    private void getOwnerInfo(String ownerId) {
+        final Context context = this;
+        DatabaseReference userRef = firebaseDatabase.getReference().child("users").child(ownerId);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userName.setText(snapshot.child("data").getValue(UserData.class).getFirstName() + " "+snapshot.child("data").getValue(UserData.class).getLastName());
+                userEmail.setText(snapshot.child("data").getValue(UserData.class).getEmail());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
 
+    private void getListingImages(DataSnapshot dataSnapshot) {
+        for (DataSnapshot child : dataSnapshot.getChildren()) {
+            itemImages.add(child.getValue(String.class));
+        }
+    }
 
+    private void displayProfileImage() {
+        Glide.with(getBaseContext())
+                .load(itemImages.get(0))
+                .centerCrop()
+                .into(listingImage);
+
+    }
 }

@@ -98,7 +98,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView47"
+                    android:id="@+id/user_full_name_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -109,7 +109,7 @@
                     android:text="user name goes here" />
 
                 <TextView
-                    android:id="@+id/textView60"
+                    android:id="@+id/user_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -118,7 +118,7 @@
             </LinearLayout>
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/circleImageView"
+                android:id="@+id/listing_image_iv"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="10dp"
@@ -145,151 +145,147 @@
             app:layout_constraintBottom_toBottomOf="@+id/toolbar6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/sold_page_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#B2ED0000"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/sold_page_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#000000"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            android:background="#B2ED0000"
+            android:visibility="invisible">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:background="#000000"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/textView46"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:gravity="center"
-                    android:text="CONFIRM SALE"
-                    android:textSize="30sp" />
-
-                <LinearLayout
-                    android:id="@+id/sale_info_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView57"
+                        android:id="@+id/textView46"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#222222"
+                        android:layout_marginBottom="5dp"
                         android:gravity="center"
-                        android:text="Sale Info"
-                        android:textSize="24sp" />
+                        android:text="CONFIRM SALE"
+                        android:textSize="30sp" />
 
-                    <TextView
-                        android:id="@+id/textView58"
+                    <LinearLayout
+                        android:id="@+id/sale_info_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Listing title" />
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textView59"
+                        <TextView
+                            android:id="@+id/textView57"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#222222"
+                            android:gravity="center"
+                            android:text="Sale Info"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/textView58"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Listing title" />
+
+                        <TextView
+                            android:id="@+id/textView59"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="title goes here" />
+
+                        <TextView
+                            android:id="@+id/textView53"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Sold Price" />
+
+                        <EditText
+                            android:id="@+id/editTextNumberDecimal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="numberDecimal" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/buyer_rating_screen"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="title goes here" />
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textView53"
+                        <TextView
+                            android:id="@+id/textView54"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#222222"
+                            android:gravity="center|center_horizontal"
+                            android:text="Rate Buyer"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/textView48"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="sold to" />
+
+                        <TextView
+                            android:id="@+id/textView50"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="persons name goes here" />
+
+                        <TextView
+                            android:id="@+id/textView55"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Rating" />
+
+                        <RatingBar
+                            android:id="@+id/rate_user_rb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginLeft="60dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Sold Price" />
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/editTextNumberDecimal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="numberDecimal" />
-                </LinearLayout>
+                        <Button
+                            android:id="@+id/cancel_sale_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="cancel sale" />
 
-                <LinearLayout
-                    android:id="@+id/buyer_rating_screen"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="vertical">
+                        <Button
+                            android:id="@+id/submit_sale_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="submit sale" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/textView54"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#222222"
-                        android:gravity="center|center_horizontal"
-                        android:text="Rate Buyer"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:id="@+id/textView48"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="sold to" />
-
-                    <TextView
-                        android:id="@+id/textView50"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="persons name goes here" />
-
-                    <TextView
-                        android:id="@+id/textView55"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Rating" />
-
-                    <RatingBar
-                        android:id="@+id/rate_user_rb"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="60dp"
-                        android:layout_marginLeft="60dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/cancel_sale_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="cancel sale" />
-
-                    <Button
-                        android:id="@+id/submit_sale_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="submit sale" />
                 </LinearLayout>
 
             </LinearLayout>
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

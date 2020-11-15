@@ -19,6 +19,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,7 +40,9 @@ public class SelectedItem extends AppCompatActivity {
     ConstraintLayout itemPopUpWindow, mainItemWindow;
     Button reportItem, cancelReport,backButton,contactSeller,confirmReport;
     Spinner reportItemSpinner;
-    String selectedItem;
+    String selectedItem, listingId;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +62,7 @@ public class SelectedItem extends AppCompatActivity {
         itemSellerFirstName = findViewById(R.id.item_seller_firstname);
         itemSellerLastName = findViewById(R.id.item_seller_lastname);
         userPicture = findViewById(R.id.item_user_image);
+
 
 //***********************************INITIALIZE SPINNER SECTION************************************************************************************//
 //**********************SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST***********************************************************************//
@@ -91,7 +96,7 @@ public class SelectedItem extends AppCompatActivity {
 //********************************************GET VALUES FROM FIREBASE AND IMAGE SELECTION****************************************************//
 //********************************************************************************************************************************************//
         // gets the item's information to display
-        String listingId = getIntent().getStringExtra("ListingID");
+        listingId = getIntent().getStringExtra("ListingID");
 
         DatabaseReference listingRef = firebaseDatabase.getReference().child("listings").child("item").child(listingId);
         listingRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -156,6 +161,13 @@ public class SelectedItem extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), selectedItem, Toast.LENGTH_SHORT).show();
 
+            }
+        });
+
+        contactSeller.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMessageScreen();
             }
         });
 
@@ -236,5 +248,13 @@ public class SelectedItem extends AppCompatActivity {
         backButton.setVisibility(View.VISIBLE);
         contactSeller.setVisibility(View.VISIBLE);
     }
+
+    public void goToMessageScreen(){
+        Intent intent = new Intent(this, Conversation.class);
+        intent.putExtra("ListingID",listingId );
+        Toast.makeText(getApplicationContext(), listingId, Toast.LENGTH_SHORT).show();
+        startActivity(intent);
+    }
+
 
 }
