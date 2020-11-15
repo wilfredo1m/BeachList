@@ -39,7 +39,7 @@ public class SelectedService extends AppCompatActivity {
     Button reportService, cancelReport, submitReport, contactSeller, backButton;
     ConstraintLayout popupWindow, mainConstraint;
     Spinner reportServiceSpinner;
-    String reportedSpinnerSelection;
+    String reportedSpinnerSelection,listingId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,7 +91,7 @@ public class SelectedService extends AppCompatActivity {
 
 //********************************************GET VALUES FROM FIREBASE AND IMAGE SELECTION****************************************************//
 //********************************************************************************************************************************************//
-        String listingId = getIntent().getStringExtra("ListingID");
+        listingId = getIntent().getStringExtra("ListingID");
 
         DatabaseReference listingRef = firebaseDatabase.getReference().child("listings").child("service").child(listingId);
         listingRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -126,6 +126,12 @@ public class SelectedService extends AppCompatActivity {
 //********************************************************************************************************************************************//
 
         contactSeller = findViewById(R.id.contact_seller_button);
+        contactSeller.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMessageScreen();
+            }
+        });
 
         // Go back to User search list (temporarily going back to home)
         backButton = findViewById(R.id.btn_back_from_user_item_page);
@@ -244,4 +250,14 @@ public class SelectedService extends AppCompatActivity {
         contactSeller.setVisibility(View.VISIBLE);
         backButton.setVisibility(View.VISIBLE);
     }
+
+    public void goToMessageScreen(){
+        Intent intent = new Intent(this, Conversation.class);
+        intent.putExtra("ListingID",listingId );
+        intent.putExtra("listingType", "service");
+        Toast.makeText(getApplicationContext(), listingId, Toast.LENGTH_SHORT).show();
+        startActivity(intent);
+    }
+
+
 }

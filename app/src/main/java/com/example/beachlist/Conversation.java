@@ -36,6 +36,8 @@ public class Conversation extends AppCompatActivity {
     String ownerOfListingName, ownerOfListingEmail;
     String potentialBuyerName, potentialBuyerEmail;
     ImageView listingImage;
+    String listingType;
+    DatabaseReference listingRef;
     //**end main page items used *************//
 
     //****popup window items used************//
@@ -62,8 +64,16 @@ public class Conversation extends AppCompatActivity {
 
         // gets the item's information to display
         listingId = getIntent().getStringExtra("ListingID");
+        listingType = getIntent().getStringExtra("listingType");
 
-        DatabaseReference listingRef = firebaseDatabase.getReference().child("listings").child("item").child(listingId);
+
+        if(listingType.equalsIgnoreCase("item")){
+            listingRef = firebaseDatabase.getReference().child("listings").child("item").child(listingId);
+
+        }else if(listingType.equalsIgnoreCase("service")){
+            listingRef = firebaseDatabase.getReference().child("listings").child("service").child(listingId);
+        }
+
         listingRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -81,8 +91,6 @@ public class Conversation extends AppCompatActivity {
                 //TODO Handle this error
             }
         });
-
-
 
 
 

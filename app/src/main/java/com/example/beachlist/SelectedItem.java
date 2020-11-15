@@ -252,6 +252,7 @@ public class SelectedItem extends AppCompatActivity {
     public void goToMessageScreen(){
         Intent intent = new Intent(this, Conversation.class);
         intent.putExtra("ListingID",listingId );
+        intent.putExtra("listingType", "item");
         Toast.makeText(getApplicationContext(), listingId, Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
