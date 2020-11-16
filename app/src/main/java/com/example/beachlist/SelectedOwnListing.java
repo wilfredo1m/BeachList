@@ -8,11 +8,11 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -24,25 +24,38 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SelectedOwnListing extends AppCompatActivity {
+
+    NewListingData updatedListing = new NewListingData();
+    String key = " ";
 //*********************main window elements***********************//
     TextView listingTitle, listingDescription, listingPrice;                                          //text views to be populated in main window
     Button backButton, shareButton,modListingButton;                                                  //buttons for main window
     ScrollView listingInfo;                                                                           //scroll view layout
     private FirebaseDatabase firebaseDatabase;                                                        //firebase call
     ViewPager2 viewPager;                                                                             //pager to view images through
-    ArrayList<String> listingImages = new ArrayList<>();                                              //arraylist to hold images
+    ArrayList<String> listingImages = new ArrayList<>();                                               //arraylist to hold images
+    ArrayList<String> imageUriList;
+    Map<String, String> newImages = new HashMap<>();
     ImageAdapter adapter;                                                                             //adapter for main window
     String type,listingId;                                                                            //strings regarding listing
 
@@ -68,10 +81,13 @@ public class SelectedOwnListing extends AppCompatActivity {
     EditText commentForShareScreen;                                                                   //be able to retrieve whatever is typed in the comment section
     String commentFromText;                                                                           //will be used to hold the comment value
 
+    private FirebaseDatabase database;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_own_user_listing);                                           //set view to activity_own_user_listing xml
+        database = FirebaseDatabase.getInstance();
 
         listingInfo = findViewById(R.id.signed_in_user_listing_sv);
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -121,6 +137,8 @@ public class SelectedOwnListing extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 getListingImages(snapshot.child("listingImages"));                                    //Populate image URLs in global variable
                 ListingData selectedListing = snapshot.getValue(ListingData.class);                   //Get data and display info
+                updatedListing = selectedListing.toNewListingData();
+                key = snapshot.getKey();
                 assert selectedListing != null;                                                       //check to see that selected listing is not null
                 displayListingInfo(selectedListing);                                                  //call listing information by passing selected listing ListingData
                 setCategory(selectedListing.getCategory());                                           //call set category
@@ -232,31 +250,35 @@ public class SelectedOwnListing extends AppCompatActivity {
 
                 //Content fields that hold updated values
                 //bitmaps                                                                            //this is the array holding the new arrays. its a bitmap array so you will prob need to add the lines at the bottom to have a string array
-                //updatedPrice.getText().toString();                                                 //this is the updated edittext for price as a string
-                //updatedDescription.getText().toString();                                           //this is the updated edittext for description as a string
-                //updatedPrice.getText().toString();                                                 //this is the updated edittext for price as a string
-                //updatedTitle.getText().toString();                                                 //this is the updated edittext for title as a string
-                String newCategory = categorySpinner.getSelectedItem().toString();
+//                String price = updatedPrice.getText().toString();                                                 //this is the updated edittext for price as a string
+//                String descr = updatedDescription.getText().toString();                                           //this is the updated edittext for description as a string
+//                String upprice = updatedPrice.getText().toString();                                                 //this is the updated edittext for price as a string
+//                String uptitle = updatedTitle.getText().toString();                                                 //this is the updated edittext for title as a string
+//                String newCategory = categorySpinner.getSelectedItem().toString();
+
                 //todo use the flags that have been created to check which item was modified
                 //todo this group can be nested or whatever method you want to implent it as, this just felt like the best way instead of updating blank fields or all fields
-                /*
-                if(!titleFlag){
 
+                if(titleFlag == true){
+                    updatedListing.setTitle(updatedTitle.getText().toString());
                 }
-                if(!categoryFlag){
+                if(categoryFlag == true){
+                    updatedListing.setCategory(categorySpinner.getSelectedItem().toString());
+                }
+                if(priceFlag == true){
+                    updatedListing.setPrice(updatedPrice.getText().toString());
+                }
+                if(descriptionFlag == true){
+                    updatedListing.setDescription(updatedDescription.getText().toString());
+                }
 
+                if(pictureFlag == true) {
+                    updateListingNewImages(imageUriList, imageUriList.size());
                 }
-                if(!priceFlag){
+                else {
+                    updateListing();
+                }
 
-                }
-                if(!pictureFlag){
-
-                }
-                if(!descriptionFlag){
-
-                }
-                 */
-                Toast.makeText(getApplicationContext(),newCategory , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -301,6 +323,136 @@ public class SelectedOwnListing extends AppCompatActivity {
 //***********************************SHARE SCREEN BUTTONS**********************************************//
 
     }//end on create()
+
+    public void updateListing(){
+        DatabaseReference listingReference = database.getReference("listings").child(type).child(listingId);
+        newImages = new HashMap<>();
+        for (int i = 0; i < listingImages.size(); i++) {
+            newImages.put(String.valueOf(i + 1), listingImages.get(i));
+        }
+        final DatabaseReference finalListingReference = listingReference;
+        listingReference.setValue(updatedListing)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        finalListingReference.child("listingImages").setValue(newImages)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        //Create listing reference under user
+                                        createListingUnderUser(listingId);
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        // Write failed
+                                        // ...
+                                    }
+                                });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Write failed
+                        // ...
+                    }
+                });
+    }
+
+    public void updateListingNewImages(final ArrayList<String> imageUrls, final int n) {
+        if ((n - 1) >= 0) {
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+            final StorageReference imageRef = storageReference.child("images/" + Uri.parse(imageUrls.get(n-1)).getLastPathSegment());
+            UploadTask uploadTask = imageRef.putFile(Uri.parse(imageUrls.get(n-1)));
+
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w(" ", "signInWithCustomToken: failure", e.getCause());
+                    Toast.makeText(SelectedOwnListing.this, "Failed to Store Image", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Log.d(" ", "uploadImageWithCustomToken: success");
+                    Task<Uri> downloadUrl = imageRef.getDownloadUrl();
+                    downloadUrl.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String imageReference = uri.toString();
+                            newImages.put(String.valueOf(n), imageReference);
+                            updateListingNewImages(imageUrls, n - 1);
+                        }
+                    });
+                }
+            });
+        }
+        else {
+            DatabaseReference listingReference = database.getReference("listings").child(type).child(listingId);
+
+            final DatabaseReference finalListingReference = listingReference;
+            listingReference.setValue(updatedListing)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            finalListingReference.child("listingImages").setValue(newImages)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            //Create listing reference under user
+                                            createListingUnderUser(listingId);
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            // Write failed
+                                            // ...
+                                        }
+                                    });
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Write failed
+                            // ...
+                        }
+                    });
+        }
+    }
+
+    public void createListingUnderUser(String listingID) {
+        Map<String, String> userListingData = new HashMap<>();
+        userListingData.put("title", updatedListing.getTitle());
+        userListingData.put("price", updatedListing.getPrice());
+        userListingData.put("imageUrl", newImages.get("1"));
+        userListingData.put("type", type);
+        final DatabaseReference userListingRef = database.getReference("users").child(updatedListing.getOwnerId()).child("listings").child(listingID);
+        userListingRef.setValue(userListingData)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Return to home screen
+                        openHomeScreen();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Write failed
+                    }
+                });
+    }
+
+    public void openHomeScreen() {
+        Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
+        startActivity(openScreen);
+    }
 
     //get the listing images from firebase user info
     private void getListingImages(DataSnapshot dataSnapshot) {
@@ -396,8 +548,6 @@ public class SelectedOwnListing extends AppCompatActivity {
         changeDescription.setClickable(true);                                                         //set clickable status back to true
         changeCategory.setClickable(true);                                                            //set clickable status back to true
         modListingButton.setClickable(true);
-
-
     }
 
     // Opens Camera Roll
@@ -440,12 +590,14 @@ public class SelectedOwnListing extends AppCompatActivity {
             if(requestCode == IMAGE_REQUEST)
             {
                 bitmaps = new ArrayList<>();                                                          //initialize bitmaps as an arraylist
+                imageUriList = new ArrayList<>();
                 ClipData clipData = data.getClipData();                                               //
                 if(clipData != null)                                                                  //check if clickpadata is not null
                 {
                     for(int i=0;i <clipData.getItemCount();i++)                                      //for loop until it reaches clipdata item count
                     {
                         Uri imageUri = clipData.getItemAt(i).getUri();                                //assign imageUir to item at clipdata position
+                        imageUriList.add(imageUri.toString());
                         try{
                             InputStream is = getContentResolver().openInputStream(imageUri);          //input stream to access gallery content
                             Bitmap bitmap = BitmapFactory.decodeStream(is);                           //Creates Bitmap objects from various sources, including files, streams(is), and byte-arrays.

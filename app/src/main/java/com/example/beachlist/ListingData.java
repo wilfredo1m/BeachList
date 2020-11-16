@@ -46,6 +46,11 @@ public class ListingData {
 //        askingPrice = askFor;
 //    }
 
+    public NewListingData toNewListingData() {
+        return new NewListingData(imageUrl, title, category, description, price, postDate, ownerId,
+                                    sellDate, sellPrice, buyerId);
+    }
+
     public String getImageUrl() { return imageUrl; }
 
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
