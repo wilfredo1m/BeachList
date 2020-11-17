@@ -58,6 +58,7 @@ public class SelectedOwnListing extends AppCompatActivity {
     Map<String, String> newImages = new HashMap<>();
     ImageAdapter adapter;                                                                             //adapter for main window
     String typeOfService,listingId;                                                                            //strings regarding listing
+//****************************************************************//
 
 //*****************popup window elements*************************//
     ConstraintLayout changeListing;                                                                   //popup window layout
@@ -73,6 +74,7 @@ public class SelectedOwnListing extends AppCompatActivity {
     public static final int IMAGE_REQUEST = 33;
     public static final int PROCESSED_OK = -1;
     boolean pictureFlag, descriptionFlag, priceFlag, categoryFlag,titleFlag;                          //keep track of what was modified in order to update
+//*************************************************************************//
 
 //*************poup window for share screen****************//
     ConstraintLayout shareScreen;                                                                     //pop up window setup for share screen settings
@@ -80,7 +82,12 @@ public class SelectedOwnListing extends AppCompatActivity {
     Button cancelShare, confirmShare;                                                                 //buttons to either revert screen or to send a message
     EditText commentForShareScreen;                                                                   //be able to retrieve whatever is typed in the comment section
     String commentFromText;                                                                           //will be used to hold the comment value
+//*********************************************************//
 
+//************popup window delete listing screen***********//
+    ConstraintLayout deleteListingScreen;
+    Button cancelDeleteListingBtn, confirmDeleteListingBtn;
+//********************************************************//
     private FirebaseDatabase database;
 
     @Override
@@ -89,10 +96,15 @@ public class SelectedOwnListing extends AppCompatActivity {
         setContentView(R.layout.activity_own_user_listing);                                           //set view to activity_own_user_listing xml
         database = FirebaseDatabase.getInstance();
 
-        listingInfo = findViewById(R.id.signed_in_user_listing_sv);
+
+//*************************Delete item screen*************************//
+        deleteListingScreen = findViewById(R.id.delete_listing_layout);
+//**********************************************************************//
+
         firebaseDatabase = FirebaseDatabase.getInstance();
 
 //*****************MAIN PAGE ITEMS********************************************//
+        listingInfo = findViewById(R.id.signed_in_user_listing_sv);
         listingTitle = findViewById(R.id.selected_listing_title);                                     // link title to xml
         listingDescription = findViewById(R.id.selected_listing_description);                         // link descirption to xml
         listingPrice = findViewById(R.id.selected_listing_price);                                     // link price to xml
@@ -121,11 +133,11 @@ public class SelectedOwnListing extends AppCompatActivity {
 //**************************SHARE SCREEN ITEMS******************************/
         shareScreen = findViewById(R.id.share_own_button_layout);
         commentForShareScreen = findViewById(R.id.comment_description_ET);
-
-
 //******************END SHARE SCREEN ITEMS******************************//
 
 
+
+//*************************FIREBASE GET USER AND LISTING INFO************************//
         // gets the listing's information to display
         typeOfService = getIntent().getStringExtra("type");                                             //get type of listing( item or service) from an intent
         listingId = getIntent().getStringExtra("listingID");                                   //get listing id from an intent
@@ -148,8 +160,9 @@ public class SelectedOwnListing extends AppCompatActivity {
                 //TODO Handle this error
             }
         });
+//*******************************************************************************//
 
-//******************************** BUTTON GROUP*******************************************************//
+//******************************** MAIN MENU BUTTON GROUP*******************************************************//
 //********************************START AT LINE 136- 168*********************************************//
         // Modify current listing
         modListingButton = findViewById(R.id.selected_own_listing_modify_btn);                        //set modListingButton to the xml
@@ -158,8 +171,7 @@ public class SelectedOwnListing extends AppCompatActivity {
             public void onClick(View view) {
                 openModifyListingScreen();                                                            //call method to bring up popup screen
                 populateCurrentListingInformation();                                                  //call method to populate fields in popup screen
-                PopulateSpinner(typeOfService);                                                                //call method to find type of listing and populate spinner accordingly
-
+                PopulateSpinner(typeOfService);                                                       //call method to find type of listing and populate spinner accordingly
             }
         });
 
@@ -178,7 +190,6 @@ public class SelectedOwnListing extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 displayShareScreen();
-                //openMessagesScreen();                                                                 //call method to send user to message screen
                 modListingButton.setClickable(false);
             }
         });
@@ -290,11 +301,13 @@ public class SelectedOwnListing extends AppCompatActivity {
         deleteListingBtn.setOnClickListener(new View.OnClickListener() {                              //set on click listener to button
             @Override
             public void onClick(View v) {
-                //Toast.makeText(getApplicationContext(), "testing button", Toast.LENGTH_SHORT).show();
+                openDeleteListingScreen();
+                deactivateModPopUpButtons();
             }
         });
 //************************************END POP UP MENU BUTTONS********************************************//
 
+//***********************************SHARE SCREEN BUTTONS**********************************************//
         cancelShare = findViewById(R.id.cancel_share_own_listing_btn);
         cancelShare.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -312,10 +325,33 @@ public class SelectedOwnListing extends AppCompatActivity {
 
             }
         });
-//***********************************SHARE SCREEN BUTTONS**********************************************//
+//***********************************END SHARE SCREEN BUTTONS**********************************************//
 
+//******************************POP UP DELTE LISTING BUTTONS***************************************************//
+//********************************START AT LINE 256-**********************************************//
+        cancelDeleteListingBtn = findViewById(R.id.cancel_delete_listing_btn);
+        cancelDeleteListingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deactivateDeleteListingPopUpScreen();
+                revertButtonStatus();
+            }
+        });
+
+        confirmDeleteListingBtn= findViewById(R.id.confirm_delete_listing_btn);
+        confirmDeleteListingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteSelectedListing();
+            }
+
+        });
+//******************************END POP UP DELTE LISTING BUTTONS***************************************************//
     }//end on create()
 
+
+//************************POP UP MENU FUNCTIONS*************************************//
+//************************starts line 366 - 527*************************************//
     public void updateListingWithoutNewImages(){
         DatabaseReference listingReference = database.getReference("listings").child(typeOfService).child(listingId);
         newImages = new HashMap<>();
@@ -475,9 +511,11 @@ public class SelectedOwnListing extends AppCompatActivity {
         adapter = new ImageAdapter(this, listingImages);                                      // add listingImages array to adapter
         viewPager.setAdapter(adapter);                                                                // set viewpager to the adapter to display images in pager screen
     }
+//**************************END MAIN MENU FUNCTIONS*********************************//
+
 
 //************************POP UP MENU FUNCTIONS*************************************//
-//************************starts line 300 - 473*************************************//
+//************************starts line 530 - 679*************************************//
     //set category
     public void setCategory(String cat){
         categoryString = cat;                                                                         //set categoryString to category passed in
@@ -529,17 +567,16 @@ public class SelectedOwnListing extends AppCompatActivity {
 
     }
 
-
     //revert clickable status for the buttons
     //to be used when:
-    //     1. cancel button is pressed
-    //     2. confirm changes button is pressed
     public void revertButtonStatus(){
         changeTitle.setClickable(true);                                                               //set clickable status back to true
         changePrice.setClickable(true);                                                               //set clickable status back to true
         changeDescription.setClickable(true);                                                         //set clickable status back to true
         changeCategory.setClickable(true);                                                            //set clickable status back to true
         modListingButton.setClickable(true);
+        cancelUpdate.setClickable(true);
+        confirmUpdate.setClickable(true);
     }
 
     // Opens Camera Roll
@@ -626,12 +663,60 @@ public class SelectedOwnListing extends AppCompatActivity {
             }// end (requestCode == IMAGE_REQUEST)
         }// end if(resultCode == PROCESSED_OK)
     }
+//***************************************END POP UP MENU SCREEN*********************************************//
 
-//********************************************************SHARE POPUP SCREEN FUNCTIONS*************************************************//
+
+
+//************************SHARE/DELETE POPUP SCREEN FUNCTIONS******************************//
+//************************starts line 683 - 679*************************************//
+
     public void displayShareScreen(){
-        //listingInfo.setVisibility(View.INVISIBLE);                                                    //set old window to invisible
         shareScreen.setVisibility(View.VISIBLE);
     }
 
+    public void openDeleteListingScreen(){
+        deleteListingScreen.setVisibility(View.VISIBLE);                                                    //set popup window to visible
+    }
+
+    public void deactivateDeleteListingPopUpScreen(){
+        deleteListingScreen.setVisibility(View.INVISIBLE);                                                    //set popup window to visible
+    }
+
+    public void deactivateModPopUpButtons(){
+        changeTitle.setClickable(false);                                                               //set clickable status back to false
+        changePrice.setClickable(false);                                                               //set clickable status back to false
+        changeDescription.setClickable(false);                                                         //set clickable status back to false
+        changeCategory.setClickable(false);                                                            //set clickable status back to false
+        modListingButton.setClickable(false);
+        cancelUpdate.setClickable(false);
+        confirmUpdate.setClickable(false);
+    }
+
+    public void deleteSelectedListing(){
+        //TODO THIS DELETES THE LISTING FROM THE MAIN LISTINGS PAGE BUT IT WILL NOT DELETE IT FROM THE NESTED
+        DatabaseReference listingReference = database.getReference("listings").child(typeOfService).child(listingId);
+        listingReference.removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        removeListingIntent();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Write failed
+                        // ...
+                    }
+                });
+    }
+
+    public void removeListingIntent(){
+        Toast.makeText(getApplicationContext(), "Listing has been deleted", Toast.LENGTH_SHORT).show();
+        Intent removeListing = new Intent(this, ActiveListings.class);                    //intent to open ActiveListings page (back button press)
+        startActivity(removeListing);
+    }
+
+//******************END SHARE/DELETE FUCNTIONS********************************************//
 
 }
