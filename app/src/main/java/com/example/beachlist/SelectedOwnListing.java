@@ -57,7 +57,7 @@ public class SelectedOwnListing extends AppCompatActivity {
     ArrayList<String> imageUriList;
     Map<String, String> newImages = new HashMap<>();
     ImageAdapter adapter;                                                                             //adapter for main window
-    String type,listingId;                                                                            //strings regarding listing
+    String typeOfService,listingId;                                                                            //strings regarding listing
 
 //*****************popup window elements*************************//
     ConstraintLayout changeListing;                                                                   //popup window layout
@@ -127,11 +127,11 @@ public class SelectedOwnListing extends AppCompatActivity {
 
 
         // gets the listing's information to display
-        type = getIntent().getStringExtra("type");                                             //get type of listing( item or service) from an intent
+        typeOfService = getIntent().getStringExtra("type");                                             //get type of listing( item or service) from an intent
         listingId = getIntent().getStringExtra("listingID");                                   //get listing id from an intent
 
 
-        DatabaseReference listingRef = firebaseDatabase.getReference().child("listings").child(type).child(listingId);    //listing reference from firebase
+        DatabaseReference listingRef = firebaseDatabase.getReference().child("listings").child(typeOfService).child(listingId);    //listing reference from firebase
         listingRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -158,7 +158,7 @@ public class SelectedOwnListing extends AppCompatActivity {
             public void onClick(View view) {
                 openModifyListingScreen();                                                            //call method to bring up popup screen
                 populateCurrentListingInformation();                                                  //call method to populate fields in popup screen
-                PopulateSpinner(type);                                                                //call method to find type of listing and populate spinner accordingly
+                PopulateSpinner(typeOfService);                                                                //call method to find type of listing and populate spinner accordingly
 
             }
         });
@@ -242,23 +242,15 @@ public class SelectedOwnListing extends AppCompatActivity {
             }
         });
 
-        //TODO finish functionality for this button
+        /*Confirm update button*/
         confirmUpdate = findViewById(R.id.accept_changes_btn);                                        //set confirmUpdate to the xml
         confirmUpdate.setOnClickListener(new View.OnClickListener() {                                 //set on click listener to button
+
             @Override
             public void onClick(View v) {
 
-                //Content fields that hold updated values
-                //bitmaps                                                                            //this is the array holding the new arrays. its a bitmap array so you will prob need to add the lines at the bottom to have a string array
-//                String price = updatedPrice.getText().toString();                                                 //this is the updated edittext for price as a string
-//                String descr = updatedDescription.getText().toString();                                           //this is the updated edittext for description as a string
-//                String upprice = updatedPrice.getText().toString();                                                 //this is the updated edittext for price as a string
-//                String uptitle = updatedTitle.getText().toString();                                                 //this is the updated edittext for title as a string
-//                String newCategory = categorySpinner.getSelectedItem().toString();
-
-                //todo use the flags that have been created to check which item was modified
-                //todo this group can be nested or whatever method you want to implent it as, this just felt like the best way instead of updating blank fields or all fields
-
+                /* Each flag corresponds to a modified value in the selected listing, and here we
+                   update the listing dependeding on which flags have been set off */
                 if(titleFlag == true){
                     updatedListing.setTitle(updatedTitle.getText().toString());
                 }
@@ -273,10 +265,10 @@ public class SelectedOwnListing extends AppCompatActivity {
                 }
 
                 if(pictureFlag == true) {
-                    updateListingNewImages(imageUriList, imageUriList.size());
+                    updateListingWithNewImages(imageUriList, imageUriList.size());
                 }
                 else {
-                    updateListing();
+                    updateListingWithoutNewImages();
                 }
 
             }
@@ -324,8 +316,8 @@ public class SelectedOwnListing extends AppCompatActivity {
 
     }//end on create()
 
-    public void updateListing(){
-        DatabaseReference listingReference = database.getReference("listings").child(type).child(listingId);
+    public void updateListingWithoutNewImages(){
+        DatabaseReference listingReference = database.getReference("listings").child(typeOfService).child(listingId);
         newImages = new HashMap<>();
         for (int i = 0; i < listingImages.size(); i++) {
             newImages.put(String.valueOf(i + 1), listingImages.get(i));
@@ -361,7 +353,7 @@ public class SelectedOwnListing extends AppCompatActivity {
                 });
     }
 
-    public void updateListingNewImages(final ArrayList<String> imageUrls, final int n) {
+    public void updateListingWithNewImages(final ArrayList<String> imageUrls, final int n) {
         if ((n - 1) >= 0) {
             StorageReference storageReference = FirebaseStorage.getInstance().getReference();
             final StorageReference imageRef = storageReference.child("images/" + Uri.parse(imageUrls.get(n-1)).getLastPathSegment());
@@ -385,14 +377,14 @@ public class SelectedOwnListing extends AppCompatActivity {
                         public void onSuccess(Uri uri) {
                             String imageReference = uri.toString();
                             newImages.put(String.valueOf(n), imageReference);
-                            updateListingNewImages(imageUrls, n - 1);
+                            updateListingWithNewImages(imageUrls, n - 1);
                         }
                     });
                 }
             });
         }
         else {
-            DatabaseReference listingReference = database.getReference("listings").child(type).child(listingId);
+            DatabaseReference listingReference = database.getReference("listings").child(typeOfService).child(listingId);
 
             final DatabaseReference finalListingReference = listingReference;
             listingReference.setValue(updatedListing)
@@ -431,7 +423,7 @@ public class SelectedOwnListing extends AppCompatActivity {
         userListingData.put("title", updatedListing.getTitle());
         userListingData.put("price", updatedListing.getPrice());
         userListingData.put("imageUrl", newImages.get("1"));
-        userListingData.put("type", type);
+        userListingData.put("type", typeOfService);
         final DatabaseReference userListingRef = database.getReference("users").child(updatedListing.getOwnerId()).child("listings").child(listingID);
         userListingRef.setValue(userListingData)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
