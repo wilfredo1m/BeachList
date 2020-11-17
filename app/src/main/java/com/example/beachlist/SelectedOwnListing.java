@@ -27,6 +27,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -78,10 +80,15 @@ public class SelectedOwnListing extends AppCompatActivity {
 
 //*************poup window for share screen****************//
     ConstraintLayout shareScreen;                                                                     //pop up window setup for share screen settings
-    Spinner userSpinner;                                                                              //should be populated with fb friends
+    Spinner friendSpinner;                                                                              //should be populated with fb friends
     Button cancelShare, confirmShare;                                                                 //buttons to either revert screen or to send a message
     EditText commentForShareScreen;                                                                   //be able to retrieve whatever is typed in the comment section
-    String commentFromText;                                                                           //will be used to hold the comment value
+    String commentFromText;                                                                           //will be used to hold the comment
+    String userID;
+    ArrayList<DataSnapshot> friends;
+    ArrayList<String>friendsFirstName = new ArrayList<>();
+    private FirebaseUser user;
+    private FirebaseAuth mAuth;
 //*********************************************************//
 
 //************popup window delete listing screen***********//
@@ -130,14 +137,46 @@ public class SelectedOwnListing extends AppCompatActivity {
         titleFlag=false;
 //****************************END POP UP WINDOW ITEMS************************//
 
-//**************************SHARE SCREEN ITEMS******************************/
+//**************************SHARE SCREEN ITEMS******************************//
         shareScreen = findViewById(R.id.share_own_button_layout);
         commentForShareScreen = findViewById(R.id.comment_description_ET);
+        friends = new ArrayList<DataSnapshot>();
+        friendSpinner = findViewById(R.id.seleted_friend_to_share_own_listing_spinner);
 //******************END SHARE SCREEN ITEMS******************************//
 
 
 
 //*************************FIREBASE GET USER AND LISTING INFO************************//
+
+//TODO see how to implement this part in order to populate a friends list arraylist of firstname, lastname, and id
+//TODO in order to be able to use the selected users name to populate in the array list and pass the id as an intent
+//TODO thinking about this more it can probably be done with just the IDs and then we use that id do pull their info
+       /*
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        String userId = user.getUid();
+        //instance of authentication
+        DatabaseReference friendsRef = database.getReference("/users/" + userId + "/friends");
+        friendsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String itemCount = String.valueOf(friendsFirstName.size());
+                if (dataSnapshot.hasChildren()) {
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        friendsFirstName.add(child.getValue().toString());
+                        friends.add(child);
+                    }
+                    String childCount= String.valueOf(friends.size()) ;
+                    Toast.makeText(getBaseContext(), friendsFirstName.get(0), Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+        */
+//*****END IMPLEMENTATION OF GETTING FRIENDS FROM THE FRIENDLIST OF THE SIGNED IN USER********************//
         // gets the listing's information to display
         typeOfService = getIntent().getStringExtra("type");                                             //get type of listing( item or service) from an intent
         listingId = getIntent().getStringExtra("listingID");                                   //get listing id from an intent
@@ -163,7 +202,7 @@ public class SelectedOwnListing extends AppCompatActivity {
 //*******************************************************************************//
 
 //******************************** MAIN MENU BUTTON GROUP*******************************************************//
-//********************************START AT LINE 136- 168*********************************************//
+//********************************START AT LINE 136- 168*********************************************/
         // Modify current listing
         modListingButton = findViewById(R.id.selected_own_listing_modify_btn);                        //set modListingButton to the xml
         modListingButton.setOnClickListener(new View.OnClickListener() {                              //set on click listener to button
