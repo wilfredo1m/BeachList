@@ -19,6 +19,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,19 +35,40 @@ public class SelectedService extends AppCompatActivity {
     private final ArrayList<String> firstImageOfService = new ArrayList<>();
 
     private FirebaseDatabase firebaseDatabase;
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    String userID;
+
+    ArrayList<String>friendNameArray = new ArrayList<>();
+    ArrayList<String>friendIDArray = new ArrayList<>();
+
     ImageAdapter adapter, adapter2;
     ImageView userPicture;
     TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName, reportedServiceTitle;
-    Button reportService, cancelReport, submitReport, contactSeller, backButton;
+    Button reportService, cancelReport, submitReport, contactSeller, backButton,shareServiceButton;
     ConstraintLayout popupWindow, mainConstraint;
     Spinner reportServiceSpinner;
     String reportedSpinnerSelection,listingId;
 
+    //*****share screen info********//
+    ConstraintLayout shareScreen;
+    Button cancelShare, confirmShare;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        userID = user.getUid();
+
+
         setContentView(R.layout.activity_selected_other_user_service);
 
+        //**share screen setup*********************************//
+        shareScreen =findViewById(R.id.share_service_layout);
+        //****************************************************//
         firebaseDatabase = FirebaseDatabase.getInstance();
         //setup for visibility of main view in the page
         mainConstraint = findViewById(R.id.scroll_container);
@@ -60,7 +83,7 @@ public class SelectedService extends AppCompatActivity {
         itemSellerLastName = findViewById(R.id.service_seller_lastname);
         userPicture = findViewById(R.id.service_user_image);
 
-
+        SetupFriendsArrayList();
 //***********************************INITIALIZE SPINNER SECTION************************************************************************************//
 //**********************SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST***********************************************************************//
 //****************************ON SELECT LISTENER TO BE ABLE TO PASS THE SELECTED INFORMATION TO THE CONFIRM REPORT BUTTON************************//
@@ -171,6 +194,33 @@ public class SelectedService extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), reportedSpinnerSelection, Toast.LENGTH_SHORT).show();
             }
         });
+
+        shareServiceButton= findViewById(R.id.share_item_button);
+        shareServiceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setupShareServiceScreenView();
+            }
+        });
+
+        //************Share screen buton group******************
+        cancelShare = findViewById(R.id.cancel_share_service_button);
+        cancelShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setupRevertScreenView();
+            }
+        });
+
+        confirmShare = findViewById(R.id.confirm_share_service_btn);
+        confirmShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
 //*********************************END BUTTON GROUP***********************************************************************************//
 //***********************************************************************************************************************************//
 
@@ -250,6 +300,8 @@ public class SelectedService extends AppCompatActivity {
         mainConstraint.setVisibility(View.VISIBLE);
         contactSeller.setVisibility(View.VISIBLE);
         backButton.setVisibility(View.VISIBLE);
+        shareScreen.setVisibility(View.INVISIBLE);
+
     }
 
     public void goToMessageScreen(){
@@ -258,6 +310,41 @@ public class SelectedService extends AppCompatActivity {
         intent.putExtra("listingType", "service");
         Toast.makeText(getApplicationContext(), listingId, Toast.LENGTH_SHORT).show();
         startActivity(intent);
+    }
+
+    public void setupShareServiceScreenView() {
+        // ****group to fix visibilities for screen ****//
+        shareScreen.setVisibility(View.VISIBLE);
+        contactSeller.setVisibility(View.INVISIBLE);
+        mainConstraint.setVisibility(View.INVISIBLE);
+        backButton.setVisibility(View.INVISIBLE);
+    }
+
+    public void SetupFriendsArrayList(){
+        //instance of authentication
+        DatabaseReference friendsRef = firebaseDatabase.getReference("/users/" + userID + "/friends");
+        friendsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        //friendsFirstName.add(child.getValue().toString());
+                        //TODO add last name to this
+                        friendNameArray.add(child.child("firstName").getValue(String.class) + " " + child.child("lastName").getValue(String.class));
+                        friendIDArray.add(child.getKey());
+
+                        //friends.add(child);
+                    }
+                   // Toast.makeText(getBaseContext(), friendNameArray.get(0), Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
+
     }
 
 

@@ -84,11 +84,14 @@ public class SelectedOwnListing extends AppCompatActivity {
     Button cancelShare, confirmShare;                                                                 //buttons to either revert screen or to send a message
     EditText commentForShareScreen;                                                                   //be able to retrieve whatever is typed in the comment section
     String commentFromText;                                                                           //will be used to hold the comment
-    String userID;
+    String userID; //not sure the purpose of this one i used the userid to get the value from fb
+    String userId;//initizalized in line 117
     ArrayList<DataSnapshot> friends;
-    ArrayList<String>friendsFirstName = new ArrayList<>();
+    ArrayList<String>friendNameArray = new ArrayList<>();
+    ArrayList<String>friendIDArray = new ArrayList<>();
     private FirebaseUser user;
     private FirebaseAuth mAuth;
+
 //*********************************************************//
 
 //************popup window delete listing screen***********//
@@ -111,7 +114,7 @@ public class SelectedOwnListing extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-        String userId = user.getUid();
+        userId = user.getUid();
 
 //*****************MAIN PAGE ITEMS********************************************//
         listingInfo = findViewById(R.id.signed_in_user_listing_sv);
@@ -147,38 +150,11 @@ public class SelectedOwnListing extends AppCompatActivity {
         friendSpinner = findViewById(R.id.seleted_friend_to_share_own_listing_spinner);
 //******************END SHARE SCREEN ITEMS******************************//
 
-
+        SetupFriendsArrayList();
 
 //*************************FIREBASE GET USER AND LISTING INFO************************//
 
-//TODO see how to implement this part in order to populate a friends list arraylist of firstname, lastname, and id
-//TODO in order to be able to use the selected users name to populate in the array list and pass the id as an intent
-//TODO thinking about this more it can probably be done with just the IDs and then we use that id do pull their info
 
-
-        //instance of authentication
-        DatabaseReference friendsRef = database.getReference("/users/" + userId + "/friends");
-        friendsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String itemCount = String.valueOf(friendsFirstName.size());
-                if (dataSnapshot.hasChildren()) {
-                    for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        //friendsFirstName.add(child.getValue().toString());
-                        //TODO add last name to this
-                        //friendsFirstName.add(child.child("firstName").getValue(String.class));
-                        friendsFirstName.add(child.getKey());
-                        //friends.add(child);
-                    }
-                    String childCount= String.valueOf(friends.size()) ;
-                    Toast.makeText(getBaseContext(), friendsFirstName.get(0), Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
 
 //*****END IMPLEMENTATION OF GETTING FRIENDS FROM THE FRIENDLIST OF THE SIGNED IN USER********************//
         // gets the listing's information to display
@@ -773,6 +749,31 @@ public class SelectedOwnListing extends AppCompatActivity {
         startActivity(removeListing);
     }
 
+    public void SetupFriendsArrayList(){
+        //instance of authentication
+        DatabaseReference friendsRef = database.getReference("/users/" + userId + "/friends");
+        friendsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        //TODO add last name to this
+                        friendNameArray.add(child.child("firstName").getValue(String.class) + " " + child.child("lastName").getValue(String.class));
+                        friendIDArray.add(child.getKey());
+                    }
+                   // Toast.makeText(getBaseContext(), friendNameArray.get(0), Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
+    }
+
 //******************END SHARE/DELETE FUCNTIONS********************************************//
+
+
 
 }

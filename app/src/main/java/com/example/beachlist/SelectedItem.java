@@ -34,13 +34,23 @@ public class SelectedItem extends AppCompatActivity {
     private final ArrayList<String> itemImages = new ArrayList<>();
     private final ArrayList<String> firstImageOfItem = new ArrayList<>();
     private FirebaseDatabase firebaseDatabase;
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    String userID;
+    ArrayList<String>friendNameArray = new ArrayList<>();
+    ArrayList<String>friendIDArray = new ArrayList<>();
+
     ImageAdapter adapter,adapter2;
     ImageView userPicture;
     TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName, reportedItemTitle;
     ConstraintLayout itemPopUpWindow, mainItemWindow;
-    Button reportItem, cancelReport,backButton,contactSeller,confirmReport;
+    Button reportItem, cancelReport,backButton,contactSeller,confirmReport,shareItemBtn;
     Spinner reportItemSpinner;
     String selectedItem, listingId;
+
+    //********SHARE SCREEN *************************/
+    ConstraintLayout shareScreen;
+    Button cancelShareButton, confirmShareButton;
 
 
     @Override
@@ -49,6 +59,13 @@ public class SelectedItem extends AppCompatActivity {
         setContentView(R.layout.activity_selected_other_user_item);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        userID = user.getUid();
+
+        //*****************share screen info**********************
+        shareScreen = findViewById(R.id.share_button_layout);
+
 
         //*************Display Item info**************************
         contactSeller = findViewById(R.id.contact_seller_button);
@@ -63,6 +80,7 @@ public class SelectedItem extends AppCompatActivity {
         itemSellerLastName = findViewById(R.id.item_seller_lastname);
         userPicture = findViewById(R.id.item_user_image);
 
+        SetupFriendsArrayList();
 
 //***********************************INITIALIZE SPINNER SECTION************************************************************************************//
 //**********************SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST***********************************************************************//
@@ -172,8 +190,39 @@ public class SelectedItem extends AppCompatActivity {
         });
 
 
+        shareItemBtn = findViewById(R.id.share_item_button);
+        shareItemBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setupShareScreenPopUp();
+            }
+        });
+
+
+
+        //****share screen button group******************************************//
+
+        cancelShareButton = findViewById(R.id.cancel_share_item_btn);
+        cancelShareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setupRevertScreenView();
+            }
+        });
+        confirmShareButton = findViewById(R.id.confirm_share_item_btn);
+        confirmShareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 //*********************************END BUTTON GROUP***********************************************************************************//
 //***********************************************************************************************************************************//
+
+
+
+
     }//end onCreate()
 
     private void getListingImages(DataSnapshot dataSnapshot) {
@@ -247,6 +296,7 @@ public class SelectedItem extends AppCompatActivity {
         mainItemWindow.setVisibility(View.VISIBLE);
         backButton.setVisibility(View.VISIBLE);
         contactSeller.setVisibility(View.VISIBLE);
+        shareScreen.setVisibility(View.INVISIBLE);
     }
 
     public void goToMessageScreen(){
@@ -257,5 +307,39 @@ public class SelectedItem extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void setupShareScreenPopUp(){
+        shareScreen.setVisibility(View.VISIBLE);
+        mainItemWindow.setVisibility(View.INVISIBLE);
+        backButton.setVisibility(View.INVISIBLE);
+        contactSeller.setVisibility(View.INVISIBLE);
+
+    }
+
+    public void SetupFriendsArrayList(){
+        //instance of authentication
+        DatabaseReference friendsRef = firebaseDatabase.getReference("/users/" + userID + "/friends");
+        friendsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        //friendsFirstName.add(child.getValue().toString());
+                        //TODO add last name to this
+                        friendNameArray.add(child.child("firstName").getValue(String.class) + " " + child.child("lastName").getValue(String.class));
+                        friendIDArray.add(child.getKey());
+
+                        //friends.add(child);
+                    }
+                   // Toast.makeText(getBaseContext(), friendNameArray.get(0), Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
+
+    }
 
 }
