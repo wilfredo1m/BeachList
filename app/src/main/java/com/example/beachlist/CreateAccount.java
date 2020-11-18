@@ -207,10 +207,17 @@ public class CreateAccount extends AppCompatActivity {
         final String userId = user.getUid();
         currentUser.setUserId(userId);
         //testing github webhook hehehe
+
         //Initialize database within User reference with a child using user ID
         final DatabaseReference userReference = database.getReference("users").child(userId).child("data");
         //Write data to database
         userReference.setValue(currentUser);
+
+        //Initialize database within User reference with a child using user ID
+        final DatabaseReference adminReference = database.getReference("users").child(userId).child("isAdmin");
+        //write data to database
+        adminReference.setValue(false);
+
         //If user has selected an image
         if(filePath != null) {
             //Store user image

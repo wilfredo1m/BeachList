@@ -84,7 +84,6 @@ public class SelectedOwnListing extends AppCompatActivity {
     Button cancelShare, confirmShare;                                                                 //buttons to either revert screen or to send a message
     EditText commentForShareScreen;                                                                   //be able to retrieve whatever is typed in the comment section
     String commentFromText;                                                                           //will be used to hold the comment
-    String userID; //not sure the purpose of this one i used the userid to get the value from fb
     String userId;//initizalized in line 117
     ArrayList<DataSnapshot> friends;
     ArrayList<String>friendNameArray = new ArrayList<>();
@@ -157,6 +156,7 @@ public class SelectedOwnListing extends AppCompatActivity {
 
 
 //*****END IMPLEMENTATION OF GETTING FRIENDS FROM THE FRIENDLIST OF THE SIGNED IN USER********************//
+
         // gets the listing's information to display
         typeOfService = getIntent().getStringExtra("type");                                             //get type of listing( item or service) from an intent
         listingId = getIntent().getStringExtra("listingID");                                   //get listing id from an intent
@@ -718,7 +718,7 @@ public class SelectedOwnListing extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        DatabaseReference userListingReference = database.getReference("users").child(userID).child("listings").child(listingId);
+                        DatabaseReference userListingReference = database.getReference("users").child(userId).child("listings").child(listingId);
                         userListingReference.removeValue()
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -741,6 +741,7 @@ public class SelectedOwnListing extends AppCompatActivity {
                         // ...
                     }
                 });
+
     }
 
     public void removeListingIntent(){
