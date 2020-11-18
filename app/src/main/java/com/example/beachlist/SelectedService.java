@@ -92,7 +92,8 @@ public class SelectedService extends AppCompatActivity {
 //********************************************GET VALUES FROM FIREBASE AND IMAGE SELECTION****************************************************//
 //********************************************************************************************************************************************//
         listingId = getIntent().getStringExtra("ListingID");
-
+        assert listingId != null;
+        
         DatabaseReference listingRef = firebaseDatabase.getReference().child("listings").child("service").child(listingId);
         listingRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

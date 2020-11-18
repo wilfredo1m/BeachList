@@ -109,6 +109,9 @@ public class SelectedOwnListing extends AppCompatActivity {
 //**********************************************************************//
 
         firebaseDatabase = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        String userId = user.getUid();
 
 //*****************MAIN PAGE ITEMS********************************************//
         listingInfo = findViewById(R.id.signed_in_user_listing_sv);
@@ -152,9 +155,7 @@ public class SelectedOwnListing extends AppCompatActivity {
 //TODO in order to be able to use the selected users name to populate in the array list and pass the id as an intent
 //TODO thinking about this more it can probably be done with just the IDs and then we use that id do pull their info
        /*
-        mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser();
-        String userId = user.getUid();
+
         //instance of authentication
         DatabaseReference friendsRef = database.getReference("/users/" + userId + "/friends");
         friendsRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -738,7 +739,20 @@ public class SelectedOwnListing extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        removeListingIntent();
+                        DatabaseReference userListingReference = database.getReference("users").child(userID).child("listings").child(listingId);
+                        userListingReference.removeValue()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        removeListingIntent();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        // Write failed.
+                                    }
+                                });
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
