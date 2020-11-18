@@ -154,7 +154,7 @@ public class SelectedOwnListing extends AppCompatActivity {
 //TODO see how to implement this part in order to populate a friends list arraylist of firstname, lastname, and id
 //TODO in order to be able to use the selected users name to populate in the array list and pass the id as an intent
 //TODO thinking about this more it can probably be done with just the IDs and then we use that id do pull their info
-       /*
+
 
         //instance of authentication
         DatabaseReference friendsRef = database.getReference("/users/" + userId + "/friends");
@@ -164,8 +164,11 @@ public class SelectedOwnListing extends AppCompatActivity {
                 String itemCount = String.valueOf(friendsFirstName.size());
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        friendsFirstName.add(child.getValue().toString());
-                        friends.add(child);
+                        //friendsFirstName.add(child.getValue().toString());
+                        //TODO add last name to this
+                        //friendsFirstName.add(child.child("firstName").getValue(String.class));
+                        friendsFirstName.add(child.getKey());
+                        //friends.add(child);
                     }
                     String childCount= String.valueOf(friends.size()) ;
                     Toast.makeText(getBaseContext(), friendsFirstName.get(0), Toast.LENGTH_SHORT).show();
@@ -176,7 +179,7 @@ public class SelectedOwnListing extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
-        */
+
 //*****END IMPLEMENTATION OF GETTING FRIENDS FROM THE FRIENDLIST OF THE SIGNED IN USER********************//
         // gets the listing's information to display
         typeOfService = getIntent().getStringExtra("type");                                             //get type of listing( item or service) from an intent
