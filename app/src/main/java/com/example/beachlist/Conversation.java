@@ -30,6 +30,7 @@ public class Conversation extends AppCompatActivity {
     Button sendMessage, backButton,soldButton;                                                        //buttons to navitage screen
     ConstraintLayout mainPage;                                                                        //layout for main page incase we need to make it invisible
     String listingId;
+    String friendID;
     private FirebaseDatabase firebaseDatabase;
     private final ArrayList<String> itemImages = new ArrayList<>();
     TextView userName,userEmail;
@@ -62,7 +63,10 @@ public class Conversation extends AppCompatActivity {
         listingImage = findViewById(R.id.listing_image_iv);
         firebaseDatabase = FirebaseDatabase.getInstance();
 
+
+        //friendID = getIntent().getStringExtra("friend ID");
         // gets the item's information to display
+        friendID = getIntent().getStringExtra("UserID");
         listingId = getIntent().getStringExtra("ListingID");
         listingType = getIntent().getStringExtra("listingType");
 
@@ -84,13 +88,16 @@ public class Conversation extends AppCompatActivity {
                 assert selectedListing != null;
                 displayProfileImage();
                 //display owner Info
-                getOwnerInfo(selectedListing.getOwnerId());
+                getOwnerInfo(friendID);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 //TODO Handle this error
             }
         });
+
+
+
 
 
 

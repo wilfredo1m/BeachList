@@ -158,7 +158,7 @@ public class SelectedOwnListing extends AppCompatActivity {
 
 //************************************spinner info***********************************//
 
-/*
+
         friendSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -173,7 +173,7 @@ public class SelectedOwnListing extends AppCompatActivity {
             }
         });
 
-*/
+
 
 
 
@@ -364,10 +364,11 @@ public class SelectedOwnListing extends AppCompatActivity {
         confirmShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String selectedFriend = friendSpinner.getSelectedItem().toString();
                 String friendID = friendIDArray.get(friendPositionInt);
                 String comment = commentForShareScreen.getText().toString();
-                Toast.makeText(getBaseContext(),  comment, Toast.LENGTH_SHORT).show();
+                sendToConversationScreen(friendID,comment);
+                //Toast.makeText(getBaseContext(),  friendID, Toast.LENGTH_SHORT).show();
+
             }
         });
 //***********************************END SHARE SCREEN BUTTONS**********************************************//
@@ -799,6 +800,18 @@ public class SelectedOwnListing extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
+
+    }
+
+    public void sendToConversationScreen(String friendsID, String sentComment){
+        String friendID = friendsID;
+        String writtenComment = sentComment;
+        Intent sendToConversation = new Intent(this, Conversation.class);                    //intent to open ActiveListings page (back button press)
+        sendToConversation.putExtra("UserID", friendID);
+        sendToConversation.putExtra("send message to friend", writtenComment);
+        sendToConversation.putExtra("ListingID",listingId );                                                      //this intent is to populate fields of next page
+        sendToConversation.putExtra("listingType", typeOfService);                                                                          //this intent is to populate fields of next page
+        startActivity(sendToConversation);
 
     }
 

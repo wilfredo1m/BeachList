@@ -38,6 +38,7 @@ public class SelectedItem extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     String userID;
+    String listingOwnerID;
     ArrayList<String>friendNameArray = new ArrayList<>();
     ArrayList<String>friendIDArray = new ArrayList<>();
 
@@ -147,6 +148,7 @@ public class SelectedItem extends AppCompatActivity {
                 ListingData selectedListing = snapshot.getValue(ListingData.class);
                 assert selectedListing != null;
                 displayListingInfo(selectedListing);
+                listingOwnerID = selectedListing.getOwnerId();
                 //display owner Info
                 getOwnerInfo(selectedListing.getOwnerId());
             }
@@ -238,8 +240,9 @@ public class SelectedItem extends AppCompatActivity {
                 String selectedFriend = shareItemSpinner.getSelectedItem().toString();
                 String friendID = friendIDArray.get(friendPositionIntValue);
                 String comment = commentForShareScreen.getText().toString();
-                Toast.makeText(getBaseContext(),  friendID, Toast.LENGTH_SHORT).show();
-
+                sendToFriend(friendID, comment);
+                //Toast.makeText(getBaseContext(),  friendID, Toast.LENGTH_SHORT).show();
+                sendToFriend(friendID,comment);
 
 
             }
@@ -329,6 +332,7 @@ public class SelectedItem extends AppCompatActivity {
 
     public void goToMessageScreen(){
         Intent intent = new Intent(this, Conversation.class);
+        intent.putExtra("UserID",listingOwnerID );
         intent.putExtra("ListingID",listingId );
         intent.putExtra("listingType", "item");
         Toast.makeText(getApplicationContext(), listingId, Toast.LENGTH_SHORT).show();
@@ -340,7 +344,6 @@ public class SelectedItem extends AppCompatActivity {
         mainItemWindow.setVisibility(View.INVISIBLE);
         backButton.setVisibility(View.INVISIBLE);
         contactSeller.setVisibility(View.INVISIBLE);
-
     }
 
     public void SetupFriendsArrayList(){
@@ -365,6 +368,18 @@ public class SelectedItem extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
+    }
+
+    public void sendToFriend(String fID, String cmnt){
+        String FriendID = fID;
+        String comment = cmnt;
+        Intent intent = new Intent(this, Conversation.class);
+        intent.putExtra("UserID",FriendID );
+        intent.putExtra("send message to friend", comment);
+        intent.putExtra("ListingID",listingId );
+        intent.putExtra("listingType", "item");
+        Toast.makeText(getApplicationContext(), listingId, Toast.LENGTH_SHORT).show();
+        startActivity(intent);
     }
 
 }

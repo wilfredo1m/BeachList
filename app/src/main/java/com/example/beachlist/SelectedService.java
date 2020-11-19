@@ -39,7 +39,7 @@ public class SelectedService extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     String userID;
-
+    String ownerID;
     ArrayList<String>friendNameArray = new ArrayList<>();
     ArrayList<String>friendIDArray = new ArrayList<>();
 
@@ -141,6 +141,7 @@ public class SelectedService extends AppCompatActivity {
 //********************************************************************************************************************************************//
         listingId = getIntent().getStringExtra("ListingID");
         assert listingId != null;
+
         
         DatabaseReference listingRef = firebaseDatabase.getReference().child("listings").child("service").child(listingId);
         listingRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -153,6 +154,7 @@ public class SelectedService extends AppCompatActivity {
                 assert selectedListing != null;
                 displayListingInfo(selectedListing);
                 //display owner Info
+                ownerID = selectedListing.getOwnerId();
                 getOwnerInfo(selectedListing.getOwnerId());
             }
 
@@ -239,7 +241,8 @@ public class SelectedService extends AppCompatActivity {
                 String selectedFriend = shareServiceSpinner.getSelectedItem().toString();
                 String friendID = friendIDArray.get(positonInt);
                 String comment = commentForShareScreen.getText().toString();
-                Toast.makeText(getBaseContext(),  friendID, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getBaseContext(),  friendID, Toast.LENGTH_SHORT).show();
+                sendToFriend(friendID,comment);
             }
         });
 
@@ -329,6 +332,7 @@ public class SelectedService extends AppCompatActivity {
 
     public void goToMessageScreen(){
         Intent intent = new Intent(this, Conversation.class);
+        intent.putExtra("UserID",ownerID );
         intent.putExtra("ListingID",listingId );
         intent.putExtra("listingType", "service");
         Toast.makeText(getApplicationContext(), listingId, Toast.LENGTH_SHORT).show();
@@ -352,8 +356,6 @@ public class SelectedService extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        //friendsFirstName.add(child.getValue().toString());
-                        //TODO add last name to this
                         friendNameArray.add(child.child("firstName").getValue(String.class) + " " + child.child("lastName").getValue(String.class));
                         friendIDArray.add(child.getKey());
                     }
@@ -371,5 +373,16 @@ public class SelectedService extends AppCompatActivity {
 
     }
 
+    public void sendToFriend(String fID, String cmnt){
+        String FriendID = fID;
+        String comment = cmnt;
+        Intent intent = new Intent(this, Conversation.class);
+        intent.putExtra("UserID",FriendID );
+        intent.putExtra("send message to friend", comment);
+        intent.putExtra("ListingID",listingId );
+        intent.putExtra("listingType", "service");
+        Toast.makeText(getApplicationContext(), listingId, Toast.LENGTH_SHORT).show();
+        startActivity(intent);
+    }
 
 }
