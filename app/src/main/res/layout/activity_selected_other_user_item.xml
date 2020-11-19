@@ -46,6 +46,20 @@
                 android:text="SHARE LISTING"
                 android:textSize="24sp" />
 
+            <TextView
+                android:id="@+id/add_comment_lbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="add a comment" />
+
+            <EditText
+                android:id="@+id/item_comment_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine" />
+
             <LinearLayout
                 android:id="@+id/share_service_divider_1"
                 android:layout_width="match_parent"

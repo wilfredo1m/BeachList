@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -53,6 +54,11 @@ public class SelectedService extends AppCompatActivity {
     //*****share screen info********//
     ConstraintLayout shareScreen;
     Button cancelShare, confirmShare;
+    Spinner shareServiceSpinner;
+    String item_position;
+    int positonInt;
+    EditText commentForShareScreen;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +74,8 @@ public class SelectedService extends AppCompatActivity {
 
         //**share screen setup*********************************//
         shareScreen =findViewById(R.id.share_service_layout);
+        shareServiceSpinner = findViewById(R.id.seleted_friend_to_share_spinner);
+        commentForShareScreen = findViewById(R.id.service_comment_et);
         //****************************************************//
         firebaseDatabase = FirebaseDatabase.getInstance();
         //setup for visibility of main view in the page
@@ -84,6 +92,8 @@ public class SelectedService extends AppCompatActivity {
         userPicture = findViewById(R.id.service_user_image);
 
         SetupFriendsArrayList();
+
+
 //***********************************INITIALIZE SPINNER SECTION************************************************************************************//
 //**********************SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST***********************************************************************//
 //****************************ON SELECT LISTENER TO BE ABLE TO PASS THE SELECTED INFORMATION TO THE CONFIRM REPORT BUTTON************************//
@@ -108,6 +118,21 @@ public class SelectedService extends AppCompatActivity {
                 // your code here
             }
         });
+
+        shareServiceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //first,  we have to retrieve the item position as a string
+                // then, we can change string value into integer
+                item_position = String.valueOf(position);
+                positonInt = Integer.valueOf(item_position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
 //********************************************************************************************************************************************//
 //********************************END SPINNER SECTION*****************************************************************************************//
 
@@ -137,11 +162,6 @@ public class SelectedService extends AppCompatActivity {
             }
         });
 
-        //TODO remove comment from line below once images are implemented
-  //      //populates image of the first listing
-  //      if (!serviceImages.isEmpty()) {
-  //          firstImageOfService.add(serviceImages.get(0));
-  //      }
 //********************************************************************************************************************************************//
 //********************************************END VALUES FROM FIREBASE ***********************************************************************//
 
@@ -176,7 +196,6 @@ public class SelectedService extends AppCompatActivity {
 
             }
         });
-
         //Cancel Report button in pop up window
         cancelReport = findViewById(R.id.cancer_report_service_button);
         cancelReport.setOnClickListener(new View.OnClickListener() {
@@ -208,6 +227,7 @@ public class SelectedService extends AppCompatActivity {
         cancelShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                commentForShareScreen.setText("");
                 setupRevertScreenView();
             }
         });
@@ -216,7 +236,10 @@ public class SelectedService extends AppCompatActivity {
         confirmShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String selectedFriend = shareServiceSpinner.getSelectedItem().toString();
+                String friendID = friendIDArray.get(positonInt);
+                String comment = commentForShareScreen.getText().toString();
+                Toast.makeText(getBaseContext(),  friendID, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -312,6 +335,7 @@ public class SelectedService extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     public void setupShareServiceScreenView() {
         // ****group to fix visibilities for screen ****//
         shareScreen.setVisibility(View.VISIBLE);
@@ -332,10 +356,10 @@ public class SelectedService extends AppCompatActivity {
                         //TODO add last name to this
                         friendNameArray.add(child.child("firstName").getValue(String.class) + " " + child.child("lastName").getValue(String.class));
                         friendIDArray.add(child.getKey());
-
-                        //friends.add(child);
                     }
-                   // Toast.makeText(getBaseContext(), friendNameArray.get(0), Toast.LENGTH_SHORT).show();
+                    ArrayAdapter<String> itemAdapter = new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_spinner_item,     //array adapter holding the array list of categories created in the strings.xml
+                            friendNameArray);                                                                                              //adapter to be populated with items_categoies array list
+                    shareServiceSpinner.setAdapter(itemAdapter);
                 }
             }
             @Override
