@@ -111,7 +111,7 @@
     <!-- Item Categories -->
     <string-array name="items_categoies">
         <item>--select a category--</item>
-        <item>Textbook-</item>
+        <item>book</item>
         <item>electronic</item>
         <item>furniture</item>
         <item>game</item>
@@ -125,7 +125,7 @@
     <!-- Service Categories -->
     <string-array name="service_categoies">
         <item>--select a service--</item>
-        <item>tutoring-</item>
+        <item>tutoring</item>
         <item>repair</item>
         <item>commission</item>
     </string-array>
