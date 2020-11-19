@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -52,9 +54,6 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         FirebaseUser user = mAuth.getCurrentUser();
         final String userId = user.getUid();
 
-
-
-
         //Database reference to the users data
         final DatabaseReference userReference = database.getReference("users").child(userId).child("data");
         userReference
@@ -88,10 +87,10 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         Button soldListingsButton = accountSettingsScreen.findViewById(R.id.btn_sold_listings);
         soldListingsButton.setOnClickListener(this);
 
-        Button reportedUser = accountSettingsScreen.findViewById(R.id.btn_reported_user);
+        final Button reportedUser = accountSettingsScreen.findViewById(R.id.btn_reported_user);
         reportedUser.setOnClickListener(this);
 
-        Button reportedListing = accountSettingsScreen.findViewById(R.id.btn_reported_listing);
+        final Button reportedListing = accountSettingsScreen.findViewById(R.id.btn_reported_listing);
         reportedListing.setOnClickListener(this);
 
 //===================================================END BUTTON CALL GROUP====================================================//
@@ -102,13 +101,28 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 //*********************IF USER IS ADMIN DISPLAY EXTRA BUTTONS WITH ADMIN RIGHTS********************************************//
         String emailString = user.getEmail();
 //        Toast.makeText(accountSettingsScreen.getContext(), emailString, Toast.LENGTH_SHORT).show();
+        final DatabaseReference adminRef = database.getReference("users").child(userId).child("isAdmin");
+        adminRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Boolean bool = snapshot.getValue(Boolean.class);
+                if (bool.booleanValue()){
+                    reportedUser.setVisibility(View.VISIBLE);
+                    reportedListing.setVisibility(View.VISIBLE);
+                }
+            }
 
-        if (emailString.contains("@yahoo.com")){
-            reportedUser.setVisibility(View.VISIBLE);
-            reportedListing.setVisibility(View.VISIBLE);
-        }else{
-            //dont display the screens
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("ERROR", error.getDetails());
+            }
+        });
+//        if (emailString.contains("@yahoo.com")){
+//            reportedUser.setVisibility(View.VISIBLE);
+//            reportedListing.setVisibility(View.VISIBLE);
+//        }else{
+//            //dont display the screens
+//        }
 //***********************END CHECK TO SEE IF THE USER WILL BE A ADMIN **********************************************************//
 
         return accountSettingsScreen;
@@ -162,8 +176,6 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         email.setText(userData.email);
 
         final ImageView profileIV = accountSettingsScreen.findViewById(R.id.iv_user_image);
-
-        System.out.println("Hope"+userData.getImageUrl()+"Space");
 
         if(userData.getImageUrl().compareTo(" ") != 0) {
             Glide.with(this)
