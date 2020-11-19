@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -90,6 +91,8 @@ public class SelectedOwnListing extends AppCompatActivity {
     ArrayList<String>friendIDArray = new ArrayList<>();
     private FirebaseUser user;
     private FirebaseAuth mAuth;
+    String friendPosition;
+    int friendPositionInt;
 
 //*********************************************************//
 
@@ -152,6 +155,25 @@ public class SelectedOwnListing extends AppCompatActivity {
         SetupFriendsArrayList();
 
 //*************************FIREBASE GET USER AND LISTING INFO************************//
+
+//************************************spinner info***********************************//
+
+/*
+        friendSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //first,  we have to retrieve the item position as a string
+                // then, we can change string value into integer
+                friendPosition = String.valueOf(position);
+                friendPositionInt = Integer.valueOf(friendPosition);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+*/
 
 
 
@@ -331,6 +353,7 @@ public class SelectedOwnListing extends AppCompatActivity {
         cancelShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                commentForShareScreen.setText("");
                 RevertScreens();
                 revertButtonStatus();
 
@@ -341,7 +364,10 @@ public class SelectedOwnListing extends AppCompatActivity {
         confirmShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String selectedFriend = friendSpinner.getSelectedItem().toString();
+                String friendID = friendIDArray.get(friendPositionInt);
+                String comment = commentForShareScreen.getText().toString();
+                Toast.makeText(getBaseContext(),  comment, Toast.LENGTH_SHORT).show();
             }
         });
 //***********************************END SHARE SCREEN BUTTONS**********************************************//
@@ -762,7 +788,10 @@ public class SelectedOwnListing extends AppCompatActivity {
                         friendNameArray.add(child.child("firstName").getValue(String.class) + " " + child.child("lastName").getValue(String.class));
                         friendIDArray.add(child.getKey());
                     }
-                   // Toast.makeText(getBaseContext(), friendNameArray.get(0), Toast.LENGTH_SHORT).show();
+                    ArrayAdapter<String> itemAdapter = new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_spinner_item,     //array adapter holding the array list of categories created in the strings.xml
+                            friendNameArray);                                                                                              //adapter to be populated with items_categoies array list
+                    friendSpinner.setAdapter(itemAdapter);
+                    //Toast.makeText(getBaseContext(), friendNameArray.get(0), Toast.LENGTH_SHORT).show();
                 }
             }
             @Override

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -51,6 +52,10 @@ public class SelectedItem extends AppCompatActivity {
     //********SHARE SCREEN *************************/
     ConstraintLayout shareScreen;
     Button cancelShareButton, confirmShareButton;
+    Spinner shareItemSpinner;
+    String friendPosition;
+    int friendPositionIntValue;
+    EditText commentForShareScreen;
 
 
     @Override
@@ -65,7 +70,8 @@ public class SelectedItem extends AppCompatActivity {
 
         //*****************share screen info**********************
         shareScreen = findViewById(R.id.share_button_layout);
-
+        shareItemSpinner = findViewById(R.id.seleted_friend_to_share_spinner);
+        commentForShareScreen = findViewById(R.id.item_comment_et);
 
         //*************Display Item info**************************
         contactSeller = findViewById(R.id.contact_seller_button);
@@ -81,7 +87,6 @@ public class SelectedItem extends AppCompatActivity {
         userPicture = findViewById(R.id.item_user_image);
 
         SetupFriendsArrayList();
-
 //***********************************INITIALIZE SPINNER SECTION************************************************************************************//
 //**********************SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST***********************************************************************//
 //****************************ON SELECT LISTENER TO BE ABLE TO PASS THE SELECTED INFORMATION TO THE CONFIRM REPORT BUTTON************************//
@@ -106,6 +111,22 @@ public class SelectedItem extends AppCompatActivity {
                 // your code here
             }
         });
+
+
+        shareItemSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //first,  we have to retrieve the item position as a string
+                // then, we can change string value into integer
+                friendPosition = String.valueOf(position);
+                friendPositionIntValue = Integer.valueOf(friendPosition);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
 //********************************************************************************************************************************************//
 //********************************END SPINNER SECTION*****************************************************************************************//
 
@@ -206,6 +227,7 @@ public class SelectedItem extends AppCompatActivity {
         cancelShareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                commentForShareScreen.setText("");
                 setupRevertScreenView();
             }
         });
@@ -213,6 +235,12 @@ public class SelectedItem extends AppCompatActivity {
         confirmShareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String selectedFriend = shareItemSpinner.getSelectedItem().toString();
+                String friendID = friendIDArray.get(friendPositionIntValue);
+                String comment = commentForShareScreen.getText().toString();
+                Toast.makeText(getBaseContext(),  friendID, Toast.LENGTH_SHORT).show();
+
+
 
             }
         });
@@ -323,13 +351,12 @@ public class SelectedItem extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        //friendsFirstName.add(child.getValue().toString());
-                        //TODO add last name to this
                         friendNameArray.add(child.child("firstName").getValue(String.class) + " " + child.child("lastName").getValue(String.class));
                         friendIDArray.add(child.getKey());
-
-                        //friends.add(child);
                     }
+                    ArrayAdapter<String> itemAdapter = new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_spinner_item,     //array adapter holding the array list of categories created in the strings.xml
+                            friendNameArray);                                                                                              //adapter to be populated with items_categoies array list
+                    shareItemSpinner.setAdapter(itemAdapter);                                                                              //setup adapter to be passed to spinner
                    // Toast.makeText(getBaseContext(), friendNameArray.get(0), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -338,8 +365,6 @@ public class SelectedItem extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
-
-
     }
 
 }

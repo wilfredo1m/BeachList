@@ -47,6 +47,20 @@
                 android:text="SHARE LISTING"
                 android:textSize="24sp" />
 
+            <TextView
+                android:id="@+id/service_comment_lbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Send a comment:" />
+
+            <EditText
+                android:id="@+id/service_comment_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine" />
+
             <LinearLayout
                 android:id="@+id/divider_layout1"
                 android:layout_width="match_parent"
@@ -506,6 +520,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="contact seller"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
