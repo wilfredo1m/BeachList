@@ -33,10 +33,7 @@ import java.util.ArrayList;
 public class SelectedItem extends AppCompatActivity {
     ViewPager2 viewPager,reportedPager;
     private final ArrayList<String> itemImages = new ArrayList<>();
-    private final ArrayList<String> firstImageOfItem = new ArrayList<>();
     private FirebaseDatabase firebaseDatabase;
-    private FirebaseAuth mAuth;
-    private FirebaseUser user;
     String userID;
     String listingOwnerID;
     ArrayList<String>friendNameArray = new ArrayList<>();
@@ -65,8 +62,9 @@ public class SelectedItem extends AppCompatActivity {
         setContentView(R.layout.activity_selected_other_user_item);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        assert user != null;
         userID = user.getUid();
 
         //*****************share screen info**********************
@@ -120,7 +118,7 @@ public class SelectedItem extends AppCompatActivity {
                 //first,  we have to retrieve the item position as a string
                 // then, we can change string value into integer
                 friendPosition = String.valueOf(position);
-                friendPositionIntValue = Integer.valueOf(friendPosition);
+                friendPositionIntValue = Integer.parseInt(friendPosition);
             }
 
             @Override
@@ -138,7 +136,7 @@ public class SelectedItem extends AppCompatActivity {
         // gets the item's information to display
         listingId = getIntent().getStringExtra("ListingID");
 
-        DatabaseReference listingRef = firebaseDatabase.getReference().child("listings").child("item").child(listingId);
+        final DatabaseReference listingRef = firebaseDatabase.getReference().child("listings").child("item").child(listingId);
         listingRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -147,6 +145,7 @@ public class SelectedItem extends AppCompatActivity {
                 //Get data and display info
                 ListingData selectedListing = snapshot.getValue(ListingData.class);
                 assert selectedListing != null;
+
                 displayListingInfo(selectedListing);
                 listingOwnerID = selectedListing.getOwnerId();
                 //display owner Info
@@ -200,8 +199,9 @@ public class SelectedItem extends AppCompatActivity {
         confirmReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                reportListing(listingRef);
+                setupRevertScreenView();
                 Toast.makeText(getApplicationContext(), selectedItem, Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -256,6 +256,10 @@ public class SelectedItem extends AppCompatActivity {
 
     }//end onCreate()
 
+    private void reportListing(DatabaseReference listingRef) {
+
+    }
+
     private void getListingImages(DataSnapshot dataSnapshot) {
         for (DataSnapshot child : dataSnapshot.getChildren()) {
             itemImages.add(child.getValue(String.class));
@@ -265,7 +269,7 @@ public class SelectedItem extends AppCompatActivity {
     private void displayListingInfo(ListingData selectedListing) {
         itemTitle.setText(selectedListing.getTitle());
         itemDescription.setText(selectedListing.getDescription());
-        itemPrice.setText("$"+selectedListing.getPrice());
+        itemPrice.setText(String.format("$%s", selectedListing.getPrice()));
         itemCategory.setText(selectedListing.getCategory());
 
         viewPager = findViewById(R.id.selected_item_images);

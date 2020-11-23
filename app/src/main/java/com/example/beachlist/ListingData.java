@@ -1,14 +1,17 @@
 package com.example.beachlist;
 
+import java.util.ArrayList;
+
 public class ListingData {
     //private int[] listingPhotos;
-    String imageUrl;
+    ArrayList<String> listingImages;
     String title, category, description, price, postDate, ownerId;
     String sellDate, sellPrice, buyerId;
+    Boolean isBanned;
 
 
     public ListingData() {
-        imageUrl = " ";
+        listingImages = new ArrayList();
 
         title = " ";
         category = " ";
@@ -20,13 +23,15 @@ public class ListingData {
         sellPrice = " ";
         sellDate = " ";
         buyerId = " ";
+
+        isBanned = false;
     }
 
     // For specific listings
-    public ListingData(String listingImageUrl,
+    public ListingData(ArrayList<String> listingImageUrl,
                        String listingTitle, String listingCategory, String listingDescription, String listingAskingPrice, String listingPostDate, String listingOwnerId,
-                       String listingSellDate, String listingSellPrice, String listingBuyerId) {
-        imageUrl = listingImageUrl;
+                       String listingSellDate, String listingSellPrice, String listingBuyerId, Boolean banned) {
+        listingImages = listingImageUrl;
 
         title = listingTitle;
         category = listingCategory;
@@ -38,6 +43,8 @@ public class ListingData {
         sellDate = listingSellDate;
         sellPrice = listingSellPrice;
         buyerId = listingBuyerId;
+
+        isBanned = banned;
     }
 
 //    public ListingData(int[] photos, String title,String askFor){
@@ -46,14 +53,9 @@ public class ListingData {
 //        askingPrice = askFor;
 //    }
 
-    public NewListingData toNewListingData() {
-        return new NewListingData(imageUrl, title, category, description, price, postDate, ownerId,
-                                    sellDate, sellPrice, buyerId);
-    }
+    public ArrayList<String> getListingImages() { return listingImages; }
 
-    public String getImageUrl() { return imageUrl; }
-
-    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+    public void setListingImages(ArrayList<String> listingImages) { this.listingImages = listingImages; }
 
     public String getTitle() {
         return title;
@@ -125,5 +127,13 @@ public class ListingData {
 
     public void setBuyerId(String buyerId) {
         this.buyerId = buyerId;
+    }
+
+    public Boolean getBanned() {
+        return isBanned;
+    }
+
+    public void setBanned(Boolean banned) {
+        isBanned = banned;
     }
 }

@@ -78,7 +78,6 @@ public class SelectedUser extends AppCompatActivity {
                 getResources().getStringArray(R.array.report_user));
         reportUserSpinner.setAdapter(arrayAdapter);                                                                       //setup adapter to be passed to spinner
         reportUserSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {                            //set listener to item selected
-
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 reportedUser =  reportUserSpinner.getSelectedItem().toString();                                          //set selected value in spinner to the reportedUser string

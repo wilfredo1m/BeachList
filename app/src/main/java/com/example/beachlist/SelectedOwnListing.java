@@ -48,13 +48,12 @@ import java.util.Map;
 
 public class SelectedOwnListing extends AppCompatActivity {
 
-    NewListingData updatedListing = new NewListingData();
+    ListingData updatedListing = new ListingData();
     String key = " ";
 //*********************main window elements***********************//
     TextView listingTitle, listingDescription, listingPrice;                                          //text views to be populated in main window
     Button backButton, shareButton,modListingButton;                                                  //buttons for main window
     ScrollView listingInfo;                                                                           //scroll view layout
-    private FirebaseDatabase firebaseDatabase;                                                        //firebase call
     ViewPager2 viewPager;                                                                             //pager to view images through
     ArrayList<String> listingImages = new ArrayList<>();                                               //arraylist to hold images
     ArrayList<String> imageUriList;
@@ -67,7 +66,7 @@ public class SelectedOwnListing extends AppCompatActivity {
     ConstraintLayout changeListing;                                                                   //popup window layout
     ViewPager2 currentImages,updatedImages;                                                           //pop up pager
     String categoryString;                                                                            //strings to retrieve info from db to be populated in pop up window
-    TextView currentTitle, currentPrice, currentDescription, currentCategory,currentListingType;      //tv to be used in pop up to populate the new screen
+    TextView currentTitle, currentPrice, currentDescription, currentCategory, currentListingType;      //tv to be used in pop up to populate the new screen
     Button changeTitle, changePrice, changeDescription, changeCategory, cancelUpdate,                 //buttons to enable modifying of specified fields
         confirmUpdate, updateImages,deleteListingBtn;                                                 //buttons to enable modifying of specified fields
     EditText updatedTitle, updatedPrice, updatedDescription;                                          //edit text fields to update listing info
@@ -89,8 +88,6 @@ public class SelectedOwnListing extends AppCompatActivity {
     ArrayList<DataSnapshot> friends;
     ArrayList<String>friendNameArray = new ArrayList<>();
     ArrayList<String>friendIDArray = new ArrayList<>();
-    private FirebaseUser user;
-    private FirebaseAuth mAuth;
     String friendPosition;
     int friendPositionInt;
 
@@ -113,9 +110,11 @@ public class SelectedOwnListing extends AppCompatActivity {
         deleteListingScreen = findViewById(R.id.delete_listing_layout);
 //**********************************************************************//
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser();
+        //firebase call
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        assert user != null;
         userId = user.getUid();
 
 //*****************MAIN PAGE ITEMS********************************************//
@@ -148,7 +147,7 @@ public class SelectedOwnListing extends AppCompatActivity {
 //**************************SHARE SCREEN ITEMS******************************//
         shareScreen = findViewById(R.id.share_own_button_layout);
         commentForShareScreen = findViewById(R.id.comment_description_ET);
-        friends = new ArrayList<DataSnapshot>();
+        friends = new ArrayList<>();
         friendSpinner = findViewById(R.id.seleted_friend_to_share_own_listing_spinner);
 //******************END SHARE SCREEN ITEMS******************************//
 
@@ -165,7 +164,7 @@ public class SelectedOwnListing extends AppCompatActivity {
                 //first,  we have to retrieve the item position as a string
                 // then, we can change string value into integer
                 friendPosition = String.valueOf(position);
-                friendPositionInt = Integer.valueOf(friendPosition);
+                friendPositionInt = Integer.parseInt(friendPosition);
             }
 
             @Override
@@ -190,9 +189,8 @@ public class SelectedOwnListing extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 getListingImages(snapshot.child("listingImages"));                                    //Populate image URLs in global variable
                 ListingData selectedListing = snapshot.getValue(ListingData.class);                   //Get data and display info
-                updatedListing = selectedListing.toNewListingData();
+                assert selectedListing != null;
                 key = snapshot.getKey();
-                assert selectedListing != null;                                                       //check to see that selected listing is not null
                 displayListingInfo(selectedListing);                                                  //call listing information by passing selected listing ListingData
                 setCategory(selectedListing.getCategory());                                           //call set category
             }
@@ -303,20 +301,20 @@ public class SelectedOwnListing extends AppCompatActivity {
 
                 /* Each flag corresponds to a modified value in the selected listing, and here we
                    update the listing dependeding on which flags have been set off */
-                if(titleFlag == true){
+                if(titleFlag){
                     updatedListing.setTitle(updatedTitle.getText().toString());
                 }
-                if(categoryFlag == true){
+                if(categoryFlag){
                     updatedListing.setCategory(categorySpinner.getSelectedItem().toString());
                 }
-                if(priceFlag == true){
+                if(priceFlag){
                     updatedListing.setPrice(updatedPrice.getText().toString());
                 }
-                if(descriptionFlag == true){
+                if(descriptionFlag){
                     updatedListing.setDescription(updatedDescription.getText().toString());
                 }
 
-                if(pictureFlag == true) {
+                if(pictureFlag) {
                     updateListingWithNewImages(imageUriList, imageUriList.size());
                 }
                 else {
@@ -552,7 +550,7 @@ public class SelectedOwnListing extends AppCompatActivity {
     private void displayListingInfo(ListingData selectedListing) {
         listingTitle.setText(selectedListing.getTitle());                                             // set text of listing title to main screen
         listingDescription.setText(selectedListing.getDescription());                                 // set text of listingDescription to main screen
-        listingPrice.setText("$"+selectedListing.getPrice());                                         // set text of listingPrice to main screen
+        listingPrice.setText(String.format("$%s", selectedListing.getPrice()));                                         // set text of listingPrice to main screen
         viewPager = findViewById(R.id.own_listing_images);                                            // link viewpager to xml
         adapter = new ImageAdapter(this, listingImages);                                      // add listingImages array to adapter
         viewPager.setAdapter(adapter);                                                                // set viewpager to the adapter to display images in pager screen
@@ -640,21 +638,17 @@ public class SelectedOwnListing extends AppCompatActivity {
     public void PopulateSpinner(String stringType){
         if(stringType.equalsIgnoreCase("item"))                                                              //check if type = item
         {
-            ArrayAdapter<String> itemAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,     //array adapter holding the array list of categories created in the strings.xml
+            ArrayAdapter<String> itemAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,     //array adapter holding the array list of categories created in the strings.xml
                     getResources().getStringArray(R.array.items_categoies));                                              //adapter to be populated with items_categoies array list
             categorySpinner.setAdapter(itemAdapter);                                                                      //setup adapter to be passed to spinner
         }
         else if(stringType.equalsIgnoreCase("service"))                                                      //check if type= service
         {
-            ArrayAdapter<String> serviceAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,  //array adapter holding the array list of services created in the strings.xml
+            ArrayAdapter<String> serviceAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,  //array adapter holding the array list of services created in the strings.xml
                     getResources().getStringArray(R.array.service_categoies));                                            //adapter to be populated with service_categoies array list
             categorySpinner.setAdapter(serviceAdapter);                                                                   //setup adapter to be passed to spinner
         }
-        else
-        {
-            //do nothing
-        }
-
+        //do nothing
     }
     @SuppressLint("MissingSuperCall")
     @Override
@@ -691,6 +685,7 @@ public class SelectedOwnListing extends AppCompatActivity {
                     Uri imageUri = data.getData();                                                    //assign imageuri to the image selected from the gallery
                     try
                     {
+                        assert imageUri != null;
                         InputStream is = getContentResolver().openInputStream(imageUri);              //input stream to access gallery content
                         Bitmap bitmap = BitmapFactory.decodeStream(is);                               //Creates Bitmap objects from various sources, including files, streams(is), and byte-arrays.
                         bitmaps.add(bitmap);                                                          //add bitmaps to the bitmaps array
@@ -782,21 +777,21 @@ public class SelectedOwnListing extends AppCompatActivity {
         DatabaseReference friendsRef = database.getReference("/users/" + userId + "/friends");
         friendsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         //TODO add last name to this
                         friendNameArray.add(child.child("firstName").getValue(String.class) + " " + child.child("lastName").getValue(String.class));
                         friendIDArray.add(child.getKey());
                     }
-                    ArrayAdapter<String> itemAdapter = new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_spinner_item,     //array adapter holding the array list of categories created in the strings.xml
+                    ArrayAdapter<String> itemAdapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_spinner_item,     //array adapter holding the array list of categories created in the strings.xml
                             friendNameArray);                                                                                              //adapter to be populated with items_categoies array list
                     friendSpinner.setAdapter(itemAdapter);
                     //Toast.makeText(getBaseContext(), friendNameArray.get(0), Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
@@ -804,11 +799,9 @@ public class SelectedOwnListing extends AppCompatActivity {
     }
 
     public void sendToConversationScreen(String friendsID, String sentComment){
-        String friendID = friendsID;
-        String writtenComment = sentComment;
         Intent sendToConversation = new Intent(this, Conversation.class);                    //intent to open ActiveListings page (back button press)
-        sendToConversation.putExtra("UserID", friendID);
-        sendToConversation.putExtra("send message to friend", writtenComment);
+        sendToConversation.putExtra("UserID", friendsID);
+        sendToConversation.putExtra("send message to friend", sentComment);
         sendToConversation.putExtra("ListingID",listingId );                                                      //this intent is to populate fields of next page
         sendToConversation.putExtra("listingType", typeOfService);                                                                          //this intent is to populate fields of next page
         startActivity(sendToConversation);
@@ -816,7 +809,5 @@ public class SelectedOwnListing extends AppCompatActivity {
     }
 
 //******************END SHARE/DELETE FUCNTIONS********************************************//
-
-
 
 }

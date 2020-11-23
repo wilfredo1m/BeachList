@@ -40,7 +40,7 @@ public class ListingReviewPage extends AppCompatActivity {
     TextView listingTitle, listingDescription, listingPrice, listingCategory, listingType;
     String title, description, category, price, type;
     Map<String, String> listingImages;
-    NewListingData currentListing;
+    ListingData currentListing;
     ArrayList<Bitmap> bitmaps;
     ViewPager2 viewPager;
     ImageAdapter2 adapter;
@@ -122,7 +122,7 @@ public class ListingReviewPage extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
         Date date = new Date();
         String postDate = dateFormat.format(date);
-        currentListing = new NewListingData();
+        currentListing = new ListingData();
         currentListing.setTitle(title);
         currentListing.setCategory(category);
         currentListing.setDescription(description);
@@ -168,7 +168,7 @@ public class ListingReviewPage extends AppCompatActivity {
             });
         }
         else {
-            currentListing.setListingImages(" ");
+            currentListing.setListingImages(new ArrayList<String>());
 
             //To be updated at a later interaction with the item
             currentListing.setBuyerId(" ");

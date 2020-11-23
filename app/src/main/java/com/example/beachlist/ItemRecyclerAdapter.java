@@ -45,6 +45,7 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
                     .centerCrop()
                     .into(holder.listingPic);
         }
+        ListingData test = list.get(position).getValue(ListingData.class);
         holder.listingTitle.setText(list.get(position).getValue(ListingData.class).getTitle());
         holder.listingPrice.setText(String.format("$%s", list.get(position).getValue(ListingData.class).getPrice()));
 

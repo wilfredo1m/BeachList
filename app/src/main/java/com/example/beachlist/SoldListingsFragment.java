@@ -19,6 +19,9 @@ public class SoldListingsFragment extends Fragment {
     SoldListingsRecyclerAdapter adapter;
     public static List<ListingData> list = new ArrayList<>();
 
+    //temporary
+    ArrayList<String> listingImages = new ArrayList();
+
 
     public SoldListingsFragment() {
         // Required empty public constructor
@@ -53,10 +56,12 @@ public class SoldListingsFragment extends Fragment {
         // clears list each time to make sure no duplicates are added
         list.clear();
 
+        listingImages.add("https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F997005285?alt=media&token=af988212-f736-4eec-86e6-fd3ffb521547");
+
         // adds the sold listings to be the list that will be displayed
         for(int i = 0; i < listingNames.length; i++){
-            ListingData listing = new ListingData("https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F997005285?alt=media&token=af988212-f736-4eec-86e6-fd3ffb521547", sellerLastNames[i], listingNames[i],listingDescriptions[i],listingAskingPrices[i],
-                    listingSoldFor[i], listingSoldTo[i], listingSoldDate[i], "filler", "filler");
+            ListingData listing = new ListingData(listingImages, sellerLastNames[i], listingNames[i],listingDescriptions[i],listingAskingPrices[i],
+                    listingSoldFor[i], listingSoldTo[i], listingSoldDate[i], "filler", "filler", false);
             list.add(listing);
         }
 
