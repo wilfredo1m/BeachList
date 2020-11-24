@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
@@ -23,8 +25,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Conversation extends AppCompatActivity {
+    RecyclerView recyclerView;
+    public static List<DataSnapshot> conversation_list = new ArrayList<>();
+    ConversationRecyclerAdapter adapter;
 
     //***main page items used******************//
     Button sendMessage, backButton,soldButton;                                                        //buttons to navitage screen
@@ -38,7 +44,7 @@ public class Conversation extends AppCompatActivity {
     String potentialBuyerName, potentialBuyerEmail;
     ImageView listingImage;
     String listingType;
-    DatabaseReference listingRef;
+    DatabaseReference listingRef, conversationRef;
     //**end main page items used *************//
 
     //****popup window items used************//
@@ -70,13 +76,43 @@ public class Conversation extends AppCompatActivity {
         listingId = getIntent().getStringExtra("ListingID");
         listingType = getIntent().getStringExtra("listingType");
 
+        listingRef = firebaseDatabase.getReference().child("listings").child(listingType).child(listingId);
+        //TODO Get conversation reference from firebase
+        //conversationRef = firebaseDatabase.getReference().child();
 
-        if(listingType.equalsIgnoreCase("item")){
-            listingRef = firebaseDatabase.getReference().child("listings").child("item").child(listingId);
 
-        }else if(listingType.equalsIgnoreCase("service")){
-            listingRef = firebaseDatabase.getReference().child("listings").child("service").child(listingId);
-        }
+
+//        if(listingType.equalsIgnoreCase("item")) {
+//            listingRef = firebaseDatabase.getReference().child("listings").child("item").child(listingId);
+//        }
+//        }else if(listingType.equalsIgnoreCase("service")){
+//            listingRef = firebaseDatabase.getReference().child("listings").child("service").child(listingId);
+//        }
+
+        //******************************Display Conversation***************************************
+        recyclerView = findViewById(R.id.conversation_recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // clears list each time to make sure no duplicates are added
+        conversation_list.clear();
+        conversationRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        conversation_list.add(child);
+                    }
+                }
+
+                onMessageListQuery();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+        //*****************************************************************************************
 
         listingRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -210,5 +246,9 @@ public class Conversation extends AppCompatActivity {
                 .centerCrop()
                 .into(listingImage);
 
+    }
+    public void onMessageListQuery() {
+        adapter = new ConversationRecyclerAdapter(this, conversation_list);
+        recyclerView.setAdapter(adapter);
     }
 }
