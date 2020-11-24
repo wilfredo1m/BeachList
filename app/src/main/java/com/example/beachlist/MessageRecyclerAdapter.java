@@ -48,7 +48,7 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, SelectedUser.class);
+                Intent intent = new Intent(context, Conversation.class);
                 intent.putExtra("position", position);
                 context.startActivity(intent);
             }
