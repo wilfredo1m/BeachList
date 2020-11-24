@@ -27,13 +27,13 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView63"
+                    android:id="@+id/shared_title_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="title goes here" />
 
                 <TextView
-                    android:id="@+id/textView49"
+                    android:id="@+id/shared_comment_tv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#373535"
@@ -41,6 +41,7 @@
             </LinearLayout>
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/shared_listing_image_iv"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_weight=".5"
