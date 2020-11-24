@@ -30,7 +30,7 @@ public class ListingData {
     // For specific listings
     public ListingData(ArrayList<String> listingImageUrl,
                        String listingTitle, String listingCategory, String listingDescription, String listingAskingPrice, String listingPostDate, String listingOwnerId,
-                       String listingSellDate, String listingSellPrice, String listingBuyerId, Boolean banned) {
+                       String listingSellDate, String listingSellPrice, String listingBuyerId, Boolean listingIsBanned) {
         listingImages = listingImageUrl;
 
         title = listingTitle;
@@ -44,7 +44,7 @@ public class ListingData {
         sellPrice = listingSellPrice;
         buyerId = listingBuyerId;
 
-        isBanned = banned;
+        isBanned = listingIsBanned;
     }
 
 //    public ListingData(int[] photos, String title,String askFor){
@@ -133,7 +133,7 @@ public class ListingData {
         return isBanned;
     }
 
-    public void setBanned(Boolean banned) {
-        isBanned = banned;
+    public void setBanned(Boolean isBanned) {
+        this.isBanned = isBanned;
     }
 }

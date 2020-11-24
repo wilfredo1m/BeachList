@@ -129,6 +129,7 @@ public class ListingReviewPage extends AppCompatActivity {
         currentListing.setPrice(price);
         currentListing.setOwnerId(mAuth.getCurrentUser().getUid());
         currentListing.setPostDate(postDate);
+        currentListing.setBanned(false);
 
         //This should become obsolete but i didn't want to change listing data again right now
         listingImages = new HashMap<>();
