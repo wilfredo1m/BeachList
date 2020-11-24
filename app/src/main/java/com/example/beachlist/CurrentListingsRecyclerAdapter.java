@@ -39,7 +39,7 @@ public class CurrentListingsRecyclerAdapter extends RecyclerView.Adapter<Current
                 .centerCrop()
                 .into(holder.listingPic);
         holder.listingTitle.setText(list.get(position).child("title").getValue(String.class));
-        holder.listingPrice.setText("$"+list.get(position).child("price").getValue(String.class));
+        holder.listingPrice.setText(String.format("$%s", list.get(position).child("price").getValue(String.class)));
 
         // when a listing is clicked, the position is taken to get that person info
         holder.itemView.setOnClickListener(new View.OnClickListener() {
