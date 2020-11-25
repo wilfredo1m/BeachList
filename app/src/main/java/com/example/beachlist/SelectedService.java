@@ -3,6 +3,7 @@ package com.example.beachlist;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,11 +32,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SelectedService extends AppCompatActivity {
+    private static final String TAG = "EXCEPTION";
     ViewPager2 viewPager, reportPager;
     private final ArrayList<String> serviceImages = new ArrayList<>();
     private final ArrayList<String> firstImageOfService = new ArrayList<>();
+    private ListingData selectedListing;
 
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth mAuth;
@@ -143,14 +149,14 @@ public class SelectedService extends AppCompatActivity {
         assert listingId != null;
 
         
-        DatabaseReference listingRef = firebaseDatabase.getReference().child("listings").child("service").child(listingId);
+        final DatabaseReference listingRef = firebaseDatabase.getReference().child("listings").child("service").child(listingId);
         listingRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //Populate image URLs in global variable
                 getListingImages(snapshot.child("listingImages"));
                 //Get data and display info
-                ListingData selectedListing = snapshot.getValue(ListingData.class);
+                selectedListing = snapshot.getValue(ListingData.class);
                 assert selectedListing != null;
                 displayListingInfo(selectedListing);
                 //display owner Info
@@ -212,7 +218,8 @@ public class SelectedService extends AppCompatActivity {
         submitReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), reportedSpinnerSelection, Toast.LENGTH_SHORT).show();
+                banListing(listingRef.child("banned"));
+                addListingToReported();
             }
         });
 
@@ -252,6 +259,40 @@ public class SelectedService extends AppCompatActivity {
 
     }//end onCreate()
 
+    private void addListingToReported() {
+        DatabaseReference reportedRef = firebaseDatabase.getReference("reported").child("listings").child(listingId);
+        HashMap<String, String> reportedListing = new HashMap<>();
+        reportedListing.put("title", selectedListing.getTitle());
+        reportedListing.put("type", "service");
+        reportedListing.put("imageUrl", selectedListing.getListingImages().get(1));
+        reportedListing.put("reason", reportedSpinnerSelection);
+        reportedRef.setValue(reportedListing).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                openHomeScreen();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "onFailure: "+e.getLocalizedMessage());
+            }
+        });
+    }
+
+    private void banListing(DatabaseReference bannedRef) {
+        bannedRef.setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
+
     private void getListingImages(DataSnapshot dataSnapshot) {
         for (DataSnapshot child : dataSnapshot.getChildren()) {
             serviceImages.add(child.getValue(String.class));
@@ -262,7 +303,7 @@ public class SelectedService extends AppCompatActivity {
     private void displayListingInfo(ListingData selectedListing) {
         itemTitle.setText(selectedListing.getTitle());
         itemDescription.setText(selectedListing.getDescription());
-        itemPrice.setText("$" + selectedListing.getPrice());
+        itemPrice.setText(String.format("$%s", selectedListing.getPrice()));
         itemCategory.setText(selectedListing.getCategory());
 
         viewPager = findViewById(R.id.selected_service_images);

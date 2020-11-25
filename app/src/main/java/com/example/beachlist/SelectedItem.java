@@ -3,6 +3,7 @@ package com.example.beachlist;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,11 +32,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SelectedItem extends AppCompatActivity {
+    private static final String TAG = "EXCEPTION";
     ViewPager2 viewPager,reportedPager;
     private final ArrayList<String> itemImages = new ArrayList<>();
     private FirebaseDatabase firebaseDatabase;
+    private ListingData selectedListing;
     String userID;
     String listingOwnerID;
     ArrayList<String>friendNameArray = new ArrayList<>();
@@ -143,7 +149,7 @@ public class SelectedItem extends AppCompatActivity {
                 //Populate image URLs in global variable
                 getListingImages(snapshot.child("listingImages"));
                 //Get data and display info
-                ListingData selectedListing = snapshot.getValue(ListingData.class);
+                selectedListing = snapshot.getValue(ListingData.class);
                 assert selectedListing != null;
 
                 displayListingInfo(selectedListing);
@@ -199,9 +205,9 @@ public class SelectedItem extends AppCompatActivity {
         confirmReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reportListing(listingRef);
-                setupRevertScreenView();
-                Toast.makeText(getApplicationContext(), selectedItem, Toast.LENGTH_SHORT).show();
+                banListing(listingRef.child("banned"));
+                addListingToReported();
+//                Toast.makeText(getApplicationContext(), selectedItem, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -251,16 +257,43 @@ public class SelectedItem extends AppCompatActivity {
 //*********************************END BUTTON GROUP***********************************************************************************//
 //***********************************************************************************************************************************//
 
-
-
-
     }//end onCreate()
 
-    private void reportListing(DatabaseReference listingRef) {
-
+    private void addListingToReported() {
+        DatabaseReference reportedRef = firebaseDatabase.getReference("reported").child("listings").child(listingId);
+        HashMap<String, String> reportedListing = new HashMap<>();
+        reportedListing.put("title", selectedListing.getTitle());
+        reportedListing.put("type", "item");
+        reportedListing.put("imageUrl", selectedListing.getListingImages().get(1));
+        reportedListing.put("reason", selectedItem);
+        reportedRef.setValue(reportedListing).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                openHomeScreen();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "onFailure: "+e.getLocalizedMessage());
+            }
+        });
     }
 
-    private void getListingImages(DataSnapshot dataSnapshot) {
+    private void banListing(@NonNull DatabaseReference bannedRef) {
+        bannedRef.setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
+
+    private void getListingImages(@NonNull DataSnapshot dataSnapshot) {
         for (DataSnapshot child : dataSnapshot.getChildren()) {
             itemImages.add(child.getValue(String.class));
         }
@@ -335,7 +368,7 @@ public class SelectedItem extends AppCompatActivity {
     }
 
     public void goToMessageScreen(){
-        Intent intent = new Intent(this, ConversationScreen.class);
+        Intent intent = new Intent(this, Conversation.class);
         intent.putExtra("UserID",listingOwnerID );
         intent.putExtra("ListingID",listingId );
         intent.putExtra("listingType", "item");
@@ -355,31 +388,29 @@ public class SelectedItem extends AppCompatActivity {
         DatabaseReference friendsRef = firebaseDatabase.getReference("/users/" + userID + "/friends");
         friendsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         friendNameArray.add(child.child("firstName").getValue(String.class) + " " + child.child("lastName").getValue(String.class));
                         friendIDArray.add(child.getKey());
                     }
-                    ArrayAdapter<String> itemAdapter = new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_spinner_item,     //array adapter holding the array list of categories created in the strings.xml
+                    ArrayAdapter<String> itemAdapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_spinner_item,     //array adapter holding the array list of categories created in the strings.xml
                             friendNameArray);                                                                                              //adapter to be populated with items_categoies array list
                     shareItemSpinner.setAdapter(itemAdapter);                                                                              //setup adapter to be passed to spinner
                    // Toast.makeText(getBaseContext(), friendNameArray.get(0), Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
     }
 
     public void sendToFriend(String fID, String cmnt){
-        String FriendID = fID;
-        String comment = cmnt;
-        Intent intent = new Intent(this, ConversationScreen.class);
-        intent.putExtra("UserID",FriendID );
-        intent.putExtra("send message to friend", comment);
+        Intent intent = new Intent(this, Conversation.class);
+        intent.putExtra("UserID", fID);
+        intent.putExtra("send message to friend", cmnt);
         intent.putExtra("ListingID",listingId );
         intent.putExtra("listingType", "item");
         Toast.makeText(getApplicationContext(), listingId, Toast.LENGTH_SHORT).show();

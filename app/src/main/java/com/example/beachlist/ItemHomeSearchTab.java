@@ -52,7 +52,9 @@ public class ItemHomeSearchTab extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        item_list.add(child);
+                        if(child.child("banned").getValue(Boolean.class).equals(false)) {
+                            item_list.add(child);
+                        }
                     }
                 }
                 onServiceListQuery();
