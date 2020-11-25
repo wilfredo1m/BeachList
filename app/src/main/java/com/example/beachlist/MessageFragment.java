@@ -1,6 +1,5 @@
 package com.example.beachlist;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +28,7 @@ public class MessageFragment extends Fragment {
     Button testBtn;
     View messageView;
     private RecyclerView recyclerView;
+    String userID;
     public static List<DataSnapshot> message_list = new ArrayList<>();
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -39,7 +41,11 @@ public class MessageFragment extends Fragment {
 
         messageView =inflater.inflate(R.layout.fragment_messages, container, false);
 
-        DatabaseReference usersReference = database.getReference().child("users");
+        DatabaseReference usersReference = database.getReference("/users/" + userID + "/chats");;
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        userID = user.getUid();
 
         //***********************DISPLAY LIST OF MESSAGES*******************************
         recyclerView = messageView.findViewById(R.id.message_screen_recycler);
@@ -56,6 +62,7 @@ public class MessageFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        // we will add the other person who the user is talking to
                         message_list.add(child);
                     }
                 }

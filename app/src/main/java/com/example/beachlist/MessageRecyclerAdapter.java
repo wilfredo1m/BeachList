@@ -44,11 +44,11 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
 
         holder.userName.setText(fullName);
 
-        // when a listing is clicked, the position is taken to get that listings info
+        // when a conversation is clicked, the position is taken to get that conversation
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, Conversation.class);
+                Intent intent = new Intent(context, ConversationScreen.class);
                 intent.putExtra("position", position);
                 context.startActivity(intent);
             }

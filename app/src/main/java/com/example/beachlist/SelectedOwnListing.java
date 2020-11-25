@@ -799,7 +799,7 @@ public class SelectedOwnListing extends AppCompatActivity {
     }
 
     public void sendToConversationScreen(String friendsID, String sentComment){
-        Intent sendToConversation = new Intent(this, Conversation.class);                    //intent to open ActiveListings page (back button press)
+        Intent sendToConversation = new Intent(this, ConversationScreen.class);                    //intent to open ActiveListings page (back button press)
         sendToConversation.putExtra("UserID", friendsID);
         sendToConversation.putExtra("send message to friend", sentComment);
         sendToConversation.putExtra("ListingID",listingId );                                                      //this intent is to populate fields of next page
