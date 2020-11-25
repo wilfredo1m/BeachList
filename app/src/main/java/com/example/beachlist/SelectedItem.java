@@ -368,7 +368,7 @@ public class SelectedItem extends AppCompatActivity {
     }
 
     public void goToMessageScreen(){
-        Intent intent = new Intent(this, Conversation.class);
+        Intent intent = new Intent(this, ConversationScreen.class);
         intent.putExtra("UserID",listingOwnerID );
         intent.putExtra("ListingID",listingId );
         intent.putExtra("listingType", "item");
@@ -408,7 +408,7 @@ public class SelectedItem extends AppCompatActivity {
     }
 
     public void sendToFriend(String fID, String cmnt){
-        Intent intent = new Intent(this, Conversation.class);
+        Intent intent = new Intent(this, ConversationScreen.class);
         intent.putExtra("UserID", fID);
         intent.putExtra("send message to friend", cmnt);
         intent.putExtra("ListingID",listingId );
