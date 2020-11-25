@@ -51,7 +51,9 @@ public class ServiceHomeSearchTab extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        service_list.add(child);
+                        if(child.child("banned").getValue(Boolean.class).equals(false)) {
+                            service_list.add(child);
+                        }
                     }
                 }
                 onServiceListQuery();
