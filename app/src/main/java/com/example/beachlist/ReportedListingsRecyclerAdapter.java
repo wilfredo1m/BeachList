@@ -82,6 +82,8 @@ public class ReportedListingsRecyclerAdapter extends RecyclerView.Adapter<Report
                             @Override
                             public void onSuccess(Void aVoid) {
                                 list.remove(position);
+                                notifyItemRemoved(position);
+                                notifyItemRangeChanged(position, list.size());
                                 System.out.println("Waived");
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -111,6 +113,9 @@ public class ReportedListingsRecyclerAdapter extends RecyclerView.Adapter<Report
                         reportedRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
+                                list.remove(position);
+                                notifyItemRemoved(position);
+                                notifyItemRangeChanged(position, list.size());
                                 System.out.println("Deleted");
                             }
                         }).addOnFailureListener(new OnFailureListener() {

@@ -65,7 +65,6 @@ public class ReportedListingsFragment extends Fragment {
 
             }
         });
-
         //*******************************************************************************
 
         return reportedListingPage;
@@ -73,8 +72,8 @@ public class ReportedListingsFragment extends Fragment {
 
     public void onUserListQuery() {
         ReportedListingsRecyclerAdapter adapter = new ReportedListingsRecyclerAdapter(getActivity(), listings);
-        adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 }
 
