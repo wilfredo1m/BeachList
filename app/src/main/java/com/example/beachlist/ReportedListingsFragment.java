@@ -1,5 +1,6 @@
 package com.example.beachlist;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,6 +46,7 @@ public class ReportedListingsFragment extends Fragment {
 //        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
 //        recyclerView.setLayoutManager(layoutManager);
 
+
         listings.clear();
 
         reportedRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -72,11 +73,9 @@ public class ReportedListingsFragment extends Fragment {
 
     public void onUserListQuery() {
         ReportedListingsRecyclerAdapter adapter = new ReportedListingsRecyclerAdapter(getActivity(), listings);
+        adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
     }
-
-
-
 }
 
 

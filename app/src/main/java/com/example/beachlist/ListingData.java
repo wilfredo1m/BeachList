@@ -9,7 +9,6 @@ public class ListingData {
     String sellDate, sellPrice, buyerId;
     Boolean isBanned;
 
-
     public ListingData() {
         listingImages = new ArrayList();
 

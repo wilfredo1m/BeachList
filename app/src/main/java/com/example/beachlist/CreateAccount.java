@@ -34,6 +34,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
 
 public class CreateAccount extends AppCompatActivity {
     private static final String TAG = "CustomAuthActivity";
@@ -213,10 +214,28 @@ public class CreateAccount extends AppCompatActivity {
         //Write data to database
         userReference.setValue(currentUser);
 
+//        HashMap<String, Boolean> userConditionals = new HashMap<>();
+//        userConditionals.put("isAdmin", false);
+//        userConditionals.put("banned", false);
+//        //Initialize database within User reference with a child using user ID
+//        final DatabaseReference adminReference = database.getReference("users").child(userId);
+//        //write data to database
+//        adminReference.setValue(userConditionals);
+
         //Initialize database within User reference with a child using user ID
         final DatabaseReference adminReference = database.getReference("users").child(userId).child("isAdmin");
         //write data to database
         adminReference.setValue(false);
+
+        //Initialize database within User reference with a child using user ID
+        final DatabaseReference bannedReference = database.getReference("users").child(userId).child("banned");
+        //write data to database
+        bannedReference.setValue(false);
+
+//        //Initialize database within User reference with a child using user ID
+//        final DatabaseReference banCountReference = database.getReference("users").child(userId).child("isAdmin");
+//        //write data to database
+//        adminReference.setValue(0);
 
         //If user has selected an image
         if(filePath != null) {
