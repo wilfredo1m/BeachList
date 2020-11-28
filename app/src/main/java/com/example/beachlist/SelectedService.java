@@ -344,14 +344,7 @@ public class SelectedService extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void populateReportScreen() {
-        reportedServiceTitle = findViewById(R.id.reportedServiceTitle);
-        reportedServiceTitle.setText(itemTitle.getText());
-        adapter2 = new ImageAdapter(getApplicationContext(), serviceImages);
-        reportPager = findViewById(R.id.reported_Service_pager);
-        reportPager.setAdapter(adapter2);
 
-    }
 
     public void setupPopUpScreenView() {
         // ****group to fix visibilities for screen ****//

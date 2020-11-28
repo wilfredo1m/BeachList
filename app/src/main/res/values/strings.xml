@@ -100,6 +100,72 @@
     <string name="repair_category">Electronic Repair</string>
     <string name="commission_category">Commission</string>
 
+    <string name="item_category_tab">Items</string>
+    <string name="service_category_tab">Services</string>
+
+    <string name="current_listing_tab">Current Listings</string>
+    <string name="sold_listing_tab">Sold Listings</string>
+    <string name="friend_image_icon">friend image goes here</string>
+
+    <!-- creating a post strings -->
+    <string name="photo_description_bar">Photo</string>
+    <string name="title_description_bar">Title</string>
+    <string name="detail_description_bar">Detail</string>
+    <string name="post_description_bar">Post</string>
+    <string name="description_lbl">Description</string>
+    <string name="next_button">Next</string>
+    <string name="submit_button">Submit</string>
+    <string name="listing_type">Listing Type</string>
+    <string name="listing_price">Listing Price</string>
+    <string name="item_rb">Item</string>
+    <string name="service_rb">Service</string>
+    <string name="category_type">Select A Category</string>
+    <string name="price_hint">100.00</string>
+    <string name="title_hint">Title goes here</string>
+    <string name="description_hint">Enter a description</string>
+    <string name="price_lbl">Price</string>
+    <string name="category_lbl">Category</string>
+    <string name="review_lbl">Review</string>
+
+    <!-- own listing strings -->
+    <string name="modify_button">Modify</string>
+    <string name="own_listing_description_field">Description Goes Here</string>
+    <string name="own_listing_description_lbl">Description</string>
+    <string name="own_listing_title">Title Goes Here</string>
+    <string name="share_listing_title">Share Listing</string>
+    <string name ="add_comment_lbl">Add a Comment</string>
+    <string name= "comment_hint">type comment here</string>
+    <string name ="select_friend_lbl">Select a Friend</string>
+    <string name= "share_link_button">Share Link</string>
+    <string name= "modify_listing_title">Modify Listing</string>
+    <string name= "change_picture_btn">change_picture</string>
+    <string name= "change_title_btn">Change Title</string>
+    <string name= "price_field_hint">Price Goes Here</string>
+    <string name= "current_category">Current Category</string>
+    <string name= "change_category_btn">Change Category</string>
+    <string name = "change_price_btn">Change Price</string>
+    <string name= "change_description_btn">Change Description</string>
+    <string name= "description_filler_info">Description goes here </string>
+    <string name= "cancel_changes_btn">Cancel Changes</string>
+    <string name= "confirm_changes_btn">Confirm Changes</string>
+    <string name= "delete_listing_button">Delete Listing</string>
+    <string name= "delete_listing_title">Are You Sure You Want To Delete This Listing</string>
+    <string name= "confirm_delete_btn">Confirm</string>
+    <string name= "delete_warning">all data will be lost if confirm button is pressed</string>
+
+    <!-- reported page info strings -->
+    <string name= "reported_listing_tab">Listings</string>
+    <string name= "reported_users_tab">Users</string>
+    <string name= "title_lbl">Title</string>
+    <string name = "contact_seller_btn">Contact Seller</string>
+    <string name= "reason_to_report_title">Reason</string>
+    <string name = "reason_to_report_prompt"></string>
+    <string name = "listings_title">Listing</string>
+    <string name = "service_title">Service</string>
+    <string name= "item_lbl">Item</string>
+
+
+
     <!-- spinner stuff -->
     <string-array name="categories">
         <item>book</item>

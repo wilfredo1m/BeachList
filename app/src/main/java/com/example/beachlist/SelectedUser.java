@@ -235,14 +235,6 @@ for (DataSnapshot child : userListings.getChildren()) {                         
                 });
     }
 
-    //populates fields for user being reported
-    public void populateReportedUserScreen(){
-        //reported user information
-        reportedUserName = findViewById(R.id.reported_user_name);
-        reportedUserName.setText(String.format("%s %s", firstName.getText(), lastName.getText()));
-        reportedPersonImage = findViewById(R.id.reportedUserImage);
-        reportedPersonImage.setImageDrawable(profilePic.getDrawable());
-    }
     public void setupPopUpScreenView(){
         // change visibility to views
         constraintLayout.setVisibility(View.VISIBLE);

@@ -88,10 +88,10 @@
         android:layout_marginLeft="64dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/ic_baseline_person_add_disabled_24"
-        app:layout_constraintEnd_toEndOf="@+id/textView11"
+        app:layout_constraintEnd_toEndOf="@+id/remove_friend_lbl"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/btn_report_friend"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/remove_friend_lbl" />
 
     <RatingBar
         android:id="@+id/ratingBar2"
@@ -111,13 +111,13 @@
         android:layout_height="40dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/ic_baseline_report_24"
-        app:layout_constraintEnd_toEndOf="@+id/textView10"
+        app:layout_constraintEnd_toEndOf="@+id/reported_user_lbl"
         app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintStart_toStartOf="@+id/reported_user_lbl"
+        app:layout_constraintTop_toBottomOf="@+id/reported_user_lbl" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/reported_user_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -128,7 +128,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_email" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/remove_friend_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -136,8 +136,8 @@
         android:text="@string/remove_friend_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toTopOf="@+id/textView10" />
+        app:layout_constraintStart_toEndOf="@+id/reported_user_lbl"
+        app:layout_constraintTop_toTopOf="@+id/reported_user_lbl" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/popup_layout"
@@ -195,6 +195,7 @@
                         android:id="@+id/reported_friend_image"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/friend_image_description"
                         android:visibility="gone"
                         app:srcCompat="@drawable/bulbasaur" />
 
@@ -296,11 +297,11 @@
                 app:titleMarginStart="150dp" />
 
             <TextView
-                android:id="@+id/textView39"
+                android:id="@+id/user_items_lbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="item" />
+                android:text="@string/item_tab" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/friend_item_recycler"
@@ -311,11 +312,11 @@
             </androidx.recyclerview.widget.RecyclerView>
 
             <TextView
-                android:id="@+id/textView41"
+                android:id="@+id/user_service_lbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="service" />
+                android:text="@string/service_category_tab" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/friend_service_recycler"

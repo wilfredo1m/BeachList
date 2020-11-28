@@ -1,7 +1,6 @@
 package com.example.beachlist;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,7 +9,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +28,7 @@ public class ListingDescriptionPage extends AppCompatActivity {
         setContentView(R.layout.activity_listing_description_page);
 
         //Radio group initialization
-        radioGroup = findViewById(R.id.radioGroup2);
+        radioGroup = findViewById(R.id.listing_type_radio_group);
 
 //************************************BUTTON GROUP ************************************************//
         // Cancels the post being created / clears all fields entered

@@ -44,21 +44,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center|center_horizontal"
-                android:text="SHARE LISTING"
+                android:text="@string/share_listing_title"
                 android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/service_comment_lbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Send a comment:" />
+                android:text="@string/add_comment_lbl" />
 
             <EditText
                 android:id="@+id/service_comment_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints=""
                 android:ems="10"
                 android:gravity="start|top"
+                android:hint="@string/comment_hint"
                 android:inputType="textMultiLine" />
 
             <LinearLayout
@@ -72,7 +74,7 @@
                 android:id="@+id/select_friend_for_service_lbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select Friend" />
+                android:text="@string/select_friend_lbl" />
 
             <LinearLayout
                 android:id="@+id/divider_layout2"
@@ -94,26 +96,31 @@
 
                 <Button
                     android:id="@+id/cancel_share_service_button"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="#575757"
                     android:text="@string/cancelBtn" />
 
                 <Button
                     android:id="@+id/confirm_share_service_btn"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="share link" />
+                    android:background="#575757"
+                    android:text="@string/share_link_button" />
             </LinearLayout>
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <TextView
         android:id="@+id/tv_selected_service_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Service"
+        android:text="@string/service_title"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar7"
         app:layout_constraintEnd_toEndOf="@+id/toolbar7"
@@ -181,16 +188,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center|center_horizontal"
-                            android:text="REPORT"
+                            android:text="@string/report_user_lbl"
                             android:textSize="18sp" />
-
-                        <androidx.viewpager2.widget.ViewPager2
-                            android:id="@+id/reported_Service_pager"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:visibility="gone">
-
-                        </androidx.viewpager2.widget.ViewPager2>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -201,31 +200,6 @@
                     android:layout_marginBottom="5dp"
                     android:background="#575757"
                     android:orientation="horizontal"></LinearLayout>
-
-                <TextView
-                    android:id="@+id/textView35"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#2B2B2B"
-                    android:gravity="center_horizontal"
-                    android:text="Title:"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:id="@+id/reportedServiceTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#121212"
-                    android:gravity="center_horizontal"
-                    android:text="Title Goes Here"
-                    android:visibility="gone" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#575757"
-                    android:orientation="horizontal"
-                    android:visibility="gone"></LinearLayout>
 
                 <TextView
                     android:id="@+id/textView18"
@@ -248,17 +222,21 @@
 
                     <Button
                         android:id="@+id/cancer_report_service_button"
+                        style="?android:attr/buttonBarButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="cancel report" />
+                        android:background="#575757"
+                        android:text="@string/cancelBtn" />
 
                     <Button
                         android:id="@+id/submit_service_report"
+                        style="?android:attr/buttonBarButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="submit report" />
+                        android:background="#575757"
+                        android:text="@string/submit_button" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -311,7 +289,7 @@
                     android:layout_height="wrap_content"
                     android:background="#2B2B2B"
                     android:gravity="center_horizontal"
-                    android:text="Title"
+                    android:text="@string/title_lbl"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -321,7 +299,7 @@
                     android:layout_height="wrap_content"
                     android:background="#121212"
                     android:gravity="center_horizontal"
-                    android:text="Title goes here"
+                    android:text="@string/title_hint"
                     android:textColor="#FFFFFF"
                     android:textSize="22sp" />
 
@@ -332,12 +310,12 @@
                     android:orientation="horizontal"></LinearLayout>
 
                 <TextView
-                    android:id="@+id/textView27"
+                    android:id="@+id/category_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#2B2B2B"
                     android:gravity="center_horizontal"
-                    android:text="Category"
+                    android:text="@string/category_lbl"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -347,7 +325,7 @@
                     android:layout_height="wrap_content"
                     android:background="#121212"
                     android:gravity="center_horizontal"
-                    android:text="Category goes here"
+                    android:text="@string/category_lbl"
                     android:textColor="#FFFFFF" />
 
                 <LinearLayout
@@ -358,12 +336,12 @@
                     android:orientation="horizontal"></LinearLayout>
 
                 <TextView
-                    android:id="@+id/textView33"
+                    android:id="@+id/listing_price_lbl_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#2B2B2B"
                     android:gravity="center_horizontal"
-                    android:text="Price"
+                    android:text="@string/price_lbl"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -373,7 +351,7 @@
                     android:layout_height="wrap_content"
                     android:background="#121212"
                     android:gravity="center_horizontal"
-                    android:text="Price goes here"
+                    android:text="@string/price_field_hint"
                     android:textColor="#FFFFFF" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -413,7 +391,7 @@
                                     android:layout_height="100dp"
                                     android:layout_margin="1dp"
                                     android:background="@drawable/ic_baseline_person_24"
-                                    android:contentDescription="TODO"
+                                    android:contentDescription="@string/friend_image_description"
                                     android:scaleType="centerCrop"
                                     app:civ_border_color="#7A7A7A"
                                     app:civ_border_width="4dp" />
@@ -474,12 +452,12 @@
                     android:orientation="horizontal"></LinearLayout>
 
                 <TextView
-                    android:id="@+id/textView22"
+                    android:id="@+id/listing_description_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#2B2B2B"
                     android:gravity="center_horizontal"
-                    android:text="Description"
+                    android:text="@string/description_lbl"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -488,7 +466,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:background="#121212"
-                    android:text="description goes here"
+                    android:text="@string/description_filler_info"
                     android:textColor="#FFFFFF" />
 
                 <LinearLayout
@@ -498,17 +476,21 @@
 
                     <Button
                         android:id="@+id/share_item_button"
+                        style="?android:attr/buttonBarButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="share" />
+                        android:background="#575757"
+                        android:text="@string/share_link_button" />
 
                     <Button
                         android:id="@+id/report_item_button"
+                        style="?android:attr/buttonBarButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="report" />
+                        android:background="#575757"
+                        android:text="@string/report_button" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -517,9 +499,11 @@
 
     <Button
         android:id="@+id/contact_seller_button"
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="contact seller"
+        android:background="#575757"
+        android:text="@string/contact_seller_btn"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

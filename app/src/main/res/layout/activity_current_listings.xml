@@ -57,13 +57,13 @@
             android:id="@+id/current_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Current Listings" />
+            android:text="@string/current_listing_tab" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/sold_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sold Listings" />
+            android:text="@string/sold_listing_tab" />
 
     </com.google.android.material.tabs.TabLayout>
 

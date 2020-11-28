@@ -42,13 +42,13 @@
             android:id="@+id/reported_user_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Users" />
+            android:text="@string/reported_users_tab" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/reported_listing_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Listings" />
+            android:text="@string/reported_listing_tab" />
 
     </com.google.android.material.tabs.TabLayout>
 

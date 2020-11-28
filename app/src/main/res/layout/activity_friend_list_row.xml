@@ -37,7 +37,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginLeft="4dp"
                     android:background="@drawable/ic_baseline_person_24"
-                    android:contentDescription="TODO"
+                    android:contentDescription="@string/friend_image_description"
                     app:civ_border_color="#7A7A7A"
                     app:civ_border_width="4dp" />
 

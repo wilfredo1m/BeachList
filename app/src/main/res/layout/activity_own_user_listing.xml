@@ -41,7 +41,7 @@
                         android:layout_height="50dp"
                         android:background="#292929"
                         android:gravity="center_horizontal"
-                        android:text="MODIFY LISTING"
+                        android:text="@string/modify_listing_title"
                         android:textSize="24sp" />
 
                     <LinearLayout
@@ -77,15 +77,18 @@
 
                         <Button
                             android:id="@+id/change_image_btn"
+                            style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="change picture" />
+                            android:background="#575757"
+                            android:text="@string/change_picture_btn" />
 
                         <LinearLayout
                             android:id="@+id/title_layout"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:background="#252525"
+                            android:baselineAligned="false"
                             android:orientation="horizontal">
 
                             <LinearLayout
@@ -102,16 +105,18 @@
                                     android:layout_height="match_parent"
                                     android:layout_margin="4dp"
                                     android:gravity="center|center_horizontal"
-                                    android:text="Title Goes Here"
+                                    android:text="@string/title_hint"
                                     android:visibility="visible" />
 
                                 <EditText
                                     android:id="@+id/edit_title_pt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:autofillHints=""
                                     android:background="#121212"
                                     android:ems="10"
                                     android:gravity="center|center_horizontal"
+                                    android:hint="@string/title_hint"
                                     android:inputType="textPersonName"
                                     android:visibility="gone"
                                     tools:text="Current Title" />
@@ -126,14 +131,11 @@
 
                                 <Button
                                     android:id="@+id/change_title_button"
+                                    style="?android:attr/buttonBarButtonStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:text="Change Title" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical"></LinearLayout>
+                                    android:background="#575757"
+                                    android:text="@string/change_title_btn" />
 
                             </LinearLayout>
 
@@ -144,6 +146,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:background="#252525"
+                            android:baselineAligned="false"
                             android:orientation="horizontal">
 
                             <LinearLayout
@@ -157,17 +160,18 @@
                                     android:id="@+id/current_price_tv"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:layout_margin="4dp"
                                     android:background="#121212"
                                     android:gravity="center|center_horizontal"
-                                    android:text="Price Goes here"
+                                    android:text="@string/price_field_hint"
                                     android:visibility="visible" />
 
                                 <EditText
                                     android:id="@+id/change_price_txt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:autofillHints=""
                                     android:ems="10"
+                                    android:hint="@string/price_field_hint"
                                     android:inputType="numberDecimal"
                                     android:visibility="gone" />
 
@@ -181,9 +185,11 @@
 
                                 <Button
                                     android:id="@+id/change_price_btn"
+                                    style="?android:attr/buttonBarButtonStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Change Price" />
+                                    android:background="#575757"
+                                    android:text="@string/change_price_btn" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -193,6 +199,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="#252525"
+                            android:baselineAligned="false"
                             android:orientation="horizontal">
 
                             <LinearLayout
@@ -206,10 +213,9 @@
                                     android:id="@+id/current_category_tv"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:layout_margin="4dp"
                                     android:background="#121212"
                                     android:gravity="center|center_horizontal"
-                                    android:text="Current Category" />
+                                    android:text="@string/current_category" />
 
                                 <Spinner
                                     android:id="@+id/change_category_spinner"
@@ -227,9 +233,11 @@
 
                                 <Button
                                     android:id="@+id/change_category_btn"
+                                    style="?android:attr/buttonBarButtonStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Change Category" />
+                                    android:background="#575757"
+                                    android:text="@string/change_category_btn" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -239,37 +247,42 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="#151515"
+                            android:baselineAligned="false"
                             android:orientation="horizontal">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
 
+                                <EditText
+                                    android:id="@+id/change_description_ml_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="90dp"
+                                    android:autofillHints=""
+                                    android:background="#121212"
+                                    android:ems="10"
+                                    android:gravity="start|top"
+                                    android:hint="@string/description_hint"
+                                    android:inputType="textMultiLine"
+                                    android:visibility="gone" />
+
                                 <Button
                                     android:id="@+id/change_description_btn"
+                                    style="?android:attr/buttonBarButtonStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Change Description" />
+                                    android:background="#575757"
+                                    android:text="@string/change_description_btn" />
 
                                 <TextView
                                     android:id="@+id/current_description_tv"
                                     android:layout_width="match_parent"
                                     android:layout_height="90dp"
                                     android:background="#121212"
-                                    android:text="Description Goes here"
-                                    android:visibility="visible" />
+                                    android:text="@string/description_filler_info" />
 
-                                <EditText
-                                    android:id="@+id/change_description_ml_text"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="90dp"
-                                    android:background="#121212"
-                                    android:ems="10"
-                                    android:gravity="start|top"
-                                    android:inputType="textMultiLine"
-                                    android:visibility="gone" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -284,17 +297,21 @@
 
                         <Button
                             android:id="@+id/cancel_changes_btn"
+                            style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="Cancel Changes" />
+                            android:background="#575757"
+                            android:text="@string/cancel_changes_btn" />
 
                         <Button
                             android:id="@+id/accept_changes_btn"
+                            style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="Confirm Changes" />
+                            android:background="#575757"
+                            android:text="@string/confirm_changes_btn" />
 
                     </LinearLayout>
 
@@ -306,9 +323,11 @@
 
                         <Button
                             android:id="@+id/delete_listing_btn"
+                            style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Delete Listing" />
+                            android:background="#575757"
+                            android:text="@string/delete_listing_button" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -351,22 +370,22 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView47"
+                    android:id="@+id/delete_listing_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:background="#F40707"
                     android:gravity="center|center_horizontal"
-                    android:text="Are you sure you want to delete the listing?"
+                    android:text="@string/delete_listing_title"
                     android:textSize="30sp" />
 
                 <TextView
-                    android:id="@+id/textView51"
+                    android:id="@+id/delete_warning_message_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#4A1919"
                     android:gravity="center_horizontal"
-                    android:text="all data will be lost if confirm button is pressed" />
+                    android:text="@string/delete_warning" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -376,17 +395,21 @@
 
                     <Button
                         android:id="@+id/cancel_delete_listing_btn"
+                        style="?android:attr/buttonBarButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="cancel" />
+                        android:background="#575757"
+                        android:text="@string/cancelBtn" />
 
                     <Button
                         android:id="@+id/confirm_delete_listing_btn"
+                        style="?android:attr/buttonBarButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="confirm" />
+                        android:background="#575757"
+                        android:text="@string/confirm_delete_btn" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -406,7 +429,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="#000000"
             android:orientation="vertical">
 
@@ -495,12 +518,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView21"
+                    android:id="@+id/select_category_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#2B2B2B"
                     android:gravity="center_horizontal"
-                    android:text="Title"
+                    android:text="@string/title_description_bar"
                     android:textColor="#B5B5B5" />
 
                 <LinearLayout
@@ -514,16 +537,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#121212"
-                    android:text="title will go here"
+                    android:text="@string/own_listing_title"
                     android:textColor="#FFFFFF" />
 
                 <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/own_listing_price_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#2B2B2B"
                     android:gravity="center_horizontal"
-                    android:text="price"
+                    android:text="@string/price_lbl"
                     android:textColor="#B5B5B5" />
 
                 <LinearLayout
@@ -541,12 +564,12 @@
                     tools:text="$200.00" />
 
                 <TextView
-                    android:id="@+id/textView15"
+                    android:id="@+id/own_listing_descirption_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#2B2B2B"
                     android:gravity="center_horizontal"
-                    android:text="listing description"
+                    android:text="@string/own_listing_description_lbl"
                     android:textColor="#B5B5B5" />
 
                 <LinearLayout
@@ -560,7 +583,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="114dp"
                     android:background="#121212"
-                    android:text="description here"
+                    android:text="@string/own_listing_description_field"
                     android:textColor="#FFFFFF" />
 
                 <Button
@@ -570,7 +593,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/rounded_corners"
-                    android:text="modify post" />
+                    android:text="@string/modify_button" />
 
             </LinearLayout>
 
@@ -608,21 +631,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center|center_horizontal"
-                android:text="SHARE LISTING"
+                android:text="@string/share_listing_title"
                 android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/textView45"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="add a comment" />
+                android:text="@string/add_comment_lbl" />
 
             <EditText
                 android:id="@+id/comment_description_ET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints=""
                 android:ems="10"
                 android:gravity="start|top"
+                android:hint="@string/comment_hint"
                 android:inputType="textMultiLine" />
 
             <LinearLayout
@@ -636,7 +661,7 @@
                 android:id="@+id/select_friend_to_share_own_listing_lbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select Friend" />
+                android:text="@string/select_friend_lbl" />
 
             <LinearLayout
                 android:id="@+id/share_own_listing_divider_2"
@@ -657,17 +682,21 @@
 
                 <Button
                     android:id="@+id/cancel_share_own_listing_btn"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="#575757"
                     android:text="@string/cancelBtn" />
 
                 <Button
                     android:id="@+id/confirm_share_own_listing_btn"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="share link" />
+                    android:background="#575757"
+                    android:text="@string/share_link_button" />
             </LinearLayout>
 
         </LinearLayout>

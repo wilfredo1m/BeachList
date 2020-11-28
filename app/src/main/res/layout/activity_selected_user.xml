@@ -40,6 +40,7 @@
         android:layout_marginLeft="12dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/ic_baseline_person_24"
+        android:contentDescription="@string/friend_image_description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tb_primary_toolbar" />
 
@@ -141,7 +142,7 @@
                 android:id="@+id/textView16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="items" />
+                android:text="@string/item_lbl" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/item_recycler"
@@ -153,7 +154,7 @@
                 android:id="@+id/textView29"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="services" />
+                android:text="@string/service_title" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/service_recycler"
@@ -239,15 +240,6 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:id="@+id/reportedUserImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp"
-                        android:scaleType="fitCenter"
-                        android:visibility="gone"
-                        app:srcCompat="@drawable/bulbasaur" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -255,31 +247,6 @@
                     android:layout_height="1dp"
                     android:background="#575757"
                     android:orientation="horizontal"></LinearLayout>
-
-                <TextView
-                    android:id="@+id/name_of_reported_user_lbl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#2B2B2B"
-                    android:gravity="center_horizontal"
-                    android:text="@string/full_name"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:id="@+id/reported_user_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#121212"
-                    android:gravity="center_horizontal"
-                    android:visibility="gone"
-                    tools:text="Name of Reported User" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#575757"
-                    android:orientation="horizontal"
-                    android:visibility="gone"></LinearLayout>
 
                 <TextView
                     android:id="@+id/textView26"
@@ -302,16 +269,20 @@
 
                     <Button
                         android:id="@+id/cancel_report_button"
+                        style="?android:attr/buttonBarButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="#575757"
                         android:text="@string/cancelBtn" />
 
                     <Button
                         android:id="@+id/confirm_report_user_button"
+                        style="?android:attr/buttonBarButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="#575757"
                         android:text="@string/report_button" />
                 </LinearLayout>
 

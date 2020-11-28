@@ -38,6 +38,7 @@
         android:layout_height="169dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/ic_baseline_person_24"
+        android:contentDescription="@string/pending_friend_image_description"
         app:layout_constraintEnd_toStartOf="@+id/tv_pending_last_name"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -183,11 +184,11 @@
                 app:titleMarginStart="150dp" />
 
             <TextView
-                android:id="@+id/textView37"
+                android:id="@+id/pending_user_item_lbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="item" />
+                android:text="@string/item_lbl" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pending_friend_item_recycler"
@@ -197,11 +198,11 @@
                 android:background="#3F51B5" />
 
             <TextView
-                android:id="@+id/textView38"
+                android:id="@+id/pending_user_service_lbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="service" />
+                android:text="@string/service_title" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pending_friend_service_recycler"
@@ -252,7 +253,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView13"
+                        android:id="@+id/reason_for_report_title"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_marginBottom="5dp"
@@ -260,45 +261,6 @@
                         android:gravity="center|center_horizontal"
                         android:text="@string/reason_header"
                         android:textColor="#606060" />
-
-                    <ImageView
-                        android:id="@+id/reported_user_image"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        app:srcCompat="@drawable/bulbasaur" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#575757"
-                        android:orientation="horizontal"
-                        android:visibility="gone"></LinearLayout>
-
-                    <TextView
-                        android:id="@+id/name_lbl"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#2B2B2B"
-                        android:gravity="center_horizontal"
-                        android:text="@string/full_name"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:id="@+id/display_reported_user_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#121212"
-                        android:gravity="center_horizontal"
-                        android:visibility="gone"
-                        tools:text="full name goes here" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#575757"
-                        android:orientation="horizontal"
-                        android:visibility="gone"></LinearLayout>
 
                     <TextView
                         android:id="@+id/report_reason_lbl"
@@ -321,16 +283,20 @@
 
                         <Button
                             android:id="@+id/cancel_report_btn"
+                            style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:background="#575757"
                             android:text="@string/cancelBtn" />
 
                         <Button
                             android:id="@+id/submit_report_btn"
+                            style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:background="#575757"
                             android:text="@string/report_button" />
                     </LinearLayout>
 

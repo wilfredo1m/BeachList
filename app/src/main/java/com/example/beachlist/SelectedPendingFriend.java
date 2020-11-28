@@ -316,14 +316,6 @@ public class SelectedPendingFriend extends AppCompatActivity {
         recyclerViewService.setAdapter(serviceRecyclerAdapter);
     }
 
-    //populates fields for user being reported
-    public void populateReportedUserScreen(){
-        //reported user information
-        reportedUserName = findViewById(R.id.display_reported_user_name);
-        reportedUserName.setText(String.format("%s %s", firstName.getText(), lastName.getText()));
-        reportedPersonImage = findViewById(R.id.reported_user_image);
-        reportedPersonImage.setImageDrawable(profilePic.getDrawable());
-    }
     public void setupPopUpScreenView(){
         // change visibility to views
         popupWindow.setVisibility(View.VISIBLE);

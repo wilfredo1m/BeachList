@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar8"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/toolbar9"></LinearLayout>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar9"
@@ -50,53 +50,53 @@
         app:tickMarkTint="#00F8FF" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/photo_descirption_bar_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
         android:fontFamily="sans-serif-black"
-        android:text="photo"
+        android:text="@string/photo_description_bar"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/textView7"
+        app:layout_constraintBottom_toBottomOf="@+id/title_descirption_bar_lbl"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView7"
+        app:layout_constraintTop_toTopOf="@+id/title_descirption_bar_lbl"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/title_descirption_bar_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
         android:layout_marginLeft="88dp"
         android:fontFamily="sans-serif-black"
-        android:text="title"
+        android:text="@string/title_description_bar"
         android:textColor="#FFFFFF"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintStart_toEndOf="@+id/photo_descirption_bar_lbl"
         app:layout_constraintTop_toBottomOf="@+id/title_seek_bar" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/detail_descirption_bar_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
         android:fontFamily="sans-serif-black"
-        android:text="detail"
+        android:text="@string/detail_description_bar"
         android:textColor="#00F6FF"
-        app:layout_constraintEnd_toStartOf="@+id/textView19"
+        app:layout_constraintEnd_toStartOf="@+id/post_descirption_bar_lbl"
         app:layout_constraintTop_toBottomOf="@+id/title_seek_bar" />
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/post_descirption_bar_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
-        android:text="post"
+        android:text="@string/post_description_bar"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/textView14"
+        app:layout_constraintBottom_toBottomOf="@+id/detail_descirption_bar_lbl"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="@+id/detail_descirption_bar_lbl"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
@@ -104,7 +104,7 @@
         android:layout_width="59dp"
         android:layout_height="39dp"
         android:background="#292929"
-        android:text="cancel"
+        android:text="@string/cancelBtn"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar9" />
@@ -115,7 +115,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_corners"
-        android:text="Next"
+        android:text="@string/next_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -141,17 +141,17 @@
             android:visibility="visible"></LinearLayout>
 
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/listing_type_lbl"
             android:layout_width="match_parent"
             android:layout_height="37dp"
             android:background="#2B2B2B"
             android:gravity="center_horizontal"
-            android:text="Listing Type"
+            android:text="@string/listing_type"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
         <RadioGroup
-            android:id="@+id/radioGroup2"
+            android:id="@+id/listing_type_radio_group"
             android:layout_width="392dp"
             android:layout_height="34dp"
             android:orientation="horizontal">
@@ -162,7 +162,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="rbclick"
-                android:text="Item"
+                android:text="@string/item_rb"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <RadioButton
@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="rbclick"
-                android:text="Service" />
+                android:text="@string/service_rb" />
         </RadioGroup>
 
         <LinearLayout
@@ -182,12 +182,12 @@
             android:orientation="horizontal"></LinearLayout>
 
         <TextView
-            android:id="@+id/textView21"
+            android:id="@+id/select_category_lbl"
             android:layout_width="match_parent"
             android:layout_height="37dp"
             android:background="#2B2B2B"
             android:gravity="center_horizontal"
-            android:text="Select A Categorie"
+            android:text="@string/category_type"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
@@ -208,12 +208,12 @@
             android:orientation="horizontal"></LinearLayout>
 
         <TextView
-            android:id="@+id/textView25"
+            android:id="@+id/listing_price_lbl"
             android:layout_width="match_parent"
             android:layout_height="37dp"
             android:background="#2B2B2B"
             android:gravity="center_horizontal"
-            android:text="Listing Price"
+            android:text="@string/listing_price"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
@@ -224,9 +224,10 @@
             android:background="#121212"
             android:ems="10"
             android:gravity="center_horizontal"
-            android:hint="100.00"
+            android:hint="@string/price_hint"
             android:inputType="numberDecimal"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:autofillHints="" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -241,7 +242,7 @@
             android:layout_height="37dp"
             android:background="#2B2B2B"
             android:gravity="center_horizontal"
-            android:text="Description"
+            android:text="@string/description_lbl"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
@@ -252,8 +253,9 @@
             android:background="#121212"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="text goes here"
-            android:inputType="textMultiLine" />
+            android:hint="@string/description_hint"
+            android:inputType="textMultiLine"
+            android:autofillHints="" />
 
     </LinearLayout>
 
