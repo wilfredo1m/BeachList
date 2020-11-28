@@ -5,10 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
-    android:fitsSystemWindows="true"><![CDATA[
-    tools:context=".HomeFragment">
-
-    ]]>
+    android:fitsSystemWindows="true">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/home_menu_toolbar"
@@ -23,9 +20,30 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <SearchView
+        android:id="@+id/sv_service_searchbar"
+        android:layout_width="325dp"
+        android:layout_height="35dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/sv_Search_bar"
+        app:layout_constraintEnd_toEndOf="@+id/sv_Search_bar"
+        app:layout_constraintStart_toStartOf="@+id/sv_Search_bar"
+        app:layout_constraintTop_toTopOf="@+id/sv_Search_bar" />
+
+    <SearchView
+        android:id="@+id/sv_user_search"
+        android:layout_width="325dp"
+        android:layout_height="35dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/sv_Search_bar"
+        app:layout_constraintEnd_toEndOf="@+id/sv_Search_bar"
+        app:layout_constraintStart_toStartOf="@+id/sv_Search_bar"
+        app:layout_constraintTop_toTopOf="@+id/sv_Search_bar" />
+
+    <SearchView
         android:id="@+id/sv_Search_bar"
         android:layout_width="325dp"
         android:layout_height="35dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/home_menu_toolbar"
         app:layout_constraintStart_toStartOf="@+id/home_menu_toolbar"
         app:layout_constraintTop_toTopOf="@+id/home_menu_toolbar">
@@ -83,6 +101,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.viewpager.widget.ViewPager>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
