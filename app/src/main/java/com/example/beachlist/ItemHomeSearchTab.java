@@ -1,9 +1,13 @@
 package com.example.beachlist;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -25,6 +29,8 @@ public class ItemHomeSearchTab extends Fragment {
     private RecyclerView recyclerView;
     public static List<DataSnapshot> item_list = new ArrayList<>();
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    ItemRecyclerAdapter adapter;
+    EditText editText;
 
     public ItemHomeSearchTab() {
         // Required empty public constructor
@@ -36,6 +42,27 @@ public class ItemHomeSearchTab extends Fragment {
         DatabaseReference usersReference = database.getReference().child("listings").child("item");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_item_select_from_home, container, false);
+
+        //********************************Search Bar******************************************
+        editText = view.findViewById(R.id.item_search_bar);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
+        //************************************************************************************
+
 
         //***********************DISPLAY LISTING*******************************
         recyclerView = view.findViewById(R.id.item_tab_recycler);
@@ -69,7 +96,19 @@ public class ItemHomeSearchTab extends Fragment {
     }
 
     public void onServiceListQuery() {
-        RecyclerView.Adapter adapter = new ItemRecyclerAdapter(getActivity(), item_list);
+        adapter = new ItemRecyclerAdapter(getActivity(), item_list);
         recyclerView.setAdapter(adapter);
+    }
+
+    private void filter(String text){
+        List<DataSnapshot> filteredList = new ArrayList<>();
+
+        for (DataSnapshot item : item_list){
+            if(item.getValue(ListingData.class).getTitle().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+
+        adapter.setFilter(filteredList);
     }
 }

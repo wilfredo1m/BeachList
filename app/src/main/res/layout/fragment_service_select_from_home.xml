@@ -15,4 +15,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/service_search_bar"
+        android:layout_width="325dp"
+        android:layout_height="35dp"
+        app:layout_constraintBottom_toBottomOf="@+id/home_menu_toolbar"
+        app:layout_constraintStart_toStartOf="@+id/home_menu_toolbar"
+        app:layout_constraintTop_toTopOf="@+id/home_menu_toolbar">
+
+    </EditText>
 </androidx.constraintlayout.widget.ConstraintLayout>

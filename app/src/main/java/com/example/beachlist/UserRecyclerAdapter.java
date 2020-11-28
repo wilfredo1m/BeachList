@@ -67,4 +67,9 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
             lastName = itemView.findViewById(R.id.friend_last_name);
         }
     }
+
+    public void setFilter(List<DataSnapshot> filter){
+        list = filter;
+        notifyDataSetChanged();
+    }
 }

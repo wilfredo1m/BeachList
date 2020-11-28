@@ -40,15 +40,15 @@
     <!--        app:layout_constraintStart_toStartOf="parent"-->
     <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <!--    <SearchView-->
-    <!--        android:id="@+id/sv_Search_bar"-->
-    <!--        android:layout_width="325dp"-->
-    <!--        android:layout_height="35dp"-->
-    <!--        app:layout_constraintBottom_toBottomOf="@+id/home_menu_toolbar"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/home_menu_toolbar"-->
-    <!--        app:layout_constraintTop_toTopOf="@+id/home_menu_toolbar">-->
+        <EditText
+            android:id="@+id/item_search_bar"
+            android:layout_width="325dp"
+            android:layout_height="35dp"
+            app:layout_constraintBottom_toBottomOf="@+id/home_menu_toolbar"
+            app:layout_constraintStart_toStartOf="@+id/home_menu_toolbar"
+            app:layout_constraintTop_toTopOf="@+id/home_menu_toolbar">
 
-    <!--    </SearchView>-->
+        </EditText>
 
     <!--    <Button-->
     <!--        android:id="@+id/btn_categories"-->

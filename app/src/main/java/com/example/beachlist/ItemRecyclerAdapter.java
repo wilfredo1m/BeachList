@@ -76,4 +76,9 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
             listingPrice = itemView.findViewById(R.id.listing_price);
         }
     }
+
+    public void setFilter(List<DataSnapshot> filter){
+        list = filter;
+        notifyDataSetChanged();
+    }
 }

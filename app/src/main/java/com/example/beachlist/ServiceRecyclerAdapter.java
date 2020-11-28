@@ -75,4 +75,9 @@ public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecycler
             listingPrice = itemView.findViewById(R.id.listing_price);
         }
     }
+
+    public void setFilter(List<DataSnapshot> filter){
+        list = filter;
+        notifyDataSetChanged();
+    }
 }
