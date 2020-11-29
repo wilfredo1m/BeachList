@@ -9,8 +9,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/home_menu_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="397dp"
+        android:layout_height="55dp"
         android:background="#292929"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -25,18 +25,18 @@
         android:layout_height="38dp"
         android:background="@drawable/ic_baseline_category_24"
         app:layout_constraintBottom_toBottomOf="@+id/home_menu_toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/home_menu_toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/home_menu_toolbar"
-        app:layout_constraintVertical_bias="0.388" />
+        app:layout_constraintVertical_bias="0.333" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/home_menu_tab_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="352dp"
+        android:layout_height="44dp"
         android:background="#535151"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_categories"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_menu_toolbar">
+        app:layout_constraintTop_toTopOf="@+id/home_menu_toolbar">
 
         <!--        <com.google.android.material.tabs.TabItem-->
         <!--            android:id="@+id/tv_item_tab"-->
@@ -60,9 +60,8 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="208dp"
-        android:paddingBottom="150dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
