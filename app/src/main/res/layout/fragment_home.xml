@@ -19,48 +19,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <SearchView
-        android:id="@+id/sv_service_searchbar"
-        android:layout_width="325dp"
-        android:layout_height="35dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/sv_Search_bar"
-        app:layout_constraintEnd_toEndOf="@+id/sv_Search_bar"
-        app:layout_constraintStart_toStartOf="@+id/sv_Search_bar"
-        app:layout_constraintTop_toTopOf="@+id/sv_Search_bar" />
-
-    <SearchView
-        android:id="@+id/sv_user_search"
-        android:layout_width="325dp"
-        android:layout_height="35dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/sv_Search_bar"
-        app:layout_constraintEnd_toEndOf="@+id/sv_Search_bar"
-        app:layout_constraintStart_toStartOf="@+id/sv_Search_bar"
-        app:layout_constraintTop_toTopOf="@+id/sv_Search_bar" />
-
-    <SearchView
-        android:id="@+id/sv_Search_bar"
-        android:layout_width="325dp"
-        android:layout_height="35dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/home_menu_toolbar"
-        app:layout_constraintStart_toStartOf="@+id/home_menu_toolbar"
-        app:layout_constraintTop_toTopOf="@+id/home_menu_toolbar">
-
-    </SearchView>
-
     <Button
         android:id="@+id/btn_categories"
         android:layout_width="41dp"
         android:layout_height="38dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:background="@drawable/ic_baseline_category_24"
         app:layout_constraintBottom_toBottomOf="@+id/home_menu_toolbar"
         app:layout_constraintEnd_toEndOf="@+id/home_menu_toolbar"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toEndOf="@+id/sv_Search_bar"
         app:layout_constraintTop_toTopOf="@+id/home_menu_toolbar"
         app:layout_constraintVertical_bias="0.388" />
 

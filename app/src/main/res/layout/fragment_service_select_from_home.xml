@@ -4,25 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
-    tools:context=".ServiceHomeSearchTab" >
+    tools:context=".ServiceHomeSearchTab">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/service_search_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <SearchView
+        android:id="@+id/service_searchview"
+        android:layout_width="51dp"
+        android:layout_height="37dp"
+        android:layout_marginBottom="19dp"
+        android:clickable="false"
+        app:layout_constraintBottom_toBottomOf="@+id/service_search_toolbar"
+        app:layout_constraintEnd_toStartOf="@+id/service_search_bar"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/service_search_toolbar"
+        app:layout_constraintTop_toTopOf="@+id/service_search_toolbar"
+        app:layout_constraintVertical_bias="0.095" />
+
+    <EditText
+        android:id="@+id/service_search_bar"
+        android:layout_width="333dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/home_menu_toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/service_search_toolbar"
+        app:layout_constraintStart_toStartOf="@+id/home_menu_toolbar"
+        app:layout_constraintTop_toTopOf="@+id/home_menu_toolbar">
+
+    </EditText>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/service_tab_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="35dp"
+        android:background="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/service_search_bar"
-        android:layout_width="325dp"
-        android:layout_height="35dp"
-        app:layout_constraintBottom_toBottomOf="@+id/home_menu_toolbar"
-        app:layout_constraintStart_toStartOf="@+id/home_menu_toolbar"
-        app:layout_constraintTop_toTopOf="@+id/home_menu_toolbar">
-
-    </EditText>
 </androidx.constraintlayout.widget.ConstraintLayout>
