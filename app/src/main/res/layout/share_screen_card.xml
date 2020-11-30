@@ -13,7 +13,8 @@
         android:onClick="clickToShare"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,14 +31,14 @@
                     android:id="@+id/shared_title_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="title goes here" />
+                    android:text="@string/title_hint" />
 
                 <TextView
                     android:id="@+id/shared_comment_tv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#373535"
-                    android:text="Comment goes here" />
+                    android:text="@string/add_comment_lbl" />
             </LinearLayout>
 
             <de.hdodenhof.circleimageview.CircleImageView
