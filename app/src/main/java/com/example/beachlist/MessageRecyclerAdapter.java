@@ -14,13 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecyclerAdapter.MyViewHolder> {
     Context context;
-    List<DataSnapshot> list;
+    List<Map<String, String>> list;
 
-    public MessageRecyclerAdapter(Context context, List<DataSnapshot> list) {
+    public MessageRecyclerAdapter(Context context, List<Map<String, String>> list) {
         this.context = context;
         this.list = list;
     }
@@ -35,12 +37,11 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
     @Override
     public void onBindViewHolder(@NonNull MessageRecyclerAdapter.MyViewHolder holder, final int position) {
         Glide.with(context)
-                .load(list.get(position).child("data").getValue(UserData.class).getImageUrl())
+                .load(list.get(position).get("url"))                // retrieve sample url from test_message
                 .centerCrop()
                 .into(holder.userPic);
 
-        String fullName = (list.get(position).child("data").getValue(UserData.class).getFirstName()
-                +" "+list.get(position).child("data").getValue(UserData.class).getLastName());
+        String fullName = (list.get(position).get("fullname"));     // retrieve sample fullname from test_message
 
         holder.userName.setText(fullName);
 

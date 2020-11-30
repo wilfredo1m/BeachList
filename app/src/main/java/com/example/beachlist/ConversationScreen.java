@@ -71,11 +71,11 @@ public class ConversationScreen extends AppCompatActivity {
 
         //friendID = getIntent().getStringExtra("friend ID");
         // gets the item's information to display
-        friendID = getIntent().getStringExtra("UserID");
-        listingId = getIntent().getStringExtra("ListingID");
-        listingType = getIntent().getStringExtra("listingType");
+//        friendID = getIntent().getStringExtra("UserID");
+//        listingId = getIntent().getStringExtra("ListingID");
+//        listingType = getIntent().getStringExtra("listingType");
 
-        listingRef = firebaseDatabase.getReference().child("listings").child(listingType).child(listingId);
+//        listingRef = firebaseDatabase.getReference().child("listings").child(listingType).child(listingId);
 
 
         //******************************Display Conversation***************************************
@@ -91,44 +91,44 @@ public class ConversationScreen extends AppCompatActivity {
         userID = user.getUid();
 
 
-        messageRef = firebaseDatabase.getReference("/users/" + userID + "/chats/" + friendID);
-        messageRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                conversation_list.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Message message = dataSnapshot.getValue(Message.class);
-                    conversation_list.add(message);
-
-                    adapter = new ConversationRecyclerAdapter(ConversationScreen.this, conversation_list);
-                    recyclerView.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        messageRef = firebaseDatabase.getReference("/users/" + userID + "/chats/" + friendID);
+//        messageRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                conversation_list.clear();
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+//                    Message message = dataSnapshot.getValue(Message.class);
+//                    conversation_list.add(message);
+//
+//                    adapter = new ConversationRecyclerAdapter(ConversationScreen.this, conversation_list);
+//                    recyclerView.setAdapter(adapter);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
         //*****************************************************************************************
 
-        listingRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //Populate image URLs in global variable
-                getListingImages(snapshot.child("listingImages"));
-                //Get data and display info
-                ListingData selectedListing = snapshot.getValue(ListingData.class);
-                assert selectedListing != null;
-                displayProfileImage();
-                //display owner Info
-                getOwnerInfo(friendID);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                //TODO Handle this error
-            }
-        });
+//        listingRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                //Populate image URLs in global variable
+//                getListingImages(snapshot.child("listingImages"));
+//                //Get data and display info
+//                ListingData selectedListing = snapshot.getValue(ListingData.class);
+//                assert selectedListing != null;
+//                displayProfileImage();
+//                //display owner Info
+//                getOwnerInfo(friendID);
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                //TODO Handle this error
+//            }
+//        });
 
 
 

@@ -21,7 +21,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class MessageFragment extends Fragment {
@@ -29,7 +31,7 @@ public class MessageFragment extends Fragment {
     View messageView;
     private RecyclerView recyclerView;
     String userID;
-    public static List<DataSnapshot> message_list = new ArrayList<>();
+    public static List<Map<String, String>> message_list = new ArrayList<>();
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     public MessageFragment() {
@@ -57,23 +59,22 @@ public class MessageFragment extends Fragment {
         // clears list each time to make sure no duplicates are added
         message_list.clear();
 
-        usersReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChildren()) {
-                    for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        // we will add the other person who the user is talking to
-                        message_list.add(child);
-                    }
-                }
-                onServiceListQuery();
-            }
+        // Map that acts as temporary placeholder for convos
+        // This will be replaced by a db call later
+        Map<String, String> test_message_one = new HashMap<String, String>();
+        Map<String, String> test_message_two = new HashMap<String, String>();
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
+        // Sample Url and Full Name
+        test_message_one.put("url", "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F2001775738?alt=media&token=6bfdb931-c5d5-488d-ad0e-8f85d10246ce");
+        test_message_one.put("fullname", "Sample Full Name one");
+
+        test_message_two.put("url", "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F2001775738?alt=media&token=6bfdb931-c5d5-488d-ad0e-8f85d10246ce");
+        test_message_two.put("fullname", "Sample Full Name two");
+
+        message_list.add(test_message_one);
+        message_list.add(test_message_two);
+
+        onServiceListQuery();
 
         // Inflate the layout for this fragment
         return messageView;
