@@ -43,6 +43,7 @@
                         android:id="@+id/sold_listing_pic"
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
+                        android:background="@drawable/charmander"
                         android:contentDescription="@string/user_image_description"
                         android:scaleType="centerCrop" />
                 </LinearLayout>
