@@ -7,29 +7,20 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Parcelable;
-import android.renderscript.ScriptGroup;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.CompositePageTransformer;
-import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class ListingTitlePage extends AppCompatActivity {
@@ -39,7 +30,7 @@ public class ListingTitlePage extends AppCompatActivity {
     int callingActivity;
     ImageView listingPic;
     ViewPager2 viewPager;
-    ImageAdapter2 adapter;
+    ImageAdapterBitmap adapter;
     ArrayList<Bitmap> bitmaps;
     ArrayList<String> imageUriList;
 
@@ -143,7 +134,7 @@ public class ListingTitlePage extends AppCompatActivity {
                         bitmaps.add(bitmap);
         //*************Display Listing Images********************
                         viewPager = findViewById(R.id.selected_images_pager);
-                        adapter = new ImageAdapter2(this,bitmaps);
+                        adapter = new ImageAdapterBitmap(this,bitmaps);
                         viewPager.setAdapter(adapter);
 //        //********************************************************
                     }catch (FileNotFoundException e){
@@ -159,7 +150,7 @@ public class ListingTitlePage extends AppCompatActivity {
                     bitmaps.add(bitmap);
 //        //*************Display Listing Images********************
                     viewPager = findViewById(R.id.selected_images_pager);
-                    adapter = new ImageAdapter2(this,bitmaps);
+                    adapter = new ImageAdapterBitmap(this,bitmaps);
                     viewPager.setAdapter(adapter);
 //        //********************************************************
                 }catch (FileNotFoundException e){

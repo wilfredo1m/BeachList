@@ -58,7 +58,7 @@ public class SelectedOwnListing extends AppCompatActivity {
     ArrayList<String> listingImages = new ArrayList<>();                                               //arraylist to hold images
     ArrayList<String> imageUriList;
     Map<String, String> newImages = new HashMap<>();
-    ImageAdapter adapter;                                                                             //adapter for main window
+    ImageAdapterString adapter;                                                                             //adapter for main window
     String typeOfService,listingId;                                                                            //strings regarding listing
 //****************************************************************//
 
@@ -72,7 +72,7 @@ public class SelectedOwnListing extends AppCompatActivity {
     EditText updatedTitle, updatedPrice, updatedDescription;                                          //edit text fields to update listing info
     Spinner categorySpinner;                                                                          //to be populated based on what type of listing is displayed
     ArrayList<Bitmap> bitmaps;                                                                        //bitmap array to hold new images from the gallery
-    ImageAdapter2 adapterForNewImages;                                                                //adapter that uses bitmaps instead of array of strings
+    ImageAdapterBitmap adapterForNewImages;                                                                //adapter that uses bitmaps instead of array of strings
     public static final int IMAGE_REQUEST = 33;
     public static final int PROCESSED_OK = -1;
     boolean pictureFlag, descriptionFlag, priceFlag, categoryFlag,titleFlag;                          //keep track of what was modified in order to update
@@ -552,7 +552,7 @@ public class SelectedOwnListing extends AppCompatActivity {
         listingDescription.setText(selectedListing.getDescription());                                 // set text of listingDescription to main screen
         listingPrice.setText(String.format("$%s", selectedListing.getPrice()));                                         // set text of listingPrice to main screen
         viewPager = findViewById(R.id.own_listing_images);                                            // link viewpager to xml
-        adapter = new ImageAdapter(this, listingImages);                                      // add listingImages array to adapter
+        adapter = new ImageAdapterString(this, listingImages);                                      // add listingImages array to adapter
         viewPager.setAdapter(adapter);                                                                // set viewpager to the adapter to display images in pager screen
     }
 //**************************END MAIN MENU FUNCTIONS*********************************//
@@ -582,7 +582,7 @@ public class SelectedOwnListing extends AppCompatActivity {
         currentPrice.setText(listingPrice.getText().toString());                                      //set current price text
         currentDescription.setText(listingDescription.getText().toString());                          //set current description text
         currentCategory.setText(getCategory());                                                       //set currentCategory text
-        adapter = new ImageAdapter(this, listingImages);                                      //add listingImages array to the adapter
+        adapter = new ImageAdapterString(this, listingImages);                                      //add listingImages array to the adapter
         currentImages.setAdapter(adapter);                                                            //set currentImages pager to the adapter to swipe through pictures and display in pager
     }
 
@@ -672,7 +672,7 @@ public class SelectedOwnListing extends AppCompatActivity {
                             Bitmap bitmap = BitmapFactory.decodeStream(is);                           //Creates Bitmap objects from various sources, including files, streams(is), and byte-arrays.
                             bitmaps.add(bitmap);                                                      //add bitmaps to the bitmaps array
                             //*************Display Listing Images********************
-                            adapterForNewImages = new ImageAdapter2(this,bitmaps);            //adapter takes in bitmap array to display in pager
+                            adapterForNewImages = new ImageAdapterBitmap(this,bitmaps);            //adapter takes in bitmap array to display in pager
                             updatedImages.setAdapter(adapterForNewImages);                            //set pager to the adapter to swipe images
                             //********************************************************
                         }catch (FileNotFoundException e){
@@ -690,7 +690,7 @@ public class SelectedOwnListing extends AppCompatActivity {
                         Bitmap bitmap = BitmapFactory.decodeStream(is);                               //Creates Bitmap objects from various sources, including files, streams(is), and byte-arrays.
                         bitmaps.add(bitmap);                                                          //add bitmaps to the bitmaps array
                         //*************Display Listing Images********************
-                        adapterForNewImages = new ImageAdapter2(this,bitmaps);                //adapter takes in bitmap array to display in pager
+                        adapterForNewImages = new ImageAdapterBitmap(this,bitmaps);                //adapter takes in bitmap array to display in pager
                         updatedImages.setAdapter(adapterForNewImages);                                //set pager to the adapter to swipe images
                          //********************************************************
                     }//end try

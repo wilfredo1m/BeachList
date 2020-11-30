@@ -49,7 +49,7 @@ public class SelectedService extends AppCompatActivity {
     ArrayList<String>friendNameArray = new ArrayList<>();
     ArrayList<String>friendIDArray = new ArrayList<>();
 
-    ImageAdapter adapter, adapter2;
+    ImageAdapterString adapter;
     ImageView userPicture;
     TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName, reportedServiceTitle;
     Button reportService, cancelReport, submitReport, contactSeller, backButton,shareServiceButton;
@@ -62,7 +62,7 @@ public class SelectedService extends AppCompatActivity {
     Button cancelShare, confirmShare;
     Spinner shareServiceSpinner;
     String item_position;
-    int positonInt;
+    int positionInt;
     EditText commentForShareScreen;
 
 
@@ -131,7 +131,7 @@ public class SelectedService extends AppCompatActivity {
                 //first,  we have to retrieve the item position as a string
                 // then, we can change string value into integer
                 item_position = String.valueOf(position);
-                positonInt = Integer.valueOf(item_position);
+                positionInt = Integer.valueOf(item_position);
             }
 
             @Override
@@ -219,7 +219,6 @@ public class SelectedService extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 banListing(listingRef.child("banned"));
-                addListingToReported();
             }
         });
 
@@ -246,7 +245,7 @@ public class SelectedService extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String selectedFriend = shareServiceSpinner.getSelectedItem().toString();
-                String friendID = friendIDArray.get(positonInt);
+                String friendID = friendIDArray.get(positionInt);
                 String comment = commentForShareScreen.getText().toString();
                // Toast.makeText(getBaseContext(),  friendID, Toast.LENGTH_SHORT).show();
                 sendToFriend(friendID,comment);
@@ -283,12 +282,12 @@ public class SelectedService extends AppCompatActivity {
         bannedRef.setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-
+                addListingToReported();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-
+                Log.e(TAG, "onFailure: "+e.getLocalizedMessage(), e.getCause());
             }
         });
     }
@@ -307,7 +306,7 @@ public class SelectedService extends AppCompatActivity {
         itemCategory.setText(selectedListing.getCategory());
 
         viewPager = findViewById(R.id.selected_service_images);
-        adapter = new ImageAdapter(this, serviceImages);
+        adapter = new ImageAdapterString(this, serviceImages);
         viewPager.setAdapter(adapter);
     }
 

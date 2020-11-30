@@ -1,33 +1,26 @@
 package com.example.beachlist;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-
-import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Scanner;
-
 // this is needed in order to run the program. if no main activity is set then nothing will run
 public class MainActivity extends AppCompatActivity {
-    private Button createAccountButton, homeScreenButton;
+    private static final String TAG = "FIREBASE LOGIN";
     private EditText emailEt, passwordEt;
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
@@ -39,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Create Account Button
-        createAccountButton = (Button) findViewById(R.id.btnCreateAccount);
+        Button createAccountButton = findViewById(R.id.btnCreateAccount);
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
 
         // Login button
-        homeScreenButton = (Button) findViewById(R.id.btnLogin);
+        Button homeScreenButton = findViewById(R.id.btnLogin);
         homeScreenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
-                        if (user.isEmailVerified() == false) {
+                        assert user != null;
+                        if (!user.isEmailVerified()) {
                             Toast.makeText(MainActivity.this, "Email Not Verified", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(MainActivity.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
@@ -89,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                             openHomeScreen();
                         }
                     } else {
-                        Toast.makeText(MainActivity.this, "Log In Failed!", Toast.LENGTH_LONG).show();
+                        Log.e(TAG, "onFailure: Sign In Failed", task.getException().getCause());
                     }
                     progressDialog.dismiss();
                 }

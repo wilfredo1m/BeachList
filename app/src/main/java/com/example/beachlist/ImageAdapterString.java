@@ -1,7 +1,6 @@
 package com.example.beachlist;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,18 +13,18 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class ImageAdapter2 extends RecyclerView.Adapter<ImageAdapter2.ViewHolder> {
+public class ImageAdapterString extends RecyclerView.Adapter<ImageAdapterString.ViewHolder> {
     Context context;
-    ArrayList<Bitmap> images;
+    ArrayList<String> images;
 
-    public ImageAdapter2(Context context, ArrayList<Bitmap> images){
+    public ImageAdapterString(Context context, ArrayList<String> images){
         this.context = context;
         this.images = images;
     }
 
     @NonNull
     @Override
-    public ImageAdapter2.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ImageAdapterString.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.pager_image_view,parent,false);
 
@@ -33,7 +32,7 @@ public class ImageAdapter2 extends RecyclerView.Adapter<ImageAdapter2.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ImageAdapter2.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ImageAdapterString.ViewHolder holder, int position) {
         //holder.imageView.setBackgroundResource(images[position]);
         Glide.with(context)
                 .load(images.get(position))

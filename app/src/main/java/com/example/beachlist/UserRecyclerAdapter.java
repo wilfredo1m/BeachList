@@ -46,7 +46,7 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, SelectedUser.class);
-                intent.putExtra("position", position);
+                intent.putExtra("selectedUserId", list.get(position).getKey());
                 context.startActivity(intent);
             }
         });

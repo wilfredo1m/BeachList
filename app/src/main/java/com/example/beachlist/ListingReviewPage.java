@@ -43,7 +43,7 @@ public class ListingReviewPage extends AppCompatActivity {
     ListingData currentListing;
     ArrayList<Bitmap> bitmaps;
     ViewPager2 viewPager;
-    ImageAdapter2 adapter;
+    ImageAdapterBitmap adapter;
 
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
@@ -69,7 +69,7 @@ public class ListingReviewPage extends AppCompatActivity {
                 bitmaps.add(bitmap);
                 //*************Display Listing Images********************
                 viewPager = findViewById(R.id.final_images_pager);
-                adapter = new ImageAdapter2(this,bitmaps);
+                adapter = new ImageAdapterBitmap(this,bitmaps);
                 viewPager.setAdapter(adapter);
 //        //********************************************************
             }catch (FileNotFoundException e){

@@ -45,7 +45,7 @@ public class SelectedItem extends AppCompatActivity {
     ArrayList<String>friendNameArray = new ArrayList<>();
     ArrayList<String>friendIDArray = new ArrayList<>();
 
-    ImageAdapter adapter,adapter2;
+    ImageAdapterString adapter,adapter2;
     ImageView userPicture;
     TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName, reportedItemTitle;
     ConstraintLayout itemPopUpWindow, mainItemWindow;
@@ -306,7 +306,7 @@ public class SelectedItem extends AppCompatActivity {
         itemCategory.setText(selectedListing.getCategory());
 
         viewPager = findViewById(R.id.selected_item_images);
-        adapter = new ImageAdapter(this, itemImages);
+        adapter = new ImageAdapterString(this, itemImages);
         viewPager.setAdapter(adapter);
     }
 
@@ -337,6 +337,7 @@ public class SelectedItem extends AppCompatActivity {
 
     public void SendToUserPage(View view) {
         Intent intent = new Intent(this, SelectedUser.class);
+        intent.putExtra("selectedUserId", listingOwnerID);
         startActivity(intent);
     }
 

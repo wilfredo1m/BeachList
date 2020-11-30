@@ -1,5 +1,6 @@
 package com.example.beachlist;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SelectedUser extends AppCompatActivity {
@@ -41,10 +42,11 @@ public class SelectedUser extends AppCompatActivity {
     FirebaseDatabase database;
     FirebaseAuth mAuth;
     FirebaseUser user;
+    UserData selectedUser;
     Button reportUser,cancelReport,submitReport,addFriendButton;
     ConstraintLayout constraintLayout;
     Spinner reportUserSpinner;
-    String reportedUser;
+    String reportedUserReason;
     RecyclerView itemRecycler, serviceRecycler;
     ItemRecyclerAdapter itemAdapter;
     ServiceRecyclerAdapter serviceAdapter;
@@ -80,7 +82,7 @@ public class SelectedUser extends AppCompatActivity {
         reportUserSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {                            //set listener to item selected
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                reportedUser =  reportUserSpinner.getSelectedItem().toString();                                          //set selected value in spinner to the reportedUser string
+                reportedUserReason =  reportUserSpinner.getSelectedItem().toString();                                          //set selected value in spinner to the reportedUser string
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
@@ -94,15 +96,25 @@ public class SelectedUser extends AppCompatActivity {
 //*****************************************GET USER INFO FROM FIREBASE***********************************************************************//
 //********************************************************************************************************************************************//
         // gets the pic and name of the user to display
-        final int position = getIntent().getIntExtra("position",1);
+        //final int position = getIntent().getIntExtra("position",1);
 
-        // Sets the persons info in the correct fields to be displayed
-        Glide.with(this)
-                .load(UserHomeSearchTab.user_list.get(position).child("data").getValue(UserData.class).getImageUrl())
-                .centerCrop()
-                .into(profilePic);
-        firstName.setText(UserHomeSearchTab.user_list.get(position).child("data").getValue(UserData.class).getFirstName());
-        lastName.setText(UserHomeSearchTab.user_list.get(position).child("data").getValue(UserData.class).getLastName());
+        //Get display information
+        final String selectedUserId = getIntent().getStringExtra("selectedUserId");
+
+        DatabaseReference selectedUserRef = database.getReference("users").child(selectedUserId).child("data");
+
+        selectedUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                selectedUser = snapshot.getValue(UserData.class);
+                displayUserInfo();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG, "onCancelled: "+error.getMessage(), error.toException());
+            }
+        });
 //********************************************************************************************************************************************//
 //*****************************************END USER INFO SECTION************************************************************************//
 
@@ -112,25 +124,36 @@ public class SelectedUser extends AppCompatActivity {
         itemRecycler = findViewById(R.id.item_recycler);                                              //link itemRecycler to xml
         itemRecycler.setLayoutManager(new LinearLayoutManager(this));                         //set recycler to the layout
 
+        final Context context = this;
         serviceRecycler = findViewById(R.id.service_recycler);                                        //link serviceRecycler to xml
         serviceRecycler.setLayoutManager(new LinearLayoutManager(this));                      //set recycler to the layout
         itemList = new ArrayList<>();                                                                 //initialize itemList arraylist
-        serviceList = new ArrayList<>();                                                              //initialize serviceList arraylist
-        DataSnapshot userListings = UserHomeSearchTab.user_list.get(position).child("listings");      //Get all snapshots of user listings
-for (DataSnapshot child : userListings.getChildren()) {                                               //for loop to populate lists
-            if(child.child("type").getValue(String.class).compareTo("item") == 0) {
-                itemList.add(child);                                                                  //add item to item arraylist
-            }
-            else {
-                serviceList.add(child);                                                               //add item to service arraylist
-            }
-        }
+        serviceList = new ArrayList<>();//initialize serviceList arraylist
+        DatabaseReference selectedUserListingRef = database.getReference("users").child(selectedUserId).child("listings"); //Get all snapshots of user listings
+        selectedUserListingRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot child : snapshot.getChildren()) {                                               //for loop to populate lists
+                    if(child.child("type").getValue(String.class).compareTo("item") == 0) {
+                        itemList.add(child);                                                                  //add item to item arraylist
+                    }
+                    else {
+                        serviceList.add(child);                                                               //add item to service arraylist
+                    }
+                }
+                itemAdapter = new ItemRecyclerAdapter(context,itemList);                                 //set adapter to itemlist
+                itemRecycler.setAdapter(itemAdapter);                                                         //pass recycler to the adapter
 
-        itemAdapter = new ItemRecyclerAdapter(this,itemList);                                 //set adapter to itemlist
-        itemRecycler.setAdapter(itemAdapter);                                                         //pass recycler to the adapter
+                serviceAdapter = new ServiceRecyclerAdapter(context, serviceList);                       //set adapter to servicelist
+                serviceRecycler.setAdapter(serviceAdapter);                                                   //pass recycler to the adapter
+            }
 
-        serviceAdapter = new ServiceRecyclerAdapter(this, serviceList);                       //set adapter to servicelist
-        serviceRecycler.setAdapter(serviceAdapter);                                                   //pass recycler to the adapter
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG, "onCancelled: "+error.getMessage(), error.toException());
+            }
+        });
+
 //********************************************************************************************************************************************//
 //*****************************************END USER LISTING SECTION************************************************************************//
 
@@ -149,7 +172,7 @@ for (DataSnapshot child : userListings.getChildren()) {                         
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 // Get Post object and use the values to update the UI
                                 UserData userData = dataSnapshot.getValue(UserData.class);
-                                addPendingFriend(position, userData);
+                                addPendingFriend(userData);
                                 // ...
                             }
 
@@ -182,7 +205,6 @@ for (DataSnapshot child : userListings.getChildren()) {                         
                 setupPopUpScreenView();
                 itemRecycler.setVisibility(View.INVISIBLE);
                 serviceRecycler.setVisibility(View.INVISIBLE);
-
             }
         });
 
@@ -202,24 +224,66 @@ for (DataSnapshot child : userListings.getChildren()) {                         
        submitReport.setOnClickListener(new View.OnClickListener() {                                      //set on click listener for button
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), reportedUser, Toast.LENGTH_SHORT).show();
-
+                //banUser(database.getReference("users").child(selectedUser.getUserId()).child("banned"));
+                addUserToReported();
             }
         });
 //*********************************END BUTTON GROUP***********************************************************************************//
 //***********************************************************************************************************************************//
     }//end onCreate
 
+    private void displayUserInfo() {
+        // Sets the persons info in the correct fields to be displayed
+        Glide.with(this)
+                .load(selectedUser.getImageUrl())
+                .centerCrop()
+                .into(profilePic);
+        firstName.setText(selectedUser.getFirstName());
+        lastName.setText(selectedUser.getLastName());
+    }
 
-    //intent to change to homeafterlogin screen with 1st menu item selected
+    private void addUserToReported() {
+        DatabaseReference reportedRef = database.getReference("reported").child("users").child(selectedUser.getUserId());
+        HashMap<String, String> reportedListing = new HashMap<>();
+        reportedListing.put("name", selectedUser.getFirstName() + " " + selectedUser.getLastName());
+        reportedListing.put("imageUrl", selectedUser.getImageUrl());
+        reportedListing.put("reason", reportedUserReason);
+        reportedRef.setValue(reportedListing).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                openHomeScreen();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "onFailure: "+e.getLocalizedMessage());
+            }
+        });
+    }
+
+//    private void banUser(DatabaseReference bannedRef) {
+//        bannedRef.setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+//                addListingToReported();
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Log.e(TAG, "onFailure: "+e.getLocalizedMessage(), e.getCause());
+//            }
+//        });
+//    }
+
+    //intent to change to home after login screen with 1st menu item selected
     public void openHomeScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         openScreen.putExtra("tab",1);
         startActivity(openScreen);
     }
     //adds pending friend to firebase
-    public void addPendingFriend(int position, UserData userData){
-        DatabaseReference addPendingFriendReference = database.getReference().child("users").child(UserHomeSearchTab.user_list.get(position).child("data").getValue(UserData.class).getUserId()).child("pending").child(user.getUid());
+    public void addPendingFriend(UserData userData){
+        DatabaseReference addPendingFriendReference = database.getReference().child("users").child(selectedUser.getUserId()).child("pending").child(user.getUid());
         addPendingFriendReference.setValue(new OtherUser(userData.getFirstName(), userData.getLastName(), userData.getImageUrl()))
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
