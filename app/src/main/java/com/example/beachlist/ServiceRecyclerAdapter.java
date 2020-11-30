@@ -71,7 +71,7 @@ public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecycler
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             listingPic = itemView.findViewById(R.id.listing_image);
-            listingTitle = itemView.findViewById(R.id.listing_title);
+            listingTitle = itemView.findViewById(R.id.title_service_row_field);
             listingPrice = itemView.findViewById(R.id.listing_price);
         }
     }
