@@ -43,6 +43,7 @@
                         android:id="@+id/sold_listing_pic"
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
+                        android:contentDescription="@string/user_image_description"
                         android:scaleType="centerCrop" />
                 </LinearLayout>
 
@@ -52,12 +53,12 @@
                     android:background="#575757"></androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/textView30"
+                    android:id="@+id/sold_title_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#2B2B2B"
                     android:gravity="center_horizontal"
-                    android:text="Title" />
+                    android:text="@string/title_lbl" />
 
                 <TextView
                     android:id="@+id/sold_listing_title"
@@ -72,12 +73,12 @@
                     android:background="#575757"></androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/textView32"
+                    android:id="@+id/sold_price_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#2B2B2B"
                     android:gravity="center_horizontal"
-                    android:text="Sold Price" />
+                    android:text="@string/sold_price_lbl" />
 
 
                 <TextView
@@ -93,12 +94,12 @@
                     android:background="#575757"></androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/textView34"
+                    android:id="@+id/sold_date_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#2B2B2B"
                     android:gravity="center_horizontal"
-                    android:text="Sold Date" />
+                    android:text="@string/sold_date_lbl" />
 
                 <TextView
                     android:id="@+id/sold_listing_date"
@@ -113,12 +114,12 @@
                     android:background="#575757"></androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/textView36"
+                    android:id="@+id/sold_to_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#2B2B2B"
                     android:gravity="center_horizontal"
-                    android:text="Sold To" />
+                    android:text="@string/sold_to_lbl" />
 
                 <TextView
                     android:id="@+id/sold_listing_soldTo"

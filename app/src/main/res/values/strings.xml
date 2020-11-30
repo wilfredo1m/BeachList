@@ -164,6 +164,10 @@
     <string name = "service_title">Service</string>
     <string name= "item_lbl">Item</string>
 
+    <string name= "sold_price_lbl">Sold Price</string>
+    <string name= "sold_to_lbl">Sold To</string>
+    <string name= "sold_date_lbl">Sold Date</string>
+
 
 
     <!-- spinner stuff -->
