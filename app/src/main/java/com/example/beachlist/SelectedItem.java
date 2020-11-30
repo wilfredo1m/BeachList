@@ -248,8 +248,6 @@ public class SelectedItem extends AppCompatActivity {
                 String comment = commentForShareScreen.getText().toString();
                 sendToFriend(friendID, comment);
                 //Toast.makeText(getBaseContext(),  friendID, Toast.LENGTH_SHORT).show();
-                sendToFriend(friendID,comment);
-
 
             }
         });
