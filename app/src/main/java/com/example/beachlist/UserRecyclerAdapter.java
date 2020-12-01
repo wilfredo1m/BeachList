@@ -40,6 +40,7 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
                 .into(holder.profilePic);
         holder.firstName.setText(list.get(position).child("data").getValue(UserData.class).getFirstName());
         holder.lastName.setText(list.get(position).child("data").getValue(UserData.class).getLastName());
+        holder.email.setText(list.get(position).child("data").getValue(UserData.class).getEmail());
 
         // when a pending friend is clicked, the position is taken to get that person info
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -59,12 +60,13 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView profilePic;
-        TextView firstName, lastName;
+        TextView firstName, lastName, email;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             profilePic = itemView.findViewById(R.id.ivProfileImage);
             firstName = itemView.findViewById(R.id.friend_first_name);
             lastName = itemView.findViewById(R.id.friend_last_name);
+            email = itemView.findViewById(R.id.user_email_tv);
         }
     }
 

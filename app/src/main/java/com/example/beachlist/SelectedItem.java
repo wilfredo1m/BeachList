@@ -48,7 +48,7 @@ public class SelectedItem extends AppCompatActivity {
 
     ImageAdapterString adapter,adapter2;
     ImageView userPicture;
-    TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName, reportedItemTitle;
+    TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName, reportedItemTitle, itemSellerEmail;
     ConstraintLayout itemPopUpWindow, mainItemWindow;
     Button reportItem, cancelReport,backButton,contactSeller,confirmReport,shareItemBtn;
     Spinner reportItemSpinner;
@@ -90,6 +90,7 @@ public class SelectedItem extends AppCompatActivity {
         itemCategory = findViewById(R.id.selected_item_category);
         itemSellerFirstName = findViewById(R.id.item_seller_firstname);
         itemSellerLastName = findViewById(R.id.item_seller_lastname);
+        itemSellerEmail = findViewById(R.id.item_user_email);
         userPicture = findViewById(R.id.item_user_image);
 
         SetupFriendsArrayList();
@@ -322,6 +323,7 @@ public class SelectedItem extends AppCompatActivity {
                         .load(snapshot.child("data").getValue(UserData.class).getImageUrl())
                         .centerCrop()
                         .into(userPicture);
+                itemSellerEmail.setText(snapshot.child("data").getValue(UserData.class).getEmail());
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

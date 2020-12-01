@@ -52,7 +52,7 @@ public class SelectedService extends AppCompatActivity {
 
     ImageAdapterString adapter;
     ImageView userPicture;
-    TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName, reportedServiceTitle;
+    TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName, reportedServiceTitle, itemSellerEmail;
     Button reportService, cancelReport, submitReport, contactSeller, backButton,shareServiceButton;
     ConstraintLayout popupWindow, mainConstraint;
     Spinner reportServiceSpinner;
@@ -96,6 +96,7 @@ public class SelectedService extends AppCompatActivity {
         itemCategory = findViewById(R.id.selected_service_category);
         itemSellerFirstName = findViewById(R.id.service_seller_firstname);
         itemSellerLastName = findViewById(R.id.service_seller_lastname);
+        itemSellerEmail = findViewById(R.id.service_user_email);
         userPicture = findViewById(R.id.service_user_image);
 
         SetupFriendsArrayList();
@@ -324,6 +325,7 @@ public class SelectedService extends AppCompatActivity {
                         .load(snapshot.child("data").getValue(UserData.class).getImageUrl())
                         .centerCrop()
                         .into(userPicture);
+                itemSellerEmail.setText(snapshot.child("data").getValue(UserData.class).getEmail());
             }
 
             @Override
