@@ -22,7 +22,7 @@
             android:layout_weight="1"
             android:background="@drawable/background_right"
             android:padding="8dp"
-            android:text="Hello"
+            android:text="@string/right_message"
             android:textColor="#039BE5"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"

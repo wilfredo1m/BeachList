@@ -165,10 +165,18 @@
     <string name= "item_lbl">Item</string>
 
     <string name= "sold_price_lbl">Sold Price</string>
+    <string name= "account_links_lbl">Account Links</string>
     <string name= "sold_to_lbl">Sold To</string>
     <string name= "sold_date_lbl">Sold Date</string>
-
-
+    <string name= "right_message">Hello</string>
+    <string name= "left_message">Hello</string>
+    <string name= "pending_friend_button">Pending Friend</string>
+    <string name= "friendlist_button">Friend List</string>
+    <string name= "active_listing_button">Active Listing</string>
+    <string name= "sold_listing_button">Sold Listings</string>
+    <string name= "logout_button">Logout</string>
+    <string name= "reported_user_button">Reported Users</string>
+    <string name= "reported_listing_button">Reported Listings</string>
 
     <!-- spinner stuff -->
     <string-array name="categories">
