@@ -93,6 +93,9 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         final Button reportedListing = accountSettingsScreen.findViewById(R.id.btn_reported_listing);
         reportedListing.setOnClickListener(this);
 
+        Button logout = accountSettingsScreen.findViewById(R.id.btn_log_out);
+        reportedListing.setOnClickListener(this);
+
 //===================================================END BUTTON CALL GROUP====================================================//
 
 
@@ -166,6 +169,10 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
                 //sets which tab will be displayed
                 startActivity(openScreen);
                 break;
+           // case R.id.btn_log_out:
+           //     openScreen = new Intent( getActivity(), MainActivity.class);
+           //     startActivity(openScreen);
+
         }
     }
 

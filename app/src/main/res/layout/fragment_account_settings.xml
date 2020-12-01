@@ -175,10 +175,12 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/btn_account_settings"
-        android:layout_width="40dp"
-        android:layout_height="45dp"
-        android:background="@drawable/ic_baseline_settings_24"
+        android:id="@+id/btn_log_out"
+        android:layout_width="74dp"
+        android:layout_height="37dp"
+        android:text="Logout"
+        style="?android:attr/buttonBarButtonStyle"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/account_setting_toolbar"
         app:layout_constraintEnd_toEndOf="@+id/account_setting_toolbar"
         app:layout_constraintTop_toTopOf="@+id/account_setting_toolbar" />
