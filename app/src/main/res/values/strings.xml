@@ -195,8 +195,17 @@
     <string name= "waive_button">Waive</string>
     <string name= "temp_ban_button">Temp Ban</string>
     <string name= "perma_ban_button">Perma Ban</string>
-
-
+    <string name= "sold_button">Sold</string>
+    <string name= "confirm_sale_lbl">Confirm Sale</string>
+    <string name= "sale_info_lbl">Sale Info</string>
+    <string name= "rate_buyer_lbl">Rate Buyer</string>
+    <string name= "listing_title_lbl">Listing Title</string>
+    <string name= "sold_to_user_name">Name Goes Here</string>
+    <string name= "cancel_sale_button">Cancel Sale</string>
+    <string name= "confirm_sale_button">Submit Sale</string>
+    <string name= "enter_message_here_hint">Type A Message</string>
+    <string name= "user_name_lbl">User Name Goes Here</string>
+    <string name= "user_email_lbl">User Email Goes Here</string>
     <!-- spinner stuff -->
     <string-array name="categories">
         <item>book</item>
