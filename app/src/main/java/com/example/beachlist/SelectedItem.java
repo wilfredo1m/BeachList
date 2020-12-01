@@ -2,6 +2,7 @@ package com.example.beachlist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -75,7 +76,7 @@ public class SelectedItem extends AppCompatActivity {
 
         //*****************share screen info**********************
         shareScreen = findViewById(R.id.share_button_layout);
-        shareItemSpinner = findViewById(R.id.seleted_friend_to_share_spinner);
+        shareItemSpinner = findViewById(R.id.selected_friend_to_share_spinner);
         commentForShareScreen = findViewById(R.id.item_comment_et);
 
         //*************Display Item info**************************
@@ -123,6 +124,7 @@ public class SelectedItem extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //first,  we have to retrieve the item position as a string
                 // then, we can change string value into integer
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
                 friendPosition = String.valueOf(position);
                 friendPositionIntValue = Integer.parseInt(friendPosition);
             }

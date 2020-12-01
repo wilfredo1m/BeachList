@@ -2,6 +2,7 @@ package com.example.beachlist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -130,6 +131,7 @@ public class SelectedService extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //first,  we have to retrieve the item position as a string
                 // then, we can change string value into integer
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
                 item_position = String.valueOf(position);
                 positionInt = Integer.valueOf(item_position);
             }

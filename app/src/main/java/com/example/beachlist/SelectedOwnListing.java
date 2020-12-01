@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -163,6 +164,7 @@ public class SelectedOwnListing extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //first,  we have to retrieve the item position as a string
                 // then, we can change string value into integer
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
                 friendPosition = String.valueOf(position);
                 friendPositionInt = Integer.parseInt(friendPosition);
             }

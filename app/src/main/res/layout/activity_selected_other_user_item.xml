@@ -91,7 +91,7 @@
                 android:orientation="horizontal">
 
                 <Spinner
-                    android:id="@+id/seleted_friend_to_share_spinner"
+                    android:id="@+id/selected_friend_to_share_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="30dp" />
             </LinearLayout>
