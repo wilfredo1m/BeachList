@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -15,6 +16,7 @@ public class ActiveListings extends AppCompatActivity {
     Button backButton;
     private ViewPager viewpager;
     int tabPosition;
+    Toolbar toolbar;
 
 
 
@@ -22,12 +24,13 @@ public class ActiveListings extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_listings);
+        toolbar = findViewById(R.id.user_listings_toolbar);
 
         //initializing tabs and pager
         TabLayout tabLayout = findViewById(R.id.listings_tab_choices);
         viewpager = findViewById(R.id.listings_view_pager);
 
-        ListingFragmentCollectionAdapter pagerAdapter= new
+        final ListingFragmentCollectionAdapter pagerAdapter= new
                 ListingFragmentCollectionAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         tabLayout.setupWithViewPager(viewpager);
         viewpager.setAdapter(pagerAdapter);
@@ -37,10 +40,12 @@ public class ActiveListings extends AppCompatActivity {
         if(tabPosition==1)
         {
             viewpager.setCurrentItem(0);
+            toolbar.setTitle(pagerAdapter.getPageTitle(0));
         }
         else if (tabPosition ==2)
         {
             viewpager.setCurrentItem(1);
+            toolbar.setTitle(pagerAdapter.getPageTitle(1));
         }
 
         //change tab view when user selects a tab
@@ -48,6 +53,7 @@ public class ActiveListings extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewpager.setCurrentItem(tab.getPosition());
+                toolbar.setTitle(pagerAdapter.getPageTitle(tab.getPosition()));
             }
 
             @Override
