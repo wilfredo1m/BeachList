@@ -177,6 +177,18 @@
     <string name= "logout_button">Logout</string>
     <string name= "reported_user_button">Reported Users</string>
     <string name= "reported_listing_button">Reported Listings</string>
+    <string name= "take_picture_button">Take A Picture</string>
+    <string name= "gallery_button">Select From Gallery</string>
+    <string name= "reported_user_lbl">Reported User</string>
+    <string name= "reported_user_field">Reported User Name Goes Here</string>
+    <string name= "reason_for_report_user_lbl">Reason For Report</string>
+    <string name= "reason_for_report_user_field">Reason For Report Goes Here</string>
+    <string name= "times_reported_lbl">Number Of Times Reported</string>
+    <string name= "times_reported_field">Number of Times Reported Here</string>
+    <string name= "waive_button">Waive</string>
+    <string name= "temp_ban_button">Temp Ban</string>
+    <string name= "perma_ban_button">Perma Ban</string>
+
 
     <!-- spinner stuff -->
     <string-array name="categories">

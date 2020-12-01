@@ -36,9 +36,10 @@
                     <ImageView
                         android:id="@+id/current_listing_pic"
                         android:layout_width="125dp"
+                        android:layout_height="match_parent"
                         android:adjustViewBounds="true"
-                        android:scaleType="centerCrop"
-                        android:layout_height="match_parent" />
+                        android:contentDescription="@string/user_image_description"
+                        android:scaleType="centerCrop" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -51,28 +52,28 @@
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
                         android:background="#2B2B2B"
-                        android:text="Title" />
+                        android:text="@string/title_lbl" />
 
                     <TextView
                         android:id="@+id/current_listing_title"
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
                         android:background="#121212"
-                        android:text="TextView" />
+                        android:text="@string/title_description_bar" />
 
                     <TextView
                         android:id="@+id/textView31"
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
                         android:background="#2B2B2B"
-                        android:text="Price" />
+                        android:text="@string/price_lbl" />
 
                     <TextView
                         android:id="@+id/current_listing_price"
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
                         android:background="#121212"
-                        android:text="TextView" />
+                        android:text="@string/price_field_hint" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

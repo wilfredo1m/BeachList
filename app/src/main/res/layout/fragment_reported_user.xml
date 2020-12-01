@@ -9,5 +9,5 @@
         android:id="@+id/reported_user_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E400FF" />
+        android:background="#000000" />
 </androidx.constraintlayout.widget.ConstraintLayout>

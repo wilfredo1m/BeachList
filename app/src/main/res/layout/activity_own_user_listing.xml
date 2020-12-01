@@ -35,15 +35,6 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/share_own_listing_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="#292929"
-                        android:gravity="center_horizontal"
-                        android:text="@string/modify_listing_title"
-                        android:textSize="24sp" />
-
                     <LinearLayout
                         android:id="@+id/picture_layout"
                         android:layout_width="match_parent"
@@ -80,7 +71,6 @@
                             style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="#575757"
                             android:text="@string/change_picture_btn" />
 
                         <LinearLayout
@@ -134,7 +124,6 @@
                                     style="?android:attr/buttonBarButtonStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:background="#575757"
                                     android:text="@string/change_title_btn" />
 
                             </LinearLayout>
@@ -154,13 +143,13 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
+                                android:background="#121212"
                                 android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/current_price_tv"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:background="#121212"
                                     android:gravity="center|center_horizontal"
                                     android:text="@string/price_field_hint"
                                     android:visibility="visible" />
@@ -188,7 +177,6 @@
                                     style="?android:attr/buttonBarButtonStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:background="#575757"
                                     android:text="@string/change_price_btn" />
                             </LinearLayout>
 
@@ -236,7 +224,6 @@
                                     style="?android:attr/buttonBarButtonStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:background="#575757"
                                     android:text="@string/change_category_btn" />
                             </LinearLayout>
 
@@ -254,6 +241,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
+                                android:background="#252525"
                                 android:orientation="vertical">
 
                                 <EditText
@@ -273,7 +261,6 @@
                                     style="?android:attr/buttonBarButtonStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:background="#575757"
                                     android:text="@string/change_description_btn" />
 
                                 <TextView
@@ -301,7 +288,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:background="#575757"
                             android:text="@string/cancel_changes_btn" />
 
                         <Button
@@ -310,7 +296,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:background="#575757"
                             android:text="@string/confirm_changes_btn" />
 
                     </LinearLayout>
@@ -326,7 +311,6 @@
                             style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="#575757"
                             android:text="@string/delete_listing_button" />
                     </LinearLayout>
 
@@ -349,8 +333,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="#474747"
+            android:layout_height="250dp"
+            android:background="#232323"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -374,7 +358,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:background="#F40707"
+                    android:background="#7A0000"
                     android:gravity="center|center_horizontal"
                     android:text="@string/delete_listing_title"
                     android:textSize="30sp" />
@@ -382,7 +366,7 @@
                 <TextView
                     android:id="@+id/delete_warning_message_lbl"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:background="#4A1919"
                     android:gravity="center_horizontal"
                     android:text="@string/delete_warning" />
@@ -391,6 +375,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
+                    android:background="#252525"
                     android:orientation="horizontal">
 
                     <Button
@@ -399,7 +384,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="#575757"
                         android:text="@string/cancelBtn" />
 
                     <Button
@@ -408,7 +392,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="#575757"
                         android:text="@string/confirm_delete_btn" />
                 </LinearLayout>
             </LinearLayout>
@@ -619,7 +602,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
-            android:background="#8E24AA"
+            android:background="#151515"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -630,14 +613,27 @@
                 android:id="@+id/share__own_listing_header_lbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#010720"
                 android:gravity="center|center_horizontal"
                 android:text="@string/share_listing_title"
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/textView45"
+                android:id="@+id/share_own_listing_btn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:background="#010720"
+                android:gravity="center_horizontal"
+                android:text="@string/modify_listing_title"
+                android:textSize="24sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/add_comment_from_own_lbl"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="#1B1A1A"
+                android:gravity="center|center_horizontal"
                 android:text="@string/add_comment_lbl" />
 
             <EditText
@@ -650,17 +646,12 @@
                 android:hint="@string/comment_hint"
                 android:inputType="textMultiLine" />
 
-            <LinearLayout
-                android:id="@+id/share_own_listing_divider_1"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#575757"
-                android:orientation="vertical"></LinearLayout>
-
             <TextView
                 android:id="@+id/select_friend_to_share_own_listing_lbl"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:background="#1C1C1C"
+                android:gravity="center|center_horizontal"
                 android:text="@string/select_friend_lbl" />
 
             <LinearLayout
@@ -668,16 +659,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#575757"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical">
 
-            <Spinner
-                android:id="@+id/seleted_friend_to_share_own_listing_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="30dp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:background="#252525"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/seleted_friend_to_share_own_listing_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#252525"
                 android:orientation="horizontal">
 
                 <Button
@@ -686,7 +688,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#575757"
                     android:text="@string/cancelBtn" />
 
                 <Button
@@ -695,7 +696,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#575757"
                     android:text="@string/share_link_button" />
             </LinearLayout>
 

@@ -3,11 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#000635"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,14 +44,14 @@
                         android:layout_height="wrap_content"
                         android:background="#2B2B2B"
                         android:gravity="center|center_horizontal"
-                        android:text="Reported User" />
+                        android:text="@string/reported_user_lbl" />
 
                     <TextView
                         android:id="@+id/reported_user_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#121212"
-                        android:text="reported user name" />
+                        android:text="@string/reported_user_field" />
 
                     <TextView
                         android:id="@+id/reason_for_report_user_header_tv"
@@ -57,14 +59,14 @@
                         android:layout_height="wrap_content"
                         android:background="#2B2B2B"
                         android:gravity="center|center_horizontal"
-                        android:text="Reason for Report" />
+                        android:text="@string/reason_for_report_user_lbl" />
 
                     <TextView
                         android:id="@+id/reason_for_report_user_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#121212"
-                        android:text="reason for report goes here" />
+                        android:text="@string/reason_for_report_user_field" />
 
                     <TextView
                         android:id="@+id/report_user_count_header_tv"
@@ -72,14 +74,14 @@
                         android:layout_height="wrap_content"
                         android:background="#2B2B2B"
                         android:gravity="center|center_horizontal"
-                        android:text="number of times reported" />
+                        android:text="@string/times_reported_lbl" />
 
                     <TextView
                         android:id="@+id/num_of_report_user_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#121212"
-                        android:text="number of times reported goes here" />
+                        android:text="@string/times_reported_field" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -90,24 +92,30 @@
 
                 <Button
                     android:id="@+id/waive_ban_btn"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
                     android:layout_weight="1"
-                    android:text="waive" />
+                    android:text="@string/waive_button" />
 
                 <Button
                     android:id="@+id/temp_ban_user_btn"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
                     android:layout_weight="1"
-                    android:text="temp. ban" />
+                    android:text="@string/temp_ban_button" />
 
                 <Button
                     android:id="@+id/perma_ban_user_btn"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
                     android:layout_weight="1"
-                    android:text="Perma Ban" />
+                    android:text="@string/perma_ban_button" />
             </LinearLayout>
 
         </LinearLayout>
