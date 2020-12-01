@@ -255,14 +255,7 @@ public class SelectedFriend extends AppCompatActivity {
                 });
     }
 
-    //populates fields for user being reported
-    public void populateReportedUserScreen(){
-        //reported user information
-        reportedUserName = findViewById(R.id.reported_user_display_name);
-        reportedUserName.setText(String.format("%s %s", firstName.getText(), lastName.getText()));
-        reportedPersonImage = findViewById(R.id.reported_friend_image);
-        reportedPersonImage.setImageDrawable(profilePic.getDrawable());
-    }
+
     public void setupPopUpScreenView(){
         // change visibility to views
         constraintLayout.setVisibility(View.VISIBLE);

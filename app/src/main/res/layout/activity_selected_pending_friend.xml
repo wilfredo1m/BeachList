@@ -257,7 +257,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_marginBottom="5dp"
-                        android:background="#131313"
+                        android:background="#010720"
                         android:gravity="center|center_horizontal"
                         android:text="@string/reason_header"
                         android:textColor="#606060" />
@@ -265,16 +265,22 @@
                     <TextView
                         android:id="@+id/report_reason_lbl"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:background="#2B2B2B"
                         android:gravity="center_horizontal"
                         android:text="@string/reason_for_report" />
 
-                    <Spinner
-                        android:id="@+id/report_reason_spinner"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:background="#3E3E3E" />
+                        android:layout_height="match_parent"
+                        android:background="#121212"
+                        android:orientation="horizontal">
+
+                        <Spinner
+                            android:id="@+id/report_reason_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -287,7 +293,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="#575757"
                             android:text="@string/cancelBtn" />
 
                         <Button
@@ -296,7 +301,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="#575757"
                             android:text="@string/report_button" />
                     </LinearLayout>
 

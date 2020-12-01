@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000">
+    android:background="#151313">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar7"
@@ -21,7 +21,7 @@
         android:id="@+id/share_button_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#CC1818"
+        android:background="#C6050505"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="3dp"
-            android:background="#8E24AA"
+            android:background="#151515"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,6 +42,7 @@
                 android:id="@+id/share_item_header_lbl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#010720"
                 android:gravity="center|center_horizontal"
                 android:text="@string/share_listing_title"
                 android:textSize="24sp" />
@@ -49,7 +50,9 @@
             <TextView
                 android:id="@+id/add_comment_lbl"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:background="#2B2B2B"
+                android:gravity="center|center_horizontal"
                 android:text="@string/add_comment_lbl" />
 
             <EditText
@@ -57,22 +60,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
+                android:background="#121212"
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="@string/comment_hint"
                 android:inputType="textMultiLine" />
 
-            <LinearLayout
-                android:id="@+id/share_service_divider_1"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#575757"
-                android:orientation="vertical"></LinearLayout>
-
             <TextView
                 android:id="@+id/select_friend_to_share_item_lbl"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:background="#2B2B2B"
+                android:gravity="center|center_horizontal"
                 android:text="@string/select_friend_lbl" />
 
             <LinearLayout
@@ -80,16 +79,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#575757"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical">
 
-            <Spinner
-                android:id="@+id/seleted_friend_to_share_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="30dp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:background="#121212"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/seleted_friend_to_share_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#252525"
                 android:orientation="horizontal">
 
                 <Button
@@ -98,7 +108,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#575757"
                     android:text="@string/cancelBtn" />
 
                 <Button
@@ -107,7 +116,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#575757"
                     android:text="@string/share_link_button" />
             </LinearLayout>
 
@@ -168,7 +176,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:background="#131313"
+                            android:background="#010720"
                             android:gravity="center"
                             android:text="@string/reason_to_report_title"
                             android:textSize="18sp" />
@@ -182,27 +190,35 @@
                     android:layout_height="1dp"
                     android:layout_marginBottom="5dp"
                     android:background="#575757"
-                    android:orientation="horizontal"></LinearLayout>
+                    android:orientation="horizontal">
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/reported_item_reason"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:background="#2B2B2B"
                     android:gravity="center_horizontal"
                     android:text="@string/reason_for_report_listing" />
 
-                <Spinner
-                    android:id="@+id/reported_item_spinner"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="#3E3E3E" />
+                    android:layout_height="match_parent"
+                    android:background="#3E3E3E"
+                    android:orientation="vertical">
+
+                    <Spinner
+                        android:id="@+id/reported_item_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/linearLayout12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#1C1C1C"
+                    android:background="#252525"
                     android:orientation="horizontal">
 
                     <Button
@@ -211,7 +227,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="#575757"
                         android:text="@string/cancelBtn" />
 
                     <Button
@@ -220,7 +235,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="#575757"
                         android:text="@string/report_button" />
                 </LinearLayout>
 
@@ -481,6 +495,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:background="#000000"
                     android:orientation="horizontal">
 
                     <Button
@@ -489,7 +504,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="#575757"
                         android:text="@string/share_link_button" />
 
                     <Button
@@ -498,7 +512,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="#575757"
                         android:text="@string/report_button" />
                 </LinearLayout>
 
