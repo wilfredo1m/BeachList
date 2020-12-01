@@ -38,7 +38,7 @@ import java.util.List;
 public class SelectedUser extends AppCompatActivity {
     private static final String TAG = "error";
     ImageView profilePic,reportedPersonImage;
-    TextView firstName, lastName, reportedUserName;
+    TextView firstName, lastName, selectedUserEmail;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
     FirebaseUser user;
@@ -71,6 +71,7 @@ public class SelectedUser extends AppCompatActivity {
         firstName = findViewById(R.id.selected_user_first_name);                                      //link firstName to xml
         lastName = findViewById(R.id.selected_user_last_name);                                        //link lastName to xml
         addFriendButton = findViewById(R.id.btn_add_user);                                            //link addFriendButton to xml
+        selectedUserEmail = findViewById(R.id.selected_user_email_tv);
 
 //***********************************INITIALIZE SPINNER SECTION************************************************************************************//
         //SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST
@@ -240,6 +241,7 @@ public class SelectedUser extends AppCompatActivity {
                 .into(profilePic);
         firstName.setText(selectedUser.getFirstName());
         lastName.setText(selectedUser.getLastName());
+        selectedUserEmail.setText(selectedUser.getEmail());
     }
 
     private void addUserToReported() {
