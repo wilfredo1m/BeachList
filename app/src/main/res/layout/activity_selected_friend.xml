@@ -32,9 +32,9 @@
 
     <TextView
         android:id="@+id/tv_full_name"
-        android:layout_width="153dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_width="207dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="casual"
         android:text="@string/first_name"
         android:textColor="#FFFFFF"
@@ -46,11 +46,11 @@
 
     <TextView
         android:id="@+id/tv_email"
-        android:layout_width="153dp"
-        android:layout_height="wrap_content"
+        android:layout_width="207dp"
+        android:layout_height="21dp"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="casual"
         android:text="@string/last_name"
         android:textColor="#FFFFFF"
@@ -95,9 +95,9 @@
 
     <RatingBar
         android:id="@+id/ratingBar2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_width="240dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="4dp"
         android:background="#000000"
         android:isIndicator="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -118,19 +118,19 @@
 
     <TextView
         android:id="@+id/reported_user_lbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="86dp"
+        android:layout_height="28dp"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="12dp"
         android:text="@string/report_user_label"
         app:layout_constraintStart_toEndOf="@+id/iv_selected_friend_image"
-        app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+        app:layout_constraintTop_toBottomOf="@+id/friend_email_tv" />
 
     <TextView
         android:id="@+id/remove_friend_lbl"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="28dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="@string/remove_friend_label"
@@ -144,7 +144,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#E9000000"
-        android:visibility="invisible">
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -247,12 +247,11 @@
 
     <ScrollView
         android:id="@+id/listing_scroll_view"
-        android:layout_width="396dp"
-        android:layout_height="644dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="match_parent"
+        android:layout_height="418dp"
         android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar2">
 
@@ -265,6 +264,7 @@
                 android:id="@+id/tb_listing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
                 android:background="#292929"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
@@ -274,14 +274,15 @@
             <TextView
                 android:id="@+id/user_items_lbl"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:background="#010A3A"
                 android:gravity="center_horizontal"
                 android:text="@string/item_tab" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/friend_item_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="#673AB7">
 
             </androidx.recyclerview.widget.RecyclerView>
@@ -289,7 +290,8 @@
             <TextView
                 android:id="@+id/user_service_lbl"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:background="#010A3A"
                 android:gravity="center_horizontal"
                 android:text="@string/service_category_tab" />
 
@@ -301,5 +303,15 @@
                 android:background="#2196F3" />
         </LinearLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/friend_email_tv"
+        android:layout_width="207dp"
+        android:layout_height="wrap_content"
+        android:text="@string/email_address"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/tv_email"
+        app:layout_constraintStart_toStartOf="@+id/tv_email"
+        app:layout_constraintTop_toBottomOf="@+id/tv_email" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,10 +48,10 @@
         android:id="@+id/btn_report_user"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/ic_baseline_report_24"
+        app:layout_constraintEnd_toEndOf="@+id/tv_report_lbl"
+        app:layout_constraintHorizontal_bias="0.913"
         app:layout_constraintStart_toEndOf="@+id/btn_reject_user"
         app:layout_constraintTop_toBottomOf="@+id/tv_report_lbl" />
 
@@ -66,11 +66,11 @@
 
     <TextView
         android:id="@+id/tv_pending_first_name"
-        android:layout_width="153dp"
+        android:layout_width="208dp"
         android:layout_height="24dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginRight="56dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
         android:fontFamily="casual"
         android:text="@string/first_name"
         android:textStyle="bold"
@@ -79,9 +79,9 @@
 
     <TextView
         android:id="@+id/tv_pending_last_name"
-        android:layout_width="156dp"
+        android:layout_width="208dp"
         android:layout_height="21dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="casual"
         android:text="@string/last_name"
         android:textStyle="bold"
@@ -94,7 +94,7 @@
         android:id="@+id/ratingBar3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:isIndicator="true"
         app:layout_constraintEnd_toEndOf="@+id/btn_reject_user"
         app:layout_constraintHorizontal_bias="1.0"
@@ -105,7 +105,7 @@
         android:id="@+id/btn_accept_user"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/ic_baseline_check_24"
         app:layout_constraintStart_toStartOf="@+id/tv_accept_user_lbl"
         app:layout_constraintTop_toBottomOf="@+id/tv_accept_user_lbl" />
@@ -114,54 +114,52 @@
         android:id="@+id/btn_reject_user"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/ic_baseline_clear_24"
+        app:layout_constraintEnd_toEndOf="@+id/tv_reject_user_lbl"
+        app:layout_constraintHorizontal_bias="0.809"
         app:layout_constraintStart_toEndOf="@+id/btn_accept_user"
         app:layout_constraintTop_toBottomOf="@+id/tv_reject_user_lbl" />
 
     <TextView
         android:id="@+id/tv_accept_user_lbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_width="44dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:fontFamily="sans-serif"
         android:text="@string/accept_user_label"
-        app:layout_constraintEnd_toStartOf="@+id/tv_reject_user_lbl"
-        app:layout_constraintTop_toBottomOf="@+id/tv_pending_last_name" />
+        app:layout_constraintStart_toStartOf="@+id/pending_friend_email"
+        app:layout_constraintTop_toTopOf="@+id/tv_reject_user_lbl" />
 
     <TextView
         android:id="@+id/tv_reject_user_lbl"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginRight="52dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="sans-serif"
         android:text="@string/deny_user_label"
-        app:layout_constraintEnd_toEndOf="@+id/tv_pending_last_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_pending_last_name" />
+        app:layout_constraintEnd_toStartOf="@+id/tv_report_lbl"
+        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintStart_toEndOf="@+id/tv_accept_user_lbl"
+        app:layout_constraintTop_toBottomOf="@+id/pending_friend_email" />
 
     <TextView
         android:id="@+id/tv_report_lbl"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
         android:text="@string/report_user_lbl"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/tv_reject_user_lbl"
+        app:layout_constraintEnd_toEndOf="@+id/pending_friend_email"
         app:layout_constraintTop_toTopOf="@+id/tv_reject_user_lbl" />
 
     <ScrollView
         android:id="@+id/listing_scroll_view"
-        android:layout_width="386dp"
-        android:layout_height="368dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="390dp"
+        android:layout_height="401dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -186,28 +184,29 @@
             <TextView
                 android:id="@+id/pending_user_item_lbl"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:background="#010A3A"
                 android:gravity="center_horizontal"
                 android:text="@string/item_lbl" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pending_friend_item_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
                 android:background="#3F51B5" />
 
             <TextView
                 android:id="@+id/pending_user_service_lbl"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:background="#010A3A"
                 android:gravity="center_horizontal"
                 android:text="@string/service_title" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pending_friend_service_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:background="#FFEB3B" />
 
         </LinearLayout>
@@ -309,6 +308,16 @@
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/pending_friend_email"
+        android:layout_width="208dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/email_address"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/tv_pending_last_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pending_last_name" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
