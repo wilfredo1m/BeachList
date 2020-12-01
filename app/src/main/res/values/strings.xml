@@ -164,6 +164,8 @@
     <string name = "service_title">Service</string>
     <string name= "item_lbl">Item</string>
 
+    <string name= "user_email">Email Address</string>
+
     <string name= "sold_price_lbl">Sold Price</string>
     <string name= "account_links_lbl">Account Links</string>
     <string name= "sold_to_lbl">Sold To</string>
