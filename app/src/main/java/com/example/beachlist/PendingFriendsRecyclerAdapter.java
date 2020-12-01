@@ -28,7 +28,7 @@ public class PendingFriendsRecyclerAdapter extends RecyclerView.Adapter<PendingF
     @NonNull
     @Override
     public PendingFriendsRecyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_pending_friend_row,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_friend_list_row,parent,false);
         return new MyViewHolder(view);
     }
 
