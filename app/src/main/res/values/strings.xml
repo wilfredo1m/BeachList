@@ -57,6 +57,7 @@
     <string name="reason_for_report_listing">What is the reason you want to report this Listing</string>
     <string name="reason_header">REASON</string>
     <string name="full_name">Name:</string>
+    <string name= "message_sent_date">Last message Sent Date</string>
 
     <!-- Messages text -->
     <string name="messages_header"> Messages</string>
