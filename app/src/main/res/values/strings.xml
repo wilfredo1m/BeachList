@@ -206,6 +206,7 @@
     <string name= "enter_message_here_hint">Type A Message</string>
     <string name= "user_name_lbl">User Name Goes Here</string>
     <string name= "user_email_lbl">User Email Goes Here</string>
+    <string name= "message_lbl">Last Message Goes Here</string>
     <!-- spinner stuff -->
     <string-array name="categories">
         <item>book</item>
