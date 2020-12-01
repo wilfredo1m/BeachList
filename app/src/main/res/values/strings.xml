@@ -165,6 +165,11 @@
     <string name= "item_lbl">Item</string>
 
     <string name= "user_email">Email Address</string>
+    <string name= "reported_listing_title_lbl">Reported Listing Title</string>
+    <string name= "reported_listing_title_field">Reported Listing Title Goes Here</string>
+    <string name= "reason_for_report_lbl">Reason for Report</string>
+    <string name= "reason_for_report_field">Reason for Report Goes here</string>
+
 
     <string name= "sold_price_lbl">Sold Price</string>
     <string name= "account_links_lbl">Account Links</string>

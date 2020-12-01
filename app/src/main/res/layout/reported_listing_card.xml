@@ -29,6 +29,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
+                    android:contentDescription="@string/content_description_login_image"
                     app:srcCompat="@drawable/collectibles" />
 
                 <LinearLayout
@@ -42,14 +43,18 @@
                         android:layout_height="wrap_content"
                         android:background="#2B2B2B"
                         android:gravity="center|center_horizontal"
-                        android:text="Reported Listing Title" />
+                        android:text="@string/reported_listing_title_lbl" />
 
                     <TextView
                         android:id="@+id/reported_listing_name_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#121212"
-                        android:text="reported listing Name" />
+                        android:paddingStart="6dp"
+                        android:paddingLeft="6dp"
+                        android:paddingRight="0dp"
+                        android:text="@string/reported_listing_title_field"
+                        android:paddingEnd="0dp" />
 
                     <TextView
                         android:id="@+id/reason_listing_report_header_tv"
@@ -57,14 +62,18 @@
                         android:layout_height="wrap_content"
                         android:background="#2B2B2B"
                         android:gravity="center|center_horizontal"
-                        android:text="Reason for Report" />
+                        android:text="@string/reason_for_report_lbl" />
 
                     <TextView
                         android:id="@+id/reason_for_report_listing_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#121212"
-                        android:text="reason for report goes here" />
+                        android:paddingStart="6dp"
+                        android:paddingLeft="6dp"
+                        android:paddingEnd="0dp"
+                        android:paddingRight="0dp"
+                        android:text="@string/reason_for_report_field" />
 
                     <TextView
                         android:id="@+id/num_times_reported_header_tv"
@@ -72,14 +81,18 @@
                         android:layout_height="wrap_content"
                         android:background="#2B2B2B"
                         android:gravity="center|center_horizontal"
-                        android:text="number of times reported" />
+                        android:text="@string/times_reported_lbl" />
 
                     <TextView
                         android:id="@+id/num_times_list_reported_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#121212"
-                        android:text="number of times reported goes here" />
+                        android:paddingStart="6dp"
+                        android:paddingLeft="6dp"
+                        android:paddingEnd="0dp"
+                        android:paddingRight="0dp"
+                        android:text="@string/times_reported_field" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -90,6 +103,7 @@
 
                 <Button
                     android:id="@+id/waive_report_listing_btn"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -97,6 +111,7 @@
 
                 <Button
                     android:id="@+id/delete_post_btn"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -104,6 +119,7 @@
 
                 <Button
                     android:id="@+id/ban_owner_btn"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
