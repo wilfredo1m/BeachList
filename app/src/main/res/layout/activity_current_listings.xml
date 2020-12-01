@@ -8,7 +8,7 @@
 
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar12"
+        android:id="@+id/user_listings_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#292929"
@@ -25,9 +25,9 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/ic_outline_arrow_back_ios_24"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar12"
+        app:layout_constraintBottom_toBottomOf="@+id/user_listings_toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar12"
+        app:layout_constraintTop_toTopOf="@+id/user_listings_toolbar"
         app:layout_constraintVertical_bias="0.437" />
 
     <androidx.viewpager.widget.ViewPager
@@ -49,7 +49,7 @@
         android:background="#FF676666"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar12"
+        app:layout_constraintTop_toBottomOf="@+id/user_listings_toolbar"
         app:tabIndicatorColor="#03DAC5"
         app:tabSelectedTextColor="#03DAC5">
 

@@ -141,6 +141,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
             case R.id.btn_active_listings:
                 openScreen = new Intent(getActivity(), ActiveListings.class);
                 openScreen.putExtra("signedInUserListingTab", 1);
+
                 startActivity(openScreen);
                 break;
             case R.id.btn_pending_friends:
