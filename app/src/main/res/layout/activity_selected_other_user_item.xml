@@ -397,73 +397,81 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/item_user_image"
+                                android:layout_width="103dp"
+                                android:layout_height="100dp"
+                                android:layout_margin="1dp"
+                                android:background="@drawable/ic_baseline_person_24"
+                                android:contentDescription="@string/friend_image_icon"
+                                android:scaleType="centerCrop"
+                                app:civ_border_color="#7A7A7A"
+                                app:civ_border_width="4dp" />
+
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
+                                android:background="#1E1E1E"
+                                android:orientation="vertical">
 
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:id="@+id/item_user_image"
-                                    android:layout_width="103dp"
-                                    android:layout_height="100dp"
-                                    android:layout_margin="1dp"
-                                    android:background="@drawable/ic_baseline_person_24"
-                                    android:contentDescription="@string/friend_image_icon"
-                                    android:scaleType="centerCrop"
-                                    app:civ_border_color="#7A7A7A"
-                                    app:civ_border_width="4dp" />
-
-
-                                <LinearLayout
+                                <TextView
+                                    android:id="@+id/item_seller_firstname"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical">
+                                    android:layout_height="30dp"
+                                    android:background="#121212"
+                                    android:fontFamily="casual"
+                                    android:paddingStart="6dp"
+                                    android:paddingLeft="6dp"
+                                    android:paddingEnd="0dp"
+                                    android:paddingRight="0dp"
+                                    android:text="@string/first_name"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
 
-                                    <TextView
-                                        android:id="@+id/item_seller_firstname"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="30dp"
-                                        android:layout_marginTop="12dp"
-                                        android:background="#121212"
-                                        android:fontFamily="casual"
-                                        android:paddingLeft="6dp"
-                                        android:text="@string/first_name"
-                                        android:textSize="18sp"
-                                        android:textStyle="bold" />
+                                <TextView
+                                    android:id="@+id/item_seller_lastname"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:background="#121212"
+                                    android:fontFamily="casual"
+                                    android:paddingStart="6dp"
+                                    android:paddingLeft="6dp"
+                                    android:paddingEnd="0dp"
+                                    android:paddingRight="0dp"
+                                    android:text="@string/last_name"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
 
-                                    <TextView
-                                        android:id="@+id/item_seller_lastname"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="30dp"
-                                        android:layout_marginTop="12dp"
-                                        android:background="#121212"
-                                        android:fontFamily="casual"
-                                        android:paddingLeft="6dp"
-                                        android:text="@string/last_name"
-                                        android:textSize="18sp"
-                                        android:textStyle="bold" />
+                                <TextView
+                                    android:id="@+id/item_user_email"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="#121212"
+                                    android:paddingStart="6dp"
+                                    android:paddingLeft="6dp"
+                                    android:paddingEnd="0dp"
+                                    android:paddingRight="0dp"
+                                    android:text="@string/user_email" />
 
-                                    <RatingBar
-                                        android:id="@+id/item_user_rating"
-                                        android:layout_width="241dp"
-                                        android:layout_height="39dp"
-                                        android:isIndicator="true"
-                                        android:scaleX="0.5"
-                                        android:scaleY="0.5"
-                                        android:transformPivotX="25dp" />
-                                </LinearLayout>
-
-
+                                <RatingBar
+                                    android:id="@+id/item_user_rating"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="39dp"
+                                    android:isIndicator="true"
+                                    android:scaleX="0.5"
+                                    android:scaleY="0.5"
+                                    android:transformPivotX="25dp" />
                             </LinearLayout>
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        </LinearLayout>
+
                     </androidx.cardview.widget.CardView>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
