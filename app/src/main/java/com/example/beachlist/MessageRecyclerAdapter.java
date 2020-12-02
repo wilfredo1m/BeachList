@@ -38,11 +38,11 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
     public void onBindViewHolder(@NonNull MessageRecyclerAdapter.MyViewHolder holder, final int position) {
 
         Glide.with(context)
-                .load("https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F71286574?alt=media&token=77eaed3a-316a-4d8f-96c4-ed09a0a2e8a5")                // retrieve sample url from test_message
+                .load(list.get(position).child("imageUrl").getValue(String.class))                // retrieve sample url from test_message
                 .centerCrop()
                 .into(holder.userPic);
 
-        String lastMessage = (list.get(position).getKey());     // retrieve sample fullname from test_message
+        String lastMessage = (list.get(position).child("lastMessage").getValue(String.class));     // retrieve sample fullname from test_message
 
         holder.userName.setText(lastMessage);
 
@@ -52,6 +52,7 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
             public void onClick(View view) {
                 Intent intent = new Intent(context, ConversationScreen.class);
                 intent.putExtra("position", position);
+                intent.putExtra("convoId", list.get(position).getKey());
                 context.startActivity(intent);
             }
         });

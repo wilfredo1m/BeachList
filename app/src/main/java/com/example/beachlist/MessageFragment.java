@@ -55,7 +55,7 @@ public class MessageFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        DatabaseReference getUserConvos = database.getReference().child("users");
+        DatabaseReference getUserConvos = database.getReference().child("convos");
 
         convo_list.clear();
 
