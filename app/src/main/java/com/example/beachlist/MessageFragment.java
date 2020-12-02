@@ -18,20 +18,21 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 
 public class MessageFragment extends Fragment {
     Button testBtn;
     View messageView;
+    MessageRecyclerAdapter adapter;
     private RecyclerView recyclerView;
     String userID;
-    public static List<Map<String, String>> message_list = new ArrayList<>();
+    public static List<DataSnapshot> convo_list = new ArrayList<>();
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     public MessageFragment() {
@@ -42,8 +43,6 @@ public class MessageFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         messageView =inflater.inflate(R.layout.fragment_messages, container, false);
-
-        DatabaseReference usersReference = database.getReference("/users/" + userID + "/chats");;
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -56,34 +55,33 @@ public class MessageFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        // clears list each time to make sure no duplicates are added
-        message_list.clear();
+        DatabaseReference getUserConvos = database.getReference().child("users");
 
-        // Map that acts as temporary placeholder for convos
-        // This will be replaced by a db call later
-        Map<String, String> test_message_one = new HashMap<String, String>();
-        Map<String, String> test_message_two = new HashMap<String, String>();
+        convo_list.clear();
 
-        // Sample Url and Full Name
-        test_message_one.put("url", "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F2001775738?alt=media&token=6bfdb931-c5d5-488d-ad0e-8f85d10246ce");
-        test_message_one.put("fullname", "Sample Full Name one");
+        getUserConvos.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        convo_list.add(child);
+                    }
+                }
+                onConvoDataQuery();
+            }
 
-        test_message_two.put("url", "https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F2001775738?alt=media&token=6bfdb931-c5d5-488d-ad0e-8f85d10246ce");
-        test_message_two.put("fullname", "Sample Full Name two");
-
-        message_list.add(test_message_one);
-        message_list.add(test_message_two);
-
-        onServiceListQuery();
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
 
         // Inflate the layout for this fragment
         return messageView;
     }
 
-    public void onServiceListQuery() {
-        RecyclerView.Adapter adapter = new MessageRecyclerAdapter(getActivity(), message_list);
+    public void onConvoDataQuery() {
+        adapter = new MessageRecyclerAdapter(getContext(), convo_list);
         recyclerView.setAdapter(adapter);
     }
-
-
 }

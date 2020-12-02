@@ -20,9 +20,9 @@ import java.util.Map;
 
 public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecyclerAdapter.MyViewHolder> {
     Context context;
-    List<Map<String, String>> list;
+    List<DataSnapshot> list;
 
-    public MessageRecyclerAdapter(Context context, List<Map<String, String>> list) {
+    public MessageRecyclerAdapter(Context context, List<DataSnapshot> list) {
         this.context = context;
         this.list = list;
     }
@@ -36,14 +36,15 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
 
     @Override
     public void onBindViewHolder(@NonNull MessageRecyclerAdapter.MyViewHolder holder, final int position) {
+
         Glide.with(context)
-                .load(list.get(position).get("url"))                // retrieve sample url from test_message
+                .load("https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F71286574?alt=media&token=77eaed3a-316a-4d8f-96c4-ed09a0a2e8a5")                // retrieve sample url from test_message
                 .centerCrop()
                 .into(holder.userPic);
 
-        String fullName = (list.get(position).get("fullname"));     // retrieve sample fullname from test_message
+        String lastMessage = (list.get(position).getKey());     // retrieve sample fullname from test_message
 
-        holder.userName.setText(fullName);
+        holder.userName.setText(lastMessage);
 
         // when a conversation is clicked, the position is taken to get that conversation
         holder.itemView.setOnClickListener(new View.OnClickListener() {
