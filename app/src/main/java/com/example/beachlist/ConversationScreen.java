@@ -69,7 +69,7 @@ public class ConversationScreen extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
 
 
-        //friendID = getIntent().getStringExtra("friend ID");
+        friendID = getIntent().getStringExtra("friend ID");
         // gets the item's information to display
 //        friendID = getIntent().getStringExtra("UserID");
 //        listingId = getIntent().getStringExtra("ListingID");
@@ -89,6 +89,22 @@ public class ConversationScreen extends AppCompatActivity {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         userID = user.getUid();
+
+
+        //*******************HARD CODED MESSAGES********************************
+        Message message1 = new Message("Viet", "bernie", "Hello there");
+        Message message2 = new Message("bernie", "Viet", "Hiya");
+        Message message3 = new Message("Viet", "bernie", "I'll give you $20 for stuff");
+        Message message4 = new Message("bernie", "Viet", "$55 is the lowest i can go");
+
+        conversation_list.add(message1);
+        conversation_list.add(message2);
+        conversation_list.add(message3);
+        conversation_list.add(message4);
+
+        adapter = new ConversationRecyclerAdapter(ConversationScreen.this, conversation_list);
+        recyclerView.setAdapter(adapter);
+        //**********************************************************************
 
 
 //        messageRef = firebaseDatabase.getReference("/users/" + userID + "/chats/" + friendID);

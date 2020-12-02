@@ -50,7 +50,7 @@ public class ConversationRecyclerAdapter extends RecyclerView.Adapter<Conversati
 //                .centerCrop()
 //                .into(holder.userPic);
 //
-//        //holder.userMessage.setText();
+        holder.userMessage.setText(list.get(position).getMessage());
     }
 
     @Override
@@ -71,12 +71,23 @@ public class ConversationRecyclerAdapter extends RecyclerView.Adapter<Conversati
 
     public int getItemViewType(int position){
         fUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (list.get(position).getSender().equals(fUser.getUid())){
+
+        //THIS IS TEMPORARY TO DISPLAY THE HARD CODED MESSAGES
+        // UNTIL WE GET THE CONVERSATION WORKING PROPERLY
+        if (list.get(position).getSender().equals("Viet")){
             return MSG_RIGHT;
         }
         else{
             return MSG_LEFT;
         }
+
+        //THIS IS THE ACTUAL WAY WE WILL CHECK WHICH SIDE TO DISPLAY THE MESSAGES ON
+//        if (list.get(position).getSender().equals(fUser.getUid())){
+//            return MSG_RIGHT;
+//        }
+//        else{
+//            return MSG_LEFT;
+//        }
     }
 }
 
