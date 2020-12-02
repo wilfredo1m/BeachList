@@ -51,7 +51,7 @@ public class SelectedPendingFriend extends AppCompatActivity {
     ScrollView listingView;
     Spinner reportUserSpinner;
     Button reportButton, rejectRequest,acceptRequest,backButton,submitReport, cancelReport;
-    TextView reportedUserName;
+    TextView email;
     ConstraintLayout popupWindow;
     String reportedUser;
 
@@ -69,6 +69,7 @@ public class SelectedPendingFriend extends AppCompatActivity {
         lastName = findViewById(R.id.tv_pending_last_name);                                                  //link lastName to xml
         listingView = findViewById(R.id.listing_scroll_view);                                                //link listingView to xml
         popupWindow = findViewById(R.id.popup_window);                                                       //link popupWindow view to xml
+        email = findViewById(R.id.pending_friend_email);
 
         recyclerViewItem = findViewById(R.id.pending_friend_item_recycler);                                 //link recyclerViewItem view to xml
         recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
@@ -103,6 +104,9 @@ public class SelectedPendingFriend extends AppCompatActivity {
 
                     onItemListQuery();
                 }
+                String friendUserID = PendingFriendsListTab.list.get(position).getKey();                        //get id of friend
+                //Toast.makeText(getApplicationContext(), friendUserID, Toast.LENGTH_SHORT).show();
+                getFriendEmail(friendUserID);                                                                   //get the email address of friend to populate field
             }
 
             @Override
@@ -122,6 +126,7 @@ public class SelectedPendingFriend extends AppCompatActivity {
 
                     onServiceListQuery();
                 }
+
             }
 
             @Override
@@ -335,4 +340,19 @@ public class SelectedPendingFriend extends AppCompatActivity {
         acceptRequest.setVisibility(View.VISIBLE);
         listingView.setVisibility(View.VISIBLE);
     }
+
+    public void getFriendEmail(String id){
+        DatabaseReference userRef = database.getReference().child("users").child(id);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                email.setText(snapshot.child("data").getValue(UserData.class).getEmail());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+
 }
