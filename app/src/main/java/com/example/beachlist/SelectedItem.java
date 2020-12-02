@@ -37,7 +37,7 @@ import java.util.HashMap;
 
 public class SelectedItem extends AppCompatActivity {
     private static final String TAG = "EXCEPTION";
-    ViewPager2 viewPager,reportedPager;
+    ViewPager2 viewPager;
     private final ArrayList<String> itemImages = new ArrayList<>();
     private FirebaseDatabase firebaseDatabase;
     private ListingData selectedListing;
@@ -46,9 +46,9 @@ public class SelectedItem extends AppCompatActivity {
     ArrayList<String>friendNameArray = new ArrayList<>();
     ArrayList<String>friendIDArray = new ArrayList<>();
 
-    ImageAdapterString adapter,adapter2;
+    ImageAdapterString adapter;
     ImageView userPicture;
-    TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName, reportedItemTitle, itemSellerEmail;
+    TextView itemTitle, itemDescription, itemPrice, itemCategory, itemSellerFirstName, itemSellerLastName, itemSellerEmail;
     ConstraintLayout itemPopUpWindow, mainItemWindow;
     Button reportItem, cancelReport,backButton,contactSeller,confirmReport,shareItemBtn;
     Spinner reportItemSpinner;
@@ -246,7 +246,7 @@ public class SelectedItem extends AppCompatActivity {
         confirmShareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String selectedFriend = shareItemSpinner.getSelectedItem().toString();
+                //String selectedFriend = shareItemSpinner.getSelectedItem().toString();
                 String friendID = friendIDArray.get(friendPositionIntValue);
                 String comment = commentForShareScreen.getText().toString();
                 sendToFriend(friendID, comment);
