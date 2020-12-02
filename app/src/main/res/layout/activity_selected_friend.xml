@@ -20,8 +20,8 @@
 
     <ImageView
         android:id="@+id/iv_selected_friend_image"
-        android:layout_width="168dp"
-        android:layout_height="169dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="8dp"
@@ -32,7 +32,7 @@
 
     <TextView
         android:id="@+id/tv_full_name"
-        android:layout_width="207dp"
+        android:layout_width="230dp"
         android:layout_height="21dp"
         android:layout_marginTop="8dp"
         android:fontFamily="casual"
@@ -46,10 +46,10 @@
 
     <TextView
         android:id="@+id/tv_email"
-        android:layout_width="207dp"
+        android:layout_width="230dp"
         android:layout_height="21dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="4dp"
         android:fontFamily="casual"
         android:text="@string/last_name"
@@ -86,10 +86,10 @@
         android:layout_height="40dp"
         android:layout_marginStart="64dp"
         android:layout_marginLeft="64dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
         android:background="@drawable/ic_baseline_person_add_disabled_24"
         app:layout_constraintEnd_toEndOf="@+id/remove_friend_lbl"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.368"
         app:layout_constraintStart_toEndOf="@+id/btn_report_friend"
         app:layout_constraintTop_toBottomOf="@+id/remove_friend_lbl" />
 
@@ -109,10 +109,10 @@
         android:id="@+id/btn_report_friend"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
         android:background="@drawable/ic_baseline_report_24"
         app:layout_constraintEnd_toEndOf="@+id/reported_user_lbl"
-        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintHorizontal_bias="0.413"
         app:layout_constraintStart_toStartOf="@+id/reported_user_lbl"
         app:layout_constraintTop_toBottomOf="@+id/reported_user_lbl" />
 
@@ -120,9 +120,9 @@
         android:id="@+id/reported_user_lbl"
         android:layout_width="86dp"
         android:layout_height="28dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
         android:text="@string/report_user_label"
         app:layout_constraintStart_toEndOf="@+id/iv_selected_friend_image"
         app:layout_constraintTop_toBottomOf="@+id/friend_email_tv" />
@@ -144,7 +144,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#E9000000"
-        android:visibility="gone">
+        android:visibility="invisible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -306,10 +306,11 @@
 
     <TextView
         android:id="@+id/friend_email_tv"
-        android:layout_width="207dp"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:text="@string/email_address"
-        android:visibility="invisible"
+        android:textSize="12sp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/tv_email"
         app:layout_constraintStart_toStartOf="@+id/tv_email"
         app:layout_constraintTop_toBottomOf="@+id/tv_email" />

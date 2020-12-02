@@ -1,5 +1,6 @@
 package com.example.beachlist;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,8 +41,8 @@ public class SelectedFriend extends AppCompatActivity {
     public static List<DataSnapshot> serviceList = new ArrayList<>();
     private static final String TAG = "error";
     Button reportFriend, unfriendButton, cancelReport,submitReport;
-    ImageView profilePic, reportedPersonImage;
-    TextView firstName, lastName, reportedUserName;
+    ImageView profilePic;
+    TextView firstName, lastName, email;
     ConstraintLayout constraintLayout;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
@@ -69,6 +70,7 @@ public class SelectedFriend extends AppCompatActivity {
         firstName = findViewById(R.id.tv_full_name);                                                //link firstName pic to xml
         lastName = findViewById(R.id.tv_email);                                                     //link lastName pic to xml
         listingScroll = findViewById(R.id.listing_scroll_view);                                     //listingScroll profile pic to xml
+        email = findViewById(R.id.friend_email_tv);
 
         recyclerViewItem = findViewById(R.id.friend_item_recycler);                                 //link recyclerViewItem view to xml
         recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
@@ -99,12 +101,15 @@ public class SelectedFriend extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     itemList.clear();
+
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         itemList.add(child);
                     }
 
                     onItemListQuery();
                 }
+                String friendUserID = FriendsListTab.list.get(position).getKey();                       //get id of friend
+                getFriendEmail(friendUserID);                                                           //get email of friend
             }
 
             @Override
@@ -170,7 +175,6 @@ public class SelectedFriend extends AppCompatActivity {
         reportFriend.setOnClickListener(new View.OnClickListener() {                                             //set on click listener for button
             @Override
             public void onClick(View v) {
-                //populateReportedUserScreen();
                 setupPopUpScreenView();
                 recyclerViewItem.setVisibility(View.INVISIBLE);
                 recyclerViewService.setVisibility(View.INVISIBLE);
@@ -271,5 +275,18 @@ public class SelectedFriend extends AppCompatActivity {
         unfriendButton.setVisibility(View.VISIBLE);
         constraintLayout.setVisibility(View.INVISIBLE);
         listingScroll.setVisibility(View.VISIBLE);
+    }
+
+    public void getFriendEmail(String id){
+        DatabaseReference userRef = database.getReference().child("users").child(id);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                email.setText(snapshot.child("data").getValue(UserData.class).getEmail());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 }

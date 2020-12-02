@@ -34,9 +34,11 @@
 
     <ImageView
         android:id="@+id/iv_selected_pending_friend_image"
-        android:layout_width="168dp"
-        android:layout_height="169dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/ic_baseline_person_24"
         android:contentDescription="@string/pending_friend_image_description"
         app:layout_constraintEnd_toStartOf="@+id/tv_pending_last_name"
@@ -66,11 +68,9 @@
 
     <TextView
         android:id="@+id/tv_pending_first_name"
-        android:layout_width="208dp"
+        android:layout_width="230dp"
         android:layout_height="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="casual"
         android:text="@string/first_name"
         android:textStyle="bold"
@@ -79,7 +79,7 @@
 
     <TextView
         android:id="@+id/tv_pending_last_name"
-        android:layout_width="208dp"
+        android:layout_width="230dp"
         android:layout_height="21dp"
         android:layout_marginTop="8dp"
         android:fontFamily="casual"
@@ -94,7 +94,7 @@
         android:id="@+id/ratingBar3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="28dp"
         android:isIndicator="true"
         app:layout_constraintEnd_toEndOf="@+id/btn_reject_user"
         app:layout_constraintHorizontal_bias="1.0"
@@ -311,11 +311,12 @@
 
     <TextView
         android:id="@+id/pending_friend_email"
-        android:layout_width="208dp"
-        android:layout_height="wrap_content"
+        android:layout_width="230dp"
+        android:layout_height="23dp"
         android:layout_marginTop="5dp"
         android:text="@string/email_address"
-        android:visibility="invisible"
+        android:textSize="12sp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/tv_pending_last_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_pending_last_name" />
 
