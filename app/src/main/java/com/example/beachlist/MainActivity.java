@@ -7,10 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,14 +27,24 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
 
+    Button homeScreenButton,createAccountButton;
+
+    //banned screen
+    ConstraintLayout bannedLayout;
+    Button testBtn, continueBtn;
+    TextView remainingTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //this line makes it so the first page to be displayed is the one below.
         setContentView(R.layout.activity_main);
 
+        bannedLayout = findViewById(R.id.banned_popup_layout);
+        remainingTime = findViewById(R.id.remaining_time_tv);
+
         // Create Account Button
-        Button createAccountButton = findViewById(R.id.btnCreateAccount);
+        createAccountButton = findViewById(R.id.btnCreateAccount);
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,12 +58,29 @@ public class MainActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
 
         // Login button
-        Button homeScreenButton = findViewById(R.id.btnLogin);
+        homeScreenButton = findViewById(R.id.btnLogin);
         homeScreenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Login User
                 Login();
+            }
+        });
+
+        testBtn= findViewById(R.id.test_popup_btn);
+        testBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayBannedScreen();
+                disablePreviousScreenEntries();
+            }
+        });
+
+        continueBtn= findViewById(R.id.continue_btn);
+        continueBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                revertToPrevScreen();
             }
         });
 
@@ -108,4 +137,25 @@ public class MainActivity extends AppCompatActivity {
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);
         startActivity(openScreen);
     }
+
+    public void displayBannedScreen(){
+        bannedLayout.setVisibility(View.VISIBLE);
+        homeScreenButton.setClickable(false);
+        createAccountButton.setClickable(false);
+
+    }
+    public void disablePreviousScreenEntries(){
+        homeScreenButton.setVisibility(View.INVISIBLE);
+        createAccountButton.setVisibility(View.INVISIBLE);
+
+    }
+
+    public void revertToPrevScreen(){
+        homeScreenButton.setClickable(true);
+        createAccountButton.setClickable(true);
+        bannedLayout.setVisibility(View.INVISIBLE);
+        homeScreenButton.setVisibility(View.VISIBLE);
+        createAccountButton.setVisibility(View.VISIBLE);
+    }
+
 }

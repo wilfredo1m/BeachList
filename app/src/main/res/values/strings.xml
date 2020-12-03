@@ -38,6 +38,11 @@
     <string name="user_image_description">User Image</string>
 
 
+    <string name= "continue_buttn">Continue</string>
+    <string name= "ban_time_left_lbl">Banned Time Lifted in</string>
+    <string name= "ban_time_left_field">Lifted time amount goes here</string>
+    <string name= "banned_header">Banned</string>
+    <string name= "banned_message">You have been banned from your account for illicit activity</string>
     <!-- Friends List Text -->
     <string name="friend_list_tab">Friend List</string>
     <string name="pending_friend_list_tab">Pending Requests</string>
@@ -58,6 +63,7 @@
     <string name="reason_header">REASON</string>
     <string name="full_name">Name:</string>
     <string name= "message_sent_date">Last message Sent Date</string>
+
 
     <!-- Messages text -->
     <string name="messages_header"> Messages</string>

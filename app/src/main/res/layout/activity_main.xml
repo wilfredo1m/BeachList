@@ -97,7 +97,6 @@
         android:id="@+id/btnLogin"
         android:layout_width="282dp"
         android:layout_height="53dp"
-        android:background="@drawable/abstract_blue_button"
         android:text="@string/login_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -109,9 +108,8 @@
 
     <Button
         android:id="@+id/btnCreateAccount"
-        android:layout_width="146dp"
-        android:layout_height="30dp"
-        android:background="@drawable/abstract_blue_button"
+        android:layout_width="149dp"
+        android:layout_height="45dp"
         android:text="@string/create_account_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -120,7 +118,82 @@
         app:layout_constraintTop_toBottomOf="@+id/btnLogin"
         app:layout_constraintVertical_bias="0.184" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/banned_popup_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#0C0C0C"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.495">
 
+        <LinearLayout
+            android:id="@+id/linearLayout17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/banned_header_tv"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="2dp"
+                android:background="#350000"
+                android:gravity="center|center_horizontal"
+                android:text="@string/banned_header"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/banned_message_tv"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#2b2b2b"
+                android:gravity="center|center_horizontal"
+                android:text="@string/banned_message" />
+
+            <TextView
+                android:id="@+id/banned_time_lbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#121212"
+                android:gravity="center|center_horizontal"
+                android:text="@string/ban_time_left_lbl" />
+
+            <TextView
+                android:id="@+id/remaining_time_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#5A0202"
+                android:gravity="center|center_horizontal"
+                android:text="@string/ban_time_left_field" />
+
+            <Button
+                android:id="@+id/continue_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/continue_buttn" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/test_popup_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivBeachListLogo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
