@@ -24,6 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ import java.util.List;
 
 public class ConversationScreen extends AppCompatActivity {
     RecyclerView recyclerView;
-    public static List<Message> conversation_list = new ArrayList<>();
+    public static List<DataSnapshot> messages_list = new ArrayList<>();
     ConversationRecyclerAdapter adapter;
 
     //***main page items used******************//
@@ -40,6 +41,7 @@ public class ConversationScreen extends AppCompatActivity {
     String listingId, friendID, userID, ownerOfListingName,
             ownerOfListingEmail, potentialBuyerName, potentialBuyerEmail, listingType;
     private FirebaseDatabase firebaseDatabase;
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private final ArrayList<String> itemImages = new ArrayList<>();
     TextView userName,userEmail;
     ImageView listingImage;
@@ -68,15 +70,13 @@ public class ConversationScreen extends AppCompatActivity {
         listingImage = findViewById(R.id.listing_image_iv);
         firebaseDatabase = FirebaseDatabase.getInstance();
 
-
+        // Retrieve info from previous screen
         friendID = getIntent().getStringExtra("friend ID");
-        // gets the item's information to display
-//        friendID = getIntent().getStringExtra("UserID");
-//        listingId = getIntent().getStringExtra("ListingID");
-//        listingType = getIntent().getStringExtra("listingType");
+        String convoId = getIntent().getStringExtra("convoId");
+        String imageUrl = getIntent().getStringExtra("imageUrl");
 
-//        listingRef = firebaseDatabase.getReference().child("listings").child(listingType).child(listingId);
-
+        // Display image of listing at the top of the convo screen
+        displayListingImage(imageUrl);
 
         //******************************Display Conversation***************************************
         recyclerView = findViewById(R.id.conversation_recyclerView);
@@ -90,66 +90,25 @@ public class ConversationScreen extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         userID = user.getUid();
 
+        // Retrieve messages for this convo from the database
+        Query getMessages = database.getReference("messages").child(convoId).orderByKey();
 
-        //*******************HARD CODED MESSAGES********************************
-        Message message1 = new Message("Viet", "bernie", "Hello there");
-        Message message2 = new Message("bernie", "Viet", "Hiya");
-        Message message3 = new Message("Viet", "bernie", "I'll give you $20 for stuff");
-        Message message4 = new Message("bernie", "Viet", "$55 is the lowest i can go");
+        getMessages.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        messages_list.add(child);
+                    }
+                }
+                onMessagesQuery();
+            }
 
-        conversation_list.add(message1);
-        conversation_list.add(message2);
-        conversation_list.add(message3);
-        conversation_list.add(message4);
-
-        adapter = new ConversationRecyclerAdapter(ConversationScreen.this, conversation_list);
-        recyclerView.setAdapter(adapter);
-        //**********************************************************************
-
-
-//        messageRef = firebaseDatabase.getReference("/users/" + userID + "/chats/" + friendID);
-//        messageRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                conversation_list.clear();
-//                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-//                    Message message = dataSnapshot.getValue(Message.class);
-//                    conversation_list.add(message);
-//
-//                    adapter = new ConversationRecyclerAdapter(ConversationScreen.this, conversation_list);
-//                    recyclerView.setAdapter(adapter);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-        //*****************************************************************************************
-
-//        listingRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                //Populate image URLs in global variable
-//                getListingImages(snapshot.child("listingImages"));
-//                //Get data and display info
-//                ListingData selectedListing = snapshot.getValue(ListingData.class);
-//                assert selectedListing != null;
-//                displayProfileImage();
-//                //display owner Info
-//                getOwnerInfo(friendID);
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                //TODO Handle this error
-//            }
-//        });
-
-
-
-
-
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
 
 
         //*****************main page buttons***************************//
@@ -206,6 +165,12 @@ public class ConversationScreen extends AppCompatActivity {
 
     }
 
+    // Upon receiving messages from the database, this function is called to show the messages
+    public void onMessagesQuery() {
+        adapter = new ConversationRecyclerAdapter(ConversationScreen.this, messages_list);
+        recyclerView.setAdapter(adapter);
+    }
+
     // takes us back to account settings screen
     public void openMessagesScreen(){
         Intent openScreen = new Intent(this, HomeScreenAfterLogin.class);              //intent to open HomeScreen
@@ -254,9 +219,9 @@ public class ConversationScreen extends AppCompatActivity {
         }
     }
 
-    private void displayProfileImage() {
+    private void displayListingImage(String imageUrl) {
         Glide.with(getBaseContext())
-                .load(itemImages.get(0))
+                .load(imageUrl)
                 .centerCrop()
                 .into(listingImage);
 
