@@ -73,10 +73,10 @@ public class ConversationScreen extends AppCompatActivity {
         // Retrieve info from previous screen
         friendID = getIntent().getStringExtra("friend ID");
         String convoId = getIntent().getStringExtra("convoId");
-        String imageUrl = getIntent().getStringExtra("imageUrl");
+        String listingUrl = getIntent().getStringExtra("listingUrl");
 
         // Display image of listing at the top of the convo screen
-        displayListingImage(imageUrl);
+        displayListingImage(listingUrl);
 
         //******************************Display Conversation***************************************
         recyclerView = findViewById(R.id.conversation_recyclerView);

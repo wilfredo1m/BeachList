@@ -53,7 +53,7 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
                 Intent intent = new Intent(context, ConversationScreen.class);
                 intent.putExtra("position", position);
                 intent.putExtra("convoId", list.get(position).getKey());
-                intent.putExtra("imageUrl", list.get(position).child("imageUrl").getValue(String.class));
+                intent.putExtra("listingUrl", list.get(position).child("imageUrl").getValue(String.class));
                 context.startActivity(intent);
             }
         });
