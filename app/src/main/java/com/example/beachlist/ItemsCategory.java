@@ -37,7 +37,7 @@ public class ItemsCategory extends Fragment {
             @Override
             public void onClick(View v) {                                                              //on click listener for button
                 openScreen.putExtra("calling page", 1);                                   //Assigns calling page to 1(item category) for use in back button in next page
-                openScreen.putExtra("category", "Textbook");
+                openScreen.putExtra("category", "book");
                 openScreen.putExtra("toolbar Name", "Filtered Textbooks");                //keeps track of which button is pressed to change title
                 startActivity(openScreen);                                                             //open next screen with the put values
             }
