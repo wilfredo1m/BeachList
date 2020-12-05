@@ -344,6 +344,9 @@ public class SelectedService extends AppCompatActivity {
 
     public void SendToUserPage(View view) {
         Intent intent = new Intent(this, SelectedUser.class);
+        intent.putExtra("selectedUserId", ownerID);
+        intent.putExtra("listingID", listingId);
+        intent.putExtra("screen", 2);
         startActivity(intent);
     }
 

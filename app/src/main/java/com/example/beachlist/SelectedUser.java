@@ -46,7 +46,7 @@ public class SelectedUser extends AppCompatActivity {
     Button reportUser,cancelReport,submitReport,addFriendButton;
     ConstraintLayout constraintLayout;
     Spinner reportUserSpinner;
-    String reportedUserReason;
+    String reportedUserReason, listingID;
     RecyclerView itemRecycler, serviceRecycler;
     ItemRecyclerAdapter itemAdapter;
     ServiceRecyclerAdapter serviceAdapter;
@@ -58,6 +58,9 @@ public class SelectedUser extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_user);
+
+        listingID = getIntent().getStringExtra("listingID");
+        final int callingActivity = getIntent().getIntExtra("screen",7);
 
         //firebase values
         database = FirebaseDatabase.getInstance();
@@ -193,7 +196,15 @@ public class SelectedUser extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {                                      //set on click listener for button
             @Override
             public void onClick(View view) {
-                openHomeScreen();
+                if (callingActivity == 1) {
+                    openItemScreen();
+                }
+                else if (callingActivity == 2){
+                    openServiceScreen();
+                }
+                else{
+                    openHomeScreen();
+                }
             }
         });
 
@@ -283,6 +294,19 @@ public class SelectedUser extends AppCompatActivity {
         openScreen.putExtra("tab",1);
         startActivity(openScreen);
     }
+
+    // Go back to selected listing user was just at
+    public void openItemScreen(){
+        Intent openScreen = new Intent(this, SelectedItem.class);
+        openScreen.putExtra("ListingID",listingID);
+        startActivity(openScreen);
+    }
+    public void openServiceScreen(){
+        Intent openScreen = new Intent(this, SelectedService.class);
+        openScreen.putExtra("ListingID",listingID);
+        startActivity(openScreen);
+    }
+
     //adds pending friend to firebase
     public void addPendingFriend(UserData userData){
         DatabaseReference addPendingFriendReference = database.getReference().child("users").child(selectedUser.getUserId()).child("pending").child(user.getUid());
