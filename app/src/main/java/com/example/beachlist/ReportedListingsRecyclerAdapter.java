@@ -70,7 +70,7 @@ public class ReportedListingsRecyclerAdapter extends RecyclerView.Adapter<Report
                 else
                     intent = new Intent(context, SelectedService.class);
                 //intent.putExtra("type", type);
-                intent.putExtra("listingID", listingId);
+                intent.putExtra("ListingID", listingId);
                 context.startActivity(intent);
             }
         });

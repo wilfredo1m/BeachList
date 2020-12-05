@@ -107,8 +107,10 @@ public class SoldListingsFragment extends Fragment {
                     for (DataSnapshot child : snapshot.getChildren()) {
                         SoldData thisListing = child.getValue(SoldData.class);
                         list.add(thisListing);
+
                     }
                 }
+                onListingQuery();
             }
 
             @Override
@@ -124,10 +126,12 @@ public class SoldListingsFragment extends Fragment {
 //            list.add(listing);
 //        }
 
+        return  soldFragment;
+    }
+
+    public void onListingQuery() {
         // Links recycler view adapter
         adapter = new SoldListingsRecyclerAdapter(getContext(),list);
         recyclerView.setAdapter(adapter);
-
-        return  soldFragment;
     }
 }
