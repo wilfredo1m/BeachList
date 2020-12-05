@@ -12,18 +12,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 
 import java.util.List;
 
 public class ConversationRecyclerAdapter extends RecyclerView.Adapter<ConversationRecyclerAdapter.MyViewHolder> {
     private Context context;
-    private List<Message> list;
+    private List<DataSnapshot> list;
     //private String imageUrl;
     public static final int MSG_LEFT = 0;
     public static final int MSG_RIGHT = 1;
-    FirebaseUser fUser;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = mAuth.getCurrentUser();
 
-    public ConversationRecyclerAdapter(Context context, List<Message> list) {
+    public ConversationRecyclerAdapter(Context context, List<DataSnapshot> list) {
         this.context = context;
         this.list = list;
         //this.imageUrl = imageUrl;
@@ -49,8 +51,8 @@ public class ConversationRecyclerAdapter extends RecyclerView.Adapter<Conversati
 //                .load(list.get(position).child("data").getValue(UserData.class).getImageUrl())
 //                .centerCrop()
 //                .into(holder.userPic);
-//
-        holder.userMessage.setText(list.get(position).getMessage());
+
+        holder.userMessage.setText(list.get(position).child("message").getValue(String.class));
     }
 
     @Override
@@ -70,11 +72,9 @@ public class ConversationRecyclerAdapter extends RecyclerView.Adapter<Conversati
     }
 
     public int getItemViewType(int position){
-        fUser = FirebaseAuth.getInstance().getCurrentUser();
-
         //THIS IS TEMPORARY TO DISPLAY THE HARD CODED MESSAGES
         // UNTIL WE GET THE CONVERSATION WORKING PROPERLY
-        if (list.get(position).getSender().equals("Viet")){
+        if (list.get(position).child("senderId").getValue(String.class).equals(user.getUid())){
             return MSG_RIGHT;
         }
         else{

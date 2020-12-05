@@ -55,7 +55,8 @@ public class MessageFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        DatabaseReference getUserConvos = database.getReference().child("convos");
+        // Filter out convos that dont belong to the user.
+        Query getUserConvos = database.getReference("convos").orderByChild("members/" + mAuth.getUid()).startAt(true);
 
         convo_list.clear();
 
