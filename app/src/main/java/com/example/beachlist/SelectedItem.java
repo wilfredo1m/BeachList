@@ -185,7 +185,7 @@ public class SelectedItem extends AppCompatActivity {
         public void onClick(View view) {
 
             String callingPage = getCallingPage();
-            if (callingPage.equalsIgnoreCase("HomeAfterLogin")){
+            if (callingPage.equalsIgnoreCase("HomeScreenAfterLogin")){
                 openHomeScreen();
             }else if(callingPage.equalsIgnoreCase("SelectedUser")){
                 sendBackToUser();

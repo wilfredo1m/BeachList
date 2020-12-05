@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,7 +54,12 @@ public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecycler
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, SelectedService.class);
+                String className = view.getContext().getClass().getName();
+                int pos = className.lastIndexOf ('.') + 1;
+                String onlyClass = className.substring(pos);
+                Toast.makeText(view.getContext(), onlyClass, Toast.LENGTH_SHORT).show();
                 intent.putExtra("ListingID", list.get(position).getKey());
+                intent.putExtra("callingPage", onlyClass);
                 context.startActivity(intent);
             }
         });

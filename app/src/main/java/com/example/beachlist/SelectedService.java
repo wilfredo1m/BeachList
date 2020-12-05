@@ -193,7 +193,18 @@ public class SelectedService extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openHomeScreen();
+                String callingPage = getCallingPage();
+                if (callingPage.equalsIgnoreCase("HomeScreenAfterLogin")){
+                    openHomeScreen();
+                }else if(callingPage.equalsIgnoreCase("SelectedUser")){
+                    sendBackToUser();
+                }else if(callingPage.equalsIgnoreCase("FilteredCategory")){
+                    sendBackToServiceCategory();
+                }else if(callingPage.equalsIgnoreCase("ReportedScreen")){
+                    sendBackToReportScreen();
+                }else
+                    openHomeScreen();
+
             }
         });
 
@@ -425,5 +436,28 @@ public class SelectedService extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), listingId, Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
+    public String getCallingPage(){
+        String callingIntent = getIntent().getStringExtra("callingPage");
+        return callingIntent;
 
+    }
+    public void sendBackToUser() {
+        Intent intent = new Intent(this, SelectedUser.class);
+        intent.putExtra("selectedUserId", ownerID);
+        intent.putExtra("screen", 3);
+        startActivity(intent);
+    }
+    public void sendBackToServiceCategory(){
+        String category =  itemCategory.getText().toString();
+        Intent categoryIntent = new Intent(this, FilteredCategory.class);
+        categoryIntent.putExtra("tabPosition", 2);
+        categoryIntent.putExtra("category",category);
+        categoryIntent.putExtra("toolbar Name", "Filtered " + category);
+        startActivity(categoryIntent);
+    }
+    public void sendBackToReportScreen(){
+        Intent intent = new Intent(this, ReportedScreen.class);
+        intent.putExtra("reportedPageTab", 2);
+        startActivity(intent);
+    }
 }
