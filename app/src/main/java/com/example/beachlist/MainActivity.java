@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     //banned screen
     ConstraintLayout bannedLayout;
-    Button testBtn, continueBtn;
+    Button  continueBtn;
     TextView remainingTime;
 
     @Override
@@ -80,14 +80,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        testBtn= findViewById(R.id.test_popup_btn);
-//        testBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                displayBannedScreen();
-//                disablePreviousScreenEntries();
-//            }
-//        });
 
         continueBtn= findViewById(R.id.continue_btn);
         continueBtn.setOnClickListener(new View.OnClickListener() {
