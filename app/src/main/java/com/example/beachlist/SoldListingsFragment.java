@@ -30,7 +30,7 @@ import java.util.List;
 public class SoldListingsFragment extends Fragment {
     RecyclerView recyclerView;
     SoldListingsRecyclerAdapter adapter;
-    public static List<ListingData> list = new ArrayList<>();
+    public static List<SoldData> list = new ArrayList<>();
 
     //temporary
     //ArrayList<String> listingImages = new ArrayList();
@@ -79,24 +79,24 @@ public class SoldListingsFragment extends Fragment {
         Time current = new Time(Time.getCurrentTimezone());
 
 
-        SoldData sold = new SoldData();
-        sold.setImageUrl("https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F997005285?alt=media&token=af988212-f736-4eec-86e6-fd3ffb521547");
-        sold.setTitle("That Sauce");
-        sold.setSellPrice(69);
-        sold.setSoldTo("Harry Johnson");
-        sold.setSoldDate(current);
-
-        soldRef.setValue(sold).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()) {
-                    System.out.println("Success!");
-                }
-                else {
-                    System.out.println("not great");
-                }
-            }
-        });
+//        SoldData sold = new SoldData();
+//        sold.setImageUrl("https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F997005285?alt=media&token=af988212-f736-4eec-86e6-fd3ffb521547");
+//        sold.setTitle("That Sauce");
+//        sold.setSellPrice(69);
+//        sold.setSoldTo("Harry Johnson");
+//        sold.setSoldDate(current);
+//
+//        soldRef.child("thisIsMadeUp").setValue(sold).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                if(task.isSuccessful()) {
+//                    System.out.println("Success!");
+//                }
+//                else {
+//                    System.out.println("not great");
+//                }
+//            }
+//        });
 
         //listingImages.add("https://firebasestorage.googleapis.com/v0/b/beachlist-26c5b.appspot.com/o/images%2F997005285?alt=media&token=af988212-f736-4eec-86e6-fd3ffb521547");
 
@@ -105,7 +105,7 @@ public class SoldListingsFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.hasChildren()) {
                     for (DataSnapshot child : snapshot.getChildren()) {
-                        ListingData thisListing = child.getValue(ListingData.class);
+                        SoldData thisListing = child.getValue(SoldData.class);
                         list.add(thisListing);
                     }
                 }
