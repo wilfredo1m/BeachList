@@ -2,6 +2,7 @@ package com.example.beachlist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -62,9 +64,15 @@ public class ReportedListingsRecyclerAdapter extends RecyclerView.Adapter<Report
         final String userId = list.get(position).child("ownerId").getValue(String.class);
         // when a listing is clicked, the position is taken to get that person info
         holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
                 Intent intent;
+                String className = view.getContext().getClass().getName();
+                int pos = className.lastIndexOf ('.') + 1;
+                String onlyClass = className.substring(pos);
+                Toast.makeText(view.getContext(), onlyClass, Toast.LENGTH_SHORT).show();
+
                 assert type != null;
                 if(type.equalsIgnoreCase("item"))
                     intent = new Intent(context, SelectedItem.class);
@@ -72,6 +80,7 @@ public class ReportedListingsRecyclerAdapter extends RecyclerView.Adapter<Report
                     intent = new Intent(context, SelectedService.class);
                 //intent.putExtra("type", type);
                 intent.putExtra("ListingID", listingId);
+                intent.putExtra("callingPage", onlyClass);
                 context.startActivity(intent);
             }
         });

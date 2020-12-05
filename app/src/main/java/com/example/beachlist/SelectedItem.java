@@ -185,14 +185,16 @@ public class SelectedItem extends AppCompatActivity {
         public void onClick(View view) {
 
             String callingPage = getCallingPage();
-
-            if (callingPage.equalsIgnoreCase("itemTab")){
+            if (callingPage.equalsIgnoreCase("HomeAfterLogin")){
                 openHomeScreen();
-            }else if(callingPage.equalsIgnoreCase("insideUser")){
+            }else if(callingPage.equalsIgnoreCase("SelectedUser")){
                 sendBackToUser();
-            }else if(callingPage.equalsIgnoreCase("filteredPage")){
+            }else if(callingPage.equalsIgnoreCase("FilteredCategory")){
                 sendBackToItemCategory();
-            } else
+            }
+            else if(callingPage.equalsIgnoreCase("ReportedScreen")){
+                sendBackToReportScreen();
+            }else
                 openHomeScreen();
             /*
             else if(callingPage.equalsIgnoreCase("selectedFriendPage")){
@@ -457,6 +459,12 @@ public class SelectedItem extends AppCompatActivity {
         startActivity(intent);
     }
      */
+    public void sendBackToReportScreen(){
+        Intent intent = new Intent(this, ReportedScreen.class);
+        intent.putExtra("reportedPageTab", 2);
+        startActivity(intent);
+    }
+
 
     public void sendBackToItemCategory(){
         String category =  itemCategory.getText().toString();
