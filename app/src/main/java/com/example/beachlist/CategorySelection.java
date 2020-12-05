@@ -90,7 +90,7 @@ public class CategorySelection extends AppCompatActivity {
     public int checkTabCall()
     {
         //get intent for tab call
-        tabPosition= getIntent().getIntExtra("calling page",7);                    //get tab position
+        tabPosition= getIntent().getIntExtra("tabPosition",7);                    //get tab position
         return tabPosition;
 
     }

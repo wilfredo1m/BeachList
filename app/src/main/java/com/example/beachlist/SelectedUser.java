@@ -196,15 +196,17 @@ public class SelectedUser extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {                                      //set on click listener for button
             @Override
             public void onClick(View view) {
-                if (callingActivity == 1) {
+                if (callingActivity == 1) {            //
                     openItemScreen();
                 }
                 else if (callingActivity == 2){
                     openServiceScreen();
                 }
-                else{
+                else if(callingActivity ==3){         // 3 is a item/service within a user
                     openHomeScreen();
                 }
+                else
+                    openHomeScreen();
             }
         });
 

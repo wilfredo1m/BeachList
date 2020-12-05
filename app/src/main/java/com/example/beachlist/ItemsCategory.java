@@ -36,7 +36,7 @@ public class ItemsCategory extends Fragment {
         textbookBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {                                                              //on click listener for button
-                openScreen.putExtra("calling page", 1);                                   //Assigns calling page to 1(item category) for use in back button in next page
+                openScreen.putExtra("tabPosition", 1);                                   //Assigns tabPosition to 1(item category) for use in back button in next page
                 openScreen.putExtra("category", "book");
                 openScreen.putExtra("toolbar Name", "Filtered Textbooks");                //keeps track of which button is pressed to change title
                 startActivity(openScreen);                                                             //open next screen with the put values
@@ -46,7 +46,7 @@ public class ItemsCategory extends Fragment {
         electronicBtn.setOnClickListener(new View.OnClickListener() {                                 //on click listener for button
             @Override
             public void onClick(View v) {
-                openScreen.putExtra("calling page", 1);                                  //Assigns calling page to 1(item category) for use in back button in next page
+                openScreen.putExtra("tabPosition", 1);                                  //Assigns tabPosition to 1(item category) for use in back button in next page
                 openScreen.putExtra("category", "electronic");
                 openScreen.putExtra("toolbar Name", "Filtered Electronics");             //keeps track of which button is pressed to change title
                 startActivity(openScreen);                                                            //open next screen with put values
@@ -56,7 +56,7 @@ public class ItemsCategory extends Fragment {
         furnitureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {                                                       //on click listener for button
-                openScreen.putExtra("calling page", 1);                                   //Assigns calling page to 1(item category) for use in back button in next page
+                openScreen.putExtra("tabPosition", 1);                                   //Assigns tabPosition to 1(item category) for use in back button in next page
                 openScreen.putExtra("category", "furniture");
                 openScreen.putExtra("toolbar Name", "Filtered Furniture");                //keeps track of which button is pressed to change title
                 startActivity(openScreen);                                                             //open next screen with put values
@@ -66,7 +66,7 @@ public class ItemsCategory extends Fragment {
         gameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {                                                             //on click listener for button
-                openScreen.putExtra("calling page", 1);                                  //Assigns calling page to 1(item category) for use in back button in next page
+                openScreen.putExtra("tabPosition", 1);                                  //Assigns tabPosition to 1(item category) for use in back button in next page
                 openScreen.putExtra("category", "game");
                 openScreen.putExtra("toolbar Name", "Filtered Games");                   //keeps track of which button is pressed to change title
                 startActivity(openScreen);                                                            //open next screen with put values
@@ -76,7 +76,7 @@ public class ItemsCategory extends Fragment {
         collectibleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {                                                     //on click listener for button
-                openScreen.putExtra("calling page", 1);                                  //Assigns calling page to 1(item category) for use in back button in next page
+                openScreen.putExtra("tabPosition", 1);                                  //Assigns tabPosition to 1(item category) for use in back button in next page
                 openScreen.putExtra("category", "collectible");
                 openScreen.putExtra("toolbar Name", "Filtered Collectibles");            //keeps track of which button is pressed to change title
                 startActivity(openScreen);                                                            //open next screen with put values
@@ -86,7 +86,7 @@ public class ItemsCategory extends Fragment {
         artBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {                                                             //on click listener for button
-                openScreen.putExtra("calling page", 1);                                  //Assigns calling page to 1(item category) for use in back button in next page
+                openScreen.putExtra("tabPosition", 1);                                  //Assigns tabPosition to 1(item category) for use in back button in next page
                 openScreen.putExtra("category", "art");
                 openScreen.putExtra("toolbar Name", "Filtered Art/Crafts");              //keeps track of which button is pressed to change title
                 startActivity(openScreen);                                                            //open next screen with put values
@@ -96,7 +96,7 @@ public class ItemsCategory extends Fragment {
         appliancesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {                                                      //on click listener for button
-                openScreen.putExtra("calling page", 1);                                  //Assigns calling page to 1(item category) for use in back button in next page
+                openScreen.putExtra("tabPosition", 1);                                  //Assigns tabPosition to 1(item category) for use in back button in next page
                 openScreen.putExtra("category", "appliances");
                 openScreen.putExtra("toolbar Name", "Filtered Appliances");              //keeps track of which button is pressed to change title
                 startActivity(openScreen);                                                            //open next screen with put values
@@ -106,7 +106,7 @@ public class ItemsCategory extends Fragment {
         jewelryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {                                                         //on click listener for button
-                openScreen.putExtra("calling page", 1);                                  //Assigns calling page to 1(item category) for use in back button in next page
+                openScreen.putExtra("tabPosition", 1);                                  //Assigns tabPosition to 1(item category) for use in back button in next page
                 openScreen.putExtra("category", "jewelry");
                 openScreen.putExtra("toolbar Name", "Filtered Jewelry");                 //keeps track of which button is pressed to change title
                 startActivity(openScreen);                                                            //open next screen with put values
@@ -116,7 +116,7 @@ public class ItemsCategory extends Fragment {
         miscBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {                                                            //on click listener for button
-                openScreen.putExtra("calling page", 1);                                  //Assigns calling page to 1(item category) for use in back button in next page
+                openScreen.putExtra("tabPosition", 1);                                  //Assigns tabPosition to 1(item category) for use in back button in next page
                 openScreen.putExtra("category", "misc");
                 openScreen.putExtra("toolbar Name", "Filtered miscellaneous ");          //keeps track of which button is pressed to change title
                 startActivity(openScreen);                                                            //open next screen with put values

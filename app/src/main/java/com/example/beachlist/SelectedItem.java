@@ -183,8 +183,25 @@ public class SelectedItem extends AppCompatActivity {
         {
         @Override
         public void onClick(View view) {
-            openHomeScreen();
+
+            String callingPage = getCallingPage();
+
+            if (callingPage.equalsIgnoreCase("itemTab")){
+                openHomeScreen();
+            }else if(callingPage.equalsIgnoreCase("insideUser")){
+                sendBackToUser();
+            }else if(callingPage.equalsIgnoreCase("filteredPage")){
+                sendBackToItemCategory();
+            } else
+                openHomeScreen();
+            /*
+            else if(callingPage.equalsIgnoreCase("selectedFriendPage")){
+                sendToSelectedFriend();
+            }else if (callingPage.equals("selectedPendingFriendPage")){
+                sendToSelectedPendingFriend();
             }
+        */
+        }
         });
 
         reportItem = findViewById(R.id.report_item_button);
@@ -412,6 +429,42 @@ public class SelectedItem extends AppCompatActivity {
         intent.putExtra("listingType", "item");
         Toast.makeText(getApplicationContext(), listingId, Toast.LENGTH_SHORT).show();
         startActivity(intent);
+    }
+    public String getCallingPage(){
+        String callingIntent = getIntent().getStringExtra("callingPage");
+        return callingIntent;
+
+    }
+
+    public void sendBackToUser() {
+        Intent intent = new Intent(this, SelectedUser.class);
+        intent.putExtra("selectedUserId", listingOwnerID);
+        intent.putExtra("screen", 3);
+        startActivity(intent);
+    }
+
+    /*
+    public void sendToSelectedFriend(){
+        Intent intent = new Intent(this, SelectedFriend.class);
+        intent.putExtra("selectedUserId", listingOwnerID);
+        startActivity(intent);
+    }
+    public void sendToSelectedPendingFriend(){
+        Intent intent = new Intent(this, SelectedPendingFriend.class);
+        int position = getIntent().getIntExtra("position", 7);
+        Toast.makeText(getApplicationContext(), position, Toast.LENGTH_SHORT).show();
+        intent.putExtra("selectedUserId", listingOwnerID);
+        startActivity(intent);
+    }
+     */
+
+    public void sendBackToItemCategory(){
+        String category =  itemCategory.getText().toString();
+        Intent categoryIntent = new Intent(this, FilteredCategory.class);
+        categoryIntent.putExtra("tabPosition", 1);
+        categoryIntent.putExtra("category",category);
+        categoryIntent.putExtra("toolbar Name", "Filtered " + category);
+        startActivity(categoryIntent);
     }
 
 }

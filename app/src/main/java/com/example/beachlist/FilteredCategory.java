@@ -84,7 +84,7 @@ public class FilteredCategory extends AppCompatActivity {
     // takes us back to account settings screen
     public void openCategoryPage(){
         Intent openScreen = new Intent(this, CategorySelection.class);                  //intent to send user to categorySelection page( back button)
-        openScreen.putExtra("calling page", getCallingPage());                                  //uses get calling page to send back to the categoryselection page in order to open up the correct tab
+        openScreen.putExtra("tabPosition", getCallingPage());                                  //uses get tabPosition to send back to the categoryselection page in order to open up the correct tab
         startActivity(openScreen);                                                                    //open calling screen
     }
     //get the title of the tab based on the selected button
@@ -99,8 +99,8 @@ public class FilteredCategory extends AppCompatActivity {
     //2- service category
     public int getCallingPage(){
         intent = getIntent();                                                                         //intent to get information from other screen
-        int pageCall = intent.getIntExtra("calling page",7);                       //intent to get calling page to be used for back button
-        return pageCall;                                                                             //return calling page
+        int pageCall = intent.getIntExtra("tabPosition",7);                       //intent to get tabPosition to be used for back button
+        return pageCall;                                                                             //return tabPosition
     }
 
     public String getCategorySelection(){
