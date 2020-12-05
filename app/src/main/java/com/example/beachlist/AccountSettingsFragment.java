@@ -34,6 +34,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
     private View accountSettingsScreen;
     private UserData currentUser;
+    private FirebaseAuth mAuth;
 
     public AccountSettingsFragment() {
         // Required empty public constructor
@@ -46,7 +47,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         accountSettingsScreen = inflater.inflate(R.layout.fragment_account_settings, container, false);
 
         //instance of authentication
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         //instance of the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -94,7 +95,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         reportedListing.setOnClickListener(this);
 
         Button logout = accountSettingsScreen.findViewById(R.id.btn_log_out);
-        reportedListing.setOnClickListener(this);
+        logout.setOnClickListener(this);
 
 //===================================================END BUTTON CALL GROUP====================================================//
 
@@ -170,10 +171,11 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
                 //sets which tab will be displayed
                 startActivity(openScreen);
                 break;
-           // case R.id.btn_log_out:
-           //     openScreen = new Intent( getActivity(), MainActivity.class);
-           //     startActivity(openScreen);
-
+            case R.id.btn_log_out:
+                mAuth.signOut();
+                openScreen = new Intent( getActivity(), MainActivity.class);
+                startActivity(openScreen);
+                break;
         }
     }
 
