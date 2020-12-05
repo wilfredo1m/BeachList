@@ -107,6 +107,21 @@ public class ReportedUserRecyclerAdapter extends RecyclerView.Adapter<ReportedUs
                     @Override
                     public void onSuccess(Void aVoid) {
                         userBanTimeLimit(userId);
+                        DatabaseReference reportedRef = database.getReference("reported").child("users").child(userId);
+                        reportedRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                list.remove(position);
+                                notifyItemRemoved(position);
+                                notifyItemRangeChanged(position, list.size());
+                                System.out.println("Waived");
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e(TAG, "onFailure: " + e.getLocalizedMessage(), e.getCause());
+                            }
+                        });
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -130,7 +145,21 @@ public class ReportedUserRecyclerAdapter extends RecyclerView.Adapter<ReportedUs
                         banTimeRef.setValue(permanent.getTime()).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                System.out.println("It's working 2");
+                                DatabaseReference reportedRef = database.getReference("reported").child("users").child(userId);
+                                reportedRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        list.remove(position);
+                                        notifyItemRemoved(position);
+                                        notifyItemRangeChanged(position, list.size());
+                                        System.out.println("Waived");
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.e(TAG, "onFailure: " + e.getLocalizedMessage(), e.getCause());
+                                    }
+                                });
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -145,7 +174,6 @@ public class ReportedUserRecyclerAdapter extends RecyclerView.Adapter<ReportedUs
 
                     }
                 });
-                System.out.println("Its working 3");
             }
         });
     }
@@ -183,7 +211,7 @@ public class ReportedUserRecyclerAdapter extends RecyclerView.Adapter<ReportedUs
         banTimeRef.setValue(endDate.getTime()).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                System.out.println("It's working 2");
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
