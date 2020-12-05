@@ -54,6 +54,7 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
                 intent.putExtra("position", position);
                 intent.putExtra("convoId", list.get(position).getKey());
                 intent.putExtra("listingUrl", list.get(position).child("imageUrl").getValue(String.class));
+                intent.putExtra("fromMessageTab", "true");
                 context.startActivity(intent);
             }
         });

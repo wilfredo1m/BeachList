@@ -75,6 +75,7 @@ public class ConversationScreen extends AppCompatActivity {
         String convoId = getIntent().getStringExtra("convoId");
         String listingUrl = getIntent().getStringExtra("listingUrl");
 
+
         // Display image of listing at the top of the convo screen
         displayListingImage(listingUrl);
 
@@ -90,25 +91,29 @@ public class ConversationScreen extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         userID = user.getUid();
 
-        // Retrieve messages for this convo from the database
-        Query getMessages = database.getReference("messages").child(convoId).orderByKey();
+        if(getIntent().getStringExtra("fromMessageTab") != null) {
+            // Retrieve messages for convo selected in message tab from the database
+            Query getMessages = database.getReference("messages").child(convoId).orderByKey();
 
-        getMessages.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChildren()) {
-                    for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        messages_list.add(child);
+            getMessages.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.hasChildren()) {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            messages_list.add(child);
+                        }
                     }
+                    onMessagesQuery();
                 }
-                onMessagesQuery();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    System.out.println("The read failed: " + databaseError.getCode());
+                }
+            });
+        }
+
+
 
 
         //*****************main page buttons***************************//
