@@ -341,6 +341,8 @@ public class SelectedItem extends AppCompatActivity {
     public void SendToUserPage(View view) {
         Intent intent = new Intent(this, SelectedUser.class);
         intent.putExtra("selectedUserId", listingOwnerID);
+        intent.putExtra("listingID", listingId);
+        intent.putExtra("screen", 1);
         startActivity(intent);
     }
 

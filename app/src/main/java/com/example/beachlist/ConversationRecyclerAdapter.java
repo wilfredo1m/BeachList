@@ -72,22 +72,13 @@ public class ConversationRecyclerAdapter extends RecyclerView.Adapter<Conversati
     }
 
     public int getItemViewType(int position){
-        //THIS IS TEMPORARY TO DISPLAY THE HARD CODED MESSAGES
-        // UNTIL WE GET THE CONVERSATION WORKING PROPERLY
+        // Show user's messages on the right side
         if (list.get(position).child("senderId").getValue(String.class).equals(user.getUid())){
             return MSG_RIGHT;
         }
         else{
             return MSG_LEFT;
         }
-
-        //THIS IS THE ACTUAL WAY WE WILL CHECK WHICH SIDE TO DISPLAY THE MESSAGES ON
-//        if (list.get(position).getSender().equals(fUser.getUid())){
-//            return MSG_RIGHT;
-//        }
-//        else{
-//            return MSG_LEFT;
-//        }
     }
 }
 
