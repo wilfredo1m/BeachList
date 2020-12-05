@@ -90,7 +90,7 @@ public class ConversationScreen extends AppCompatActivity {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         userID = user.getUid();
-
+        messages_list.clear();
         if(getIntent().getStringExtra("fromMessageTab") != null) {
             // Retrieve messages for convo selected in message tab from the database
             Query getMessages = database.getReference("messages").child(convoId).orderByKey();
