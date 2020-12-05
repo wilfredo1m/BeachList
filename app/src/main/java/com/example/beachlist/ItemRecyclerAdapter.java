@@ -60,26 +60,11 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
                 String className = view.getContext().getClass().getName();
                 int pos = className.lastIndexOf ('.') + 1;
                 String onlyClass = className.substring(pos);
-                view.getAccessibilityClassName();
                 Toast.makeText(view.getContext(), onlyClass, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, SelectedItem.class);
                 intent.putExtra("ListingID", list.get(position).getKey());
-                if (onlyClass.equalsIgnoreCase("SelectedUser")){
-                    intent.putExtra("callingPage", "insideUser");
-                    context.startActivity(intent);
-                }else if(onlyClass.equalsIgnoreCase("HomeScreenAfterLogin")){
-                    intent.putExtra("callingPage", "itemTab");
-                    context.startActivity(intent);
-                }else if(onlyClass.equalsIgnoreCase("FilteredCategory")){
-                    intent.putExtra("callingPage", "filteredPage");
-                    context.startActivity(intent);
-                }else if(onlyClass.equalsIgnoreCase("SelectedFriend")){
-                    intent.putExtra("callingPage", "selectedFriendPage");
-                    context.startActivity(intent);
-                }else if(onlyClass.equalsIgnoreCase("SelectedPendingFriend")){
-                    intent.putExtra("callingPage", "selectedPendingFriendPage");
-                    context.startActivity(intent);
-                }
+                intent.putExtra("callingPage", onlyClass);
+                context.startActivity(intent);
             }
         });
     }
