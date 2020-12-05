@@ -2,13 +2,16 @@ package com.example.beachlist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -51,11 +54,32 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
 
         // when a listing is clicked, the position is taken to get that listings info
         holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
+                String className = view.getContext().getClass().getName();
+                int pos = className.lastIndexOf ('.') + 1;
+                String onlyClass = className.substring(pos);
+                view.getAccessibilityClassName();
+                Toast.makeText(view.getContext(), onlyClass, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, SelectedItem.class);
                 intent.putExtra("ListingID", list.get(position).getKey());
-                context.startActivity(intent);
+                if (onlyClass.equalsIgnoreCase("SelectedUser")){
+                    intent.putExtra("callingPage", "insideUser");
+                    context.startActivity(intent);
+                }else if(onlyClass.equalsIgnoreCase("HomeScreenAfterLogin")){
+                    intent.putExtra("callingPage", "itemTab");
+                    context.startActivity(intent);
+                }else if(onlyClass.equalsIgnoreCase("FilteredCategory")){
+                    intent.putExtra("callingPage", "filteredPage");
+                    context.startActivity(intent);
+                }else if(onlyClass.equalsIgnoreCase("SelectedFriend")){
+                    intent.putExtra("callingPage", "selectedFriendPage");
+                    context.startActivity(intent);
+                }else if(onlyClass.equalsIgnoreCase("SelectedPendingFriend")){
+                    intent.putExtra("callingPage", "selectedPendingFriendPage");
+                    context.startActivity(intent);
+                }
             }
         });
     }
@@ -64,6 +88,9 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
     public int getItemCount() {
         return list.size();
     }
+
+
+
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView listingPic;
@@ -81,4 +108,5 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
         list = filter;
         notifyDataSetChanged();
     }
+
 }

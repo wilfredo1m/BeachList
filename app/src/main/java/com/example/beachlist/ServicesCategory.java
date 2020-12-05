@@ -35,7 +35,7 @@ public class ServicesCategory extends Fragment {
         tutoringBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {                                                        //setup on click listener
-                openScreen.putExtra("calling page", 2);                                  //Assigns calling page to 2(service category) for use in back button in next page
+                openScreen.putExtra("tabPosition", 2);                                  //Assigns tabPosition to 2(service category) for use in back button in next page
                 openScreen.putExtra("category", "tutoring");
                 openScreen.putExtra("toolbar Name", "Filtered Tutoring");                //keeps track of which button is pressed to change title
                 startActivity(openScreen);                                                            //open next screen with the put values
@@ -47,7 +47,7 @@ public class ServicesCategory extends Fragment {
         commissionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {                                                      //setup on click listener
-                openScreen.putExtra("calling page", 2);                                  //Assigns calling page to 2(service category) for use in back button in next page
+                openScreen.putExtra("tabPosition", 2);                                  //Assigns tabPosition to 2(service category) for use in back button in next page
                 openScreen.putExtra("category", "commission");
                 openScreen.putExtra("toolbar Name", "Filtered Commission");              //keeps track of which button is pressed to change title
                 startActivity(openScreen);                                                            //open next screen with the put values
@@ -59,7 +59,7 @@ public class ServicesCategory extends Fragment {
         repairBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {                                                          //setup on click listener
-                openScreen.putExtra("calling page", 2);                                  //Assigns calling page to 2(service category) for use in back button in next page
+                openScreen.putExtra("tabPosition", 2);                                  //Assigns tabPosition to 2(service category) for use in back button in next page
                 openScreen.putExtra("category", "repair");
                 openScreen.putExtra("toolbar Name", "Filtered Repair");                  //keeps track of which button is pressed to change title
                 startActivity(openScreen);                                                            //open next screen with the put values
