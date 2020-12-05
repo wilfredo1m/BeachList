@@ -59,6 +59,7 @@ public class ReportedListingsRecyclerAdapter extends RecyclerView.Adapter<Report
 
         final String type = list.get(position).child("type").getValue(String.class);
         final String listingId = list.get(position).getKey();
+        final String userId = list.get(position).child("ownerId").getValue(String.class);
         // when a listing is clicked, the position is taken to get that person info
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,10 +119,21 @@ public class ReportedListingsRecyclerAdapter extends RecyclerView.Adapter<Report
                         reportedRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                list.remove(position);
-                                notifyItemRemoved(position);
-                                notifyItemRangeChanged(position, list.size());
-                                System.out.println("Deleted");
+                                DatabaseReference userListingRef = database.getReference("users").child(userId).child("listings").child(listingId);
+                                userListingRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        list.remove(position);
+                                        notifyItemRemoved(position);
+                                        notifyItemRangeChanged(position, list.size());
+                                        System.out.println("Deleted");
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.e(TAG, "onFailure: " + e.getLocalizedMessage(), e.getCause());
+                                    }
+                                });
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
