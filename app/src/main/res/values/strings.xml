@@ -39,7 +39,7 @@
 
 
     <string name= "continue_buttn">Continue</string>
-    <string name= "ban_time_left_lbl">Banned Time Lifted in</string>
+    <string name= "ban_time_left_lbl">Banned Time Lifted on</string>
     <string name= "ban_time_left_field">Lifted time amount goes here</string>
     <string name= "banned_header">Banned</string>
     <string name= "banned_message">You have been banned from your account for illicit activity</string>

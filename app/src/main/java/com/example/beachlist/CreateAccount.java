@@ -210,9 +210,9 @@ public class CreateAccount extends AppCompatActivity {
         //testing github webhook hehehe
 
         //Initialize database within User reference with a child using user ID
-        final DatabaseReference userReference = database.getReference("users").child(userId).child("data");
+        final DatabaseReference dataReference = database.getReference("users").child(userId).child("data");
         //Write data to database
-        userReference.setValue(currentUser);
+        dataReference.setValue(currentUser);
 
 //        HashMap<String, Boolean> userConditionals = new HashMap<>();
 //        userConditionals.put("isAdmin", false);
@@ -222,15 +222,23 @@ public class CreateAccount extends AppCompatActivity {
 //        //write data to database
 //        adminReference.setValue(userConditionals);
 
-        //Initialize database within User reference with a child using user ID
-        final DatabaseReference adminReference = database.getReference("users").child(userId).child("isAdmin");
-        //write data to database
-        adminReference.setValue(false);
+//        //Initialize database within User reference with a child using user ID
+//        final DatabaseReference adminReference = database.getReference("users").child(userId).child("isAdmin");
+//        //write data to database
+//        adminReference.setValue(false);
+//
+//        //Initialize database within User reference with a child using user ID
+//        final DatabaseReference bannedReference = database.getReference("users").child(userId).child("banned");
+//        //write data to database
+//        bannedReference.setValue(false);
 
         //Initialize database within User reference with a child using user ID
-        final DatabaseReference bannedReference = database.getReference("users").child(userId).child("banned");
+        final DatabaseReference userReference = database.getReference("users").child(userId).child("banned");
         //write data to database
-        bannedReference.setValue(false);
+        HashMap<String, Boolean> conditionals = new HashMap<>();
+        conditionals.put("isAdmin", false);
+        conditionals.put("isBanned", false);
+        userReference.setValue(conditionals);
 
 //        //Initialize database within User reference with a child using user ID
 //        final DatabaseReference banCountReference = database.getReference("users").child(userId).child("isAdmin");
