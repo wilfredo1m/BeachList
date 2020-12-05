@@ -115,6 +115,7 @@ public class SelectedOwnListing extends AppCompatActivity {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
+
         assert user != null;
         userId = user.getUid();
 

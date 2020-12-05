@@ -267,7 +267,7 @@ public class SelectedUser extends AppCompatActivity {
 //        bannedRef.setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
 //            @Override
 //            public void onSuccess(Void aVoid) {
-//                addListingToReported();
+//                addUserToReported();
 //            }
 //        }).addOnFailureListener(new OnFailureListener() {
 //            @Override

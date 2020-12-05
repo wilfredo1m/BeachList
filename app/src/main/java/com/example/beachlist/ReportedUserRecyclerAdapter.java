@@ -2,6 +2,7 @@ package com.example.beachlist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class ReportedUserRecyclerAdapter extends RecyclerView.Adapter<ReportedUserRecyclerAdapter.MyViewHolder> {
@@ -66,10 +70,10 @@ public class ReportedUserRecyclerAdapter extends RecyclerView.Adapter<ReportedUs
         holder.waiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference listingRef = database.getReference("users").child(userId).child("banned");
-                listingRef.setValue(false).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
+//                DatabaseReference listingRef = database.getReference("users").child(userId).child("banned");
+//                listingRef.setValue(false).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
                         DatabaseReference reportedRef = database.getReference("reported").child("users").child(userId);
                         reportedRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -86,51 +90,61 @@ public class ReportedUserRecyclerAdapter extends RecyclerView.Adapter<ReportedUs
                             }
                         });
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e(TAG, "onFailure: " + e.getLocalizedMessage(), e.getCause());
-                    }
-                });
-            }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.e(TAG, "onFailure: " + e.getLocalizedMessage(), e.getCause());
+//                    }
+//                });
+//            }
         });
 
         holder.tempBanUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                DatabaseReference listingRef = database.getReference("users").child(userId).child();
-//                listingRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void aVoid) {
-//                        DatabaseReference reportedRef = database.getReference("reported").child("listings").child(listingId);
-//                        reportedRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-//                            @Override
-//                            public void onSuccess(Void aVoid) {
-//                                list.remove(position);
-//                                notifyItemRemoved(position);
-//                                notifyItemRangeChanged(position, list.size());
-//                                System.out.println("Deleted");
-//                            }
-//                        }).addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                Log.e(TAG, "onFailure: " + e.getLocalizedMessage(), e.getCause());
-//                            }
-//                        });
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.d(TAG, "onFailure: " + e.getLocalizedMessage());
-//                    }
-//                });
-                System.out.println("Its working 2");
+                DatabaseReference listingRef = database.getReference("users").child(userId).child("isBanned");
+                listingRef.setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        userBanTimeLimit(userId);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
             }
         });
 
         holder.permaBanUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DatabaseReference listingRef = database.getReference("users").child(userId).child("isBanned");
+                listingRef.setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Timestamp permanent = new Timestamp(0);
+                        System.out.println(permanent.getTime());
+                        DatabaseReference banTimeRef = database.getReference("users").child(userId).child("banClock");
+                        banTimeRef.setValue(permanent.getTime()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                System.out.println("It's working 2");
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                            }
+                        });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
                 System.out.println("Its working 3");
             }
         });
@@ -155,5 +169,27 @@ public class ReportedUserRecyclerAdapter extends RecyclerView.Adapter<ReportedUs
             tempBanUserButton = itemView.findViewById(R.id.temp_ban_user_btn);
             permaBanUserButton = itemView.findViewById(R.id.perma_ban_user_btn);
         }
+    }
+
+    public void userBanTimeLimit(String userId) {
+        Time currentTime = new Time();
+        currentTime.setToNow();
+        Timestamp currentDate = new Timestamp(currentTime.toMillis(true));
+        System.out.println(currentDate.getTime());
+        currentTime.monthDay += 1;
+        Timestamp endDate = new Timestamp(currentTime.toMillis(true));
+        System.out.println(endDate.getTime());
+        DatabaseReference banTimeRef = database.getReference("users").child(userId).child("banClock");
+        banTimeRef.setValue(endDate.getTime()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                System.out.println("It's working 2");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
     }
 }

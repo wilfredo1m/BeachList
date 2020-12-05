@@ -267,6 +267,7 @@ public class SelectedItem extends AppCompatActivity {
         reportedListing.put("type", "item");
         reportedListing.put("imageUrl", selectedListing.getListingImages().get(1));
         reportedListing.put("reason", selectedItem);
+        reportedListing.put("ownerId", selectedListing.getOwnerId());
         reportedRef.setValue(reportedListing).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {

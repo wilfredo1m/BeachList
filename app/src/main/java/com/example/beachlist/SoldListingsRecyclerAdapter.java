@@ -33,7 +33,7 @@ public class SoldListingsRecyclerAdapter extends RecyclerView.Adapter<SoldListin
     @Override
     public void onBindViewHolder(@NonNull SoldListingsRecyclerAdapter.MyViewHolder holder, int position) {
         Glide.with(context)
-                .load(list.get(position).getListingImages().get(0))
+                .load(list.get(position).getListingImages().get(1))
                 .centerCrop()
                 .into(holder.listingPic);
         //holder.listingPic.setImageResource(list.get(position).getListingPhotos()[0]);

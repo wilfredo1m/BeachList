@@ -2,6 +2,7 @@ package com.example.beachlist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,9 +19,13 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 
 public class ReportedListingsRecyclerAdapter extends RecyclerView.Adapter<ReportedListingsRecyclerAdapter.MyViewHolder> {
@@ -58,13 +64,12 @@ public class ReportedListingsRecyclerAdapter extends RecyclerView.Adapter<Report
             @Override
             public void onClick(View view) {
                 Intent intent;
-
                 assert type != null;
                 if(type.equalsIgnoreCase("item"))
                     intent = new Intent(context, SelectedItem.class);
                 else
                     intent = new Intent(context, SelectedService.class);
-                intent.putExtra("type", type);
+                //intent.putExtra("type", type);
                 intent.putExtra("listingID", listingId);
                 context.startActivity(intent);
             }
@@ -137,7 +142,7 @@ public class ReportedListingsRecyclerAdapter extends RecyclerView.Adapter<Report
         holder.banUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Its working 3");
+                banUser(database.getReference("users").child(list.get(position).child("ownerId").getValue(String.class)).child("isBanned"), position);
             }
         });
     }
@@ -161,5 +166,41 @@ public class ReportedListingsRecyclerAdapter extends RecyclerView.Adapter<Report
             deleteButton = itemView.findViewById(R.id.delete_post_btn);
             banUserButton = itemView.findViewById(R.id.ban_owner_btn);
         }
+    }
+
+    public void userBanTimeLimit(String userId) {
+        Time currentTime = new Time();
+        currentTime.setToNow();
+        Timestamp currentDate = new Timestamp(currentTime.toMillis(true));
+        System.out.println(currentDate.getTime());
+        currentTime.monthDay += 1;
+        Timestamp endDate = new Timestamp(currentTime.toMillis(true));
+        System.out.println(endDate.getTime());
+        DatabaseReference banTimeRef = database.getReference("users").child(userId).child("banClock");
+        banTimeRef.setValue(endDate.getTime()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                System.out.println("It's working 2");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
+
+    private void banUser(DatabaseReference bannedRef, final int position) {
+        bannedRef.setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                userBanTimeLimit(list.get(position).child("ownerId").getValue(String.class));
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, "onFailure: "+e.getLocalizedMessage(), e.getCause());
+            }
+        });
     }
 }

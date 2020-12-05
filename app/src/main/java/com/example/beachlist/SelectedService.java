@@ -268,6 +268,7 @@ public class SelectedService extends AppCompatActivity {
         reportedListing.put("type", "service");
         reportedListing.put("imageUrl", selectedListing.getListingImages().get(1));
         reportedListing.put("reason", reportedSpinnerSelection);
+        reportedListing.put("ownerId", selectedListing.getOwnerId());
         reportedRef.setValue(reportedListing).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
