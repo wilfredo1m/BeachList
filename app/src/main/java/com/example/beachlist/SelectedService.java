@@ -41,6 +41,8 @@ public class SelectedService extends AppCompatActivity {
     private final ArrayList<String> serviceImages = new ArrayList<>();
     private final ArrayList<String> firstImageOfService = new ArrayList<>();
     private ListingData selectedListing;
+    String listingOwnerID;
+
 
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth mAuth;
@@ -75,6 +77,7 @@ public class SelectedService extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         userID = user.getUid();
+
 
 
         setContentView(R.layout.activity_selected_other_user_service);
@@ -163,7 +166,7 @@ public class SelectedService extends AppCompatActivity {
                 assert selectedListing != null;
                 displayListingInfo(selectedListing);
                 //display owner Info
-                ownerID = selectedListing.getOwnerId();
+                listingOwnerID = selectedListing.getOwnerId();
                 getOwnerInfo(selectedListing.getOwnerId());
             }
 
@@ -388,9 +391,14 @@ public class SelectedService extends AppCompatActivity {
 
     public void goToMessageScreen(){
         Intent intent = new Intent(this, ConversationScreen.class);
-        intent.putExtra("UserID",ownerID );
-        intent.putExtra("ListingID",listingId );
+        intent.putExtra("listingOwnerId", listingOwnerID);
+        intent.putExtra("sellerFirstName", itemSellerFirstName.getText().toString());
+        intent.putExtra("sellerLastName", itemSellerLastName.getText().toString());
+        intent.putExtra("sellerEmail", itemSellerEmail.getText().toString());
+        intent.putExtra("listingImageUrl", selectedListing.getListingImages().get(1));
+        intent.putExtra("listingId",listingId );
         intent.putExtra("listingType", "service");
+        intent.putExtra("fromContactSeller", "true");
         Toast.makeText(getApplicationContext(), listingId, Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
