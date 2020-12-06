@@ -220,6 +220,7 @@ public class ConversationScreen extends AppCompatActivity {
                         map.put("senderId", userID);
                         map.put("message", sentMessage.getText().toString());
                         database.getReference().child("messages").child(convoId).child(String.valueOf((convoSize+1))).setValue(map);
+                        database.getReference().child("convos").child(convoId).child("lastMessage").setValue(sentMessage.getText().toString());
                         sentMessage.setText("");
                     }
                 }
