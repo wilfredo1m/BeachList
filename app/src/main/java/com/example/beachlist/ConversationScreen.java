@@ -112,6 +112,10 @@ public class ConversationScreen extends AppCompatActivity {
             // Display image of listing at the top of the convo screen
             displayListingImage(listingUrl);
 
+            // Show email and name of seller of item
+            userEmail.setText(getIntent().getStringExtra("ownerEmail"));
+            userName.setText(getIntent().getStringExtra("ownerName"));
+
             // Get convoId from previous screen.
             convoId = getIntent().getStringExtra("convoId");
 
