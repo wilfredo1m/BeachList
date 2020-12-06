@@ -53,10 +53,11 @@ public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecycler
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, SelectedService.class);
                 String className = view.getContext().getClass().getName();
                 int pos = className.lastIndexOf ('.') + 1;
                 String onlyClass = className.substring(pos);
+                Toast.makeText(view.getContext(), onlyClass, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, SelectedService.class);
                 intent.putExtra("ListingID", list.get(position).getKey());
                 intent.putExtra("callingPage", onlyClass);
                 context.startActivity(intent);

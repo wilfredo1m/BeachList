@@ -197,6 +197,7 @@ public class SelectedService extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String callingPage = getCallingPage();
+
                 if (callingPage.equalsIgnoreCase("HomeScreenAfterLogin")){
                     openHomeScreen();
                 }else if(callingPage.equalsIgnoreCase("SelectedUser")){
@@ -212,7 +213,10 @@ public class SelectedService extends AppCompatActivity {
                 }else
                     openHomeScreen();
 
+
             }
+
+
         });
 
         //report button in main window to triggerpop up window
@@ -455,7 +459,7 @@ public class SelectedService extends AppCompatActivity {
     }
     public void sendBackToUser() {
         Intent intent = new Intent(this, SelectedUser.class);
-        intent.putExtra("selectedUserId", ownerID);
+        intent.putExtra("selectedUserId", listingOwnerID);
         intent.putExtra("screen", 3);
         startActivity(intent);
     }
@@ -476,12 +480,12 @@ public class SelectedService extends AppCompatActivity {
 
     public void sendToSelectedFriend(){
         Intent intent = new Intent(this, SelectedFriend.class);
-        intent.putExtra("userId", ownerID);
+        intent.putExtra("userId", listingOwnerID);
         startActivity(intent);
     }
     public void sendToSelectedPendingFriend(){
         Intent intent = new Intent(this, SelectedPendingFriend.class);
-        intent.putExtra("userId", ownerID);
+        intent.putExtra("userId", listingOwnerID);
         startActivity(intent);
     }
 
