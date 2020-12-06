@@ -160,7 +160,7 @@ public class ConversationScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextView sentMessage = findViewById(R.id.editTextTextMultiLine);
-                if(sentMessage.getText().toString() != "") {
+                if(!sentMessage.getText().toString().equals("")) {
                     Map<String, String> map = new HashMap<>();
                     map.put("senderId", userID);
                     map.put("message", sentMessage.getText().toString());
