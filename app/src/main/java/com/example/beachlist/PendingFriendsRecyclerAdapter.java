@@ -47,7 +47,7 @@ public class PendingFriendsRecyclerAdapter extends RecyclerView.Adapter<PendingF
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, SelectedPendingFriend.class);
-                intent.putExtra("position", position);
+                intent.putExtra("userId", list.get(position).getKey());
                 context.startActivity(intent);
             }
         });

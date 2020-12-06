@@ -1,5 +1,6 @@
 package com.example.beachlist;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,6 +55,7 @@ public class SelectedPendingFriend extends AppCompatActivity {
     TextView email;
     ConstraintLayout popupWindow;
     String reportedUser;
+    UserData pendingFriend;
 
 
     @Override
@@ -77,25 +79,38 @@ public class SelectedPendingFriend extends AppCompatActivity {
         recyclerViewService = findViewById(R.id.pending_friend_service_recycler);                           //link recyclerViewService view to xml
         recyclerViewService.setLayoutManager(new LinearLayoutManager(this));
 
-        // gets the pic and name of the user to display
-        final int position = getIntent().getIntExtra("position",1);                       //retrieve position from a intent passed
+        final String friendUserId = getIntent().getStringExtra("userId");                          //retrieve position from a intent passed
 
+        DatabaseReference userRef = database.getReference("users").child(friendUserId).child("data");
 //********************************SETS PERSON INFO FROM FIREBASE**************************************************************************//
-        // Sets the persons info in the correct fields to be displayed
-        Glide.with(this)
-                .load(PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getImageUrl())
-                .centerCrop()
-                .into(profilePic);
-        firstName.setText(PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getFirstName());
-        lastName.setText(PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getLastName());
+        final Context context = this;
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                pendingFriend = snapshot.getValue(UserData.class);
+                Glide.with(context)
+                        .load(pendingFriend.getImageUrl())
+                        .centerCrop()
+                        .into(profilePic);
+                //profilePic.setImageBitmap(null);
+                firstName.setText(pendingFriend.getFirstName());
+                lastName.setText(pendingFriend.getLastName());
+                email.setText(pendingFriend.getEmail());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         // get selected friend's active listings
-        Query itemsQuery = database.getReference().child("listings").child("item").orderByChild("ownerId").equalTo(PendingFriendsListTab.list.get(position).getKey());
-        Query serviceQuery = database.getReference().child("listings").child("service").orderByChild("ownerId").equalTo(PendingFriendsListTab.list.get(position).getKey());
+        Query itemsQuery = database.getReference().child("listings").child("item").orderByChild("ownerId").equalTo(friendUserId);
+        Query serviceQuery = database.getReference().child("listings").child("service").orderByChild("ownerId").equalTo(friendUserId);
 
         itemsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     itemList.clear();
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
@@ -103,21 +118,20 @@ public class SelectedPendingFriend extends AppCompatActivity {
                     }
 
                     onItemListQuery();
-                }
-                String friendUserID = PendingFriendsListTab.list.get(position).getKey();                        //get id of friend
+                }                     //get id of friend
                 //Toast.makeText(getApplicationContext(), friendUserID, Toast.LENGTH_SHORT).show();
-                getFriendEmail(friendUserID);                                                                   //get the email address of friend to populate field
+                //getFriendEmail(friendUserId);                                                                   //get the email address of friend to populate field
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
 
         serviceQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     serviceList.clear();
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
@@ -130,7 +144,7 @@ public class SelectedPendingFriend extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
@@ -174,7 +188,7 @@ public class SelectedPendingFriend extends AppCompatActivity {
         acceptRequest.setOnClickListener(new View.OnClickListener() {                                            //set onclicklistner to button
             @Override
             public void onClick(View view) {
-                acceptRequest(position);
+                acceptRequest(friendUserId);
             }
         });
 
@@ -182,7 +196,7 @@ public class SelectedPendingFriend extends AppCompatActivity {
         rejectRequest.setOnClickListener(new View.OnClickListener() {                                           //set onclicklistner to button
             @Override
             public void onClick(View view) {
-                DatabaseReference deletePendingReference = database.getReference().child("users").child(user.getUid()).child("pending").child(PendingFriendsListTab.list.get(position).getKey());
+                DatabaseReference deletePendingReference = database.getReference().child("users").child(user.getUid()).child("pending").child(friendUserId);
                 deletePendingReference.removeValue()
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -243,13 +257,13 @@ public class SelectedPendingFriend extends AppCompatActivity {
         startActivity(openScreen);
     }
 
-    public void acceptRequest(final int position) {
-        DatabaseReference newFriendReference = database.getReference().child("users").child(user.getUid()).child("friends").child(PendingFriendsListTab.list.get(position).getKey());
-        newFriendReference.setValue(new OtherUser(PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getFirstName(), PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getLastName(), PendingFriendsListTab.list.get(position).getValue(OtherUser.class).getImageUrl()))
+    public void acceptRequest(final String friendUserId) {
+        DatabaseReference newFriendReference = database.getReference().child("users").child(user.getUid()).child("friends").child(friendUserId);
+        newFriendReference.setValue(new OtherUser(pendingFriend.getFirstName(), pendingFriend.getLastName(), pendingFriend.getImageUrl()))
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        removeFromPending(position);
+                        removeFromPending(friendUserId);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -260,13 +274,13 @@ public class SelectedPendingFriend extends AppCompatActivity {
                 });
     }
 
-    public void removeFromPending(final int position) {
-        DatabaseReference deletePendingReference = database.getReference().child("users").child(user.getUid()).child("pending").child(PendingFriendsListTab.list.get(position).getKey());
+    public void removeFromPending(final String friendUserId) {
+        DatabaseReference deletePendingReference = database.getReference().child("users").child(user.getUid()).child("pending").child(friendUserId);
         deletePendingReference.removeValue()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        retrieveMyData(position);
+                        retrieveMyData(friendUserId);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -277,8 +291,8 @@ public class SelectedPendingFriend extends AppCompatActivity {
                 });
     }
 
-    public void updateOtherUsersFriends(final int position, OtherUser myData) {
-        DatabaseReference updateOtherUserReference = database.getReference().child("users").child(PendingFriendsListTab.list.get(position).getKey()).child("friends").child(user.getUid());
+    public void updateOtherUsersFriends(final String friendUserId, OtherUser myData) {
+        DatabaseReference updateOtherUserReference = database.getReference().child("users").child(friendUserId).child("friends").child(user.getUid());
         updateOtherUserReference.setValue(myData)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -295,13 +309,13 @@ public class SelectedPendingFriend extends AppCompatActivity {
 
     }
 
-    public void retrieveMyData(final int position) {
+    public void retrieveMyData(final String friendUserId) {
         DatabaseReference retrieveMyDataReference = database.getReference().child("users").child(user.getUid()).child("data");
         retrieveMyDataReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 OtherUser myData = new OtherUser(dataSnapshot.getValue(UserData.class).getFirstName(), dataSnapshot.getValue(UserData.class).getLastName(), dataSnapshot.getValue(UserData.class).getImageUrl());
-                updateOtherUsersFriends(position, myData);
+                updateOtherUsersFriends(friendUserId, myData);
             }
 
             @Override
