@@ -202,6 +202,10 @@ public class SelectedService extends AppCompatActivity {
                     sendBackToServiceCategory();
                 }else if(callingPage.equalsIgnoreCase("ReportedScreen")){
                     sendBackToReportScreen();
+                }else if(callingPage.equalsIgnoreCase("SelectedFriend")){
+                    sendToSelectedFriend();
+                }else if (callingPage.equals("SelectedPendingFriend")){
+                    sendToSelectedPendingFriend();
                 }else
                     openHomeScreen();
 
@@ -460,4 +464,17 @@ public class SelectedService extends AppCompatActivity {
         intent.putExtra("reportedPageTab", 2);
         startActivity(intent);
     }
+
+
+    public void sendToSelectedFriend(){
+        Intent intent = new Intent(this, SelectedFriend.class);
+        intent.putExtra("userId", ownerID);
+        startActivity(intent);
+    }
+    public void sendToSelectedPendingFriend(){
+        Intent intent = new Intent(this, SelectedPendingFriend.class);
+        intent.putExtra("userId", ownerID);
+        startActivity(intent);
+    }
+
 }

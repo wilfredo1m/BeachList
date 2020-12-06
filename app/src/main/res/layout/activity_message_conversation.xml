@@ -170,7 +170,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView46"
+                        android:id="@+id/confirm_sale_header_lbl"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
@@ -261,7 +261,7 @@
                             android:text="@string/sold_to_lbl" />
 
                         <TextView
-                            android:id="@+id/textView50"
+                            android:id="@+id/buyerNameTv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="#121212"

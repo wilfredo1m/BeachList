@@ -60,6 +60,7 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
                 String className = view.getContext().getClass().getName();
                 int pos = className.lastIndexOf ('.') + 1;
                 String onlyClass = className.substring(pos);
+                view.getAccessibilityClassName();
                 Toast.makeText(view.getContext(), onlyClass, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, SelectedItem.class);
                 intent.putExtra("ListingID", list.get(position).getKey());

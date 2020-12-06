@@ -191,18 +191,15 @@ public class SelectedItem extends AppCompatActivity {
                 sendBackToUser();
             }else if(callingPage.equalsIgnoreCase("FilteredCategory")){
                 sendBackToItemCategory();
-            }
-            else if(callingPage.equalsIgnoreCase("ReportedScreen")){
+            }else if(callingPage.equalsIgnoreCase("ReportedScreen")){
                 sendBackToReportScreen();
+            }else if(callingPage.equalsIgnoreCase("SelectedFriend")){
+                sendToSelectedFriend();
+            }else if (callingPage.equals("SelectedPendingFriend")){
+                sendToSelectedPendingFriend();
             }else
                 openHomeScreen();
-            /*
-            else if(callingPage.equalsIgnoreCase("selectedFriendPage")){
-                sendToSelectedFriend();
-            }else if (callingPage.equals("selectedPendingFriendPage")){
-                sendToSelectedPendingFriend();
-            }
-        */
+
         }
         });
 
@@ -450,20 +447,18 @@ public class SelectedItem extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /*
+
     public void sendToSelectedFriend(){
         Intent intent = new Intent(this, SelectedFriend.class);
-        intent.putExtra("selectedUserId", listingOwnerID);
+        intent.putExtra("userId", listingOwnerID);
         startActivity(intent);
     }
     public void sendToSelectedPendingFriend(){
         Intent intent = new Intent(this, SelectedPendingFriend.class);
-        int position = getIntent().getIntExtra("position", 7);
-        Toast.makeText(getApplicationContext(), position, Toast.LENGTH_SHORT).show();
-        intent.putExtra("selectedUserId", listingOwnerID);
+        intent.putExtra("userId", listingOwnerID);
         startActivity(intent);
     }
-     */
+
     public void sendBackToReportScreen(){
         Intent intent = new Intent(this, ReportedScreen.class);
         intent.putExtra("reportedPageTab", 2);
