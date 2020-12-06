@@ -385,9 +385,13 @@ public class SelectedItem extends AppCompatActivity {
 
     public void goToMessageScreen(){
         Intent intent = new Intent(this, ConversationScreen.class);
-        intent.putExtra("UserID",listingOwnerID );
-        intent.putExtra("ListingID",listingId );
+        intent.putExtra("listingOwnerId", listingOwnerID);
+        intent.putExtra("sellerFirstName", itemSellerFirstName.getText().toString());
+        intent.putExtra("sellerLastName", itemSellerLastName.getText().toString());
+        intent.putExtra("sellerEmail", itemSellerEmail.getText().toString());
+        intent.putExtra("listingId",listingId );
         intent.putExtra("listingType", "item");
+        intent.putExtra("fromContactSeller", "true");
         Toast.makeText(getApplicationContext(), listingId, Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
@@ -425,9 +429,9 @@ public class SelectedItem extends AppCompatActivity {
 
     public void sendToFriend(String fID, String cmnt){
         Intent intent = new Intent(this, ConversationScreen.class);
-        intent.putExtra("UserID", fID);
+        intent.putExtra("userId", fID);
         intent.putExtra("send message to friend", cmnt);
-        intent.putExtra("ListingID",listingId );
+        intent.putExtra("listingId", listingId );
         intent.putExtra("listingType", "item");
         Toast.makeText(getApplicationContext(), listingId, Toast.LENGTH_SHORT).show();
         startActivity(intent);

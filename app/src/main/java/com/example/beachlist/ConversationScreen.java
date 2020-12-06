@@ -72,12 +72,6 @@ public class ConversationScreen extends AppCompatActivity {
 
         // Retrieve info from previous screen
         friendID = getIntent().getStringExtra("friend ID");
-        String convoId = getIntent().getStringExtra("convoId");
-        String listingUrl = getIntent().getStringExtra("listingUrl");
-
-
-        // Display image of listing at the top of the convo screen
-        displayListingImage(listingUrl);
 
         //******************************Display Conversation***************************************
         recyclerView = findViewById(R.id.conversation_recyclerView);
@@ -91,7 +85,22 @@ public class ConversationScreen extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         userID = user.getUid();
         messages_list.clear();
+
+        // Check where we came from, either message tab or selected listing
         if(getIntent().getStringExtra("fromMessageTab") != null) {
+
+            // Remove "fromMessageTab" now that we have arrived to conversationScreen safely
+            getIntent().removeExtra("fromMessageTab");
+
+            // Retrieve listing image from previous screen
+            String listingUrl = getIntent().getStringExtra("listingUrl");
+
+            // Display image of listing at the top of the convo screen
+            displayListingImage(listingUrl);
+
+            // Get convoId from previous screen.
+            String convoId = getIntent().getStringExtra("convoId");
+
             // Retrieve messages for convo selected in message tab from the database
             Query getMessages = database.getReference("messages").child(convoId).orderByKey();
 
@@ -111,6 +120,21 @@ public class ConversationScreen extends AppCompatActivity {
                     System.out.println("The read failed: " + databaseError.getCode());
                 }
             });
+        } else if (getIntent().getStringExtra("fromContactSeller") != null) {
+
+            // "fromMessageTab" wasnt stored in the intent, which means we are entering the
+            // conversation screen from a listing
+
+            String listingOwnerId = getIntent().getStringExtra("listingOwnerId");
+            String sellerEmail = getIntent().getStringExtra("sellerEmail");
+            String sellerFirstName = getIntent().getStringExtra("sellerFirstName");
+            String sellerLastName = getIntent().getStringExtra("sellerLastName");
+            String listingId = getIntent().getStringExtra("fromContactSeller");
+
+            userEmail.setText(sellerEmail);
+            userName.setText(sellerFirstName + " " + sellerLastName);
+
+
         }
 
 
