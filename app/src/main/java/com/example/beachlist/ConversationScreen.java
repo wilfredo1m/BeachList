@@ -160,11 +160,13 @@ public class ConversationScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextView sentMessage = findViewById(R.id.editTextTextMultiLine);
-                Map<String, String> map = new HashMap<>();
-                map.put("senderId", userID);
-                map.put("message", sentMessage.getText().toString());
-                database.getReference().child("messages").child(convoId).child(String.valueOf((convoSize+1))).setValue(map);
-                sentMessage.setText("");
+                if(sentMessage.getText().toString() != "") {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("senderId", userID);
+                    map.put("message", sentMessage.getText().toString());
+                    database.getReference().child("messages").child(convoId).child(String.valueOf((convoSize+1))).setValue(map);
+                    sentMessage.setText("");
+                }
             }
         });
 
@@ -218,6 +220,7 @@ public class ConversationScreen extends AppCompatActivity {
         getMessages.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                messages_list.clear();
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         messages_list.add(child);
