@@ -28,7 +28,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ConversationScreen extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -45,6 +47,8 @@ public class ConversationScreen extends AppCompatActivity {
     private final ArrayList<String> itemImages = new ArrayList<>();
     TextView userName,userEmail;
     ImageView listingImage;
+    String convoId;
+    int convoSize;
     DatabaseReference listingRef, conversationRef, messageRef;
     //**end main page items used *************//
 
@@ -86,6 +90,7 @@ public class ConversationScreen extends AppCompatActivity {
         userID = user.getUid();
         messages_list.clear();
 
+
         // Check where we came from, either message tab or selected listing
         if(getIntent().getStringExtra("fromMessageTab") != null) {
 
@@ -99,7 +104,7 @@ public class ConversationScreen extends AppCompatActivity {
             displayListingImage(listingUrl);
 
             // Get convoId from previous screen.
-            String convoId = getIntent().getStringExtra("convoId");
+            convoId = getIntent().getStringExtra("convoId");
 
             // Retrieve messages for convo selected in message tab from the database
             getMessages(convoId);
@@ -122,15 +127,16 @@ public class ConversationScreen extends AppCompatActivity {
 
             Query checkForExistingConvo = database.getReference("users").child(userID).child("convos").orderByChild("listingId").equalTo(listingId);
 
-            checkForExistingConvo.addListenerForSingleValueEvent(new ValueEventListener() {
+            checkForExistingConvo.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if(dataSnapshot.getValue() == null) {
-                        // dataSnapshot is null, so we know conversation didnt already exist.
+                        // todo:dataSnapshot is null, so we know conversation didnt already exist.
                         // so now we will have to create a convo once the first message is sent.
                     }
                     else {
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            convoId = child.getKey();
                             getMessages(child.getKey());
                         }
                     }
@@ -153,7 +159,12 @@ public class ConversationScreen extends AppCompatActivity {
         sendMessage.setOnClickListener(new View.OnClickListener() {                                    //set on click listener for button
             @Override
             public void onClick(View v) {
-
+                TextView sentMessage = findViewById(R.id.editTextTextMultiLine);
+                Map<String, String> map = new HashMap<>();
+                map.put("senderId", userID);
+                map.put("message", sentMessage.getText().toString());
+                database.getReference().child("messages").child(convoId).child(String.valueOf((convoSize+1))).setValue(map);
+                sentMessage.setText("");
             }
         });
 
@@ -204,13 +215,14 @@ public class ConversationScreen extends AppCompatActivity {
     public void getMessages(String convoId) {
         Query getMessages = database.getReference("messages").child(convoId).orderByKey();
 
-        getMessages.addListenerForSingleValueEvent(new ValueEventListener() {
+        getMessages.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         messages_list.add(child);
                     }
+                    convoSize = messages_list.size();
                 }
                 onMessagesQuery();
             }
