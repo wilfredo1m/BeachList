@@ -127,6 +127,8 @@ public class ConversationScreen extends AppCompatActivity {
 
         } else if (getIntent().getStringExtra("fromContactSeller") != null) {
 
+            getIntent().removeExtra("fromContactSeller");
+
             // "fromMessageTab" wasnt stored in the intent, which means we are entering the
             // conversation screen from a listing
 
