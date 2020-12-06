@@ -35,6 +35,7 @@ import java.util.Map;
 public class ConversationScreen extends AppCompatActivity {
     RecyclerView recyclerView;
     public static List<DataSnapshot> messages_list = new ArrayList<>();
+    public static List<DataSnapshot> convo_list = new ArrayList<>();
     ConversationRecyclerAdapter adapter;
 
     //***main page items used******************//
@@ -57,6 +58,7 @@ public class ConversationScreen extends AppCompatActivity {
     Button confirmSale, cancelSale;                                                                   //buttons to confirm sale
     RatingBar rating;                                                                                 //rating bar object to be able to retrieve the rating give
     //*****end popup window items used*****//
+    final boolean[] newConvoFlag = {false};
 
 
 
@@ -89,7 +91,8 @@ public class ConversationScreen extends AppCompatActivity {
         final FirebaseUser user = mAuth.getCurrentUser();
         userID = user.getUid();
         messages_list.clear();
-        final boolean[] newConvoFlag = {false};
+        convo_list.clear();
+
 
         String listingOwnerId = "";
         String sellerEmail = "";
@@ -141,9 +144,10 @@ public class ConversationScreen extends AppCompatActivity {
             userEmail.setText(sellerEmail);
             userName.setText(sellerFirstName + " " + sellerLastName);
 
-            Query checkForExistingConvo = database.getReference("users").child(userID).child("convos").orderByChild("listingId").equalTo(listingId);
+            Query checkForExistingConvoOtherUserId = database.getReference("users").child(userID).child("convos").orderByChild("otherUserId").equalTo(listingOwnerId);
 
-            checkForExistingConvo.addValueEventListener(new ValueEventListener() {
+            final String finalListingOwnerId1 = listingOwnerId;
+            checkForExistingConvoOtherUserId.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if(dataSnapshot.getValue() == null) {
@@ -152,9 +156,9 @@ public class ConversationScreen extends AppCompatActivity {
                     else {
                         newConvoFlag[0] = false;
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
-                            convoId = child.getKey();
-                            getMessages(child.getKey());
+                            convo_list.add(child);
                         }
+                        searchConvosByListingId(finalListingOwnerId1);
                     }
                 }
 
@@ -163,7 +167,6 @@ public class ConversationScreen extends AppCompatActivity {
                     System.out.println("The read failed: " + databaseError.getCode());
                 }
             });
-
         }
 
 
@@ -203,7 +206,10 @@ public class ConversationScreen extends AppCompatActivity {
                         database.getReference().child("messages").child(newConvoId).child("1").setValue(newMessage);
 
                         database.getReference().child("users").child(user.getUid()).child("convos").child(newConvoId).child("listingId").setValue(listingId);
+                        database.getReference().child("users").child(user.getUid()).child("convos").child(newConvoId).child("otherUserId").setValue(finalListingOwnerId);
+
                         database.getReference().child("users").child(finalListingOwnerId).child("convos").child(newConvoId).child("listingId").setValue(listingId);
+                        database.getReference().child("users").child(finalListingOwnerId).child("convos").child(newConvoId).child("otherUserId").setValue(user.getUid());
 
                         sentMessage.setText("");
                     }
@@ -262,6 +268,34 @@ public class ConversationScreen extends AppCompatActivity {
 
 
 
+    }
+
+    public void searchConvosByListingId(final String otherUserId) {
+        Query checkForExistingConvo = database.getReference("users").child(userID).child("convos").orderByChild("listingId").equalTo(listingId);
+
+        checkForExistingConvo.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue() == null) {
+                    newConvoFlag[0] = true;
+                }
+                else {
+                    newConvoFlag[0] = false;
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        if(child.child("otherUserId").getValue(String.class).equals(otherUserId)) {
+                            convoId = child.getKey();
+                            break;
+                        }
+                    }
+                    getMessages(convoId);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
     }
 
     public void getMessages(String convoId) {
