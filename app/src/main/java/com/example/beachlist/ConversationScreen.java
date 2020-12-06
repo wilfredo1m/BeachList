@@ -102,38 +102,45 @@ public class ConversationScreen extends AppCompatActivity {
             String convoId = getIntent().getStringExtra("convoId");
 
             // Retrieve messages for convo selected in message tab from the database
-            Query getMessages = database.getReference("messages").child(convoId).orderByKey();
+            getMessages(convoId);
 
-            getMessages.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.hasChildren()) {
-                        for (DataSnapshot child : dataSnapshot.getChildren()) {
-                            messages_list.add(child);
-                        }
-                    }
-                    onMessagesQuery();
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    System.out.println("The read failed: " + databaseError.getCode());
-                }
-            });
         } else if (getIntent().getStringExtra("fromContactSeller") != null) {
 
             // "fromMessageTab" wasnt stored in the intent, which means we are entering the
             // conversation screen from a listing
 
+            // Get data that was stored in intent in previous screen
             String listingOwnerId = getIntent().getStringExtra("listingOwnerId");
             String sellerEmail = getIntent().getStringExtra("sellerEmail");
             String sellerFirstName = getIntent().getStringExtra("sellerFirstName");
             String sellerLastName = getIntent().getStringExtra("sellerLastName");
-            String listingId = getIntent().getStringExtra("fromContactSeller");
+            final String listingId = getIntent().getStringExtra("listingId");
 
+            // Show email and name of seller of item
             userEmail.setText(sellerEmail);
             userName.setText(sellerFirstName + " " + sellerLastName);
 
+            Query checkForExistingConvo = database.getReference("users").child(userID).child("convos").orderByChild("listingId").equalTo(listingId);
+
+            checkForExistingConvo.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.getValue() == null) {
+                        // dataSnapshot is null, so we know conversation didnt already exist.
+                        // so now we will have to create a convo once the first message is sent.
+                    }
+                    else {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            getMessages(child.getKey());
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("The read failed: " + databaseError.getCode());
+                }
+            });
 
         }
 
@@ -192,6 +199,27 @@ public class ConversationScreen extends AppCompatActivity {
 
 
 
+    }
+
+    public void getMessages(String convoId) {
+        Query getMessages = database.getReference("messages").child(convoId).orderByKey();
+
+        getMessages.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        messages_list.add(child);
+                    }
+                }
+                onMessagesQuery();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
     }
 
     // Upon receiving messages from the database, this function is called to show the messages
