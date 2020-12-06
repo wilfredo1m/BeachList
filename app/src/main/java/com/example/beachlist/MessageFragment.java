@@ -63,6 +63,7 @@ public class MessageFragment extends Fragment {
         getUserConvos.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                convo_list.clear();
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         convo_list.add(child);
