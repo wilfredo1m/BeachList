@@ -57,7 +57,6 @@ public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecycler
                 String className = view.getContext().getClass().getName();
                 int pos = className.lastIndexOf ('.') + 1;
                 String onlyClass = className.substring(pos);
-                Toast.makeText(view.getContext(), onlyClass, Toast.LENGTH_SHORT).show();
                 intent.putExtra("ListingID", list.get(position).getKey());
                 intent.putExtra("callingPage", onlyClass);
                 context.startActivity(intent);

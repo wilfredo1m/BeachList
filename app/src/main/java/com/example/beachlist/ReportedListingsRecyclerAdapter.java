@@ -71,8 +71,6 @@ public class ReportedListingsRecyclerAdapter extends RecyclerView.Adapter<Report
                 String className = view.getContext().getClass().getName();
                 int pos = className.lastIndexOf ('.') + 1;
                 String onlyClass = className.substring(pos);
-                Toast.makeText(view.getContext(), onlyClass, Toast.LENGTH_SHORT).show();
-
                 assert type != null;
                 if(type.equalsIgnoreCase("item"))
                     intent = new Intent(context, SelectedItem.class);
