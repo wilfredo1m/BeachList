@@ -41,7 +41,7 @@ public class ConversationScreen extends AppCompatActivity {
     Button sendMessage, backButton,soldButton;                                                        //buttons to navitage screen
     ConstraintLayout mainPage;                                                                        //layout for main page incase we need to make it invisible
     String listingId, friendID, userID, ownerOfListingName,
-            ownerOfListingEmail, potentialBuyerName, potentialBuyerEmail, listingType;
+            ownerOfListingEmail, potentialBuyerName, potentialBuyerEmail, listingType = "";
     private FirebaseDatabase firebaseDatabase;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private final ArrayList<String> itemImages = new ArrayList<>();
@@ -86,19 +86,28 @@ public class ConversationScreen extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
+        final FirebaseUser user = mAuth.getCurrentUser();
         userID = user.getUid();
         messages_list.clear();
+        final boolean[] newConvoFlag = {false};
 
+        String listingOwnerId = "";
+        String sellerEmail = "";
+        String sellerFirstName = "";
+        String sellerLastName = "";
+
+        String listingUrl = "";
 
         // Check where we came from, either message tab or selected listing
         if(getIntent().getStringExtra("fromMessageTab") != null) {
+
+            newConvoFlag[0] = false;
 
             // Remove "fromMessageTab" now that we have arrived to conversationScreen safely
             getIntent().removeExtra("fromMessageTab");
 
             // Retrieve listing image from previous screen
-            String listingUrl = getIntent().getStringExtra("listingUrl");
+            listingUrl = getIntent().getStringExtra("listingUrl");
 
             // Display image of listing at the top of the convo screen
             displayListingImage(listingUrl);
@@ -115,11 +124,14 @@ public class ConversationScreen extends AppCompatActivity {
             // conversation screen from a listing
 
             // Get data that was stored in intent in previous screen
-            String listingOwnerId = getIntent().getStringExtra("listingOwnerId");
-            String sellerEmail = getIntent().getStringExtra("sellerEmail");
-            String sellerFirstName = getIntent().getStringExtra("sellerFirstName");
-            String sellerLastName = getIntent().getStringExtra("sellerLastName");
-            final String listingId = getIntent().getStringExtra("listingId");
+            listingOwnerId = getIntent().getStringExtra("listingOwnerId");
+            sellerEmail = getIntent().getStringExtra("sellerEmail");
+            sellerFirstName = getIntent().getStringExtra("sellerFirstName");
+            sellerLastName = getIntent().getStringExtra("sellerLastName");
+            listingUrl = getIntent().getStringExtra("listingImageUrl");
+            listingId = getIntent().getStringExtra("listingId");
+
+            displayListingImage(listingUrl);
 
             // Show email and name of seller of item
             userEmail.setText(sellerEmail);
@@ -131,10 +143,10 @@ public class ConversationScreen extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if(dataSnapshot.getValue() == null) {
-                        // todo:dataSnapshot is null, so we know conversation didnt already exist.
-                        // so now we will have to create a convo once the first message is sent.
+                        newConvoFlag[0] = true;
                     }
                     else {
+                        newConvoFlag[0] = false;
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
                             convoId = child.getKey();
                             getMessages(child.getKey());
@@ -156,16 +168,50 @@ public class ConversationScreen extends AppCompatActivity {
         //*****************main page buttons***************************//
         //*************line 34-53*************************************//
         sendMessage= findViewById(R.id.send_message_btn);                                              //link submit button to xml button
+        final String finalListingUrl = listingUrl;
+        final String finalSellerFirstName = sellerFirstName;
+        final String finalSellerLastName = sellerLastName;
+        final String finalSellerEmail = sellerEmail;
+        final String finalListingOwnerId = listingOwnerId;
         sendMessage.setOnClickListener(new View.OnClickListener() {                                    //set on click listener for button
             @Override
             public void onClick(View v) {
                 TextView sentMessage = findViewById(R.id.editTextTextMultiLine);
-                if(!sentMessage.getText().toString().equals("")) {
-                    Map<String, String> map = new HashMap<>();
-                    map.put("senderId", userID);
-                    map.put("message", sentMessage.getText().toString());
-                    database.getReference().child("messages").child(convoId).child(String.valueOf((convoSize+1))).setValue(map);
-                    sentMessage.setText("");
+                if (newConvoFlag[0] == true) {
+                    if(!sentMessage.getText().toString().equals("")) {
+                        newConvoFlag[0] = false;
+
+                        Map<String, String> newConvo = new HashMap<>();
+                        newConvo.put("imageUrl", finalListingUrl);
+                        newConvo.put("lastMessage", sentMessage.getText().toString());
+                        newConvo.put("listingId", listingId);
+                        newConvo.put("sellerName", finalSellerFirstName +" "+ finalSellerLastName);
+                        newConvo.put("sellerEmail", finalSellerEmail);
+
+                        Map<String, String> newMessage = new HashMap<>();
+                        newMessage.put("message", sentMessage.getText().toString());
+                        newMessage.put("senderId", user.getUid());
+
+                        String newConvoId = database.getReference().child("convos").push().getKey();
+                        database.getReference().child("convos").child(newConvoId).setValue(newConvo);
+                        database.getReference().child("convos").child(newConvoId).child("members").child(finalListingOwnerId).setValue(true);
+                        database.getReference().child("convos").child(newConvoId).child("members").child(user.getUid()).setValue(true);
+                        database.getReference().child("messages").child(newConvoId).child("1").setValue(newMessage);
+
+                        database.getReference().child("users").child(user.getUid()).child("convos").child(newConvoId).child("listingId").setValue(listingId);
+                        database.getReference().child("users").child(finalListingOwnerId).child("convos").child(newConvoId).child("listingId").setValue(listingId);
+
+                        sentMessage.setText("");
+                    }
+
+                } else {
+                    if(!sentMessage.getText().toString().equals("")) {
+                        Map<String, String> map = new HashMap<>();
+                        map.put("senderId", userID);
+                        map.put("message", sentMessage.getText().toString());
+                        database.getReference().child("messages").child(convoId).child(String.valueOf((convoSize+1))).setValue(map);
+                        sentMessage.setText("");
+                    }
                 }
             }
         });

@@ -389,6 +389,7 @@ public class SelectedItem extends AppCompatActivity {
         intent.putExtra("sellerFirstName", itemSellerFirstName.getText().toString());
         intent.putExtra("sellerLastName", itemSellerLastName.getText().toString());
         intent.putExtra("sellerEmail", itemSellerEmail.getText().toString());
+        intent.putExtra("listingImageUrl", selectedListing.getListingImages().get(1));
         intent.putExtra("listingId",listingId );
         intent.putExtra("listingType", "item");
         intent.putExtra("fromContactSeller", "true");
