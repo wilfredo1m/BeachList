@@ -538,6 +538,7 @@ public class SelectedOwnListing extends AppCompatActivity {
     //go back to all current listings page
     public void openCurrentListingsListScreen(){
         Intent openScreen = new Intent(this, ActiveListings.class);                    //intent to open ActiveListings page (back button press)
+        openScreen.putExtra("signedInUserListingTab", 1);
         startActivity(openScreen);                                                                    //start screen change
     }
 
