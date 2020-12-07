@@ -204,6 +204,8 @@ public class SelectedUser extends AppCompatActivity {
                 }
                 else if(callingActivity ==3){         // 3 is a item/service within a user
                     openHomeScreen();
+                }else if(callingActivity ==4){
+                    openReportedUserScreen();
                 }
                 else
                     openHomeScreen();
@@ -340,5 +342,11 @@ public class SelectedUser extends AppCompatActivity {
         reportUser.setVisibility(View.VISIBLE);
         addFriendButton.setVisibility(View.VISIBLE);
         constraintLayout.setVisibility(View.INVISIBLE);
+    }
+
+    public void openReportedUserScreen(){
+        Intent intent = new Intent(this, ReportedScreen.class);
+        intent.putExtra("reportedPageTab", 1);
+        startActivity(intent);
     }
 }

@@ -61,8 +61,12 @@ public class ReportedUserRecyclerAdapter extends RecyclerView.Adapter<ReportedUs
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //String className = view.getContext().getClass().getName();
+                //int pos = className.lastIndexOf ('.') + 1;
+                //String onlyClass = className.substring(pos);
                 Intent intent = new Intent(context, SelectedUser.class);
                 intent.putExtra("selectedUserId", userId);
+                intent.putExtra("screen", 4);
                 context.startActivity(intent);
             }
         });
