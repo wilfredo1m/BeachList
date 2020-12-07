@@ -196,6 +196,7 @@ public class SelectedOwnListing extends AppCompatActivity {
                 key = snapshot.getKey();
                 displayListingInfo(selectedListing);                                                  //call listing information by passing selected listing ListingData
                 setCategory(selectedListing.getCategory());                                           //call set category
+                updatedListing = selectedListing;
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -301,9 +302,8 @@ public class SelectedOwnListing extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
                 /* Each flag corresponds to a modified value in the selected listing, and here we
-                   update the listing dependeding on which flags have been set off */
+                   update the listing depending on which flags have been set off */
                 if(titleFlag){
                     updatedListing.setTitle(updatedTitle.getText().toString());
                 }
@@ -316,7 +316,6 @@ public class SelectedOwnListing extends AppCompatActivity {
                 if(descriptionFlag){
                     updatedListing.setDescription(updatedDescription.getText().toString());
                 }
-
                 if(pictureFlag) {
                     updateListingWithNewImages(imageUriList, imageUriList.size());
                 }
@@ -738,7 +737,6 @@ public class SelectedOwnListing extends AppCompatActivity {
     }
 
     public void deleteSelectedListing(){
-        //TODO THIS DELETES THE LISTING FROM THE MAIN LISTINGS PAGE BUT IT WILL NOT DELETE IT FROM THE NESTED
         DatabaseReference listingReference = database.getReference("listings").child(typeOfService).child(listingId);
         listingReference.removeValue()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
