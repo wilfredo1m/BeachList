@@ -62,10 +62,10 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
                 intent.putExtra("listingId", list.get(position).child("listingId").getValue(String.class));
                 intent.putExtra("fromMessageTab", "true");
                 DataSnapshot membersRef = list.get(position).child("members");
-//                if(membersRef.hasChildren())
-//                    for(DataSnapshot snapshot : membersRef.getChildren())
-//                        if(!snapshot.getKey().equalsIgnoreCase(currentUserId))
-//                            intent.putExtra("listingOwnerId", snapshot.getKey());
+                if(membersRef.hasChildren())
+                    for(DataSnapshot snapshot : membersRef.getChildren())
+                        if(!snapshot.getKey().equalsIgnoreCase(currentUserId))
+                            intent.putExtra("listingOwnerId", snapshot.getKey());
                 context.startActivity(intent);
             }
         });

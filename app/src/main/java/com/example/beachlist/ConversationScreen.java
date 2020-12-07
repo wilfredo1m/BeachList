@@ -3,9 +3,11 @@ package com.example.beachlist;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -42,8 +44,7 @@ public class ConversationScreen extends AppCompatActivity {
     //***main page items used******************//
     Button sendMessage, backButton,soldButton;                                                        //buttons to navitage screen
     ConstraintLayout mainPage;                                                                        //layout for main page incase we need to make it invisible
-    String listingId, friendID, userID, ownerOfListingName,
-            ownerOfListingEmail, potentialBuyerName, potentialBuyerEmail, listingType = "";
+    String listingId, friendID, userID;
     private FirebaseDatabase firebaseDatabase;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private final ArrayList<String> itemImages = new ArrayList<>();
@@ -51,8 +52,9 @@ public class ConversationScreen extends AppCompatActivity {
     ImageView listingImage;
     String convoId;
     int convoSize;
-    String sellerImageUrl;
-    DatabaseReference listingRef, conversationRef, messageRef;
+    String sellerImageUrl, type;
+    ListingData thisListing;
+    UserData buyerData;
     //**end main page items used *************//
 
     //****popup window items used************//
@@ -61,6 +63,10 @@ public class ConversationScreen extends AppCompatActivity {
     RatingBar rating;                                                                                 //rating bar object to be able to retrieve the rating give
     //*****end popup window items used*****//
     final boolean[] newConvoFlag = {true};
+
+    //********sold screen***************//
+    TextView soldListingTitle, buyerFullName;
+    EditText soldPrice;
 
 
     @Override
@@ -73,6 +79,10 @@ public class ConversationScreen extends AppCompatActivity {
         rating = findViewById(R.id.rate_user_rb);
         userEmail = findViewById(R.id.user_email);
         listingImage = findViewById(R.id.listing_image_iv);
+        soldListingTitle = findViewById(R.id.sold_title_tv);
+        buyerFullName = findViewById(R.id.buyerNameTv);
+        soldPrice = findViewById(R.id.sold_price_et);
+
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         // Retrieve info from previous screen
@@ -93,12 +103,14 @@ public class ConversationScreen extends AppCompatActivity {
         convo_list.clear();
 
 
-        String listingOwnerId = "";
         String sellerEmail = "";
         String sellerFirstName = "";
         String sellerLastName = "";
 
         String listingUrl = "";
+
+        listingId = getIntent().getStringExtra("listingId");
+        final String listingOwnerId = getIntent().getStringExtra("listingOwnerId");
 
         // Check where we came from, either message tab or selected listing
         if(getIntent().getStringExtra("fromMessageTab") != null) {
@@ -132,12 +144,10 @@ public class ConversationScreen extends AppCompatActivity {
             // conversation screen from a listing
 
             // Get data that was stored in intent in previous screen
-            listingOwnerId = getIntent().getStringExtra("listingOwnerId");
             sellerEmail = getIntent().getStringExtra("sellerEmail");
             sellerFirstName = getIntent().getStringExtra("sellerFirstName");
             sellerLastName = getIntent().getStringExtra("sellerLastName");
             listingUrl = getIntent().getStringExtra("listingImageUrl");
-            listingId = getIntent().getStringExtra("listingId");
 
             displayListingImage(listingUrl);
 
@@ -180,7 +190,6 @@ public class ConversationScreen extends AppCompatActivity {
 //
 //            @Override
 //            public void onCancelled(@NonNull DatabaseError error) {
-//                //TODO Handle this error
 //            }
 //        });
 
@@ -249,11 +258,50 @@ public class ConversationScreen extends AppCompatActivity {
         });
 
         soldButton = findViewById(R.id.sold_listing_btn);
+        soldButton.setVisibility(View.INVISIBLE);
         soldButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 displayPopUpWindow();
                 deactivateButtons();
+            }
+        });
+
+        DatabaseReference userRef = database.getReference("users").child(userID).child("listings");
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.child(listingId).exists()) {
+                    soldButton.setVisibility(View.VISIBLE);
+                    type = snapshot.child(listingId).child("type").getValue(String.class);
+                    DatabaseReference listingRef = database.getReference("listings").child(type).child(listingId);
+                    listingRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            thisListing = snapshot.getValue(ListingData.class);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        final DatabaseReference buyerRef = database.getReference("users").child(listingOwnerId).child("data");
+        buyerRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                buyerData = snapshot.getValue(UserData.class);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
         //**************END MAIN PAGE BUTTONS*********************//
@@ -265,8 +313,21 @@ public class ConversationScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String userRating = String.valueOf(rating.getRating());                               //to be used to update that users rating
-               Toast.makeText(getApplicationContext(), userRating, Toast.LENGTH_SHORT).show();        //testing userRating is picking up correct value
+                Integer userPrice = Integer.valueOf(soldPrice.getText().toString());
+                Toast.makeText(getApplicationContext(), userRating, Toast.LENGTH_SHORT).show();        //testing userRating is picking up correct value
 
+                DatabaseReference listingRef = database.getReference("listings").child(type).child(listingId).child("banned");
+                listingRef.setValue(true);
+
+                Time current = new Time();
+                current.setToNow();
+                SoldData soldListing = new SoldData(thisListing.getListingImages().get(1), thisListing.getTitle(), current, userPrice, buyerData.getFirstName()+" "+buyerData.getLastName());
+
+                DatabaseReference userListingRef = database.getReference("users").child(userID).child("listings").child(listingId);
+                userListingRef.removeValue();
+
+                DatabaseReference userSoldRef = database.getReference("users").child(userID).child("sold").child(listingId);
+                userSoldRef.setValue(soldListing);
             }
         });
 
@@ -341,6 +402,8 @@ public class ConversationScreen extends AppCompatActivity {
 
     public void displayPopUpWindow(){
         soldView.setVisibility(View.VISIBLE);
+        soldListingTitle.setText(thisListing.getTitle());
+        buyerFullName.setText(String.format("%s %s", buyerData.getFirstName(), buyerData.getLastName()));
     }
 
     public void deactivateButtons(){

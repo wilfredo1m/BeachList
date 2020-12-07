@@ -1,6 +1,8 @@
 package com.example.beachlist;
 
 import android.content.Context;
+import android.text.format.DateFormat;
+import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class SoldListingsRecyclerAdapter extends RecyclerView.Adapter<SoldListingsRecyclerAdapter.MyViewHolder> {
@@ -38,8 +41,10 @@ public class SoldListingsRecyclerAdapter extends RecyclerView.Adapter<SoldListin
                 .into(holder.listingPic);
         //holder.listingPic.setImageResource(list.get(position).getListingPhotos()[0]);
         holder.listingTitle.setText(list.get(position).getTitle());
-        holder.listingDate.setText(list.get(position).getSoldDate().format("MM-dd-yyyy"));
-        holder.listingSoldPrice.setText("$"+list.get(position).getSellPrice());
+        Time current = list.get(position).getSoldDate();
+        SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+        holder.listingDate.setText(format.format(current));
+        holder.listingSoldPrice.setText(String.format("$%d", list.get(position).getSellPrice()));
         holder.listingSoldTo.setText(list.get(position).getSoldTo());
     }
 
