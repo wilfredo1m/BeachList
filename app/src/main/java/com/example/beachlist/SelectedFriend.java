@@ -295,16 +295,16 @@ public class SelectedFriend extends AppCompatActivity {
         listingScroll.setVisibility(View.VISIBLE);
     }
 
-    public void getFriendEmail(String id){
-        DatabaseReference userRef = database.getReference().child("users").child(id);
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                email.setText(snapshot.child("data").getValue(UserData.class).getEmail());
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
+//    public void getFriendEmail(String id){
+//        DatabaseReference userRef = database.getReference().child("users").child(id);
+//        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                email.setText(snapshot.child("data").getValue(UserData.class).getEmail());
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//            }
+//        });
+//    }
 }

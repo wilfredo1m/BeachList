@@ -209,18 +209,13 @@ public class CreateAccount extends AppCompatActivity {
         currentUser.setUserId(userId);
         //testing github webhook hehehe
 
-        //Initialize database within User reference with a child using user ID
-        final DatabaseReference dataReference = database.getReference("users").child(userId).child("data");
-        //Write data to database
-        dataReference.setValue(currentUser);
-
 //        HashMap<String, Boolean> userConditionals = new HashMap<>();
 //        userConditionals.put("isAdmin", false);
 //        userConditionals.put("banned", false);
 //        //Initialize database within User reference with a child using user ID
-//        final DatabaseReference adminReference = database.getReference("users").child(userId);
+//        final DatabaseReference adminAndBannedReference = database.getReference("users").child(userId);
 //        //write data to database
-//        adminReference.setValue(userConditionals);
+//        adminAndBannedReference.setValue(userConditionals);
 
 //        //Initialize database within User reference with a child using user ID
 //        final DatabaseReference adminReference = database.getReference("users").child(userId).child("isAdmin");
@@ -233,17 +228,17 @@ public class CreateAccount extends AppCompatActivity {
 //        bannedReference.setValue(false);
 
         //Initialize database within User reference with a child using user ID
-        final DatabaseReference userReference = database.getReference("users").child(userId).child("banned");
+        final DatabaseReference userReference = database.getReference("users").child(userId);
         //write data to database
         HashMap<String, Boolean> conditionals = new HashMap<>();
         conditionals.put("isAdmin", false);
         conditionals.put("isBanned", false);
         userReference.setValue(conditionals);
 
-//        //Initialize database within User reference with a child using user ID
-//        final DatabaseReference banCountReference = database.getReference("users").child(userId).child("isAdmin");
-//        //write data to database
-//        adminReference.setValue(0);
+        //Initialize database within User reference with a child using user ID
+        final DatabaseReference dataReference = database.getReference("users").child(userId).child("data");
+        //Write data to database
+        dataReference.setValue(currentUser);
 
         //If user has selected an image
         if(filePath != null) {

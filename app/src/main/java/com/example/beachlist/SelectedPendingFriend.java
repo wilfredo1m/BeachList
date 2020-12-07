@@ -116,7 +116,6 @@ public class SelectedPendingFriend extends AppCompatActivity {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         itemList.add(child);
                     }
-
                     onItemListQuery();
                 }                     //get id of friend
                 //Toast.makeText(getApplicationContext(), friendUserID, Toast.LENGTH_SHORT).show();
@@ -137,10 +136,8 @@ public class SelectedPendingFriend extends AppCompatActivity {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         serviceList.add(child);
                     }
-
                     onServiceListQuery();
                 }
-
             }
 
             @Override

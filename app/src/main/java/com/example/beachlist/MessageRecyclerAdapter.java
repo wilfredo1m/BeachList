@@ -12,7 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,7 @@ import java.util.Map;
 public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecyclerAdapter.MyViewHolder> {
     Context context;
     List<DataSnapshot> list;
+    String currentUserId = FirebaseAuth.getInstance().getUid();
 
     public MessageRecyclerAdapter(Context context, List<DataSnapshot> list) {
         this.context = context;
@@ -42,7 +45,7 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
                 .centerCrop()
                 .into(holder.userPic);
 
-        String lastMessage = (list.get(position).child("lastMessage").getValue(String.class));     // retrieve sample fullname from test_message
+        String lastMessage = list.get(position).child("lastMessage").getValue(String.class);     // retrieve sample fullname from test_message
 
         holder.userName.setText(lastMessage);
 
@@ -56,7 +59,13 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
                 intent.putExtra("listingUrl", list.get(position).child("imageUrl").getValue(String.class));
                 intent.putExtra("ownerName", list.get(position).child("sellerName").getValue(String.class));
                 intent.putExtra("ownerEmail", list.get(position).child("sellerEmail").getValue(String.class));
+                intent.putExtra("listingId", list.get(position).child("listingId").getValue(String.class));
                 intent.putExtra("fromMessageTab", "true");
+                DataSnapshot membersRef = list.get(position).child("members");
+//                if(membersRef.hasChildren())
+//                    for(DataSnapshot snapshot : membersRef.getChildren())
+//                        if(!snapshot.getKey().equalsIgnoreCase(currentUserId))
+//                            intent.putExtra("listingOwnerId", snapshot.getKey());
                 context.startActivity(intent);
             }
         });

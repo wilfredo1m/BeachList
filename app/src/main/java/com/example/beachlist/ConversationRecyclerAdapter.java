@@ -10,25 +10,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
 public class ConversationRecyclerAdapter extends RecyclerView.Adapter<ConversationRecyclerAdapter.MyViewHolder> {
     private Context context;
-    private List<DataSnapshot> list;
-    //private String imageUrl;
+    private final List<DataSnapshot> list;
+    private String imageUrl;
     public static final int MSG_LEFT = 0;
     public static final int MSG_RIGHT = 1;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
 
-    public ConversationRecyclerAdapter(Context context, List<DataSnapshot> list) {
+    public ConversationRecyclerAdapter(Context context, List<DataSnapshot> list, String imageUrl) {
         this.context = context;
         this.list = list;
-        //this.imageUrl = imageUrl;
+        this.imageUrl = imageUrl;
     }
 
     @NonNull
@@ -47,11 +50,15 @@ public class ConversationRecyclerAdapter extends RecyclerView.Adapter<Conversati
     @Override
     public void onBindViewHolder(@NonNull ConversationRecyclerAdapter.MyViewHolder holder, final int position) {
         //TODO access messages
-//        Glide.with(context)
-//                .load(list.get(position).child("data").getValue(UserData.class).getImageUrl())
-//                .centerCrop()
-//                .into(holder.userPic);
-
+//        String senderId = list.get(position).child("senderId").getValue(String.class);
+//        System.out.println(imageUrl);
+//        if (!senderId.equals(user.getUid())) {
+//            System.out.println(senderId);
+//            Glide.with(context)
+//                    .load(imageUrl)
+//                    .centerCrop()
+//                    .into(holder.userPic);
+//        }
         holder.userMessage.setText(list.get(position).child("message").getValue(String.class));
     }
 

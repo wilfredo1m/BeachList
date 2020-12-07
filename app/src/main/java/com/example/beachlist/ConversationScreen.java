@@ -3,6 +3,7 @@ package com.example.beachlist;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -50,6 +51,7 @@ public class ConversationScreen extends AppCompatActivity {
     ImageView listingImage;
     String convoId;
     int convoSize;
+    String sellerImageUrl;
     DatabaseReference listingRef, conversationRef, messageRef;
     //**end main page items used *************//
 
@@ -59,9 +61,6 @@ public class ConversationScreen extends AppCompatActivity {
     RatingBar rating;                                                                                 //rating bar object to be able to retrieve the rating give
     //*****end popup window items used*****//
     final boolean[] newConvoFlag = {true};
-
-
-
 
 
     @Override
@@ -144,14 +143,14 @@ public class ConversationScreen extends AppCompatActivity {
 
             // Show email and name of seller of item
             userEmail.setText(sellerEmail);
-            userName.setText(sellerFirstName + " " + sellerLastName);
+            userName.setText(String.format("%s %s", sellerFirstName, sellerLastName));
 
             Query checkForExistingConvoOtherUserId = database.getReference("users").child(userID).child("convos").orderByChild("otherUserId").equalTo(listingOwnerId);
 
             final String finalListingOwnerId1 = listingOwnerId;
             checkForExistingConvoOtherUserId.addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
 
@@ -165,13 +164,25 @@ public class ConversationScreen extends AppCompatActivity {
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
+                public void onCancelled(@NonNull DatabaseError databaseError) {
                     System.out.println("The read failed: " + databaseError.getCode());
                 }
             });
         }
 
-
+//        DatabaseReference sellerImageRef = database.getReference("users").child(listingOwnerId).child("data").child("imageUrl");
+//        sellerImageRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                sellerImageUrl = snapshot.getValue(String.class);
+//                System.out.println(sellerImageUrl);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                //TODO Handle this error
+//            }
+//        });
 
 
         //*****************main page buttons***************************//
@@ -186,7 +197,7 @@ public class ConversationScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextView sentMessage = findViewById(R.id.editTextTextMultiLine);
-                if (newConvoFlag[0] == true) {
+                if (newConvoFlag[0]) {
                     if(!sentMessage.getText().toString().equals("")) {
                         newConvoFlag[0] = false;
 
@@ -268,9 +279,6 @@ public class ConversationScreen extends AppCompatActivity {
                 rating.setRating(0);                                                                  //reset the rating bar upon a cancel
             }
         });
-
-
-
     }
 
     public void searchConvosByListingId(final String otherUserId) {
@@ -278,7 +286,7 @@ public class ConversationScreen extends AppCompatActivity {
 
         checkForExistingConvo.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     if(child.child("otherUserId").getValue(String.class).equals(otherUserId)) {
                         convoId = child.getKey();
@@ -289,7 +297,7 @@ public class ConversationScreen extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
@@ -320,7 +328,7 @@ public class ConversationScreen extends AppCompatActivity {
 
     // Upon receiving messages from the database, this function is called to show the messages
     public void onMessagesQuery() {
-        adapter = new ConversationRecyclerAdapter(ConversationScreen.this, messages_list);
+        adapter = new ConversationRecyclerAdapter(ConversationScreen.this, messages_list, sellerImageUrl);
         recyclerView.setAdapter(adapter);
     }
 
@@ -352,12 +360,11 @@ public class ConversationScreen extends AppCompatActivity {
     }
 
     private void getOwnerInfo(String ownerId) {
-        final Context context = this;
         DatabaseReference userRef = firebaseDatabase.getReference().child("users").child(ownerId);
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userName.setText(snapshot.child("data").getValue(UserData.class).getFirstName() + " "+snapshot.child("data").getValue(UserData.class).getLastName());
+                userName.setText(String.format("%s %s", snapshot.child("data").getValue(UserData.class).getFirstName(), snapshot.child("data").getValue(UserData.class).getLastName()));
                 userEmail.setText(snapshot.child("data").getValue(UserData.class).getEmail());
             }
             @Override
@@ -377,6 +384,5 @@ public class ConversationScreen extends AppCompatActivity {
                 .load(imageUrl)
                 .centerCrop()
                 .into(listingImage);
-
     }
 }
