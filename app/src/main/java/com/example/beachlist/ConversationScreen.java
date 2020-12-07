@@ -58,7 +58,7 @@ public class ConversationScreen extends AppCompatActivity {
     Button confirmSale, cancelSale;                                                                   //buttons to confirm sale
     RatingBar rating;                                                                                 //rating bar object to be able to retrieve the rating give
     //*****end popup window items used*****//
-    final boolean[] newConvoFlag = {false};
+    final boolean[] newConvoFlag = {true};
 
 
 
@@ -152,16 +152,16 @@ public class ConversationScreen extends AppCompatActivity {
             checkForExistingConvoOtherUserId.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.getValue() == null) {
-                        newConvoFlag[0] = true;
-                    }
-                    else {
-                        newConvoFlag[0] = false;
-                        for (DataSnapshot child : dataSnapshot.getChildren()) {
-                            convo_list.add(child);
+
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+
+                        //if statement to differentiate from other convos with the same owner
+                        if(child.child("listingId").getValue(String.class).equals(listingId)) {
+                            newConvoFlag[0] = false;
+                            searchConvosByListingId(finalListingOwnerId1);
                         }
-                        searchConvosByListingId(finalListingOwnerId1);
                     }
+
                 }
 
                 @Override
@@ -279,19 +279,13 @@ public class ConversationScreen extends AppCompatActivity {
         checkForExistingConvo.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getValue() == null) {
-                    newConvoFlag[0] = true;
-                }
-                else {
-                    newConvoFlag[0] = false;
-                    for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        if(child.child("otherUserId").getValue(String.class).equals(otherUserId)) {
-                            convoId = child.getKey();
-                            break;
-                        }
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    if(child.child("otherUserId").getValue(String.class).equals(otherUserId)) {
+                        convoId = child.getKey();
+                        break;
                     }
-                    getMessages(convoId);
                 }
+                getMessages(convoId);
             }
 
             @Override
