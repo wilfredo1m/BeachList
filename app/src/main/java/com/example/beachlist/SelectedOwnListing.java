@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -39,6 +40,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -305,16 +308,41 @@ public class SelectedOwnListing extends AppCompatActivity {
                 /* Each flag corresponds to a modified value in the selected listing, and here we
                    update the listing depending on which flags have been set off */
                 if(titleFlag){
-                    updatedListing.setTitle(updatedTitle.getText().toString());
+
+                    if(TextUtils.isEmpty(updatedTitle.getText().toString())){
+                        Toast.makeText(getBaseContext(),"Enter A Value For The Title Field", Toast.LENGTH_SHORT).show();
+
+                    }else{
+                        Toast.makeText(getBaseContext(),"good to go", Toast.LENGTH_SHORT).show();
+                        updatedListing.setTitle(updatedTitle.getText().toString());
+                    }
                 }
                 if(categoryFlag){
-                    updatedListing.setCategory(categorySpinner.getSelectedItem().toString());
+
+                    if(categorySpinner.getSelectedItemPosition()==0){
+                        Toast.makeText(getBaseContext(),"Select a spinner category", Toast.LENGTH_SHORT).show();
+                    }else{
+                        updatedListing.setCategory(categorySpinner.getSelectedItem().toString());
+                    }
+
                 }
                 if(priceFlag){
-                    updatedListing.setPrice(updatedPrice.getText().toString());
+
+                    if(TextUtils.isEmpty(updatedPrice.getText().toString())){
+                        Toast.makeText(getBaseContext(),"Enter A Value For The Price Field", Toast.LENGTH_SHORT).show();
+                    }else{
+                        updatedListing.setPrice(updatedPrice.getText().toString());
+                    }
+
                 }
                 if(descriptionFlag){
-                    updatedListing.setDescription(updatedDescription.getText().toString());
+
+                    if(TextUtils.isEmpty(updatedDescription.getText().toString())){
+                        Toast.makeText(getBaseContext(),"Enter A Value For The Description Field", Toast.LENGTH_SHORT).show();
+                    }else{
+                        updatedListing.setDescription(updatedDescription.getText().toString());
+                    }
+
                 }
                 if(pictureFlag) {
                     updateListingWithNewImages(imageUriList, imageUriList.size());
