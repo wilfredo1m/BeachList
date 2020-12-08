@@ -11,7 +11,7 @@
         android:id="@+id/home_menu_toolbar"
         android:layout_width="397dp"
         android:layout_height="55dp"
-        android:background="#292929"
+        android:background="#535151"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         android:visibility="visible"
@@ -21,7 +21,7 @@
 
     <Button
         android:id="@+id/btn_categories"
-        android:layout_width="41dp"
+        android:layout_width="38dp"
         android:layout_height="38dp"
         android:background="@drawable/ic_baseline_category_24"
         app:layout_constraintBottom_toBottomOf="@+id/home_menu_toolbar"
@@ -31,12 +31,13 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/home_menu_tab_view"
-        android:layout_width="352dp"
+        android:layout_width="350dp"
         android:layout_height="44dp"
         android:background="#535151"
         app:layout_constraintEnd_toStartOf="@+id/btn_categories"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/home_menu_toolbar">
+        app:layout_constraintTop_toTopOf="@+id/home_menu_toolbar"
+        app:tabSelectedTextColor="#03DAC5">
 
         <!--        <com.google.android.material.tabs.TabItem-->
         <!--            android:id="@+id/tv_item_tab"-->

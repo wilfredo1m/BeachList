@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/category_toolbar"
         app:tabIndicatorColor="#03DAC5"
+        app:tabSelectedTextColor="#03DAC5"
         tools:layout_editor_absoluteX="199dp">
 
         <com.google.android.material.tabs.TabItem
