@@ -7,11 +7,13 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,12 +35,13 @@ public class ListingTitlePage extends AppCompatActivity {
     ImageAdapterBitmap adapter;
     ArrayList<Bitmap> bitmaps;
     ArrayList<String> imageUriList;
+    TextView titleTextView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listing_title_image_page);
-
+        titleTextView = findViewById(R.id.et_listing_title);
         // Progress bar for creating a post
         SeekBar seekBar = findViewById(R.id.title_seek_bar);
         seekBar.setClickable(false);
@@ -67,7 +70,11 @@ public class ListingTitlePage extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openItemDescriptionScreen();
+                if(TextUtils.isEmpty(titleTextView.getText().toString())){
+                    Toast.makeText(getApplicationContext(), "Please Enter A Title", Toast.LENGTH_SHORT).show();        //testing userRating is picking up correct value
+                }else{
+                    openItemDescriptionScreen();
+                }
             }
         });
 
@@ -166,7 +173,6 @@ public class ListingTitlePage extends AppCompatActivity {
 
     public void openItemDescriptionScreen(){
         Intent openScreen = new Intent(this, ListingDescriptionPage.class);
-        TextView titleTextView = findViewById(R.id.et_listing_title);
         openScreen.putExtra("ListingTitle", titleTextView.getText().toString());
         openScreen.putStringArrayListExtra("Listing Images", imageUriList);
         startActivity(openScreen);
