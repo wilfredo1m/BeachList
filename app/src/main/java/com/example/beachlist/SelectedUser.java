@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -53,6 +54,7 @@ public class SelectedUser extends AppCompatActivity {
     ServiceRecyclerAdapter serviceAdapter;
     List<DataSnapshot> itemList, serviceList;
     ScrollView scrollView;
+    TextView noItem, noService;
 //    ViewPager itemPager,servicePager;
 
     @Override
@@ -76,6 +78,8 @@ public class SelectedUser extends AppCompatActivity {
         lastName = findViewById(R.id.selected_user_last_name);                                        //link lastName to xml
         addFriendButton = findViewById(R.id.btn_add_user);                                            //link addFriendButton to xml
         selectedUserEmail = findViewById(R.id.selected_user_email_tv);
+        noItem= findViewById(R.id.no_item_selected_user_lbl);
+        noService = findViewById(R.id.no_service_selected_user_lbl);
 
 //***********************************INITIALIZE SPINNER SECTION************************************************************************************//
         //SETS UP SPINNER WITH ADAPTER TO POPULATE ARRAY LIST
@@ -146,11 +150,20 @@ public class SelectedUser extends AppCompatActivity {
                         serviceList.add(child);                                                               //add item to service arraylist
                     }
                 }
+
                 itemAdapter = new ItemRecyclerAdapter(context,itemList);                                 //set adapter to itemlist
                 itemRecycler.setAdapter(itemAdapter);                                                         //pass recycler to the adapter
-
+                String itemCount = String.valueOf(itemAdapter.getItemCount());
+                if(itemCount.equalsIgnoreCase("0")){
+                    noItem.setVisibility(View.VISIBLE);
+                }
+                //Toast.makeText(getApplicationContext(), count, Toast.LENGTH_SHORT).show();
                 serviceAdapter = new ServiceRecyclerAdapter(context, serviceList);                       //set adapter to servicelist
                 serviceRecycler.setAdapter(serviceAdapter);                                                   //pass recycler to the adapter
+                String serviceCount = String.valueOf(serviceAdapter.getItemCount());
+                if(serviceCount.equalsIgnoreCase("0")){
+                    noService.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
@@ -158,6 +171,8 @@ public class SelectedUser extends AppCompatActivity {
                 Log.e(TAG, "onCancelled: "+error.getMessage(), error.toException());
             }
         });
+
+
 
 //********************************************************************************************************************************************//
 //*****************************************END USER LISTING SECTION************************************************************************//
@@ -351,5 +366,8 @@ public class SelectedUser extends AppCompatActivity {
         Intent intent = new Intent(this, ReportedScreen.class);
         intent.putExtra("reportedPageTab", 1);
         startActivity(intent);
+    }
+    public void CheckIfListingsEmpty(){
+
     }
 }

@@ -206,11 +206,22 @@
                         android:gravity="center|center_horizontal"
                         android:text="@string/item_lbl" />
 
+                    <TextView
+                        android:id="@+id/no_item_selected_user_lbl"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="#2196F3"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/no_items_in_user"
+                        android:visibility="gone" />
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/item_recycler"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="#FF0606" />
+                        android:background="#FF0606" >
+
+                    </androidx.recyclerview.widget.RecyclerView>
 
                     <TextView
                         android:id="@+id/textView29"
@@ -219,6 +230,15 @@
                         android:background="#010A3A"
                         android:gravity="center|center_horizontal"
                         android:text="@string/service_title" />
+
+                    <TextView
+                        android:id="@+id/no_service_selected_user_lbl"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="#2196F3"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/no_service_in_user"
+                        android:visibility="gone" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/service_recycler"
