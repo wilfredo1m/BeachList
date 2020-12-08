@@ -210,6 +210,8 @@ public class SelectedFriend extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 updateOtherUsersFriends(friendUserId);
+                                Toast.makeText(getApplicationContext(), "User Has been Removed From Friend List", Toast.LENGTH_SHORT).show();
+
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {

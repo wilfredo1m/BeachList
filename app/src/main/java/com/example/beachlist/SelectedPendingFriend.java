@@ -186,6 +186,8 @@ public class SelectedPendingFriend extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 acceptRequest(friendUserId);
+                Toast.makeText(getApplicationContext(), "User Has been Added to Friend List", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -199,6 +201,7 @@ public class SelectedPendingFriend extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 openFriendsListScreen();
+                                Toast.makeText(getApplicationContext(), "User Has been Removed From Pending Friend List", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
