@@ -71,7 +71,7 @@ public class ListingTitlePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(TextUtils.isEmpty(titleTextView.getText().toString())){
-                    Toast.makeText(getApplicationContext(), "Please Enter A Title", Toast.LENGTH_SHORT).show();        //testing userRating is picking up correct value
+                    Toast.makeText(getApplicationContext(), "Please Enter A Title", Toast.LENGTH_SHORT).show();
                 }else{
                     openItemDescriptionScreen();
                 }

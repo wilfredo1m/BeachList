@@ -2,6 +2,7 @@ package com.example.beachlist;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +22,7 @@ public class ListingDescriptionPage extends AppCompatActivity {
     Spinner spinner;
     RadioGroup radioGroup;
     RadioButton radioButton;
-
+    TextView listingPrice,description;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         ArrayList<String> test = this.getIntent().getStringArrayListExtra("Listing Images");
@@ -29,7 +31,10 @@ public class ListingDescriptionPage extends AppCompatActivity {
 
         //Radio group initialization
         radioGroup = findViewById(R.id.listing_type_radio_group);
-
+        //pull typed value for listing price
+        listingPrice = findViewById(R.id.et_listing_price);
+        description = findViewById(R.id.et_listing_description);
+        spinner = findViewById(R.id.categorie_spinner);
 //************************************BUTTON GROUP ************************************************//
         // Cancels the post being created / clears all fields entered
         cancelButton = findViewById(R.id.btn_cancel);
@@ -47,7 +52,15 @@ public class ListingDescriptionPage extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToPostListingPage();
+                if((TextUtils.isEmpty(listingPrice.getText().toString()) )
+                        || (TextUtils.isEmpty(description.getText().toString()))
+                        || (radioGroup.getCheckedRadioButtonId() == -1)
+                        || (spinner.getSelectedItemPosition()==0)) {
+                    Toast.makeText(getApplicationContext(), "Please Enter Values for All Fields", Toast.LENGTH_SHORT).show();
+                }else{
+                    goToPostListingPage();
+                }
+
             }
         });
 //************************************END BUTTON GROUP**********************************************//
@@ -78,18 +91,10 @@ public class ListingDescriptionPage extends AppCompatActivity {
         //TODO this radiobutton & spinner call crashes it if you go back and replace with something else. We will prob need an intent to select upon back in order to fix this from crashing
         String category = spinner.getSelectedItem().toString();
         String listingType = radioButton.getText().toString();
-       //TODO end problem children
         //Toast.makeText(getApplicationContext(), listingType, Toast.LENGTH_SHORT).show();
-
-        //pull typed value for listing price
-        TextView listingPrice = findViewById(R.id.et_listing_price);
-        TextView description = findViewById(R.id.et_listing_description);
 
         //begin intent to change screen
         Intent openScreen = new Intent(this, ListingReviewPage.class);
-
-
-
         //block to pass intents to the next screen
       //  openScreen.putExtra("ListingPics", byteArray);
         openScreen.putExtra("ListingPrice", listingPrice.getText().toString());
@@ -106,7 +111,6 @@ public class ListingDescriptionPage extends AppCompatActivity {
     public void rbclick(View v){
 
         //initiate the spinner
-        spinner = findViewById(R.id.categorie_spinner);
 
         //get the id of the radio button that is pressed ( not value we assign)
         int radiobuttonid = radioGroup.getCheckedRadioButtonId();
