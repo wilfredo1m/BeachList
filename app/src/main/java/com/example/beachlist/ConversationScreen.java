@@ -3,6 +3,7 @@ package com.example.beachlist;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
@@ -313,21 +314,27 @@ public class ConversationScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String userRating = String.valueOf(rating.getRating());                               //to be used to update that users rating
-                Integer userPrice = Integer.valueOf(soldPrice.getText().toString());
-                Toast.makeText(getApplicationContext(), userRating, Toast.LENGTH_SHORT).show();        //testing userRating is picking up correct value
+                if(TextUtils.isEmpty(soldPrice.getText().toString())){
+                    Toast.makeText(getApplicationContext(), "Please enter a valid sold price", Toast.LENGTH_SHORT).show();        //testing userRating is picking up correct value
 
-                DatabaseReference listingRef = database.getReference("listings").child(type).child(listingId).child("banned");
-                listingRef.setValue(true);
+                }else{
+                    Integer userPrice = Integer.valueOf(soldPrice.getText().toString());
+                    DatabaseReference listingRef = database.getReference("listings").child(type).child(listingId).child("banned");
+                    listingRef.setValue(true);
 
-                Time current = new Time();
-                current.setToNow();
-                SoldData soldListing = new SoldData(thisListing.getListingImages().get(1), thisListing.getTitle(), current, userPrice, buyerData.getFirstName()+" "+buyerData.getLastName());
+                    Time current = new Time();
+                    current.setToNow();
+                    SoldData soldListing = new SoldData(thisListing.getListingImages().get(1), thisListing.getTitle(), current, userPrice, buyerData.getFirstName()+" "+buyerData.getLastName());
 
-                DatabaseReference userListingRef = database.getReference("users").child(userID).child("listings").child(listingId);
-                userListingRef.removeValue();
+                    DatabaseReference userListingRef = database.getReference("users").child(userID).child("listings").child(listingId);
+                    userListingRef.removeValue();
 
-                DatabaseReference userSoldRef = database.getReference("users").child(userID).child("sold").child(listingId);
-                userSoldRef.setValue(soldListing);
+                    DatabaseReference userSoldRef = database.getReference("users").child(userID).child("sold").child(listingId);
+                    userSoldRef.setValue(soldListing);
+                    Toast.makeText(getApplicationContext(), "Purchase has been completed successfully", Toast.LENGTH_SHORT).show();        //testing userRating is picking up correct value
+                    openMessagesScreen();
+                }
+
             }
         });
 
