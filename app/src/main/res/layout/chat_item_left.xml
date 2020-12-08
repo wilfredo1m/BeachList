@@ -18,7 +18,8 @@
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:src="@drawable/charmander" />
+            android:src="@drawable/charmander"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/show_message"
