@@ -135,7 +135,7 @@ public class ListingReviewPage extends AppCompatActivity {
         listingImages = new HashMap<>();
         ArrayList<String> imageUris = this.getIntent().getStringArrayListExtra("Listing Images");
         getUrls(imageUris, imageUris.size());
-
+        Toast.makeText(ListingReviewPage.this, "Post Has Been Created", Toast.LENGTH_SHORT).show();
     }
 
     public void getUrls(final ArrayList<String> imageUrls, final int n) {

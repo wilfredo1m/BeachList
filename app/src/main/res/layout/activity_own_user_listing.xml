@@ -324,7 +324,7 @@
         android:id="@+id/delete_listing_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#CD000000"
+        android:background="#D7000000"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -367,8 +367,8 @@
                     android:id="@+id/delete_warning_message_lbl"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
-                    android:background="#4A1919"
-                    android:gravity="center_horizontal"
+                    android:background="#5C0303"
+                    android:gravity="center|center_horizontal"
                     android:text="@string/delete_warning" />
 
                 <LinearLayout

@@ -97,6 +97,7 @@ public class ReportedListingsRecyclerAdapter extends RecyclerView.Adapter<Report
                                 list.remove(position);
                                 notifyItemRemoved(position);
                                 notifyItemRangeChanged(position, list.size());
+                                Toast.makeText(context, "Listing Has Been Waived", Toast.LENGTH_SHORT).show();
                                 System.out.println("Waived");
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -133,6 +134,7 @@ public class ReportedListingsRecyclerAdapter extends RecyclerView.Adapter<Report
                                         list.remove(position);
                                         notifyItemRemoved(position);
                                         notifyItemRangeChanged(position, list.size());
+                                        Toast.makeText(context, "Listing Has Been Deleted", Toast.LENGTH_SHORT).show();
                                         System.out.println("Deleted");
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -162,6 +164,8 @@ public class ReportedListingsRecyclerAdapter extends RecyclerView.Adapter<Report
             @Override
             public void onClick(View v) {
                 banUser(database.getReference("users").child(list.get(position).child("ownerId").getValue(String.class)).child("isBanned"), position);
+                Toast.makeText(context, "User Has Been Banned", Toast.LENGTH_SHORT).show();
+
             }
         });
     }

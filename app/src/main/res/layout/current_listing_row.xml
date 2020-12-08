@@ -57,7 +57,7 @@
                     <TextView
                         android:id="@+id/current_listing_title"
                         android:layout_width="match_parent"
-                        android:layout_height="25dp"
+                        android:layout_height="wrap_content"
                         android:background="#121212"
                         android:text="@string/title_description_bar" />
 

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -242,6 +243,8 @@ public class SelectedUser extends AppCompatActivity {
             public void onClick(View v) {
                 //banUser(database.getReference("users").child(selectedUser.getUserId()).child("banned"));
                 addUserToReported();
+                Toast.makeText(getApplicationContext(), "User Has Been Reported", Toast.LENGTH_SHORT).show();
+
             }
         });
 //*********************************END BUTTON GROUP***********************************************************************************//

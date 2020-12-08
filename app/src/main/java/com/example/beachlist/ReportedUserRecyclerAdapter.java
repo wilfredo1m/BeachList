@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -85,6 +86,7 @@ public class ReportedUserRecyclerAdapter extends RecyclerView.Adapter<ReportedUs
                                 list.remove(position);
                                 notifyItemRemoved(position);
                                 notifyItemRangeChanged(position, list.size());
+                                Toast.makeText(context, "User Has Been Waived", Toast.LENGTH_SHORT).show();
                                 System.out.println("Waived");
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -118,6 +120,7 @@ public class ReportedUserRecyclerAdapter extends RecyclerView.Adapter<ReportedUs
                                 list.remove(position);
                                 notifyItemRemoved(position);
                                 notifyItemRangeChanged(position, list.size());
+                                Toast.makeText(context, "User Has Been Temporarily Banned", Toast.LENGTH_SHORT).show();
                                 System.out.println("Waived");
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -156,6 +159,7 @@ public class ReportedUserRecyclerAdapter extends RecyclerView.Adapter<ReportedUs
                                         list.remove(position);
                                         notifyItemRemoved(position);
                                         notifyItemRangeChanged(position, list.size());
+                                        Toast.makeText(context, "User Has Been Permanently Banned", Toast.LENGTH_SHORT).show();
                                         System.out.println("Waived");
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {

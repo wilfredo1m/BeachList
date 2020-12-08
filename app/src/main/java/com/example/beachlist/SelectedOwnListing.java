@@ -322,6 +322,7 @@ public class SelectedOwnListing extends AppCompatActivity {
                 else {
                     updateListingWithoutNewImages();
                 }
+                Toast.makeText(getBaseContext(),"Post Has Been Successfully Updated", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -388,6 +389,7 @@ public class SelectedOwnListing extends AppCompatActivity {
         confirmDeleteListingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getBaseContext(),"Post Has Been Successfully Deleted", Toast.LENGTH_SHORT).show();
                 deleteSelectedListing();
             }
 

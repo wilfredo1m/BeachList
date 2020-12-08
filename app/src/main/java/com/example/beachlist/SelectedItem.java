@@ -226,7 +226,7 @@ public class SelectedItem extends AppCompatActivity {
             public void onClick(View v) {
                 banListing(listingRef.child("banned"));
                 addListingToReported();
-//                Toast.makeText(getApplicationContext(), selectedItem, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Listing Has Been Reported", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -390,7 +390,7 @@ public class SelectedItem extends AppCompatActivity {
         intent.putExtra("listingId",listingId );
         intent.putExtra("listingType", "item");
         intent.putExtra("fromContactSeller", "true");
-        Toast.makeText(getApplicationContext(), listingId, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), listingId, Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
 

@@ -244,6 +244,7 @@ public class SelectedService extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 banListing(listingRef.child("banned"));
+                Toast.makeText(getApplicationContext(), "Listing Has Been Reported", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -403,7 +404,7 @@ public class SelectedService extends AppCompatActivity {
         intent.putExtra("listingId",listingId );
         intent.putExtra("listingType", "service");
         intent.putExtra("fromContactSeller", "true");
-        Toast.makeText(getApplicationContext(), listingId, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), listingId, Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
 
