@@ -189,11 +189,20 @@
                 android:gravity="center_horizontal"
                 android:text="@string/item_lbl" />
 
+            <TextView
+                android:id="@+id/no_item_in_pending_lbl"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#2196F3"
+                android:gravity="center|center_horizontal"
+                android:text="@string/no_items_in_user"
+                android:visibility="gone" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pending_friend_item_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#3F51B5" />
+                android:background="#673AB7" />
 
             <TextView
                 android:id="@+id/pending_user_service_lbl"
@@ -203,11 +212,20 @@
                 android:gravity="center_horizontal"
                 android:text="@string/service_title" />
 
+            <TextView
+                android:id="@+id/no_service_in_pending_lbl"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#2196F3"
+                android:gravity="center|center_horizontal"
+                android:text="@string/no_service_in_user"
+                android:visibility="gone" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pending_friend_service_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFEB3B" />
+                android:background="#2196F3" />
 
         </LinearLayout>
     </ScrollView>

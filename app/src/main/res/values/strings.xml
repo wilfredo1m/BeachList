@@ -36,6 +36,8 @@
     <string name="tl_current_listings">Current Listings</string>
     <string name="tl_sold_listings">Sold Listings</string>
     <string name="user_image_description">User Image</string>
+    <string name="no_items_in_user">No Items Listed</string>
+    <string name="no_service_in_user">No Service Listed</string>
 
 
     <string name= "continue_buttn">Continue</string>

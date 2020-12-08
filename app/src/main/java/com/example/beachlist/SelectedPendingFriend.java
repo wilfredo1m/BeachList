@@ -52,7 +52,7 @@ public class SelectedPendingFriend extends AppCompatActivity {
     ScrollView listingView;
     Spinner reportUserSpinner;
     Button reportButton, rejectRequest,acceptRequest,backButton,submitReport, cancelReport;
-    TextView email;
+    TextView email,noItem,noService;
     ConstraintLayout popupWindow;
     String reportedUser;
     UserData pendingFriend;
@@ -65,7 +65,8 @@ public class SelectedPendingFriend extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-
+        noItem = findViewById(R.id.no_item_in_pending_lbl);
+        noService= findViewById(R.id.no_service_in_pending_lbl);
         profilePic = findViewById(R.id.iv_selected_pending_friend_image);                                    //link profile pic to xml
         firstName = findViewById(R.id.tv_pending_first_name);                                                //link firstName to xml
         lastName = findViewById(R.id.tv_pending_last_name);                                                  //link lastName to xml
@@ -117,7 +118,9 @@ public class SelectedPendingFriend extends AppCompatActivity {
                         itemList.add(child);
                     }
                     onItemListQuery();
-                }                     //get id of friend
+                }else{
+                    noItem.setVisibility(View.VISIBLE);
+                }
                 //Toast.makeText(getApplicationContext(), friendUserID, Toast.LENGTH_SHORT).show();
                 //getFriendEmail(friendUserId);                                                                   //get the email address of friend to populate field
             }
@@ -137,6 +140,8 @@ public class SelectedPendingFriend extends AppCompatActivity {
                         serviceList.add(child);
                     }
                     onServiceListQuery();
+                }else{
+                    noService.setVisibility(View.VISIBLE);
                 }
             }
 

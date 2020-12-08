@@ -42,7 +42,7 @@ public class SelectedFriend extends AppCompatActivity {
     private static final String TAG = "error";
     Button reportFriend, unfriendButton, cancelReport,submitReport;
     ImageView profilePic;
-    TextView firstName, lastName, email;
+    TextView firstName, lastName, email,noItem,noService;
     ConstraintLayout constraintLayout;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
@@ -65,7 +65,8 @@ public class SelectedFriend extends AppCompatActivity {
         user = mAuth.getCurrentUser();
 
         constraintLayout = findViewById(R.id.popup_layout);
-
+        noService = findViewById(R.id.no_service_in_selected_friend_lbl);
+        noItem = findViewById(R.id.no_items_in_selected_friend_lbl);
         profilePic = findViewById(R.id.iv_selected_friend_image);                                   //link profile pic to xml
         firstName = findViewById(R.id.tv_full_name);                                                //link firstName pic to xml
         lastName = findViewById(R.id.tv_email);                                                     //link lastName pic to xml
@@ -126,6 +127,8 @@ public class SelectedFriend extends AppCompatActivity {
                         itemList.add(child);
                     }
                     onItemListQuery();
+                }else{
+                    noItem.setVisibility(View.VISIBLE);
                 }
                 //getFriendEmail(friendUserId);                                                           //get email of friend
             }
@@ -146,6 +149,8 @@ public class SelectedFriend extends AppCompatActivity {
                     }
 
                     onServiceListQuery();
+                }else{
+                    noService.setVisibility(View.VISIBLE);
                 }
             }
 
