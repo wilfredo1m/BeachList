@@ -55,8 +55,10 @@ public class FilteredCategory extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        if (child.getValue(ListingData.class).getCategory().equalsIgnoreCase(categorySelection)) {
-                            list.add(child);
+                        if (child.getValue(ListingData.class).getCategory().equalsIgnoreCase(categorySelection))   {
+                            if(child.child("banned").getValue(Boolean.class).equals(false)){
+                                list.add(child);
+                            }
                         }
                     }
                 }
